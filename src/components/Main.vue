@@ -1,7 +1,7 @@
 <template>
   <div class="main-div">
     <Header class="header" />
-    <div class="logo"></div>
+    <div class="logo1"></div>
     <button class="t4 more-button">Узнать больше</button>
     <div class="t4 alfa">Альфа версия</div>
     <ul class="t4 lengUl">
@@ -17,11 +17,12 @@ export default {
   components: { Header }
 };
 </script>
-<style >
+<style  >
 .header {
   float: right;
   margin-top: 60px;
   margin-right: 164px;
+  color: #f2f2f2;
 }
 .main-div {
   width: 100%;
@@ -33,7 +34,7 @@ export default {
   );
   background: linear-gradient(242.49deg, #9b9ea7 0%, #2b344f 100%), #f2f2f2;
 }
-.logo {
+.logo1 {
   background-image: url(../assets/Darewin.svg);
   position: absolute;
   width: 411px;

@@ -9,12 +9,12 @@
     </ul>
     <ul class="header-text">
       <li class="t4">Войти</li>
-      <li class="t4">Регистрацыя</li>
+      <li class="t4">Регистрация</li>
     </ul>
   </div>
 </template>
 
-<style >
+<style>
 ul.header-text {
   display: inline;
   margin: 0 0 0 32px;
@@ -24,7 +24,5 @@ ul.header-text li {
   display: inline;
   margin: 60px 32px 0 0;
   padding: 6px 0px;
-  color: #f2f2f2;
 }
 </style>
-

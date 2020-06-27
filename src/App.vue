@@ -21,6 +21,14 @@ body {
   margin: 0;
   padding: 0;
 }
+.t1,
+.t2,
+.t3,
+.t4,
+.t5,
+.t6 {
+  font-family: "Roboto";
+}
 .t1 {
   font-style: normal;
   font-weight: 500;
