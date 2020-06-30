@@ -32,6 +32,9 @@ export default {
   created() {
     this.$ml.change("russian");
   },
+  updated() {
+    this.active = this.$store.getters.lang;
+  },
 };
 </script>
 <style>
@@ -45,6 +48,7 @@ export default {
 .lengUl li {
   display: inline !important;
   margin-right: 32px;
+  cursor: pointer;
 }
 
 .active {

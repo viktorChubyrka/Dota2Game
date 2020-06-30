@@ -9,9 +9,7 @@
                 left: 624px;
                 top: calc(50% - 48px/2 - 233px);"
         class="t2"
-      >
-        {{ $ml.get("p2s4Title") }}
-      </div>
+      >{{ $ml.get("p2s4Title") }}</div>
       <div
         v-show="ActiveSlide == 4"
         style="color:white;position: absolute;
@@ -20,21 +18,16 @@
                 left: 624px;
                 top: calc(50% - 72px/2 - 156px);"
         class="t4"
-      >
-        {{ $ml.get("p2s4Text") }}
-      </div>
-      <button
-        v-show="ActiveSlide == 4 && !countdown"
-        style="width:225px;height:50px"
-        class="next-button t4"
-      >
-        {{ $ml.get("register") }}
-      </button>
+      >{{ $ml.get("p2s4Text") }}</div>
+      <router-link to="/registration">
+        <button
+          v-show="ActiveSlide == 4 && !countdown"
+          style="width:225px;height:50px"
+          class="next-button t4"
+        >{{ $ml.get("register") }}</button>
+      </router-link>
     </div>
-    <div
-      :class="{ active: ActiveSlide == 3, slidet3: ActiveSlide > 3 }"
-      id="second"
-    >
+    <div :class="{ active: ActiveSlide == 3, slidet3: ActiveSlide > 3 }" id="second">
       <div
         v-show="ActiveSlide == 3"
         style="color:white;position: absolute;
@@ -43,9 +36,7 @@
                 left: 83px;
                 top: calc(50% - 48px/2 - 258px);"
         class="t2"
-      >
-        {{ $ml.get("p2s3Title") }}
-      </div>
+      >{{ $ml.get("p2s3Title") }}</div>
       <div
         v-show="ActiveSlide == 3"
         style="color:white;position: absolute;
@@ -54,21 +45,14 @@
                 left: 83px;
                 top: calc(50% - 180px/2 - 127px);"
         class="t4"
-      >
-        {{ $ml.get("p2s3Text") }}
-      </div>
+      >{{ $ml.get("p2s3Text") }}</div>
       <button
         v-show="ActiveSlide == 3 && !countdown"
         @click="SetActiveSlide(3)"
         class="next-button t4"
-      >
-        {{ $ml.get("p2Button") }}
-      </button>
+      >{{ $ml.get("p2Button") }}</button>
     </div>
-    <div
-      :class="{ active: ActiveSlide == 2, slidet2: ActiveSlide > 2 }"
-      id="third"
-    >
+    <div :class="{ active: ActiveSlide == 2, slidet2: ActiveSlide > 2 }" id="third">
       <div
         v-show="ActiveSlide == 2"
         style="color:black;position: absolute;
@@ -77,9 +61,7 @@
                 left: 627px;
                 top: calc(50% - 48px/2 - 225px);"
         class="t2"
-      >
-        {{ $ml.get("p2s2Title") }}
-      </div>
+      >{{ $ml.get("p2s2Title") }}</div>
       <div
         v-show="ActiveSlide == 2"
         style="color:black;position: absolute;
@@ -88,22 +70,15 @@
                 left: 627px;
                 top: calc(50% - 180px/2 - 94px);"
         class="t4"
-      >
-        {{ $ml.get("p2s2Text") }}
-      </div>
+      >{{ $ml.get("p2s2Text") }}</div>
       <button
         style="color:black;border-color:black"
         v-show="ActiveSlide == 2 && !countdown"
         @click="SetActiveSlide(2)"
         class="next-button t4"
-      >
-        {{ $ml.get("p2Button") }}
-      </button>
+      >{{ $ml.get("p2Button") }}</button>
     </div>
-    <div
-      :class="{ active: ActiveSlide == 1, slidet1: ActiveSlide > 1 }"
-      id="fourth"
-    >
+    <div :class="{ active: ActiveSlide == 1, slidet1: ActiveSlide > 1 }" id="fourth">
       <div
         v-show="ActiveSlide == 1"
         style="color:white;position: absolute;
@@ -112,9 +87,7 @@
                 left: 723px;
                 top: 305.72px;"
         class="t2"
-      >
-        {{ $ml.get("p2s1Title") }}
-      </div>
+      >{{ $ml.get("p2s1Title") }}</div>
       <div
         v-show="ActiveSlide == 1"
         style="color:white;position: absolute;
@@ -123,17 +96,13 @@
                 left: 722px;
                 top: 370.56px;"
         class="t4"
-      >
-        {{ $ml.get("p2s1Text") }}
-      </div>
+      >{{ $ml.get("p2s1Text") }}</div>
 
       <button
         v-show="ActiveSlide == 1 && !countdown"
         @click="SetActiveSlide(1)"
         class="next-button t4"
-      >
-        {{ $ml.get("p2Button") }}
-      </button>
+      >{{ $ml.get("p2Button") }}</button>
     </div>
   </div>
 </template>
@@ -143,7 +112,7 @@ export default {
   data() {
     return {
       ActiveSlide: 1,
-      countdown: 5000,
+      countdown: 5000
     };
   },
   methods: {
@@ -161,11 +130,11 @@ export default {
           this.CountdownTimer();
         }, 1000);
       }
-    },
+    }
   },
   created() {
     this.CountdownTimer();
-  },
+  }
 };
 </script>
 <style>

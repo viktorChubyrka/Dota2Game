@@ -43,8 +43,16 @@
       </li>
     </ul>
     <ul class="header-text">
-      <li class="t4">{{ this.$ml.get("logIn") }}</li>
-      <li class="t4">{{ this.$ml.get("register") }}</li>
+      <li class="t4">
+        <a :style="{ color: headerColor }" href="/logIn">{{
+          this.$ml.get("logIn")
+        }}</a>
+      </li>
+      <li class="t4">
+        <a :style="{ color: headerColor }" href="/registration">
+          {{ this.$ml.get("register") }}</a
+        >
+      </li>
     </ul>
   </div>
 </template>
@@ -61,6 +69,7 @@ export default {
 
   methods: {
     SetCurentPage(index) {
+      this.$router.push("/");
       this.$store.commit("SetCurrentPage", index);
     },
   },

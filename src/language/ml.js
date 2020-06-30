@@ -8,7 +8,7 @@ export default new MLCreate({
   save: process.env.NODE_ENV === "production",
   languages: [
     new MLanguage("english").create({
-      alfa: "Alfa version",
+      alfa: "Alpha version",
       p1GetMore: "Learn more",
       header1: "Home",
       header2: "Principles",

@@ -1,6 +1,8 @@
 <template>
   <div class="reg-container">
-    <Header headerColor="#f5f5f5" class="header" /><Lang />
+    <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
+    <Header headerColor="#f5f5f5" class="header" />
+    <Lang />
     <div class="logoR"></div>
     <div
       class="t2"
@@ -9,9 +11,7 @@ width: 343px;
 height: 48px;
 left: 790px;
 top: 306px;"
-    >
-      {{ this.$ml.get("forgotPassw") }}
-    </div>
+    >{{ this.$ml.get("forgotPassw") }}</div>
     <div
       class="t5"
       style="position: absolute;color:#f2f2f2
@@ -19,9 +19,7 @@ width: 343px;
 height: 32px;
 left: 790px;
 top: 386px;"
-    >
-      {{ $ml.get("wPass") }}
-    </div>
+    >{{ $ml.get("wPass") }}</div>
     <div
       class="inputs"
       style="position: absolute;
@@ -44,9 +42,7 @@ top: 526px;
 border:0px solid black;
 background: #626878;
 border-radius: 4px;"
-    >
-      {{ $ml.get("dropPassword") }}
-    </button>
+    >{{ $ml.get("dropPassword") }}</button>
   </div>
 </template>
 <script>
@@ -62,9 +58,9 @@ export default {
       },
       cp: () => {
         return this.$ml.get("cPassword");
-      },
+      }
     };
-  },
+  }
 };
 </script>
 <style>
