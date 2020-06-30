@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="first-div">
-      <Header class="header4" />
+      <Header headerColor="#000000" class="header4" />
       <div class="logo4"></div>
       <div
         style="position: absolute;
@@ -9,45 +9,44 @@
                 left: 200px;
                 top: 202px;"
         class="t3"
-      >Контакты</div>
+      >
+        {{ $ml.get("header5") }}
+      </div>
       <div
         style="position: absolute;
                 left: 970px;
                 top: 202px;"
         class="t3"
-      >Задать вопрос</div>
+      >
+        {{ $ml.get("ask") }}
+      </div>
       <table class="t4" id="contactTable">
         <tr>
-          <td>Телефон</td>
+          <td>{{ $ml.get("phone") }}</td>
           <td>+38 (097) 347-91-43</td>
         </tr>
         <tr>
-          <td>Почта</td>
+          <td>{{ $ml.get("post") }}</td>
           <td>question@dclub.com</td>
         </tr>
         <tr>
-          <td>Адрес</td>
+          <td>{{ $ml.get("adres") }}</td>
           <td>Ужгород, улица Собранецкая 19, этаж 2</td>
         </tr>
       </table>
+
       <div>
         <input
-          placeholder="адрес вашей электронной почты"
+          :placeholder="ea()"
           class="t5"
-          style="position: absolute;
-          padding:4px 18px;
-                width: 750px;
-                height: 40px;
-                left: 970px;
-                top: 275px;
-                border: 1px solid #BDBDBD;
-                box-sizing: border-box;
-                border-radius: 4px;"
+          style="position:absolute; padding:4px 18px; width: 750px; height: 40px; left: 970px;
+        top: 275px; border: 1px solid #BDBDBD; box-sizing: border-box;
+        border-radius: 4px;"
           type="text"
         />
         <textarea
           class="t5"
-          placeholder="ваш вопрос "
+          :placeholder="yq()"
           style="position: absolute;
           padding:4px 18px;
                 width: 750px;
@@ -70,7 +69,9 @@
                 border-size:0px;
                 background: #1F2430;
                 border-radius: 4px;"
-        >Задать вопрос</button>
+        >
+          {{ $ml.get("ask") }}
+        </button>
       </div>
     </div>
     <div class="second-div">
@@ -81,21 +82,25 @@
                 bottom:58px;
                 color:#e0e0e0"
         class="t6"
-      >Darewin’s club, 2020. All rights reserved.</div>
+      >
+        Darewin’s club, 2020. All rights reserved.
+      </div>
       <div
         style="position: absolute;
                 left: 612px;
                 bottom:288px;
                 color:#f2f2f2"
         class="t3"
-      >Карта сайта</div>
+      >
+        {{ $ml.get("map") }}
+      </div>
       <ul class="t6" id="pageMap">
-        <li>Главная</li>
-        <li>Принципы</li>
-        <li>О нас</li>
-        <li>FAQ</li>
-        <li>Личный кабинет</li>
-        <li>Контакты</li>
+        <li>{{ $ml.get("header1") }}</li>
+        <li>{{ $ml.get("header2") }}</li>
+        <li>{{ $ml.get("header3") }}</li>
+        <li>{{ $ml.get("header4") }}</li>
+        <li>{{ $ml.get("userCab") }}</li>
+        <li>{{ $ml.get("header5") }}</li>
       </ul>
       <div
         style="position: absolute;
@@ -103,20 +108,19 @@
                 bottom:288px;
                 color:#f2f2f2"
         class="t3"
-      >Положения и правила Darewin’s club</div>
+      >
+        {{ $ml.get("pp") }}
+      </div>
       <ul style="left:920px;bottom:166px" class="t6" id="pageMap">
-        <li>Условия использования</li>
-        <li>Политика конфиденциальности</li>
-        <li>Политика AML</li>
+        <li>{{ $ml.get("usePol") }}</li>
+        <li>{{ $ml.get("confPol") }}</li>
+        <li>{{ $ml.get("AMLPol") }}</li>
       </ul>
       <ul class="t4" id="fotterLogInUl">
-        <li>Войти</li>
-        <li>Регистрация</li>
+        <li>{{ $ml.get("logIn") }}</li>
+        <li>{{ $ml.get("register") }}</li>
       </ul>
-      <ul class="t4 lengUl">
-        <li>RU</li>
-        <li>ENG</li>
-      </ul>
+      <Lang />
       <ul id="socialSites">
         <li>
           <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
@@ -136,12 +140,23 @@
 </template>
 <script>
 import Header from "./General/Header";
+import Lang from "./General/Lang";
 
 export default {
-  components: { Header }
+  components: { Header, Lang },
+  data() {
+    return {
+      ea: () => {
+        return this.$ml.get("emailAdres");
+      },
+      yq: () => {
+        return this.$ml.get("youQ");
+      },
+    };
+  },
 };
 </script>
-<style >
+<style>
 .first-div {
   width: 100%;
   height: 61vh;
@@ -201,22 +216,6 @@ export default {
 #fotterLogInUl li {
   display: inline;
   padding-left: 32px;
-  color: #f2f2f2;
-}
-.lengUl {
-  position: absolute;
-  width: 31px;
-  height: 36px;
-  left: 1624px;
-  top: 904px;
-  margin: 0;
-  padding: 0;
-}
-.lengUl li {
-  display: inline;
-  margin-right: 32px;
-}
-.lengUl li:first-child {
   color: #f2f2f2;
 }
 #socialSites li {

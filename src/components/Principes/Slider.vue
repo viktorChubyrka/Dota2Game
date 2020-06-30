@@ -1,91 +1,120 @@
 <template>
   <div style="width:100%;height:728px;margin:0;padding:0;">
-    <div :class="{active:ActiveSlide == 4}" id="first">
+    <div :class="{ active: ActiveSlide == 4 }" id="first">
       <div
-        v-show="ActiveSlide == 4 "
+        v-show="ActiveSlide == 4"
         style="color:white;position: absolute;
                 width: 429px;
                 height: 48px;
                 left: 624px;
                 top: calc(50% - 48px/2 - 233px);"
         class="t2"
-      >Забери свой приз</div>
+      >
+        {{ $ml.get("p2s4Title") }}
+      </div>
       <div
-        v-show="ActiveSlide == 4 "
+        v-show="ActiveSlide == 4"
         style="color:white;position: absolute;
                 width: 483px;
                 height: 72px;
                 left: 624px;
                 top: calc(50% - 72px/2 - 156px);"
         class="t4"
-      >Любая достойная победа вознаграждается. Пускай победит сильнейший</div>
+      >
+        {{ $ml.get("p2s4Text") }}
+      </div>
       <button
-        v-show="ActiveSlide == 4 && !Countdown"
+        v-show="ActiveSlide == 4 && !countdown"
         style="width:225px;height:50px"
         class="next-button t4"
-      >Регистрация</button>
+      >
+        {{ $ml.get("register") }}
+      </button>
     </div>
-    <div :class="{active:ActiveSlide == 3,slidet3:ActiveSlide>3}" id="second">
+    <div
+      :class="{ active: ActiveSlide == 3, slidet3: ActiveSlide > 3 }"
+      id="second"
+    >
       <div
-        v-show="ActiveSlide == 3 "
+        v-show="ActiveSlide == 3"
         style="color:white;position: absolute;
                 width: 429px;
                 height: 48px;
                 left: 83px;
                 top: calc(50% - 48px/2 - 258px);"
         class="t2"
-      >Поиск игры</div>
+      >
+        {{ $ml.get("p2s3Title") }}
+      </div>
       <div
-        v-show="ActiveSlide == 3 "
+        v-show="ActiveSlide == 3"
         style="color:white;position: absolute;
                 width: 483px;
                 height: 180px;
                 left: 83px;
                 top: calc(50% - 180px/2 - 127px);"
         class="t4"
-      >В вашем личном кабинете вы сможете создать или найти уже готовую игру, выполнив определённые условия участия. Если период ожидания покажется вам долгим, то клуб всегда оповестит вас о предстоящих играх.</div>
+      >
+        {{ $ml.get("p2s3Text") }}
+      </div>
       <button
-        v-show="ActiveSlide == 3 && !Countdown"
+        v-show="ActiveSlide == 3 && !countdown"
         @click="SetActiveSlide(3)"
         class="next-button t4"
-      >Далее</button>
+      >
+        {{ $ml.get("p2Button") }}
+      </button>
     </div>
-    <div :class="{active:ActiveSlide == 2,slidet2:ActiveSlide>2}" id="third">
+    <div
+      :class="{ active: ActiveSlide == 2, slidet2: ActiveSlide > 2 }"
+      id="third"
+    >
       <div
-        v-show="ActiveSlide == 2 "
+        v-show="ActiveSlide == 2"
         style="color:black;position: absolute;
                 width: 429px;
                 height: 48px;
                 left: 627px;
                 top: calc(50% - 48px/2 - 225px);"
         class="t2"
-      >Активация клубного пропуска</div>
+      >
+        {{ $ml.get("p2s2Title") }}
+      </div>
       <div
-        v-show="ActiveSlide == 2 "
+        v-show="ActiveSlide == 2"
         style="color:black;position: absolute;
                 width: 483px;
                 height: 180px;
                 left: 627px;
                 top: calc(50% - 180px/2 - 94px);"
         class="t4"
-      >Завершив регистрацию, вы получаете доступ к своему личному кабинету. В этом разделе вы сможете ознакомиться с правилами клуба и активировать счет, чтобы у вас была возможность делать игровые взносы.</div>
+      >
+        {{ $ml.get("p2s2Text") }}
+      </div>
       <button
         style="color:black;border-color:black"
-        v-show="ActiveSlide == 2 && !Countdown"
+        v-show="ActiveSlide == 2 && !countdown"
         @click="SetActiveSlide(2)"
         class="next-button t4"
-      >Далее</button>
+      >
+        {{ $ml.get("p2Button") }}
+      </button>
     </div>
-    <div :class="{active:ActiveSlide == 1,slidet1:ActiveSlide>1}" id="fourth">
+    <div
+      :class="{ active: ActiveSlide == 1, slidet1: ActiveSlide > 1 }"
+      id="fourth"
+    >
       <div
-        v-show="ActiveSlide == 1 "
+        v-show="ActiveSlide == 1"
         style="color:white;position: absolute;
                 width: 181px;
                 height: 48px;
                 left: 723px;
                 top: 305.72px;"
         class="t2"
-      >Регистрация</div>
+      >
+        {{ $ml.get("p2s1Title") }}
+      </div>
       <div
         v-show="ActiveSlide == 1"
         style="color:white;position: absolute;
@@ -94,48 +123,52 @@
                 left: 722px;
                 top: 370.56px;"
         class="t4"
-      >В любом клубе есть участники. Задайтесь вопросом: "как попасть в клуб?". Очень просто. Нажав на кнопку регистрации, вам будет открыт бланк для заполнения нужной информации.</div>
+      >
+        {{ $ml.get("p2s1Text") }}
+      </div>
 
       <button
-        v-show="ActiveSlide == 1 && !Countdown"
+        v-show="ActiveSlide == 1 && !countdown"
         @click="SetActiveSlide(1)"
         class="next-button t4"
-      >Далее</button>
+      >
+        {{ $ml.get("p2Button") }}
+      </button>
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
   data() {
     return {
       ActiveSlide: 1,
-      ActiveButton: false,
-      Countdown: 5
+      countdown: 5000,
     };
   },
   methods: {
     SetActiveSlide(index) {
       this.ActiveSlide = index + 1;
-      this.Countdown = 5;
+      this.$store.commit("SetCountdown", 5);
+      this.countdown = this.$store.getters.countdown;
       this.CountdownTimer();
     },
     CountdownTimer() {
-      if (this.Countdown > 0) {
+      if (this.$store.getters.countdown > 0) {
         setTimeout(() => {
-          this.Countdown -= 1;
+          this.$store.commit("SetCountdown", this.$store.getters.countdown - 1);
+          this.countdown = this.$store.getters.countdown;
           this.CountdownTimer();
         }, 1000);
       }
-    }
+    },
   },
   created() {
     this.CountdownTimer();
-  }
+  },
 };
 </script>
-<style >
+<style>
 .active {
   width: 1132px !important;
 }

@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <Promo />
+    <router-view></router-view>
   </div>
 </template>
 <script>
 import Promo from "./views/Promo";
 
 export default {
-  components: { Promo }
+  components: { Promo },
 };
 </script>
 <style>
@@ -15,8 +15,14 @@ template {
   margin: 0;
   padding: 0;
 }
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
+  overflow-x: hidden;
+  overflow-y: hidden;
   font-family: "Roboto";
   margin: 0;
   padding: 0;

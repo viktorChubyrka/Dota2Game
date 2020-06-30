@@ -1,28 +1,32 @@
 <template>
   <div class="main-div">
-    <Header class="header" />
+    <Header headerColor="#f2f2f2" class="header" />
     <div class="logo1"></div>
-    <button class="t4 more-button">Узнать больше</button>
-    <div class="t4 alfa">Альфа версия</div>
-    <ul class="t4 lengUl">
-      <li>RU</li>
-      <li>ENG</li>
-    </ul>
+    <a @click="ChangePage()" href="#page2">
+      <button class="t4 more-button">{{ $ml.get("p1GetMore") }}</button></a
+    >
+    <Lang />
+    <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
   </div>
 </template>
 <script>
 import Header from "./General/Header";
+import Lang from "./General/Lang";
 
 export default {
-  components: { Header }
+  components: { Header, Lang },
+  methods: {
+    ChangePage() {
+      this.$store.commit("SetCurrentPage", 2);
+    },
+  },
 };
 </script>
-<style  >
+<style>
 .header {
   float: right;
   margin-top: 60px;
   margin-right: 164px;
-  color: #f2f2f2;
 }
 .main-div {
   width: 100%;
@@ -44,6 +48,8 @@ export default {
 }
 .more-button {
   position: absolute;
+  width: 224px;
+  height: 50px;
   left: 849px;
   top: 735px;
   background: transparent;
@@ -56,22 +62,6 @@ export default {
   position: absolute;
   right: 1587px;
   top: 904px;
-  color: #f2f2f2;
-}
-.lengUl {
-  position: absolute;
-  width: 31px;
-  height: 36px;
-  left: 1624px;
-  top: 904px;
-  margin: 0;
-  padding: 0;
-}
-.lengUl li {
-  display: inline;
-  margin-right: 32px;
-}
-.lengUl li:first-child {
   color: #f2f2f2;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="main-div3">
-    <Header class="header" />
+    <Header headerColor="#f2f2f2" class="header" />
     <div class="logo"></div>
     <img
       style="position: absolute;
@@ -19,12 +19,7 @@ top: 208px;"
             top: 252px;font-style: italic;"
       class="t4"
     >
-      Будучи игроком в "DotA" я всегда мечтал попасть в ряды лучших, иметь возможность провести эти напряженные
-      50 минут с профессионалами своего дела и, кончено же, побеждать, может быть, даже найти товарищей и в дальнейшем
-      напарников по команде. Но увы, по определённым причинам это не так просто. В нашем клубе есть место каждому, кто достоин этого,
-      где узнав цену победы и поражения, любой сможет проявить себя в полной мере, показывая исключительную игру, ибо на кону стоит вопрос
-      денежного вознаграждения, и быть уверенным в том, что это было не напрасно. Испытав на себе вкус сладости победы и горечи поражения
-      в Darewin's Club ты узнаешь себе цену.
+      {{ $ml.get("p3Text1") }}
     </div>
     <div
       style="color:white;position: absolute;
@@ -34,24 +29,21 @@ top: 208px;"
             top: 544px;font-style: italic;"
       class="t4"
     >
-      Я мог бы рассказать, какие мы классные и замечательные. Но это не в моих интересах. Ведь мы – нечто большее, чем просто клуб.
-      Мы скорей сообщество, которое подходит далеко не каждому. А точнее – каждому, кто готов бороться и побеждать. Именно это и
-      характеризует Darewin’s Club. Теперь задайте себе вопрос – вы готовы?
+      {{ $ml.get("p3Text2") }}
     </div>
-    <div class="t4 alfa">Альфа версия</div>
-    <ul class="t4 lengUl">
-      <li>RU</li>
-      <li>ENG</li>
-    </ul>
+    <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
+    <Lang />
   </div>
 </template>
 <script>
 import Header from "../components/General/Header";
+import Lang from "./General/Lang";
+
 export default {
-  components: { Header }
+  components: { Header, Lang },
 };
 </script>
-<style >
+<style>
 .main-div3 {
   width: 100%;
   height: 100vh;
@@ -77,22 +69,6 @@ export default {
   height: 36px;
   right: 1587px;
   top: 904px;
-  color: #f2f2f2;
-}
-.lengUl {
-  position: absolute;
-  width: 31px;
-  height: 36px;
-  left: 1624px;
-  top: 904px;
-  margin: 0;
-  padding: 0;
-}
-.lengUl li {
-  display: inline;
-  margin-right: 32px;
-}
-.lengUl li:first-child {
   color: #f2f2f2;
 }
 </style>

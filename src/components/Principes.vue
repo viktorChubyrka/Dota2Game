@@ -1,25 +1,23 @@
 <template>
   <div class="main-div2">
-    <Header class="header2" />
+    <Header headerColor="#000000" class="header2" />
     <div class="logo2"></div>
-    <div class="t4 alfa2">Альфа версия</div>
+    <div class="t4 alfa2">{{ $ml.get("alfa") }}</div>
     <Slider class="slider" />
-    <ul class="t4 lengUl">
-      <li>RU</li>
-      <li>ENG</li>
-    </ul>
+    <Lang />
   </div>
 </template>
 <script>
 import Slider from "./Principes/Slider";
 import Header from "./General/Header";
+import Lang from "./General/Lang";
 
 export default {
   name: "Princioes",
-  components: { Slider, Header }
+  components: { Slider, Header, Lang },
 };
 </script>
-<style >
+<style>
 .logo2 {
   background: url(../assets/DarewinLarge.svg);
   position: absolute;
@@ -40,7 +38,6 @@ export default {
   float: right;
   margin-top: 60px;
   margin-right: 164px;
-  color: black;
 }
 .main-div2 {
   width: 100%;

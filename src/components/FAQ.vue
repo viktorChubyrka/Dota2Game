@@ -1,19 +1,78 @@
 <template>
   <div class="main-div">
-    <Header class="header" />
+    <Header headerColor="#f2f2f2" class="header" />
     <div class="logo"></div>
-    <div style="color:white;position: absolute;
+    <div
+      style="color:white;position: absolute;
 left: 200px;
-top: 166px;" class="t1">FAQ</div>
+top: 166px;"
+      class="t1"
+    >
+      FAQ
+    </div>
     <div>
       <div>
         <ul id="FAQUl">
           <li
-            :class="{focusedLi:index==focused,t5:true}"
-            @click="ChangeQuestion(index)"
-            v-for="(q,index) in questions"
-            :key="index"
-          >{{q}}</li>
+            :class="{ focusedLi: 0 == focused, t5: true }"
+            @click="ChangeQuestion(0)"
+          >
+            {{ $ml.get("p4q1") }}
+          </li>
+          <li
+            :class="{ focusedLi: 1 == focused, t5: true }"
+            @click="ChangeQuestion(1)"
+          >
+            {{ $ml.get("p4q2") }}
+          </li>
+          <li
+            :class="{ focusedLi: 2 == focused, t5: true }"
+            @click="ChangeQuestion(2)"
+          >
+            {{ $ml.get("p4q3") }}
+          </li>
+          <li
+            :class="{ focusedLi: 3 == focused, t5: true }"
+            @click="ChangeQuestion(3)"
+          >
+            {{ $ml.get("p4q4") }}
+          </li>
+          <li
+            :class="{ focusedLi: 4 == focused, t5: true }"
+            @click="ChangeQuestion(4)"
+          >
+            {{ $ml.get("p4q5") }}
+          </li>
+          <li
+            :class="{ focusedLi: 5 == focused, t5: true }"
+            @click="ChangeQuestion(5)"
+          >
+            {{ $ml.get("p4q6") }}
+          </li>
+          <li
+            :class="{ focusedLi: 6 == focused, t5: true }"
+            @click="ChangeQuestion(6)"
+          >
+            {{ $ml.get("p4q7") }}
+          </li>
+          <li
+            :class="{ focusedLi: 7 == focused, t5: true }"
+            @click="ChangeQuestion(7)"
+          >
+            {{ $ml.get("p4q8") }}
+          </li>
+          <li
+            :class="{ focusedLi: 8 == focused, t5: true }"
+            @click="ChangeQuestion(8)"
+          >
+            {{ $ml.get("p4q9") }}
+          </li>
+          <li
+            :class="{ focusedLi: 9 == focused, t5: true }"
+            @click="ChangeQuestion(9)"
+          >
+            {{ $ml.get("p4q10") }}
+          </li>
         </ul>
       </div>
       <div
@@ -22,38 +81,26 @@ top: 166px;" class="t1">FAQ</div>
                     left: 879px;
                     top: 224px;"
       >
-        <div class="t2">{{CurrentQuestion}}</div>
-        <div style="margin-top:24px;transition:2s" class="t4">{{CurrentQuestionAnswer}}</div>
+        <div class="t2">{{ $ml.get(`p4q${focused + 1}`) }}</div>
+        <div style="margin-top:24px;transition:2s" class="t4">
+          {{ $ml.get(`p4t${focused + 1}`) }}
+        </div>
       </div>
     </div>
-
-    <div class="t4 alfa">Альфа версия</div>
-    <ul class="t4 lengUl">
-      <li>RU</li>
-      <li>ENG</li>
-    </ul>
+    <Lang />
+    <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
   </div>
 </template>
 <script>
 import Header from "./General/Header";
+import Lang from "./General/Lang";
 
 export default {
-  components: { Header },
+  components: { Header, Lang },
   data() {
     return {
       focused: 0,
-      questions: [
-        "Что это такое?",
-        "Я уже где-то такое слышал, и чем вы лучше?",
-        "Секунду, я что должен перевести деньги?",
-        "У меня нет денег. Или я похож на Била Гейтса",
-        "Очень похоже на кидалово, не так ли?",
-        "В чем ваша выгода?",
-        "А какие игры сейчас доступны в клубе?",
-        'Ясно. Когда бета-версия? Не очень хочу тратить своё время на альфа-тестирование "супер-пупер" проекта...',
-        "Ладно. Даже если я переведу средства на свой клубный счёт, то как мне забрать их обратно, не говоря уже о призовых?",
-        "Вижу это уже последний пункт, но я не нашёл ответа на свой вопрос. Кто мне поможет?"
-      ],
+
       answers: [
         "В первую очередь – мы киберспортивный клуб. Или, проще говоря, мы то место, где вы сможете реализовать свои соревновательные амбиции и получить вознаграждение за свои старания.",
         "Мы не лучше. Мы – другие. Деятельность клуба не связана с букмекингом, здесь не торгуют “шмотом”, мы не дарим бесплатные спины, и тем более не предлагаем вам купить аналитику, чтобы вывести вашу игру “на кардинально новый уровень”. Клубный пропуск даёт вам возможность принимать участие в играх и получать до 100% (а в исключительных случаях и больше) от взноса в игру. По факту – Вы играете на победу.",
@@ -64,24 +111,22 @@ export default {
         "На период бета-тестирования доступна только одна игра – Dota2. Соло или командный режим – выбор за вами. Но правила будут как на соревнованиях, чтобы заставить игроков стараться принимать правильные решения – Captains mode, Bo1.",
         'Мы уважаем ваше драгоценное время. Поэтому хотим сказать, что бета-версия будет запущена, как только будет необходимый объём дневных игр для поддержания соревновательного духа внутри клуба. В бета-версии будет доступно большое количество игр и множество разных "фич и плюшек". Ну а участники альфа-тестирования получат вознаграждение за свои старания, когда проект перейдёт в бета-версию.',
         "В нашем клубе доступны разные способы перевода средств. Выберите себе тот, который подходит лично вам. Все способы абсолютно безопасны и гарантируют вам сохранность данных при переводе средств. Просим обратить ваше внимание на то, что комиссия может взыматься вашим банком или платежной системой за перевод средств и/или внутреннюю конвертацию валюты.",
-        "В нашем клубе работает поддержка участников. Мы отвечаем на умные (и не очень) вопросы, наблюдаем за честными (и не очень) игроками, а также, решаем очевидные (и не очень) споры, чтобы участники знали, что игры в Darewin's Club всегда Fair Play. Пусть вам улыбается фортуна."
+        "В нашем клубе работает поддержка участников. Мы отвечаем на умные (и не очень) вопросы, наблюдаем за честными (и не очень) игроками, а также, решаем очевидные (и не очень) споры, чтобы участники знали, что игры в Darewin's Club всегда Fair Play. Пусть вам улыбается фортуна.",
       ],
       CurrentQuestion: "Что это такое?" || questions[0],
       CurrentQuestionAnswer:
         "В первую очередь – мы киберспортивный клуб. Или, проще говоря, мы то место, где вы сможете реализовать свои соревновательные амбиции и получить вознаграждение за свои старания." ||
-        answers[0]
+        answers[0],
     };
   },
   methods: {
     ChangeQuestion(index) {
-      this.CurrentQuestion = this.questions[index];
-      this.CurrentQuestionAnswer = this.answers[index];
       this.focused = index;
-    }
-  }
+    },
+  },
 };
 </script>
-<style >
+<style>
 .logo {
   background: url(../assets/DarewinLargeWhite.svg);
   position: relative;
@@ -108,22 +153,7 @@ export default {
   top: 904px;
   color: white;
 }
-.lengUl {
-  position: absolute;
-  width: 31px;
-  height: 36px;
-  left: 1624px;
-  top: 904px;
-  margin: 0;
-  padding: 0;
-}
-.lengUl li {
-  display: inline;
-  margin-right: 32px;
-}
-.lengUl li:first-child {
-  color: #f2f2f2;
-}
+
 #FAQUl {
   padding: 0;
   position: absolute;
