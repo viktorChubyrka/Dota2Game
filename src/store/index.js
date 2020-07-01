@@ -4,7 +4,7 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-const url = "http://dota2botbackend.herokuapp.com";
+const url = "https://dota2botbackend.herokuapp.com";
 
 export default new Vuex.Store({
   state: {
