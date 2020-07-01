@@ -3,6 +3,7 @@
     <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
     <Header headerColor="#f5f5f5" class="header" />
     <Lang />
+    <h1 style="color:red;position:absolute;left:790px;top:355px" class="t5">{{error}}</h1>
     <div class="logoR"></div>
     <div
       class="t2"
@@ -28,10 +29,11 @@ height: 32px;
 left: 790px;
 top: 434px;"
     >
-      <input type="password" :placeholder="p()" />
-      <input type="password" :placeholder="cp()" />
+      <input v-model="password" type="password" :placeholder="p()" />
+      <input v-model="cpassword" type="password" :placeholder="cp()" />
     </div>
     <button
+      @click="changePassword()"
       class="t4"
       style="position: absolute;
       color:white;
@@ -48,11 +50,14 @@ border-radius: 4px;"
 <script>
 import Header from "../components/General/Header";
 import Lang from "../components/General/Lang";
+import Axios from "axios";
 
 export default {
   components: { Header, Lang },
   data() {
     return {
+      password: "",
+      cpassword: "",
       p: () => {
         return this.$ml.get("password");
       },
@@ -60,6 +65,27 @@ export default {
         return this.$ml.get("cPassword");
       }
     };
+  },
+  methods: {
+    changePassword() {
+      this.$store.dispatch("ChangePassword", {
+        data: {
+          email: this.$route.params.email,
+          password: this.password,
+          cpassword: this.cpassword
+        },
+        context: this
+      });
+    }
+  },
+  created() {
+    console.log(this.$route.params.date - Date.now());
+    if (Date.now() - this.$route.params.date > 300000) this.$router.push("/");
+  },
+  computed: {
+    error() {
+      return this.$store.getters.changePasswordError;
+    }
   }
 };
 </script>

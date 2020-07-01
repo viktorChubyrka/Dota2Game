@@ -23,6 +23,7 @@ top: 386px;"
     >{{ $ml.get("readyT") }}</div>
 
     <button
+      @click="goToLogin()"
       class="t4"
       style="position: absolute;
       color:white;
@@ -45,6 +46,11 @@ export default {
   components: { Header, Lang },
   data() {
     return {};
+  },
+  methods: {
+    goToLogin() {
+      this.$router.push("/login");
+    }
   }
 };
 </script>

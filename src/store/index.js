@@ -11,8 +11,16 @@ export default new Vuex.Store({
     lang: 1,
     loginError: "",
     registrationError: "",
+    changePasswordError: "",
+    emailError: "",
   },
   getters: {
+    changePasswordError: (state) => {
+      return state.changePasswordError;
+    },
+    emailError: (state) => {
+      return state.emailError;
+    },
     GetCurrentPage: (state) => {
       return state.currentPage;
     },
@@ -30,6 +38,12 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    SetChangePasswordError: (state, payload) => {
+      state.changePasswordError = payload;
+    },
+    SetEmailError: (state, payload) => {
+      state.emailError = payload;
+    },
     SetLoginError: (state, payload) => {
       state.loginError = payload;
     },
@@ -75,6 +89,24 @@ export default new Vuex.Store({
         console.log("Dsad");
         state.commit("SetLoginError", data.data.data.message);
       }
+    },
+    ChangePassword: async (state, payload) => {
+      let data = await Axios.post(
+        "http://localhost:4040/api/user/actions/newPassword",
+        payload.data
+      );
+      console.log(data);
+      if (data.data.data.status == 200) {
+        state.commit("SetChangePasswordError", data.data.data.message);
+        payload.context.$router.push("/passwordResetSucces");
+      } else state.commit("SetChangePasswordError", data.data.data.message);
+    },
+    SendEmailToChangePassword: async (state, payload) => {
+      let data = await Axios.post(
+        "http://localhost:4040/api/user/actions/restorePassword",
+        payload.data
+      );
+      state.commit("SetEmailError", data.data);
     },
   },
   modules: {},
