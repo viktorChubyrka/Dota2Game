@@ -4,6 +4,8 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
+const url = "http://dota2botbackend.herokuapp.com";
+
 export default new Vuex.Store({
   state: {
     currentPage: 1,
@@ -69,7 +71,7 @@ export default new Vuex.Store({
   actions: {
     Registration: async (state, payload) => {
       let data = await Axios.post(
-        "http://localhost:4040/api/user/autorization/registration",
+        `${url}/api/user/autorization/registration`,
         payload.user
       );
       if (data.data.status == 200) {
@@ -80,7 +82,7 @@ export default new Vuex.Store({
     },
     LogIn: async (state, payload) => {
       let data = await Axios.post(
-        "http://localhost:4040/api/user/autorization/login",
+        `${url}/api/user/autorization/login`,
         payload.user
       );
       if (data.data.data.status == 200) {
@@ -92,7 +94,7 @@ export default new Vuex.Store({
     },
     ChangePassword: async (state, payload) => {
       let data = await Axios.post(
-        "http://localhost:4040/api/user/actions/newPassword",
+        `${url}/api/user/actions/newPassword`,
         payload.data
       );
       console.log(data);
@@ -103,7 +105,7 @@ export default new Vuex.Store({
     },
     SendEmailToChangePassword: async (state, payload) => {
       let data = await Axios.post(
-        "http://localhost:4040/api/user/actions/restorePassword",
+        `${url}/api/user/actions/restorePassword`,
         payload.data
       );
       state.commit("SetEmailError", data.data);
