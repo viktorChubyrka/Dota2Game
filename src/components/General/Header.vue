@@ -42,6 +42,7 @@ export default {
   methods: {
     SetCurentPage(index) {
       this.$store.commit("SetCurrentPage", index);
+      localStorage.setItem("currentPage", index);
       this.$router.push({ name: "Promo", params: { currentPage: index } });
     }
   },

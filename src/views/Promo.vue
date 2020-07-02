@@ -31,9 +31,6 @@ export default {
   data() {
     return {};
   },
-  beforeDestroy() {
-    localStorage.setItem("currentPage", this.$store.getters.GetCurrentPage);
-  },
   mounted: function() {
     window.addEventListener("scroll", () => {
       let pos = window.pageYOffset;
@@ -45,15 +42,20 @@ export default {
       } else if (pos == 2976) this.$store.commit("SetCurrentAnimation", 5);
       else if (pos == 3968) this.$store.commit("SetCurrentAnimation", 6);
     });
-    if (localStorage.getItem("currentPage")) {
-      var top = document.getElementById(`page1`).offsetTop;
-      window.scrollTo(0, top);
-      localStorage.setItem("currentPage", -1);
+    if (+localStorage.getItem("currentPage")) {
+      this.$store.commit(
+        "SetCurrentPage",
+        +localStorage.getItem("currentPage")
+      );
     }
 
     if (this.$route.params.currentPage) {
       this.$store.commit("SetCurrentPage", +this.$route.params.currentPage);
-    } else this.$store.commit("SetCurrentPage", 1);
+    } else
+      this.$store.commit(
+        "SetCurrentPage",
+        +localStorage.getItem("currentPage")
+      );
     window.addEventListener("mousewheel", e => {
       switch (this.$store.getters.GetCurrentPage) {
         case 1:
@@ -62,7 +64,7 @@ export default {
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
-            console.log(top);
+            localStorage.setItem("currentPage", 2);
             this.$store.commit("SetCurrentPage", 2);
           }
           break;
@@ -72,13 +74,14 @@ export default {
               `page${this.$store.getters.GetCurrentPage - 1}`
             ).offsetTop;
             window.scrollTo(0, top);
+            localStorage.setItem("currentPage", 1);
             this.$store.commit("SetCurrentPage", 1);
           } else {
             var top = document.getElementById(
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
-            console.log(top);
+            localStorage.setItem("currentPage", 3);
             this.$store.commit("SetCurrentPage", 3);
           }
           break;
@@ -88,13 +91,14 @@ export default {
               `page${this.$store.getters.GetCurrentPage - 1}`
             ).offsetTop;
             window.scrollTo(0, top);
+            localStorage.setItem("currentPage", 2);
             this.$store.commit("SetCurrentPage", 2);
           } else {
             var top = document.getElementById(
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
-            console.log(top);
+            localStorage.setItem("currentPage", 4);
             this.$store.commit("SetCurrentPage", 4);
           }
           break;
@@ -104,13 +108,14 @@ export default {
               `page${this.$store.getters.GetCurrentPage - 1}`
             ).offsetTop;
             window.scrollTo(0, top);
+            localStorage.setItem("currentPage", 3);
             this.$store.commit("SetCurrentPage", 3);
           } else {
             var top = document.getElementById(
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
-            console.log(top);
+            localStorage.setItem("currentPage", 5);
             this.$store.commit("SetCurrentPage", 5);
           }
           break;
@@ -120,6 +125,7 @@ export default {
               `page${this.$store.getters.GetCurrentPage - 1}`
             ).offsetTop;
             window.scrollTo(0, top);
+            localStorage.setItem("currentPage", 4);
             this.$store.commit("SetCurrentPage", 4);
           }
           break;
