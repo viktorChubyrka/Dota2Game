@@ -98,6 +98,9 @@ export default {
     error() {
       return this.$store.getters.loginError;
     }
+  },
+  created() {
+    this.$store.commit("SetCurrentPage", 0);
   }
 };
 </script>

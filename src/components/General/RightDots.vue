@@ -2,16 +2,32 @@
   <div>
     <ul class="dots">
       <li v-for="i in 5" :key="i">
-        <div
-          :class="{
+        <a @click="SetPage(i)" :href="page(i)">
+          <div
+            :class="{
             dot: true,
             selected: $store.getters.GetCurrentPage == i,
           }"
-        ></div>
+          ></div>
+        </a>
       </li>
     </ul>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      page: i => `#page${i}`
+    };
+  },
+  methods: {
+    SetPage(i) {
+      this.$store.commit("SetCurrentPage", i);
+    }
+  }
+};
+</script>
 
 <style>
 .dot {

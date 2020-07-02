@@ -2,7 +2,7 @@
   <div style="width:100%;height:728px;margin:0;padding:0;">
     <div :class="{ active: ActiveSlide == 4 }" id="first">
       <div
-        v-show="ActiveSlide == 4"
+        :class="{textNormal:true,textShow:counter[3] == 0}"
         style="color:white;position: absolute;
                 width: 429px;
                 height: 48px;
@@ -11,7 +11,7 @@
         class="t2"
       >{{ $ml.get("p2s4Title") }}</div>
       <div
-        v-show="ActiveSlide == 4"
+        :class="{textNormal:true,textShow:counter[3] == 0}"
         style="color:white;position: absolute;
                 width: 483px;
                 height: 72px;
@@ -21,15 +21,15 @@
       >{{ $ml.get("p2s4Text") }}</div>
       <router-link to="/registration">
         <button
-          v-show="ActiveSlide == 4 && !countdown"
           style="width:225px;height:50px"
-          class="next-button t4"
+          @click="SetActiveSlide(4)"
+          :class="{nextButton:true, t4:true,showBtn:ActiveSlide == 4 && !countdown}"
         >{{ $ml.get("register") }}</button>
       </router-link>
     </div>
     <div :class="{ active: ActiveSlide == 3, slidet3: ActiveSlide > 3 }" id="second">
       <div
-        v-show="ActiveSlide == 3"
+        :class="{textNormal:true,textShow:counter[2] == 0}"
         style="color:white;position: absolute;
                 width: 429px;
                 height: 48px;
@@ -38,7 +38,7 @@
         class="t2"
       >{{ $ml.get("p2s3Title") }}</div>
       <div
-        v-show="ActiveSlide == 3"
+        :class="{textNormal:true,textShow:counter[2] == 0}"
         style="color:white;position: absolute;
                 width: 483px;
                 height: 180px;
@@ -47,14 +47,13 @@
         class="t4"
       >{{ $ml.get("p2s3Text") }}</div>
       <button
-        v-show="ActiveSlide == 3 && !countdown"
-        @click="SetActiveSlide(3)"
-        class="next-button t4"
+        @click="SetActiveSlide(3), CounterTimer(3)"
+        :class="{nextButton:true, t4:true,showBtn:ActiveSlide == 3 && !countdown}"
       >{{ $ml.get("p2Button") }}</button>
     </div>
     <div :class="{ active: ActiveSlide == 2, slidet2: ActiveSlide > 2 }" id="third">
       <div
-        v-show="ActiveSlide == 2"
+        :class="{textNormal:true,textShow:ActiveSlide == 2 && counter[1] == 0}"
         style="color:black;position: absolute;
                 width: 429px;
                 height: 48px;
@@ -63,7 +62,7 @@
         class="t2"
       >{{ $ml.get("p2s2Title") }}</div>
       <div
-        v-show="ActiveSlide == 2"
+        :class="{textNormal:true,textShow:counter[1] == 0}"
         style="color:black;position: absolute;
                 width: 483px;
                 height: 180px;
@@ -73,14 +72,13 @@
       >{{ $ml.get("p2s2Text") }}</div>
       <button
         style="color:black;border-color:black"
-        v-show="ActiveSlide == 2 && !countdown"
-        @click="SetActiveSlide(2)"
-        class="next-button t4"
+        @click="SetActiveSlide(2), CounterTimer(2)"
+        :class="{nextButton:true, t4:true,showBtn:ActiveSlide == 2 && !countdown}"
       >{{ $ml.get("p2Button") }}</button>
     </div>
     <div :class="{ active: ActiveSlide == 1, slidet1: ActiveSlide > 1 }" id="fourth">
       <div
-        v-show="ActiveSlide == 1"
+        :class="{textNormal:true,textShow:counter[0] == 0}"
         style="color:white;position: absolute;
                 width: 181px;
                 height: 48px;
@@ -89,7 +87,7 @@
         class="t2"
       >{{ $ml.get("p2s1Title") }}</div>
       <div
-        v-show="ActiveSlide == 1"
+        :class="{textNormal:true,textShow:counter[0] == 0}"
         style="color:white;position: absolute;
                 width: 390.65px;
                 height: 180px;
@@ -99,9 +97,8 @@
       >{{ $ml.get("p2s1Text") }}</div>
 
       <button
-        v-show="ActiveSlide == 1 && !countdown"
-        @click="SetActiveSlide(1)"
-        class="next-button t4"
+        @click="SetActiveSlide(1), CounterTimer(1)"
+        :class="{nextButton:true, t4:true,showBtn:ActiveSlide == 1 && !countdown}"
       >{{ $ml.get("p2Button") }}</button>
     </div>
   </div>
@@ -112,13 +109,14 @@ export default {
   data() {
     return {
       ActiveSlide: 1,
-      countdown: 5000
+      countdown: 5000,
+      counter: [0, 1, 1, 1]
     };
   },
   methods: {
     SetActiveSlide(index) {
       this.ActiveSlide = index + 1;
-      this.$store.commit("SetCountdown", 5);
+      this.$store.commit("SetCountdown", 4);
       this.countdown = this.$store.getters.countdown;
       this.CountdownTimer();
     },
@@ -130,6 +128,10 @@ export default {
           this.CountdownTimer();
         }, 1000);
       }
+    },
+    CounterTimer(i) {
+      this.counter[i - 1] = 1;
+      setTimeout(() => (this.counter[i] -= 1), 500);
     }
   },
   created() {
@@ -150,16 +152,25 @@ export default {
 .slidet3 {
   right: 1132px !important;
 }
-.next-button {
+.nextButton {
   width: 151px;
   height: 50px;
   position: absolute;
   right: 25px;
   top: 636px;
+  opacity: 0;
   background: transparent;
   border: 1px solid #f2f2f2;
   border-radius: 8px;
   color: #f2f2f2;
+  transition: opacity 1s;
+}
+.textNormal {
+  opacity: 0;
+  transition: opacity 1s;
+}
+.textShow {
+  opacity: 1;
 }
 
 .showBtn {
@@ -173,7 +184,6 @@ export default {
   right: 0px;
   z-index: 4;
   background: url(../../assets/Principes/fourth.jpg) no-repeat;
-
   transition: width 1s;
 }
 #second {
@@ -202,7 +212,6 @@ export default {
   right: 588px;
   z-index: 1;
   background: url(../../assets/Principes/first.jpg) no-repeat;
-
   transition: width 1s, right 1s;
 }
 </style>

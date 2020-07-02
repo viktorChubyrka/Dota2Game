@@ -1,57 +1,29 @@
 <template>
   <div>
     <ul class="header-text">
-      <li class="t4">
+      <li
+        :style="{borderColor:headerColor }"
+        :class="{currentPage:currentPage==i}"
+        class="t4"
+        v-for="i in 5"
+        :key="i"
+        @click="SetCurentPage(i)"
+      >
         <a
-          :style="{ color: headerColor }"
-          @click="SetCurentPage(1)"
-          href="#page1"
-          >{{ this.$ml.get("header1") }}</a
-        >
+          :style="{ color: headerColor,borderColor:headerColor }"
+          :href="page(i)"
+        >{{ $ml.get(`header${i}`) }}</a>
       </li>
+
       <li class="t4">
-        <a
-          :style="{ color: headerColor }"
-          @click="SetCurentPage(2)"
-          href="#page2"
-          >{{ this.$ml.get("header2") }}</a
-        >
-      </li>
-      <li class="t4">
-        <a
-          :style="{ color: headerColor }"
-          @click="SetCurentPage(3)"
-          href="#page3"
-          >{{ this.$ml.get("header3") }}</a
-        >
-      </li>
-      <li class="t4">
-        <a
-          :style="{ color: headerColor }"
-          @click="SetCurentPage(4)"
-          href="#page4"
-          >{{ this.$ml.get("header4") }}</a
-        >
-      </li>
-      <li class="t4">
-        <a
-          :style="{ color: headerColor }"
-          @click="SetCurentPage(5)"
-          href="#page5"
-          >{{ this.$ml.get("header5") }}</a
-        >
-      </li>
-    </ul>
-    <ul class="header-text">
-      <li class="t4">
-        <a :style="{ color: headerColor }" href="/logIn">{{
+        <a :style="{ color: headerColor }" href="/logIn">
+          {{
           this.$ml.get("logIn")
-        }}</a>
+          }}
+        </a>
       </li>
       <li class="t4">
-        <a :style="{ color: headerColor }" href="/registration">
-          {{ this.$ml.get("register") }}</a
-        >
+        <a :style="{ color: headerColor }" href="/registration">{{ this.$ml.get("register") }}</a>
       </li>
     </ul>
   </div>
@@ -61,22 +33,30 @@ export default {
   props: ["headerColor"],
   data() {
     return {
-      pageStr: (i) => {
+      page: i => `#page${i}`,
+      pageStr: i => {
         return `#page${i}`;
-      },
+      }
     };
   },
-
   methods: {
     SetCurentPage(index) {
-      this.$router.push("/");
       this.$store.commit("SetCurrentPage", index);
-    },
+      this.$router.push({ name: "Promo", params: { currentPage: index } });
+    }
   },
+  computed: {
+    currentPage() {
+      return this.$store.getters.GetCurrentPage;
+    }
+  }
 };
 </script>
 
 <style scoped>
+.currentPage {
+  border-bottom: 2px solid;
+}
 a {
   text-decoration: none;
 }
@@ -87,13 +67,14 @@ ul.header-text {
 }
 ul.header-text li {
   display: inline;
-  margin: 60px 32px 0 0;
-  padding: 6px 0px;
-}
-ul.header-text li a:hover {
-  color: rgb(212, 206, 206) !important;
+  margin: 60px 0px 0 0;
+  padding: 6px 16px;
 }
 ul.header-text li:hover {
-  color: rgb(212, 206, 206) !important;
+  color: #292f40 !important;
+  background: #f2f2f2;
+}
+ul.header-text li:hover a {
+  color: #292f40 !important;
 }
 </style>

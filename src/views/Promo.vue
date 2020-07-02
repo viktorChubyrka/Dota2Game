@@ -31,12 +31,30 @@ export default {
   data() {
     return {};
   },
-
+  beforeDestroy() {
+    localStorage.setItem("currentPage", this.$store.getters.GetCurrentPage);
+  },
   mounted: function() {
-    var tope = document.getElementById(`page1`).offsetTop;
-    window.scrollTo(0, tope);
-    this.$store.commit("SetCurrentPage", 1);
-    window.addEventListener("mousewheel", (e) => {
+    window.addEventListener("scroll", () => {
+      let pos = window.pageYOffset;
+      if (pos == 0) this.$store.commit("SetCurrentAnimation", 1);
+      else if (pos == 992) this.$store.commit("SetCurrentAnimation", 2);
+      else if (pos == 1984) {
+        this.$store.commit("SetCurrentAnimation", 3);
+        setTimeout(() => this.$store.commit("SetCurrentAnimation", 4), 1000);
+      } else if (pos == 2976) this.$store.commit("SetCurrentAnimation", 5);
+      else if (pos == 3968) this.$store.commit("SetCurrentAnimation", 6);
+    });
+    if (localStorage.getItem("currentPage")) {
+      var top = document.getElementById(`page1`).offsetTop;
+      window.scrollTo(0, top);
+      localStorage.setItem("currentPage", -1);
+    }
+
+    if (this.$route.params.currentPage) {
+      this.$store.commit("SetCurrentPage", +this.$route.params.currentPage);
+    } else this.$store.commit("SetCurrentPage", 1);
+    window.addEventListener("mousewheel", e => {
       switch (this.$store.getters.GetCurrentPage) {
         case 1:
           if (e.deltaY > 0) {
@@ -44,6 +62,7 @@ export default {
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
+            console.log(top);
             this.$store.commit("SetCurrentPage", 2);
           }
           break;
@@ -59,6 +78,7 @@ export default {
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
+            console.log(top);
             this.$store.commit("SetCurrentPage", 3);
           }
           break;
@@ -74,6 +94,7 @@ export default {
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
+            console.log(top);
             this.$store.commit("SetCurrentPage", 4);
           }
           break;
@@ -89,6 +110,7 @@ export default {
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
+            console.log(top);
             this.$store.commit("SetCurrentPage", 5);
           }
           break;
@@ -105,7 +127,7 @@ export default {
           break;
       }
     });
-  },
+  }
 };
 </script>
 <style></style>

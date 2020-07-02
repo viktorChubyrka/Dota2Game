@@ -15,8 +15,12 @@ export default new Vuex.Store({
     registrationError: "",
     changePasswordError: "",
     emailError: "",
+    currentAnimation: 1,
   },
   getters: {
+    currentAnimation: (state) => {
+      return state.currentAnimation;
+    },
     changePasswordError: (state) => {
       return state.changePasswordError;
     },
@@ -40,6 +44,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    SetCurrentAnimation: (state, payload) => {
+      state.currentAnimation = payload;
+    },
     SetChangePasswordError: (state, payload) => {
       state.changePasswordError = payload;
     },

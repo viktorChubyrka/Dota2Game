@@ -1,12 +1,8 @@
 <template>
   <div>
     <ul class="t4 lengUl">
-      <li :class="{ active: active == 1 }" @click="ChangeLang(1)">
-        RU
-      </li>
-      <li :class="{ active: active == 2 }" @click="ChangeLang(2)">
-        ENG
-      </li>
+      <li :class="{ active: active == 1 }" @click="ChangeLang(1)">RU</li>
+      <li :class="{ active: active == 2 }" @click="ChangeLang(2)">ENG</li>
     </ul>
   </div>
 </template>
@@ -14,7 +10,7 @@
 export default {
   data() {
     return {
-      active: this.$store.getters.lang,
+      active: this.$store.getters.lang
     };
   },
   methods: {
@@ -27,14 +23,14 @@ export default {
         this.$store.commit("SetLang", 2);
       }
       this.active = this.$store.getters.lang;
-    },
+    }
   },
   created() {
     this.$ml.change("russian");
   },
   updated() {
     this.active = this.$store.getters.lang;
-  },
+  }
 };
 </script>
 <style>
@@ -47,11 +43,18 @@ export default {
 }
 .lengUl li {
   display: inline !important;
-  margin-right: 32px;
+  padding: 0 16px;
   cursor: pointer;
 }
 
 .active {
   color: white;
+}
+.lengUl li:hover {
+  color: #292f40 !important;
+  background: #f2f2f2;
+}
+.lengUl li:hover a {
+  color: #292f40 !important;
 }
 </style>

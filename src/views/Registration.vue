@@ -135,6 +135,9 @@ export default {
     error() {
       return this.$store.getters.registrationError;
     }
+  },
+  created() {
+    this.$store.commit("SetCurrentPage", 0);
   }
 };
 </script>

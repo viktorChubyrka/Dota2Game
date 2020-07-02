@@ -3,8 +3,8 @@
     <Header headerColor="#f2f2f2" class="header" />
     <div class="logo1"></div>
     <a @click="ChangePage()" href="#page2">
-      <button class="t4 more-button">{{ $ml.get("p1GetMore") }}</button></a
-    >
+      <button class="t4 more-button">{{ $ml.get("p1GetMore") }}</button>
+    </a>
     <Lang />
     <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
   </div>
@@ -18,8 +18,8 @@ export default {
   methods: {
     ChangePage() {
       this.$store.commit("SetCurrentPage", 2);
-    },
-  },
+    }
+  }
 };
 </script>
 <style>
@@ -57,6 +57,11 @@ export default {
   border: 1px solid #f2f2f2;
   border-radius: 8px;
   color: #f2f2f2;
+}
+.more-button:hover {
+  background: #f2f2f2;
+  border: #292f40;
+  color: #292f40;
 }
 .alfa {
   position: absolute;

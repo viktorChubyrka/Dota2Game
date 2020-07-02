@@ -3,7 +3,7 @@
     <Header headerColor="#000000" class="header2" />
     <div class="logo2"></div>
     <div class="t4 alfa2">{{ $ml.get("alfa") }}</div>
-    <Slider class="slider" />
+    <Slider :class="{slider:true, sliderShow:$store.getters.currentAnimation == 2}" />
     <Lang />
   </div>
 </template>
@@ -14,7 +14,7 @@ import Lang from "./General/Lang";
 
 export default {
   name: "Princioes",
-  components: { Slider, Header, Lang },
+  components: { Slider, Header, Lang }
 };
 </script>
 <style>
@@ -32,6 +32,11 @@ export default {
   position: absolute;
   top: 136px;
   right: 100px;
+  opacity: 0;
+  transition: opacity 2s;
+}
+.sliderShow {
+  opacity: 1;
 }
 
 .header2 {

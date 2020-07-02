@@ -3,6 +3,7 @@
     <Header headerColor="#f2f2f2" class="header" />
     <div class="logo"></div>
     <img
+      :class="{hidetImg:true,showImg:$store.getters.currentAnimation == 3 || $store.getters.currentAnimation == 4}"
       style="position: absolute;
 width: 464px;
 height: 612px;
@@ -12,25 +13,23 @@ top: 208px;"
       alt
     />
     <div
+      :class="{hidetText:true,showText:$store.getters.currentAnimation == 4}"
       style="color:white;position: absolute;
             width: 952px;
             height: 252px;
             left: 768px;
             top: 252px;font-style: italic;"
       class="t4"
-    >
-      {{ $ml.get("p3Text1") }}
-    </div>
+    >{{ $ml.get("p3Text1") }}</div>
     <div
+      :class="{hidetText:true,showText:$store.getters.currentAnimation == 4}"
       style="color:white;position: absolute;
             width: 951px;
             height: 144px;
             left: 768px;
             top: 544px;font-style: italic;"
       class="t4"
-    >
-      {{ $ml.get("p3Text2") }}
-    </div>
+    >{{ $ml.get("p3Text2") }}</div>
     <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
     <Lang />
   </div>
@@ -40,7 +39,7 @@ import Header from "../components/General/Header";
 import Lang from "./General/Lang";
 
 export default {
-  components: { Header, Lang },
+  components: { Header, Lang }
 };
 </script>
 <style>
@@ -70,5 +69,19 @@ export default {
   right: 1587px;
   top: 904px;
   color: #f2f2f2;
+}
+.hidetImg {
+  opacity: 0;
+  transition: opacity 2s;
+}
+.showImg {
+  opacity: 1;
+}
+.hidetText {
+  opacity: 0;
+  transition: opacity 2s;
+}
+.showText {
+  opacity: 1;
 }
 </style>
