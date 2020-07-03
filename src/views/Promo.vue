@@ -32,16 +32,6 @@ export default {
     return {};
   },
   mounted: function() {
-    window.addEventListener("scroll", () => {
-      let pos = window.pageYOffset;
-      if (pos == 0) this.$store.commit("SetCurrentAnimation", 1);
-      else if (pos == 992) this.$store.commit("SetCurrentAnimation", 2);
-      else if (pos == 1984) {
-        this.$store.commit("SetCurrentAnimation", 3);
-        setTimeout(() => this.$store.commit("SetCurrentAnimation", 4), 1000);
-      } else if (pos == 2976) this.$store.commit("SetCurrentAnimation", 5);
-      else if (pos == 3968) this.$store.commit("SetCurrentAnimation", 6);
-    });
     if (+localStorage.getItem("currentPage")) {
       this.$store.commit(
         "SetCurrentPage",
@@ -66,6 +56,7 @@ export default {
             window.scrollTo(0, top);
             localStorage.setItem("currentPage", 2);
             this.$store.commit("SetCurrentPage", 2);
+            this.$store.commit("SetCurrentAnimation", 2);
           }
           break;
         case 2:
@@ -76,6 +67,7 @@ export default {
             window.scrollTo(0, top);
             localStorage.setItem("currentPage", 1);
             this.$store.commit("SetCurrentPage", 1);
+            this.$store.commit("SetCurrentAnimation", 1);
           } else {
             var top = document.getElementById(
               `page${this.$store.getters.GetCurrentPage + 1}`
@@ -83,6 +75,11 @@ export default {
             window.scrollTo(0, top);
             localStorage.setItem("currentPage", 3);
             this.$store.commit("SetCurrentPage", 3);
+            this.$store.commit("SetCurrentAnimation", 3);
+            setTimeout(
+              () => this.$store.commit("SetCurrentAnimation", 4),
+              1000
+            );
           }
           break;
         case 3:
@@ -93,6 +90,7 @@ export default {
             window.scrollTo(0, top);
             localStorage.setItem("currentPage", 2);
             this.$store.commit("SetCurrentPage", 2);
+            this.$store.commit("SetCurrentAnimation", 2);
           } else {
             var top = document.getElementById(
               `page${this.$store.getters.GetCurrentPage + 1}`
@@ -100,6 +98,7 @@ export default {
             window.scrollTo(0, top);
             localStorage.setItem("currentPage", 4);
             this.$store.commit("SetCurrentPage", 4);
+            this.$store.commit("SetCurrentAnimation", 5);
           }
           break;
         case 4:
@@ -110,6 +109,11 @@ export default {
             window.scrollTo(0, top);
             localStorage.setItem("currentPage", 3);
             this.$store.commit("SetCurrentPage", 3);
+            this.$store.commit("SetCurrentAnimation", 3);
+            setTimeout(
+              () => this.$store.commit("SetCurrentAnimation", 4),
+              1000
+            );
           } else {
             var top = document.getElementById(
               `page${this.$store.getters.GetCurrentPage + 1}`
@@ -117,6 +121,7 @@ export default {
             window.scrollTo(0, top);
             localStorage.setItem("currentPage", 5);
             this.$store.commit("SetCurrentPage", 5);
+            this.$store.commit("SetCurrentAnimation", 6);
           }
           break;
         case 5:
@@ -127,6 +132,7 @@ export default {
             window.scrollTo(0, top);
             localStorage.setItem("currentPage", 4);
             this.$store.commit("SetCurrentPage", 4);
+            this.$store.commit("SetCurrentAnimation", 5);
           }
           break;
         default:
