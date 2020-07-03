@@ -29,11 +29,11 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => (this.show = !this.show), 4000);
+    setTimeout(() => (this.start2 = !this.start2), 4000);
     setTimeout(() => {
-      this.start = !this.start;
+      this.show = !this.show;
       setTimeout(() => {
-        this.start2 = !this.start2;
+        this.start = !this.start;
       }, 1500);
     }, 2000);
   }

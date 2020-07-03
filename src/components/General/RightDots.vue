@@ -39,7 +39,7 @@ export default {
   created() {
     setTimeout(() => {
       this.show = true;
-    }, 4500);
+    }, 2500);
   }
 };
 </script>
