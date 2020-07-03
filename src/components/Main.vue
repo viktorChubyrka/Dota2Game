@@ -18,6 +18,7 @@ export default {
   methods: {
     ChangePage() {
       this.$store.commit("SetCurrentPage", 2);
+      setTimeout(() => this.$store.commit("SetCurrentAnimation", 2), 1000);
     }
   }
 };

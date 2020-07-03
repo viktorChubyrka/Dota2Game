@@ -44,6 +44,15 @@ export default {
       this.$store.commit("SetCurrentPage", index);
       localStorage.setItem("currentPage", index);
       this.$router.push({ name: "Promo", params: { currentPage: index } });
+      if (index == 3) {
+        setTimeout(() => this.$store.commit("SetCurrentAnimation", 3), 1000);
+        setTimeout(() => this.$store.commit("SetCurrentAnimation", 4), 2000);
+      } else {
+        setTimeout(
+          () => this.$store.commit("SetCurrentAnimation", index),
+          1000
+        );
+      }
     }
   },
   computed: {

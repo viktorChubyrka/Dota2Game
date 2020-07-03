@@ -32,113 +32,117 @@ export default {
     return {};
   },
   mounted: function() {
-    if (+localStorage.getItem("currentPage")) {
-      this.$store.commit(
-        "SetCurrentPage",
-        +localStorage.getItem("currentPage")
-      );
-    }
-
     if (this.$route.params.currentPage) {
       this.$store.commit("SetCurrentPage", +this.$route.params.currentPage);
-    } else
-      this.$store.commit(
-        "SetCurrentPage",
-        +localStorage.getItem("currentPage")
-      );
-    window.addEventListener("mousewheel", e => {
-      switch (this.$store.getters.GetCurrentPage) {
-        case 1:
-          if (e.deltaY > 0) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage + 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            localStorage.setItem("currentPage", 2);
-            this.$store.commit("SetCurrentPage", 2);
-            this.$store.commit("SetCurrentAnimation", 2);
-          }
-          break;
-        case 2:
-          if (e.deltaY < 0) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage - 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            localStorage.setItem("currentPage", 1);
-            this.$store.commit("SetCurrentPage", 1);
-            this.$store.commit("SetCurrentAnimation", 1);
-          } else {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage + 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            localStorage.setItem("currentPage", 3);
-            this.$store.commit("SetCurrentPage", 3);
-            this.$store.commit("SetCurrentAnimation", 3);
-            setTimeout(
-              () => this.$store.commit("SetCurrentAnimation", 4),
-              1000
-            );
-          }
-          break;
-        case 3:
-          if (e.deltaY < 0) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage - 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            localStorage.setItem("currentPage", 2);
-            this.$store.commit("SetCurrentPage", 2);
-            this.$store.commit("SetCurrentAnimation", 2);
-          } else {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage + 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            localStorage.setItem("currentPage", 4);
-            this.$store.commit("SetCurrentPage", 4);
-            this.$store.commit("SetCurrentAnimation", 5);
-          }
-          break;
-        case 4:
-          if (e.deltaY < 0) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage - 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            localStorage.setItem("currentPage", 3);
-            this.$store.commit("SetCurrentPage", 3);
-            this.$store.commit("SetCurrentAnimation", 3);
-            setTimeout(
-              () => this.$store.commit("SetCurrentAnimation", 4),
-              1000
-            );
-          } else {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage + 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            localStorage.setItem("currentPage", 5);
-            this.$store.commit("SetCurrentPage", 5);
-            this.$store.commit("SetCurrentAnimation", 6);
-          }
-          break;
-        case 5:
-          if (e.deltaY < 0) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage - 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            localStorage.setItem("currentPage", 4);
-            this.$store.commit("SetCurrentPage", 4);
-            this.$store.commit("SetCurrentAnimation", 5);
-          }
-          break;
-        default:
-          break;
-      }
-    });
+    } else {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        this.$store.commit("SetCurrentPage", 1);
+      }, 100);
+    }
+    window.addEventListener(
+      "mousewheel",
+      e => {
+        e.preventDefault();
+        switch (this.$store.getters.GetCurrentPage) {
+          case 1:
+            if (e.deltaY > 0) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage + 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+
+              this.$store.commit("SetCurrentPage", 2);
+              setTimeout(
+                () => this.$store.commit("SetCurrentAnimation", 2),
+                1000
+              );
+            }
+            break;
+          case 2:
+            if (e.deltaY < 0) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage - 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+
+              this.$store.commit("SetCurrentPage", 1);
+              this.$store.commit("SetCurrentAnimation", 1);
+            } else {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage + 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 3);
+              setTimeout(
+                () => this.$store.commit("SetCurrentAnimation", 3),
+                1000
+              );
+              setTimeout(
+                () => this.$store.commit("SetCurrentAnimation", 4),
+                2000
+              );
+            }
+            break;
+          case 3:
+            if (e.deltaY < 0) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage - 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 2);
+              setTimeout(
+                () => this.$store.commit("SetCurrentAnimation", 2),
+                1000
+              );
+            } else {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage + 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 4);
+              this.$store.commit("SetCurrentAnimation", 5);
+            }
+            break;
+          case 4:
+            if (e.deltaY < 0) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage - 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 3);
+              setTimeout(() => {
+                this.$store.commit("SetCurrentAnimation", 3);
+              }, 1000);
+              setTimeout(
+                () => this.$store.commit("SetCurrentAnimation", 4),
+                2000
+              );
+            } else {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage + 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 5);
+              this.$store.commit("SetCurrentAnimation", 6);
+            }
+            break;
+          case 5:
+            if (e.deltaY < 0) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage - 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 4);
+              this.$store.commit("SetCurrentAnimation", 5);
+            }
+            break;
+          default:
+            break;
+        }
+      },
+      { passive: false }
+    );
   }
 };
 </script>

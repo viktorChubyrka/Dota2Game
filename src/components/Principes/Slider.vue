@@ -165,6 +165,11 @@ export default {
   color: #f2f2f2;
   transition: opacity 1s;
 }
+.nextButton:hover {
+  background: #f2f2f2;
+  border: #292f40;
+  color: #2a2c2f;
+}
 .textNormal {
   opacity: 0;
   transition: opacity 1s;

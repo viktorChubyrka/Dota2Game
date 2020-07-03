@@ -22,8 +22,17 @@ export default {
     };
   },
   methods: {
-    SetPage(i) {
-      this.$store.commit("SetCurrentPage", i);
+    SetPage(index) {
+      this.$store.commit("SetCurrentPage", index);
+      if (index == 3) {
+        setTimeout(() => this.$store.commit("SetCurrentAnimation", 3), 1000);
+        setTimeout(() => this.$store.commit("SetCurrentAnimation", 4), 2000);
+      } else {
+        setTimeout(
+          () => this.$store.commit("SetCurrentAnimation", index),
+          1000
+        );
+      }
     }
   }
 };
