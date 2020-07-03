@@ -1,6 +1,6 @@
 <template>
   <div class="main-div">
-    <Header headerColor="#f2f2f2" class="header" />
+    <Header headerColor="#f2f2f2" :class="{header1:true,showHider:show}" />
     <div class="logo1"></div>
     <a @click="ChangePage()" href="#page2">
       <button :class="{t4:true, moreButton:true,showBtn:start2}">{{ $ml.get("p1GetMore") }}</button>
@@ -18,30 +18,37 @@ export default {
   data() {
     return {
       start: false,
-      start2: false
+      start2: false,
+      show: false
     };
   },
   methods: {
     ChangePage() {
       this.$store.commit("SetCurrentPage", 2);
-      setTimeout(() => this.$store.commit("SetCurrentAnimation", 2), 1000);
+      setTimeout(() => this.$store.commit("SetAnim1"), 1000);
     }
   },
   mounted() {
+    setTimeout(() => (this.show = !this.show), 4000);
     setTimeout(() => {
       this.start = !this.start;
       setTimeout(() => {
         this.start2 = !this.start2;
-      }, 500);
-    }, 1000);
+      }, 1500);
+    }, 2000);
   }
 };
 </script>
 <style>
-.header {
+.header1 {
   float: right;
   margin-top: 60px;
   margin-right: 164px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.showHider {
+  opacity: 1;
 }
 .main-div {
   width: 100%;

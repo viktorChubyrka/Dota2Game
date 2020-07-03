@@ -72,14 +72,14 @@ export default {
 }
 .hidetImg {
   opacity: 0;
-  transition: opacity 2s;
+  transition: opacity 1s;
 }
 .showImg {
   opacity: 1;
 }
 .hidetText {
   opacity: 0;
-  transition: opacity 2s;
+  transition: opacity 1s;
 }
 .showText {
   opacity: 1;

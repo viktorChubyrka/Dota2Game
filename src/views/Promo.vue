@@ -4,19 +4,19 @@
       <div :class="{preloaderLogo:true, logoWhite:start}"></div>
       <div :class="{loading:true,load:start}"></div>
     </div>
-    <div id="page1" style="position:relative">
+    <div :class="{show:show,comp:true}" id="page1" style="position:relative">
       <Main />
     </div>
-    <div id="page2" style="position:relative">
+    <div :class="{show:show,comp:true}" id="page2" style="position:relative">
       <Principes />
     </div>
-    <div id="page3" style="position:relative">
+    <div :class="{show:show,comp:true}" id="page3" style="position:relative">
       <AboutUs />
     </div>
-    <div id="page4" style="position:relative">
+    <div :class="{show:show,comp:true}" id="page4" style="position:relative">
       <FAQ />
     </div>
-    <div id="page5" style="position:relative">
+    <div :class="{show:show,comp:true}" id="page5" style="position:relative">
       <ContactUs />
     </div>
     <RightDots />
@@ -34,12 +34,16 @@ export default {
   components: { Main, Principes, FAQ, ContactUs, AboutUs, RightDots },
   data() {
     return {
-      start: false
+      start: false,
+      show: false
     };
   },
   methods: {},
   mounted: function() {
-    setTimeout(() => (this.start = !this.start), 20);
+    setTimeout(() => {
+      this.start = !this.start;
+      this.show = true;
+    }, 20);
     if (this.$route.params.currentPage) {
       this.$store.commit("SetCurrentPage", +this.$route.params.currentPage);
     } else {
@@ -48,21 +52,7 @@ export default {
         this.$store.commit("SetCurrentPage", 1);
       }, 100);
     }
-    document.onkeydown = checkKey;
 
-    function checkKey(e) {
-      e = e || window.event;
-
-      if (e.keyCode == "38") {
-        // up arrow
-      } else if (e.keyCode == "40") {
-        // down arrow
-      } else if (e.keyCode == "37") {
-        // left arrow
-      } else if (e.keyCode == "39") {
-        // right arrow
-      }
-    }
     window.addEventListener(
       "mousewheel",
       e => {
@@ -160,6 +150,13 @@ export default {
 };
 </script>
 <style>
+.comp {
+  opacity: 0;
+  transition: opacity 3s;
+}
+.show {
+  opacity: 1;
+}
 .loading {
   position: absolute;
   width: 0px;
@@ -167,7 +164,7 @@ export default {
   left: 754px;
   top: 607px;
   background-color: black;
-  transition: background-color 0.75s, width 0.75s;
+  transition: background-color 2.75s, width 2.75s;
   z-index: 101;
 }
 .load {
@@ -183,7 +180,7 @@ export default {
   height: 100vh;
   z-index: 100;
   background-color: white;
-  transition: opacity 2.25s, z-index 2.25s;
+  transition: opacity 3.25s, z-index 3.25s;
 }
 .hidePreloader {
   opacity: 0;
@@ -196,7 +193,7 @@ export default {
   height: 345px;
   left: 754px;
   top: 262px;
-  transition: background-image 0.75s;
+  transition: background-image 2.75s;
 }
 .logoWhite {
   background-image: url(../assets/Darewin.svg);

@@ -3,7 +3,7 @@
     <ul class="header-text">
       <li
         :style="{ borderColor: headerColor }"
-        :class="{ currentPage: currentPage == i, showLi: show }"
+        :class="{ currentPage: currentPage == i, }"
         class="t4"
         v-for="i in 5"
         :key="i"
@@ -15,10 +15,10 @@
         >{{ $ml.get(`header${i}`) }}</a>
       </li>
 
-      <li :class="{t4:true,showLi: show}">
+      <li :class="{t4:true }">
         <a :style="{ color: headerColor }" href="/logIn">{{ this.$ml.get("logIn") }}</a>
       </li>
-      <li :class="{t4:true,showLi: show}">
+      <li :class="{t4:true }">
         <a :style="{ color: headerColor}" href="/registration">
           {{
           this.$ml.get("register")
@@ -33,7 +33,6 @@ export default {
   props: ["headerColor"],
   data() {
     return {
-      show: false,
       page: i => `#page${i}`,
       pageStr: i => {
         return `#page${i}`;
@@ -57,9 +56,6 @@ export default {
     currentPage() {
       return this.$store.getters.GetCurrentPage;
     }
-  },
-  mounted() {
-    setTimeout(() => (this.show = !this.show), 2500);
   }
 };
 </script>
@@ -80,12 +76,9 @@ ul.header-text li {
   display: inline;
   margin: 60px 0px 0 0;
   padding: 6px 16px;
-  opacity: 0;
   transition: opacity 0.5s linear;
 }
-.showLi {
-  opacity: 1 !important;
-}
+
 ul.header-text li:hover {
   color: #292f40 !important;
   background: #f2f2f2;
