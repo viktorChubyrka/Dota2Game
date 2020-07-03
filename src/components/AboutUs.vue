@@ -72,7 +72,7 @@ export default {
 }
 .hidetImg {
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 2s;
 }
 .showImg {
   opacity: 1;
