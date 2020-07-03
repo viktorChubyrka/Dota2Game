@@ -39,7 +39,7 @@ export default {
   },
   methods: {},
   mounted: function() {
-    setTimeout(() => (this.start = !this.start), 10);
+    setTimeout(() => (this.start = !this.start), 20);
     if (this.$route.params.currentPage) {
       this.$store.commit("SetCurrentPage", +this.$route.params.currentPage);
     } else {
@@ -76,10 +76,7 @@ export default {
               window.scrollTo(0, top);
 
               this.$store.commit("SetCurrentPage", 2);
-              setTimeout(
-                () => this.$store.commit("SetCurrentAnimation", 2),
-                1000
-              );
+              setTimeout(() => this.$store.commit("SetAnim1"), 1000);
             }
             break;
           case 2:
@@ -90,21 +87,14 @@ export default {
               window.scrollTo(0, top);
 
               this.$store.commit("SetCurrentPage", 1);
-              this.$store.commit("SetCurrentAnimation", 1);
             } else {
               var top = document.getElementById(
                 `page${this.$store.getters.GetCurrentPage + 1}`
               ).offsetTop;
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 3);
-              setTimeout(
-                () => this.$store.commit("SetCurrentAnimation", 3),
-                1000
-              );
-              setTimeout(
-                () => this.$store.commit("SetCurrentAnimation", 4),
-                2000
-              );
+              setTimeout(() => this.$store.commit("SetAnim2"), 1000);
+              setTimeout(() => this.$store.commit("SetAnim3", 4), 2000);
             }
             break;
           case 3:
@@ -193,12 +183,11 @@ export default {
   height: 100vh;
   z-index: 100;
   background-color: white;
-  transition: background-color 2s, opacity 2.25s;
+  transition: opacity 2.25s, z-index 2.25s;
 }
 .hidePreloader {
-  background-color: linear-gradient(242.49deg, #9b9ea7 0%, #2b344f 100%),
-    #f2f2f2;
   opacity: 0;
+  z-index: 0;
 }
 .preloaderLogo {
   background-image: url(../assets/DarewinBlack.svg);

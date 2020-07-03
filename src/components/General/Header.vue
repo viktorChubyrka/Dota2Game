@@ -2,28 +2,28 @@
   <div>
     <ul class="header-text">
       <li
-        :style="{borderColor:headerColor }"
-        :class="{currentPage:currentPage==i}"
+        :style="{ borderColor: headerColor }"
+        :class="{ currentPage: currentPage == i, showLi: show }"
         class="t4"
         v-for="i in 5"
         :key="i"
         @click="SetCurentPage(i)"
       >
         <a
-          :style="{ color: headerColor,borderColor:headerColor }"
+          :style="{ color: headerColor, borderColor: headerColor }"
           :href="page(i)"
         >{{ $ml.get(`header${i}`) }}</a>
       </li>
 
-      <li class="t4">
-        <a :style="{ color: headerColor }" href="/logIn">
+      <li :class="{t4:true,showLi: show}">
+        <a :style="{ color: headerColor }" href="/logIn">{{ this.$ml.get("logIn") }}</a>
+      </li>
+      <li :class="{t4:true,showLi: show}">
+        <a :style="{ color: headerColor}" href="/registration">
           {{
-          this.$ml.get("logIn")
+          this.$ml.get("register")
           }}
         </a>
-      </li>
-      <li class="t4">
-        <a :style="{ color: headerColor }" href="/registration">{{ this.$ml.get("register") }}</a>
       </li>
     </ul>
   </div>
@@ -33,6 +33,7 @@ export default {
   props: ["headerColor"],
   data() {
     return {
+      show: false,
       page: i => `#page${i}`,
       pageStr: i => {
         return `#page${i}`;
@@ -45,13 +46,10 @@ export default {
       localStorage.setItem("currentPage", index);
       this.$router.push({ name: "Promo", params: { currentPage: index } });
       if (index == 3) {
-        setTimeout(() => this.$store.commit("SetCurrentAnimation", 3), 1000);
-        setTimeout(() => this.$store.commit("SetCurrentAnimation", 4), 2000);
-      } else {
-        setTimeout(
-          () => this.$store.commit("SetCurrentAnimation", index),
-          1000
-        );
+        setTimeout(() => this.$store.commit("SetAnim2", 3), 1000);
+        setTimeout(() => this.$store.commit("SetAnim3", 4), 2000);
+      } else if (index == 2) {
+        setTimeout(() => this.$store.commit("SetAnim1", index), 1000);
       }
     }
   },
@@ -59,6 +57,9 @@ export default {
     currentPage() {
       return this.$store.getters.GetCurrentPage;
     }
+  },
+  mounted() {
+    setTimeout(() => (this.show = !this.show), 2500);
   }
 };
 </script>
@@ -79,6 +80,11 @@ ul.header-text li {
   display: inline;
   margin: 60px 0px 0 0;
   padding: 6px 16px;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+}
+.showLi {
+  opacity: 1 !important;
 }
 ul.header-text li:hover {
   color: #292f40 !important;

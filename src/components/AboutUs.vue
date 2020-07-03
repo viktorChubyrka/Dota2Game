@@ -3,7 +3,7 @@
     <Header headerColor="#f2f2f2" class="header" />
     <div class="logo"></div>
     <img
-      :class="{hidetImg:true,showImg:$store.getters.currentAnimation == 3 || $store.getters.currentAnimation == 4}"
+      :class="{hidetImg:true,showImg:$store.getters.currentAnimation == 3 || $store.getters.anim2}"
       style="position: absolute;
 width: 464px;
 height: 612px;
@@ -13,7 +13,7 @@ top: 208px;"
       alt
     />
     <div
-      :class="{hidetText:true,showText:$store.getters.currentAnimation == 4}"
+      :class="{hidetText:true,showText:$store.getters.anim3}"
       style="color:white;position: absolute;
             width: 952px;
             height: 252px;
@@ -22,7 +22,7 @@ top: 208px;"
       class="t4"
     >{{ $ml.get("p3Text1") }}</div>
     <div
-      :class="{hidetText:true,showText:$store.getters.currentAnimation == 4}"
+      :class="{hidetText:true,showText:$store.getters.anim3}"
       style="color:white;position: absolute;
             width: 951px;
             height: 144px;

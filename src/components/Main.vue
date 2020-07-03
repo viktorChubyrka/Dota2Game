@@ -3,10 +3,10 @@
     <Header headerColor="#f2f2f2" class="header" />
     <div class="logo1"></div>
     <a @click="ChangePage()" href="#page2">
-      <button class="t4 more-button">{{ $ml.get("p1GetMore") }}</button>
+      <button :class="{t4:true, moreButton:true,showBtn:start2}">{{ $ml.get("p1GetMore") }}</button>
     </a>
-    <Lang />
-    <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
+    <Lang :class="{lang:true,loadText:start}" />
+    <div :class="{t4:true, alfa:true,loadText:start}">{{ $ml.get("alfa") }}</div>
   </div>
 </template>
 <script>
@@ -15,11 +15,25 @@ import Lang from "./General/Lang";
 
 export default {
   components: { Header, Lang },
+  data() {
+    return {
+      start: false,
+      start2: false
+    };
+  },
   methods: {
     ChangePage() {
       this.$store.commit("SetCurrentPage", 2);
       setTimeout(() => this.$store.commit("SetCurrentAnimation", 2), 1000);
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.start = !this.start;
+      setTimeout(() => {
+        this.start2 = !this.start2;
+      }, 500);
+    }, 1000);
   }
 };
 </script>
@@ -47,7 +61,7 @@ export default {
   left: 754px;
   top: 262px;
 }
-.more-button {
+.moreButton {
   position: absolute;
   width: 224px;
   height: 50px;
@@ -58,16 +72,30 @@ export default {
   border: 1px solid #f2f2f2;
   border-radius: 8px;
   color: #f2f2f2;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
-.more-button:hover {
+.moreButton:hover {
   background: #f2f2f2;
   border: #292f40;
   color: #292f40;
+}
+.showBtn {
+  opacity: 1;
 }
 .alfa {
   position: absolute;
   right: 1587px;
   top: 904px;
   color: #f2f2f2;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.lang {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.loadText {
+  opacity: 1;
 }
 </style>

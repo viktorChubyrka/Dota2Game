@@ -15,11 +15,19 @@ export default new Vuex.Store({
     registrationError: "",
     changePasswordError: "",
     emailError: "",
-    currentAnimation: 1,
+    anim1: false,
+    anim2: false,
+    anim3: false,
   },
   getters: {
-    currentAnimation: (state) => {
-      return state.currentAnimation;
+    anim1: (state) => {
+      return state.anim1;
+    },
+    anim2: (state) => {
+      return state.anim2;
+    },
+    anim3: (state) => {
+      return state.anim3;
     },
     changePasswordError: (state) => {
       return state.changePasswordError;
@@ -44,8 +52,14 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    SetCurrentAnimation: (state, payload) => {
-      state.currentAnimation = payload;
+    SetAnim1: (state) => {
+      state.anim1 = true;
+    },
+    SetAnim2: (state) => {
+      state.anim2 = true;
+    },
+    SetAnim3: (state) => {
+      state.anim3 = true;
     },
     SetChangePasswordError: (state, payload) => {
       state.changePasswordError = payload;

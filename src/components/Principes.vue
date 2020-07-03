@@ -3,7 +3,7 @@
     <Header headerColor="#000000" class="header2" />
     <div class="logo2"></div>
     <div class="t4 alfa2">{{ $ml.get("alfa") }}</div>
-    <Slider :class="{slider:true, sliderShow:$store.getters.currentAnimation == 2}" />
+    <Slider :class="{slider:true, sliderShow:$store.getters.anim1}" />
     <Lang />
   </div>
 </template>

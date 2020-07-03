@@ -9,17 +9,13 @@
                 left: 200px;
                 top: 202px;"
         class="t3"
-      >
-        {{ $ml.get("header5") }}
-      </div>
+      >{{ $ml.get("header5") }}</div>
       <div
         style="position: absolute;
                 left: 970px;
                 top: 202px;"
         class="t3"
-      >
-        {{ $ml.get("ask") }}
-      </div>
+      >{{ $ml.get("ask") }}</div>
       <table class="t4" id="contactTable">
         <tr>
           <td>{{ $ml.get("phone") }}</td>
@@ -69,9 +65,7 @@
                 border-size:0px;
                 background: #1F2430;
                 border-radius: 4px;"
-        >
-          {{ $ml.get("ask") }}
-        </button>
+        >{{ $ml.get("ask") }}</button>
       </div>
     </div>
     <div class="second-div">
@@ -82,18 +76,14 @@
                 bottom:58px;
                 color:#e0e0e0"
         class="t6"
-      >
-        Darewin’s club, 2020. All rights reserved.
-      </div>
+      >Darewin’s club, 2020. All rights reserved.</div>
       <div
         style="position: absolute;
                 left: 612px;
                 bottom:288px;
                 color:#f2f2f2"
         class="t3"
-      >
-        {{ $ml.get("map") }}
-      </div>
+      >{{ $ml.get("map") }}</div>
       <ul class="t6" id="pageMap">
         <li>{{ $ml.get("header1") }}</li>
         <li>{{ $ml.get("header2") }}</li>
@@ -108,9 +98,7 @@
                 bottom:288px;
                 color:#f2f2f2"
         class="t3"
-      >
-        {{ $ml.get("pp") }}
-      </div>
+      >{{ $ml.get("pp") }}</div>
       <ul style="left:920px;bottom:166px" class="t6" id="pageMap">
         <li>{{ $ml.get("usePol") }}</li>
         <li>{{ $ml.get("confPol") }}</li>
@@ -151,9 +139,9 @@ export default {
       },
       yq: () => {
         return this.$ml.get("youQ");
-      },
+      }
     };
-  },
+  }
 };
 </script>
 <style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="dots">
+    <ul :class="{dots:true,show:show}">
       <li v-for="i in 5" :key="i">
         <a @click="SetPage(i)" :href="page(i)">
           <div
@@ -18,7 +18,8 @@
 export default {
   data() {
     return {
-      page: i => `#page${i}`
+      page: i => `#page${i}`,
+      show: false
     };
   },
   methods: {
@@ -34,6 +35,11 @@ export default {
         );
       }
     }
+  },
+  created() {
+    setTimeout(() => {
+      this.show = true;
+    }, 2000);
   }
 };
 </script>
@@ -53,6 +59,11 @@ export default {
   right: 32px;
   list-style-type: none;
   margin: 0;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.show {
+  opacity: 1;
 }
 .selected {
   width: 12px;
