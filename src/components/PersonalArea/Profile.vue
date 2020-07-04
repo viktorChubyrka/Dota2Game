@@ -7,16 +7,16 @@
       <div class="t3">О себе</div>
       <button class="t4">Изменить</button>
     </div>
-    <input id="name" class="t5 inputs" type="text" />
-    <input id="surname" class="t5 inputs" type="text" />
+    <input id="name" class="t5 inputs" placeholder="Имя" type="text" :value="user.name" />
+    <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" :value="user.surname" />
     <div style="top:413px" class="titleBlock">
       <div class="t3">Контакты</div>
       <button class="t4">Изменить</button>
     </div>
-    <input id="login" class="t5 inputs" type="text" />
-    <input id="email" class="t5 inputs" type="text" />
-    <input id="phone" class="t5 inputs" type="text" />
-    <input id="steamID" class="t5 inputs" type="text" />
+    <input id="login" class="t5 inputs" type="text" placeholder="Логин" :value="user.login" />
+    <input id="email" class="t5 inputs" type="text" placeholder="Емайл" :value="user.email" />
+    <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" :value="user.phone" />
+    <input id="steamID" class="t5 inputs" type="text" placeholder="SteamID" :value="user.steamID" />
     <div class="passPromo">
       <div class="t3">Безопасность</div>
       <div class="t4 changePass">Изменить пароль</div>
@@ -25,6 +25,18 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  computed: {
+    user() {
+      return this.$store.getters.userData;
+    }
+  },
+  created() {
+    this.$store.dispatch("GetUserData", { context: this });
+  }
+};
+</script>
 <style scoped>
 .promo {
   position: absolute;

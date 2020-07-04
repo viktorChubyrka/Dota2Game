@@ -4,8 +4,8 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-const url = "https://dota2botbackend.herokuapp.com";
-// const url = "http://localhost:4040";
+// const url = "https://dota2botbackend.herokuapp.com";
+const url = "http://localhost:4040";
 
 export default new Vuex.Store({
   state: {
@@ -19,6 +19,7 @@ export default new Vuex.Store({
     anim1: false,
     anim2: false,
     anim3: false,
+    userData: {},
   },
   getters: {
     anim1: (state) => {
@@ -50,6 +51,9 @@ export default new Vuex.Store({
     },
     registrationError: (state) => {
       return state.registrationError;
+    },
+    userData: (state) => {
+      return state.userData;
     },
   },
   mutations: {
@@ -89,6 +93,9 @@ export default new Vuex.Store({
     SetLang: (state, payload) => {
       state.lang = payload;
     },
+    SetUserData: (state, payload) => {
+      state.userData = payload;
+    },
   },
   actions: {
     Registration: async (state, payload) => {
@@ -105,10 +112,12 @@ export default new Vuex.Store({
     LogIn: async (state, payload) => {
       let data = await Axios.post(
         `${url}/api/user/autorization/login`,
-        payload.user
+        payload.user,
+        { withCredentials: true }
       );
       if (data.data.data.status == 200) {
         payload.context.$router.push("/personalArea");
+        localStorage.setItem("login", data.data.data.login);
       } else {
         console.log("Dsad");
         state.commit("SetLoginError", data.data.data.message);
@@ -133,8 +142,24 @@ export default new Vuex.Store({
       state.commit("SetEmailError", data.data);
     },
     LogOut: async (state, payload) => {
-      let data = await Axios.get(`${url}/api/user/autorization/logOut`);
+      let data = await Axios.get(`${url}/api/user/autorization/logOut`, {
+        withCredentials: true,
+      });
       if (data.status == 200) payload.context.$router.push("/");
+    },
+    GetUserData: async (state, payload) => {
+      console.log(localStorage.getItem("login"));
+      let data = await Axios.post(
+        `${url}/api/user/actions/getUserData`,
+        {
+          login: localStorage.getItem("login"),
+        },
+        { withCredentials: true }
+      );
+      console.log(data.data);
+      if (data.data.data.status == 200)
+        state.commit("SetUserData", data.data.data.userModel);
+      // else payload.context.$router.push("/");
     },
   },
   modules: {},
