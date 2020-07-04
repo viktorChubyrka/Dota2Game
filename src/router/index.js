@@ -7,6 +7,8 @@ import LogIn from "../views/LogIn.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
 import RecoweryPassword from "../views/RecoweryPassword.vue";
 import PasswordResetSucces from "../views/PasswordResetSucces.vue";
+import PersonalArea from "../views/PersonalArea";
+import Profile from "../components/PersonalArea/Profile";
 
 Vue.use(VueRouter);
 
@@ -40,6 +42,18 @@ const routes = [
     path: "/passwordResetSucces",
     name: "PasswordResetSucces",
     component: PasswordResetSucces,
+  },
+  {
+    path: "/personalArea",
+    name: "PersonalArea",
+    component: PersonalArea,
+    children: [
+      {
+        path: "profile",
+        name: "Profile",
+        component: Profile,
+      },
+    ],
   },
 ];
 

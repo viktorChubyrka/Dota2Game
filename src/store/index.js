@@ -4,7 +4,8 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-const url = "https://dota2botbackend.herokuapp.com";
+// const url = "https://dota2botbackend.herokuapp.com";
+const url = "http://localhost:4040";
 
 export default new Vuex.Store({
   state: {
@@ -107,7 +108,7 @@ export default new Vuex.Store({
         payload.user
       );
       if (data.data.data.status == 200) {
-        payload.context.$router.push("/");
+        payload.context.$router.push("/personalArea");
       } else {
         console.log("Dsad");
         state.commit("SetLoginError", data.data.data.message);
@@ -130,6 +131,10 @@ export default new Vuex.Store({
         payload.data
       );
       state.commit("SetEmailError", data.data);
+    },
+    LogOut: async (state, payload) => {
+      let data = await Axios.get(`${url}/api/user/autorization/logOut`);
+      if (data.status == 200) payload.context.$router.push("/");
     },
   },
   modules: {},

@@ -1,0 +1,134 @@
+<template>
+  <div>
+    <div class="profileImg"></div>
+    <div class="t4 changePhoto">Изменить фото</div>
+
+    <div class="titleBlock">
+      <div class="t3">О себе</div>
+      <button class="t4">Изменить</button>
+    </div>
+    <input id="name" class="t5 inputs" type="text" />
+    <input id="surname" class="t5 inputs" type="text" />
+    <div style="top:413px" class="titleBlock">
+      <div class="t3">Контакты</div>
+      <button class="t4">Изменить</button>
+    </div>
+    <input id="login" class="t5 inputs" type="text" />
+    <input id="email" class="t5 inputs" type="text" />
+    <input id="phone" class="t5 inputs" type="text" />
+    <input id="steamID" class="t5 inputs" type="text" />
+    <div class="passPromo">
+      <div class="t3">Безопасность</div>
+      <div class="t4 changePass">Изменить пароль</div>
+      <div class="t3 promoTitle">Darewin’s family промокод</div>
+      <div class="t4 promo">asdke94ld7</div>
+    </div>
+  </div>
+</template>
+<style scoped>
+.promo {
+  position: absolute;
+  width: 201px;
+  height: 36px;
+  left: 0px;
+  top: 208px;
+}
+.promoTitle {
+  position: absolute;
+  width: 292px;
+  height: 38px;
+  left: 0 px;
+  top: 152px;
+}
+.profileImg {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  left: 0;
+  top: 64px;
+  background: #e0e0e0;
+  border-radius: 70px;
+}
+.changePhoto {
+  position: absolute;
+  width: 145px;
+  height: 36px;
+  left: 188px;
+  top: 116px;
+  text-decoration: underline;
+  color: #35a7ff;
+}
+.changePass {
+  position: absolute;
+  width: 166px;
+  height: 36px;
+  left: 0px;
+  top: 54px;
+  text-decoration: underline;
+  color: #35a7ff;
+}
+.AboutUser {
+  position: absolute;
+  width: 444px;
+  height: 144px;
+  left: 0;
+  top: 236px;
+}
+.inputs {
+  position: absolute;
+  width: 444px;
+  height: 40px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  padding-left: 16px;
+  color: #1f2430;
+}
+#name {
+  left: 0;
+  top: 292px;
+}
+#surname {
+  left: 0;
+  top: 340px;
+}
+#login {
+  left: 0;
+  top: 468px;
+}
+#email {
+  left: 0;
+  top: 516px;
+}
+#phone {
+  left: 0;
+  top: 564px;
+}
+#steamID {
+  left: 0;
+  top: 612px;
+}
+.titleBlock {
+  position: absolute;
+  width: 444px;
+  height: 40px;
+  left: 0;
+  top: 236px;
+}
+.titleBlock div {
+  float: left;
+}
+.titleBlock button {
+  float: right;
+  width: 170px;
+  height: 40px;
+  background: #f2f2f2;
+  border: none;
+  border-radius: 6px;
+  color: #1f2430;
+}
+.passPromo {
+  position: absolute;
+  left: 721px;
+  top: 64px;
+}
+</style>
