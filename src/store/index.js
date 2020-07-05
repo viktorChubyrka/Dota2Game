@@ -4,8 +4,8 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-// const url = "https://dota2botbackend.herokuapp.com";
-const url = "http://localhost:4040";
+const url = "https://dota2botbackend.herokuapp.com";
+//const url = "http://localhost:4040";
 
 export default new Vuex.Store({
   state: {
