@@ -75,13 +75,16 @@ ul.header-text {
 ul.header-text li {
   display: inline;
   margin: 60px 0px 0 0;
-  padding: 6px 16px;
+  padding: 4px 14px;
   transition: opacity 0.5s linear;
 }
 
 ul.header-text li:hover {
+  background-color: rgba(255, 255, 255, 1);
   color: #292f40 !important;
-  background: #f2f2f2;
+  -webkit-box-shadow: 0 0 10px 6px rgba(255, 255, 255, 1);
+  -moz-box-shadow: 0 0 10px 6px rgba(255, 255, 255, 1);
+  box-shadow: 0 0 10px 6px rgba(255, 255, 255, 1);
 }
 ul.header-text li:hover a {
   color: #292f40 !important;

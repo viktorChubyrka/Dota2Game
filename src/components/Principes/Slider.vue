@@ -159,14 +159,19 @@ export default {
   right: 25px;
   top: 636px;
   opacity: 0;
-  background: transparent;
+  background-color: rgba(255, 255, 255, 0);
   border: 1px solid #f2f2f2;
   border-radius: 8px;
   color: #f2f2f2;
   transition: opacity 1s;
+  -webkit-transition: background-color 1s;
+  -moz-transition: background-color 1s;
+  -ms-transition: background-color 1s;
+  -o-transition: background-color 1s;
+  transition: background-color 1s;
 }
 .nextButton:hover {
-  background: #f2f2f2;
+  background-color: #f2f2f2;
   border: #292f40;
   color: #2a2c2f;
 }

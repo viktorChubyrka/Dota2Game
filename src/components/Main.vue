@@ -29,13 +29,13 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => (this.start2 = !this.start2), 4000);
+    setTimeout(() => (this.start2 = !this.start2), 5000);
     setTimeout(() => {
       this.show = !this.show;
       setTimeout(() => {
         this.start = !this.start;
-      }, 1500);
-    }, 2000);
+      }, 2500);
+    }, 3000);
   }
 };
 </script>
@@ -74,17 +74,21 @@ export default {
   height: 50px;
   left: 849px;
   top: 735px;
-  background: transparent;
+  background-color: rgba(255, 255, 255, 0);
   padding: 6px 40px;
   border: 1px solid #f2f2f2;
   border-radius: 8px;
   color: #f2f2f2;
   opacity: 0;
   transition: opacity 0.5s;
+  -webkit-transition: background-color 1s;
+  -moz-transition: background-color 1s;
+  -ms-transition: background-color 1s;
+  -o-transition: background-color 1s;
+  transition: background-color 1s;
 }
 .moreButton:hover {
-  background: #f2f2f2;
-  border: #292f40;
+  background-color: #f2f2f2;
   color: #292f40;
 }
 .showBtn {

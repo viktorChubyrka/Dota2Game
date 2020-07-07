@@ -1,7 +1,7 @@
 <template >
   <div>
     <div :class="{preloader:true,hidePreloader:start}">
-      <div :class="{preloaderLogo:true, logoWhite:start}"></div>
+      <div :class="{preloaderLogo:true,black:start2}"></div>
       <div :class="{loading:true,load:start}"></div>
     </div>
     <div :class="{show:show,comp:true}" id="page1" style="position:relative">
@@ -19,7 +19,7 @@
     <div :class="{show:show,comp:true}" id="page5" style="position:relative">
       <ContactUs />
     </div>
-    <RightDots />
+    <RightDots style="opacity:0;transition:opacity .5s" :class="{showDots:start3}" />
   </div>
 </template>
 <script>
@@ -35,15 +35,24 @@ export default {
   data() {
     return {
       start: false,
+      start2: false,
+      start3: false,
       show: false
     };
   },
   methods: {},
   mounted: function() {
     setTimeout(() => {
-      this.start = !this.start;
-      this.show = true;
+      this.start2 = true;
+      setTimeout(() => {
+        this.start = !this.start;
+        this.show = true;
+      }, 1000);
     }, 20);
+    setTimeout(() => {
+      this.start3 = true;
+    }, 4000);
+
     if (this.$route.params.currentPage) {
       this.$store.commit("SetCurrentPage", +this.$route.params.currentPage);
     } else {
@@ -89,17 +98,13 @@ export default {
             ).offsetTop;
             window.scrollTo(0, top);
             this.$store.commit("SetCurrentPage", 2);
-            setTimeout(
-              () => this.$store.commit("SetCurrentAnimation", 2),
-              1000
-            );
+            setTimeout(() => this.$store.commit("SetAnim1"), 1000);
           } else if (e.keyCode == 40) {
             var top = document.getElementById(
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
             this.$store.commit("SetCurrentPage", 4);
-            this.$store.commit("SetCurrentAnimation", 5);
           }
           break;
         case 4:
@@ -110,19 +115,15 @@ export default {
             window.scrollTo(0, top);
             this.$store.commit("SetCurrentPage", 3);
             setTimeout(() => {
-              this.$store.commit("SetCurrentAnimation", 3);
+              this.$store.commit("SetAnim2", 3);
             }, 1000);
-            setTimeout(
-              () => this.$store.commit("SetCurrentAnimation", 4),
-              2000
-            );
+            setTimeout(() => this.$store.commit("SetAnim3", 4), 2000);
           } else if (e.keyCode == 40) {
             var top = document.getElementById(
               `page${this.$store.getters.GetCurrentPage + 1}`
             ).offsetTop;
             window.scrollTo(0, top);
             this.$store.commit("SetCurrentPage", 5);
-            this.$store.commit("SetCurrentAnimation", 6);
           }
           break;
         case 5:
@@ -132,7 +133,6 @@ export default {
             ).offsetTop;
             window.scrollTo(0, top);
             this.$store.commit("SetCurrentPage", 4);
-            this.$store.commit("SetCurrentAnimation", 5);
           }
           break;
         default:
@@ -179,17 +179,13 @@ export default {
               ).offsetTop;
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 2);
-              setTimeout(
-                () => this.$store.commit("SetCurrentAnimation", 2),
-                1000
-              );
+              setTimeout(() => this.$store.commit("SetAnim1"), 1000);
             } else {
               var top = document.getElementById(
                 `page${this.$store.getters.GetCurrentPage + 1}`
               ).offsetTop;
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 4);
-              this.$store.commit("SetCurrentAnimation", 5);
             }
             break;
           case 4:
@@ -200,19 +196,15 @@ export default {
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 3);
               setTimeout(() => {
-                this.$store.commit("SetCurrentAnimation", 3);
+                this.$store.commit("SetAnim2");
               }, 1000);
-              setTimeout(
-                () => this.$store.commit("SetCurrentAnimation", 4),
-                2000
-              );
+              setTimeout(() => this.$store.commit("SetAnim3"), 2000);
             } else {
               var top = document.getElementById(
                 `page${this.$store.getters.GetCurrentPage + 1}`
               ).offsetTop;
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 5);
-              this.$store.commit("SetCurrentAnimation", 6);
             }
             break;
           case 5:
@@ -222,7 +214,6 @@ export default {
               ).offsetTop;
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 4);
-              this.$store.commit("SetCurrentAnimation", 5);
             }
             break;
           default:
@@ -256,6 +247,9 @@ export default {
   width: 411px;
   background-color: white;
 }
+.showDots {
+  opacity: 1 !important;
+}
 .preloader {
   position: fixed;
   top: 0;
@@ -265,7 +259,7 @@ export default {
   height: 100vh;
   z-index: 100;
   background-color: white;
-  transition: opacity 3.25s, z-index 3.25s;
+  transition: opacity 3.75s, z-index 4.25s;
 }
 .hidePreloader {
   opacity: 0;
@@ -278,9 +272,11 @@ export default {
   height: 345px;
   left: 754px;
   top: 262px;
-  transition: background-image 2.75s;
+  opacity: 0;
+  transition: background-image 3.75s;
+  transition: opacity 1s;
 }
-.logoWhite {
-  background-image: url(../assets/Darewin.svg);
+.black {
+  opacity: 1 !important;
 }
 </style>

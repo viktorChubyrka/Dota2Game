@@ -5,18 +5,18 @@
 
     <div class="titleBlock">
       <div class="t3">О себе</div>
-      <button class="t4">Изменить</button>
+      <button class="t4" @click="changeName()">Изменить</button>
     </div>
-    <input id="name" class="t5 inputs" placeholder="Имя" type="text" :value="user.name" />
-    <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" :value="user.surname" />
+    <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="user.name" />
+    <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="user.surname" />
     <div style="top:413px" class="titleBlock">
       <div class="t3">Контакты</div>
-      <button class="t4">Изменить</button>
+      <button class="t4" @click="changeContactData()">Изменить</button>
     </div>
-    <input id="login" class="t5 inputs" type="text" placeholder="Логин" :value="user.login" />
-    <input id="email" class="t5 inputs" type="text" placeholder="Емайл" :value="user.email" />
-    <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" :value="user.phone" />
-    <input id="steamID" class="t5 inputs" type="text" placeholder="SteamID" :value="user.steamID" />
+    <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="user.login" />
+    <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="user.email" />
+    <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" v-model="user.number" />
+    <input id="steamID" class="t5 inputs" type="text" placeholder="SteamID" v-model="user.steamID" />
     <div class="passPromo">
       <div class="t3">Безопасность</div>
       <div class="t4 changePass">Изменить пароль</div>
@@ -27,6 +27,35 @@
 </template>
 <script>
 export default {
+  data() {
+    return {};
+  },
+  methods: {
+    changeName() {
+      let login = localStorage.getItem("login");
+      this.$store.dispatch("ChangeName", {
+        data: {
+          firstName: this.user.name,
+          lastName: this.user.surname,
+          login
+        },
+        consext: this
+      });
+    },
+    changeContactData() {
+      let login = localStorage.getItem("login");
+      this.$store.dispatch("ChangeContactInfo", {
+        data: {
+          email: this.user.email,
+          phone: this.user.number,
+          loginChange: this.user.login,
+          steamID: this.user.steamID,
+          login
+        },
+        consext: this
+      });
+    }
+  },
   computed: {
     user() {
       return this.$store.getters.userData;

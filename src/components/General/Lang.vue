@@ -27,6 +27,7 @@ export default {
   },
   created() {
     this.$ml.change("russian");
+    this.$store.commit("SetLang", 1);
   },
   updated() {
     this.active = this.$store.getters.lang;
@@ -53,6 +54,9 @@ export default {
 .lengUl li:hover {
   color: #292f40 !important;
   background: #f2f2f2;
+  -webkit-box-shadow: 0 0 10px 6px rgba(255, 255, 255, 1);
+  -moz-box-shadow: 0 0 10px 6px rgba(255, 255, 255, 1);
+  box-shadow: 0 0 10px 6px rgba(255, 255, 255, 1);
 }
 .lengUl li:hover a {
   color: #292f40 !important;

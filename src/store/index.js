@@ -5,7 +5,7 @@ import Axios from "axios";
 Vue.use(Vuex);
 
 // const url = "https://dota2botbackend.herokuapp.com";
-const url = "http://localhost:4040";
+const url = "http://localhost:3000";
 
 export default new Vuex.Store({
   state: {
@@ -148,7 +148,6 @@ export default new Vuex.Store({
       if (data.status == 200) payload.context.$router.push("/");
     },
     GetUserData: async (state, payload) => {
-      console.log(localStorage.getItem("login"));
       let data = await Axios.post(
         `${url}/api/user/actions/getUserData`,
         {
@@ -159,7 +158,27 @@ export default new Vuex.Store({
       console.log(data.data);
       if (data.data.data.status == 200)
         state.commit("SetUserData", data.data.data.userModel);
-      // else payload.context.$router.push("/");
+      else payload.context.$router.push("/");
+    },
+    ChangeName: async (state, payload) => {
+      let data = await Axios.post(
+        `${url}/api/user/actions/changeName`,
+        payload.data,
+        {
+          withCredentials: true,
+        }
+      );
+      if (data.data.data.status != 200) payload.context.$router.push("/");
+    },
+    ChangeContactInfo: async (state, payload) => {
+      let data = await Axios.post(
+        `${url}/api/user/actions/changeContactInfo`,
+        payload.data,
+        {
+          withCredentials: true,
+        }
+      );
+      if (data.data.data.status != 200) payload.context.$router.push("/");
     },
   },
   modules: {},

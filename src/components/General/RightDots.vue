@@ -24,15 +24,13 @@ export default {
   },
   methods: {
     SetPage(index) {
+      console.log(index);
       this.$store.commit("SetCurrentPage", index);
       if (index == 3) {
-        setTimeout(() => this.$store.commit("SetCurrentAnimation", 3), 1000);
-        setTimeout(() => this.$store.commit("SetCurrentAnimation", 4), 2000);
+        setTimeout(() => this.$store.commit("SetAnim2"), 1000);
+        setTimeout(() => this.$store.commit("SetAnim3"), 2000);
       } else {
-        setTimeout(
-          () => this.$store.commit("SetCurrentAnimation", index),
-          1000
-        );
+        setTimeout(() => this.$store.commit("SetAnim1"), 1000);
       }
     }
   },

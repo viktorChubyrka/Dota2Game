@@ -14,7 +14,7 @@
         <div class="notification">
           <i class="fa fa-bell fa-lg"></i>
         </div>
-        <div class="nickname t5">Pawunya</div>
+        <div class="nickname t5">{{login}}</div>
         <div @click="LogOut()" class="logOut">Выйти</div>
       </div>
     </div>
@@ -69,6 +69,11 @@ export default {
     return {
       focus: 1
     };
+  },
+  computed: {
+    login() {
+      return localStorage.getItem("login");
+    }
   },
   methods: {
     ChangePage(i) {
