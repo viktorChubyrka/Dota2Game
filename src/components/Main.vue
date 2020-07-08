@@ -1,9 +1,9 @@
 <template>
   <div class="main-div">
-    <Header headerColor="#f2f2f2" :class="{header1:true,showHider:show}" />
+    <Header headerColor="#f2f2f2" :class="{header1:true}" />
     <div class="logo1"></div>
-    <a @click="ChangePage()" href="#page2">
-      <button :class="{t4:true, moreButton:true,showBtn:start2}">{{ $ml.get("p1GetMore") }}</button>
+    <a :class="{hideA:true,showBtn:start2}" @click="ChangePage()" href="#page2">
+      <button :class="{t4:true, moreButton:true}">{{ $ml.get("p1GetMore") }}</button>
     </a>
     <Lang :class="{lang:true,loadText:start}" />
     <div :class="{t4:true, alfa:true,loadText:start}">{{ $ml.get("alfa") }}</div>
@@ -31,7 +31,6 @@ export default {
   mounted() {
     setTimeout(() => (this.start2 = !this.start2), 5000);
     setTimeout(() => {
-      this.show = !this.show;
       setTimeout(() => {
         this.start = !this.start;
       }, 2500);
@@ -44,11 +43,10 @@ export default {
   float: right;
   margin-top: 60px;
   margin-right: 164px;
+}
+.hideA {
   opacity: 0;
   transition: opacity 0.5s;
-}
-.showHider {
-  opacity: 1;
 }
 .main-div {
   width: 100%;
@@ -79,8 +77,7 @@ export default {
   border: 1px solid #f2f2f2;
   border-radius: 8px;
   color: #f2f2f2;
-  opacity: 0;
-  transition: opacity 0.5s;
+
   -webkit-transition: background-color 1s;
   -moz-transition: background-color 1s;
   -ms-transition: background-color 1s;

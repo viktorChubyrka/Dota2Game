@@ -23,7 +23,7 @@
         <button
           style="width:225px;height:50px"
           @click="SetActiveSlide(4)"
-          :class="{nextButton:true, t4:true,showBtn:ActiveSlide == 4 && !countdown}"
+          :class="{nextButton:true,hideBtn:true, t4:true,showBtn:ActiveSlide == 4 && !countdown}"
         >{{ $ml.get("register") }}</button>
       </router-link>
     </div>
@@ -48,7 +48,7 @@
       >{{ $ml.get("p2s3Text") }}</div>
       <button
         @click="SetActiveSlide(3), CounterTimer(3)"
-        :class="{nextButton:true, t4:true,showBtn:ActiveSlide == 3 && !countdown}"
+        :class="{nextButton:true,hideBtn:true, t4:true,showBtn:ActiveSlide == 3 && !countdown}"
       >{{ $ml.get("p2Button") }}</button>
     </div>
     <div :class="{ active: ActiveSlide == 2, slidet2: ActiveSlide > 2 }" id="third">
@@ -73,7 +73,7 @@
       <button
         style="color:black;border-color:black"
         @click="SetActiveSlide(2), CounterTimer(2)"
-        :class="{nextButton:true, t4:true,showBtn:ActiveSlide == 2 && !countdown}"
+        :class="{nextButton:true,hideBtn:true, t4:true,showBtn:ActiveSlide == 2 && !countdown}"
       >{{ $ml.get("p2Button") }}</button>
     </div>
     <div :class="{ active: ActiveSlide == 1, slidet1: ActiveSlide > 1 }" id="fourth">
@@ -98,7 +98,7 @@
 
       <button
         @click="SetActiveSlide(1), CounterTimer(1)"
-        :class="{nextButton:true, t4:true,showBtn:ActiveSlide == 1 && !countdown}"
+        :class="{nextButton:true,hideBtn:true, t4:true,showBtn:ActiveSlide == 1 && !countdown}"
       >{{ $ml.get("p2Button") }}</button>
     </div>
   </div>
@@ -158,12 +158,10 @@ export default {
   position: absolute;
   right: 25px;
   top: 636px;
-  opacity: 0;
   background-color: rgba(255, 255, 255, 0);
   border: 1px solid #f2f2f2;
   border-radius: 8px;
   color: #f2f2f2;
-  transition: opacity 1s;
   -webkit-transition: background-color 1s;
   -moz-transition: background-color 1s;
   -ms-transition: background-color 1s;
@@ -182,7 +180,10 @@ export default {
 .textShow {
   opacity: 1;
 }
-
+.hideBtn {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
 .showBtn {
   opacity: 1;
 }

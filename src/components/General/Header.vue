@@ -1,30 +1,30 @@
 <template>
   <div>
     <ul class="header-text">
-      <li
-        :style="{ borderColor: headerColor }"
-        :class="{ currentPage: currentPage == i, }"
-        class="t4"
+      <a
         v-for="i in 5"
         :key="i"
-        @click="SetCurentPage(i)"
+        :style="{ color: headerColor, borderColor: headerColor }"
+        :href="page(i)"
       >
-        <a
-          :style="{ color: headerColor, borderColor: headerColor }"
-          :href="page(i)"
-        >{{ $ml.get(`header${i}`) }}</a>
-      </li>
+        <li
+          :style="{ borderColor: headerColor }"
+          :class="{ currentPage: currentPage == i, }"
+          class="t4"
+          @click="SetCurentPage(i)"
+        >{{ $ml.get(`header${i}`) }}</li>
+      </a>
 
-      <li :class="{t4:true }">
-        <a :style="{ color: headerColor }" href="/logIn">{{ this.$ml.get("logIn") }}</a>
-      </li>
-      <li :class="{t4:true }">
-        <a :style="{ color: headerColor}" href="/registration">
+      <a :style="{ color: headerColor }" href="/logIn">
+        <li :class="{t4:true }">{{ this.$ml.get("logIn") }}</li>
+      </a>
+      <a :style="{ color: headerColor}" href="/registration">
+        <li :class="{t4:true }">
           {{
           this.$ml.get("register")
           }}
-        </a>
-      </li>
+        </li>
+      </a>
     </ul>
   </div>
 </template>

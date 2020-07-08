@@ -85,12 +85,24 @@
         class="t3"
       >{{ $ml.get("map") }}</div>
       <ul class="t6" id="pageMap">
-        <li>{{ $ml.get("header1") }}</li>
-        <li>{{ $ml.get("header2") }}</li>
-        <li>{{ $ml.get("header3") }}</li>
-        <li>{{ $ml.get("header4") }}</li>
-        <li>{{ $ml.get("userCab") }}</li>
-        <li>{{ $ml.get("header5") }}</li>
+        <li>
+          <a @click="SetCurentPage(1)" href="#page1">{{ $ml.get("header1") }}</a>
+        </li>
+        <li>
+          <a @click="SetCurentPage(2)" href="#page2">{{ $ml.get("header2") }}</a>
+        </li>
+        <li>
+          <a @click="SetCurentPage(3)" href="#page3">{{ $ml.get("header3") }}</a>
+        </li>
+        <li>
+          <a @click="SetCurentPage(4)" href="#page4">{{ $ml.get("header4") }}</a>
+        </li>
+        <li>
+          <a href="/personalArea">{{ $ml.get("userCab") }}</a>
+        </li>
+        <li>
+          <a @click="SetCurentPage(5)" href="#page5">{{ $ml.get("header5") }}</a>
+        </li>
       </ul>
       <div
         style="position: absolute;
@@ -141,6 +153,19 @@ export default {
         return this.$ml.get("youQ");
       }
     };
+  },
+  methods: {
+    SetCurentPage(index) {
+      this.$store.commit("SetCurrentPage", index);
+      localStorage.setItem("currentPage", index);
+      this.$router.push({ name: "Promo", params: { currentPage: index } });
+      if (index == 3) {
+        setTimeout(() => this.$store.commit("SetAnim2", 3), 1000);
+        setTimeout(() => this.$store.commit("SetAnim3", 4), 2000);
+      } else if (index == 2) {
+        setTimeout(() => this.$store.commit("SetAnim1", index), 1000);
+      }
+    }
   }
 };
 </script>
@@ -194,6 +219,10 @@ export default {
 }
 #pageMap li {
   padding-top: 12px;
+}
+#pageMap li a {
+  text-decoration: none;
+  color: #f2f2f2;
 }
 #fotterLogInUl {
   padding: 0;

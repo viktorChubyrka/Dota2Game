@@ -1,6 +1,14 @@
 <template>
   <div>
-    <div class="profileImg"></div>
+    <div class="profileImg" :style="{background:`url(${user.photo?user.photo:''}) center`}"></div>
+    <input
+      id="filechooser"
+      class="changePhoto"
+      style="opacity:0;position:absolute;z-index:100"
+      type="file"
+      name="file"
+      @change="SendFile()"
+    />
     <div class="t4 changePhoto">Изменить фото</div>
 
     <div class="titleBlock">
@@ -54,6 +62,14 @@ export default {
         },
         consext: this
       });
+    },
+    SendFile() {
+      var blobFile = document.getElementById("filechooser").files[0];
+      console.log(blobFile);
+      var formData = new FormData();
+      formData.append("file", blobFile);
+      formData.append("login", localStorage.getItem("login"));
+      this.$store.dispatch("SendFile", { formData, context: this });
     }
   },
   computed: {
@@ -88,6 +104,8 @@ export default {
   left: 0;
   top: 64px;
   background: #e0e0e0;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
   border-radius: 70px;
 }
 .changePhoto {

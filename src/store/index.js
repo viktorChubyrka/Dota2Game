@@ -5,7 +5,7 @@ import Axios from "axios";
 Vue.use(Vuex);
 
 const url = "https://dota2botbackend.herokuapp.com";
-//const url = "http://localhost:4040";
+// const url = "http://localhost:3000";
 
 export default new Vuex.Store({
   state: {
@@ -179,6 +179,18 @@ export default new Vuex.Store({
         }
       );
       if (data.data.data.status != 200) payload.context.$router.push("/");
+    },
+    SendFile: async (state, payload) => {
+      console.log(payload.formData);
+      let headers = {
+        "Content-Type": "multipart/form-data",
+      };
+      let data = await Axios.post(
+        `${url}/api/user/actions/sendFile`,
+        payload.formData,
+        headers
+      );
+      console.log(data);
     },
   },
   modules: {},
