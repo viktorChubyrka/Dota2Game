@@ -15,16 +15,17 @@
         >{{ $ml.get(`header${i}`) }}</li>
       </a>
 
-      <a :style="{ color: headerColor }" href="/logIn">
-        <li :class="{t4:true }">{{ this.$ml.get("logIn") }}</li>
-      </a>
-      <a :style="{ color: headerColor}" href="/registration">
-        <li :class="{t4:true }">
-          {{
-          this.$ml.get("register")
-          }}
-        </li>
-      </a>
+      <li
+        @click="ChekLoginIn(1)"
+        :style="{ color: headerColor }"
+        :class="{t4:true }"
+      >{{ this.$ml.get("logIn") }}</li>
+
+      <li @click="ChekLoginIn(2)" :style="{ color: headerColor }" :class="{t4:true }">
+        {{
+        this.$ml.get("register")
+        }}
+      </li>
     </ul>
   </div>
 </template>
@@ -50,6 +51,9 @@ export default {
       } else if (index == 2) {
         setTimeout(() => this.$store.commit("SetAnim1", index), 1000);
       }
+    },
+    ChekLoginIn(i) {
+      this.$store.dispatch("CheckSession", { i, context: this });
     }
   },
   computed: {
@@ -76,6 +80,7 @@ ul.header-text li {
   display: inline;
   margin: 60px 0px 0 0;
   padding: 4px 14px;
+  cursor: pointer;
   transition: opacity 0.5s linear;
 }
 

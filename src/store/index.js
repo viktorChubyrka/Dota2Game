@@ -192,6 +192,19 @@ export default new Vuex.Store({
       );
       console.log(data);
     },
+    CheckSession: async (state, payload) => {
+      let status = await Axios.post(`${url}/api/user/actions/`, payload.i, {
+        withCredentials: true,
+      });
+      console.log(status);
+      if (status.data == 200) {
+        payload.context.$router.push("personalArea/profile");
+      } else {
+        if (payload.i == 1) {
+          payload.context.$router.push("/login");
+        } else payload.context.$router.push("/registration");
+      }
+    },
   },
   modules: {},
 });
