@@ -1,16 +1,24 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view class="example"></router-view>
   </div>
 </template>
 <script>
 import Promo from "./views/Promo";
 
 export default {
-  components: { Promo },
+  components: { Promo }
 };
 </script>
 <style>
+body {
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 template {
   margin: 0;
   padding: 0;
@@ -21,8 +29,6 @@ html {
 
 html,
 body {
-  overflow-x: hidden;
-  overflow-y: hidden;
   font-family: "Roboto";
   margin: 0;
   padding: 0;

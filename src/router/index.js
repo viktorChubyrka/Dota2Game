@@ -9,6 +9,9 @@ import RecoweryPassword from "../views/RecoweryPassword.vue";
 import PasswordResetSucces from "../views/PasswordResetSucces.vue";
 import PersonalArea from "../views/PersonalArea";
 import Profile from "../components/PersonalArea/Profile";
+import Support from "../components/PersonalArea/Support";
+import LoyalityProgram from "../components/PersonalArea/LoyalityProgram";
+import Games from "../components/PersonalArea/Games";
 
 Vue.use(VueRouter);
 
@@ -52,6 +55,21 @@ const routes = [
         path: "profile",
         name: "Profile",
         component: Profile,
+      },
+      {
+        path: "support",
+        name: "Support",
+        component: Support,
+      },
+      {
+        path: "loyalityProgram",
+        name: "LoyalityProgram",
+        component: LoyalityProgram,
+      },
+      {
+        path: "games",
+        name: "Games",
+        component: Games,
       },
     ],
   },

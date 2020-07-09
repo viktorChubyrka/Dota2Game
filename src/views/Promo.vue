@@ -1,4 +1,4 @@
-<template >
+<template  >
   <div>
     <div :class="{preloader:true,hidePreloader:start}">
       <div :class="{preloaderLogo:true,black:start2}"></div>

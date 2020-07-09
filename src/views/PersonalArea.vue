@@ -39,23 +39,62 @@
     </div>
     <div class="sideNavigation">
       <ul class="sideNavUl">
-        <li @click="ChangePage(1)" :class="{t5:true,focusedLi:focus==1}">
-          <i class="fa fa-trophy fa-lg"></i>Игры
-        </li>
-        <li @click="ChangePage(2)" :class="{t5:true,focusedLi:focus==2}">
-          <i class="fa fa-book fa-lg"></i>Правила
-        </li>
-        <li @click="ChangePage(3)" :class="{t5:true,focusedLi:focus==3}">
-          <i class="fa fa-clipboard fa-lg"></i>Профиль
-        </li>
-        <li @click="ChangePage(4)" :class="{t5:true,focusedLi:focus==4}">Друзья</li>
-        <li @click="ChangePage(5)" :class="{t5:true,focusedLi:focus==5}">
-          <i class="fa fa-credit-card fa-lg"></i>Средства
-        </li>
-        <li @click="ChangePage(6)" :class="{t5:true,focusedLi:focus==6}">Darewin’s family</li>
-        <li @click="ChangePage(7)" :class="{t5:true,focusedLi:focus==7}">
-          <i class="fa fa-info-circle fa-lg"></i>Поддержка
-        </li>
+        <router-link class="RL" to="games">
+          <li @click="ChangePage(1)" :class="{t5:true,focusedLi:focus==1}">
+            <div style="display:flex">
+              <img class="icon" src="../assets/iconsPA/gamesIcon.svg" />
+              <div>Игры</div>
+            </div>
+          </li>
+        </router-link>
+        <router-link class="RL" to>
+          <li @click="ChangePage(2)" :class="{t5:true,focusedLi:focus==2}">
+            <div style="display:flex">
+              <img class="icon" src="../assets/iconsPA/rulesIcon.svg" />
+              <div>Правила</div>
+            </div>
+          </li>
+        </router-link>
+        <router-link class="RL" to="profile">
+          <li @click="ChangePage(3)" :class="{t5:true,focusedLi:focus==3}">
+            <div style="display:flex">
+              <img class="icon" src="../assets/iconsPA/profileIcon.svg" />
+              <div>Профиль</div>
+            </div>
+          </li>
+        </router-link>
+        <router-link class="RL" to>
+          <li @click="ChangePage(4)" :class="{t5:true,focusedLi:focus==4}">
+            <div style="display:flex">
+              <img class="icon" src="../assets/iconsPA/friendsIcon.svg" />
+              <div>Друзья</div>
+            </div>
+          </li>
+        </router-link>
+        <router-link class="RL" to>
+          <li @click="ChangePage(5)" :class="{t5:true,focusedLi:focus==5}">
+            <div style="display:flex">
+              <img class="icon" src="../assets/iconsPA/moneyIcon.svg" />
+              <div>Средства</div>
+            </div>
+          </li>
+        </router-link>
+        <router-link class="RL" to="loyalityProgram">
+          <li @click="ChangePage(6)" :class="{t5:true,focusedLi:focus==6}">
+            <div style="display:flex">
+              <img class="icon" src="../assets/iconsPA/familyIcon.svg" />
+              <div>Darewin’s family</div>
+            </div>
+          </li>
+        </router-link>
+        <router-link class="RL" to="support">
+          <li @click="ChangePage(7)" :class="{t5:true,focusedLi:focus==7}">
+            <div style="display:flex">
+              <img class="icon" src="../assets/iconsPA/infoIcon.svg" />
+              <div>Поддержка</div>
+            </div>
+          </li>
+        </router-link>
       </ul>
     </div>
     <div class="pages">
@@ -82,10 +121,25 @@ export default {
     LogOut() {
       this.$store.dispatch("LogOut", { context: this });
     }
+  },
+  created() {
+    window.addEventListener("mousewheel", e => {
+      e.allowDefault();
+    });
   }
 };
 </script>
 <style >
+.RL {
+  text-decoration: none;
+}
+body {
+  overflow-y: scroll !important;
+}
+.icon {
+  padding-right: 8px;
+  fill: grey !important;
+}
 .pages {
   position: relative;
   width: 1622px;

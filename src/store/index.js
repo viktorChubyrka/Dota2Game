@@ -4,8 +4,8 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-const url = "https://dota2botbackend.herokuapp.com";
-// const url = "http://localhost:3000";
+//const url = "https://dota2botbackend.herokuapp.com";
+const url = "http://localhost:3000";
 
 export default new Vuex.Store({
   state: {
@@ -116,7 +116,7 @@ export default new Vuex.Store({
         { withCredentials: true }
       );
       if (data.data.data.status == 200) {
-        payload.context.$router.push("/personalArea");
+        payload.context.$router.push("/personalArea/profile");
         localStorage.setItem("login", data.data.data.login);
       } else {
         console.log("Dsad");
