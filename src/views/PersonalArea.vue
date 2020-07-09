@@ -39,7 +39,7 @@
     </div>
     <div class="sideNavigation">
       <ul class="sideNavUl">
-        <router-link class="RL" to="personalArea/games">
+        <router-link class="RL" to="games">
           <li @click="ChangePage(1)" :class="{t5:true,focusedLi:focus==1}">
             <div style="display:flex">
               <img class="icon" src="../assets/iconsPA/gamesIcon.svg" />
@@ -55,7 +55,7 @@
             </div>
           </li>
         </router-link>
-        <router-link class="RL" to="personalArea/profile">
+        <router-link class="RL" to="profile">
           <li @click="ChangePage(3)" :class="{t5:true,focusedLi:focus==3}">
             <div style="display:flex">
               <img class="icon" src="../assets/iconsPA/profileIcon.svg" />
@@ -79,7 +79,7 @@
             </div>
           </li>
         </router-link>
-        <router-link class="RL" to="personalArea/loyalityProgram">
+        <router-link class="RL" to="loyalityProgram">
           <li @click="ChangePage(6)" :class="{t5:true,focusedLi:focus==6}">
             <div style="display:flex">
               <img class="icon" src="../assets/iconsPA/familyIcon.svg" />
@@ -87,7 +87,7 @@
             </div>
           </li>
         </router-link>
-        <router-link class="RL" to="personalArea/support">
+        <router-link class="RL" to="support">
           <li @click="ChangePage(7)" :class="{t5:true,focusedLi:focus==7}">
             <div style="display:flex">
               <img class="icon" src="../assets/iconsPA/infoIcon.svg" />
