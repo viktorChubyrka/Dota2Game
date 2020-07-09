@@ -100,7 +100,7 @@ export default {
       login: "",
       password: "",
       cpassword: "",
-      promoCode: "",
+      promoCode: this.$route.params.promo ? this.$route.params.promo : "",
       accept: false,
       ea: () => {
         return this.$ml.get("emailAdress2");

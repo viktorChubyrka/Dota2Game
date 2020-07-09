@@ -10,7 +10,8 @@
 export default {
   data() {
     return {
-      active: this.$store.getters.lang
+      active: this.$store.getters.lang,
+      lengs: ["russian", "english"]
     };
   },
   methods: {
@@ -18,16 +19,18 @@ export default {
       if (num == 1) {
         this.$ml.change("russian");
         this.$store.commit("SetLang", 1);
+        localStorage.setItem("leng", 1);
       } else {
         this.$ml.change("english");
         this.$store.commit("SetLang", 2);
+        localStorage.setItem("leng", 2);
       }
       this.active = this.$store.getters.lang;
     }
   },
   created() {
-    this.$ml.change("russian");
-    this.$store.commit("SetLang", 1);
+    this.$ml.change(this.lengs[localStorage.getItem("leng") - 1]);
+    this.$store.commit("SetLang", localStorage.getItem("leng"));
   },
   updated() {
     this.active = this.$store.getters.lang;

@@ -119,6 +119,8 @@ export default {
       this.$store.commit("SetCountdown", 4);
       this.countdown = this.$store.getters.countdown;
       this.CountdownTimer();
+      if (index == 4)
+        this.$store.dispatch("CheckSession", { i: 2, context: this });
     },
     CountdownTimer() {
       if (this.$store.getters.countdown > 0) {

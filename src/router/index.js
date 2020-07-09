@@ -12,6 +12,7 @@ import Profile from "../components/PersonalArea/Profile";
 import Support from "../components/PersonalArea/Support";
 import LoyalityProgram from "../components/PersonalArea/LoyalityProgram";
 import Games from "../components/PersonalArea/Games";
+import Money from "../components/PersonalArea/Money";
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,11 @@ const routes = [
     path: "/",
     name: "Promo",
     component: Promo,
+  },
+  {
+    path: "/registration/ref=:promo",
+    name: "Registration",
+    component: Registration,
   },
   {
     path: "/registration",
@@ -70,6 +76,11 @@ const routes = [
         path: "games",
         name: "Games",
         component: Games,
+      },
+      {
+        path: "money",
+        name: "Money",
+        component: Money,
       },
     ],
   },

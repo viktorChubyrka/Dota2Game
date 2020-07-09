@@ -13,7 +13,7 @@
     </div>
   </div>
 </template>
-<style >
+<style scoped>
 .buttonSolo {
   padding: 16px 48px;
   position: absolute;

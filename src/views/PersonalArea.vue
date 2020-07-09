@@ -20,20 +20,16 @@
     </div>
     <div class="actions">
       <div class="readyIcon1">
-        <i class="fa fa-bolt fa-3x"></i>
+        <img :class="{icon:true,iconFocused:focus==5}" src="../assets/iconsPA/readyIcon.svg" />
       </div>
       <div class="readyIconText1 t4">Готов!</div>
       <div class="readyIcon2">
-        <i class="fa fa-users fa-3x"></i>
+        <img class="icon" src="../assets/iconsPA/teamUpIcon.svg" />
       </div>
-      <div class="readyIcon4">
-        <i class="fa fa-search fa-2x"></i>
-      </div>
-
       <div class="readyIconText2 t4">Собрать команду</div>
 
       <div class="readyIcon3">
-        <i class="fa fa-gamepad fa-3x"></i>
+        <img class="icon" src="../assets/iconsPA/searchIcon.svg" />
       </div>
       <div class="readyIconText3 t4">Найти игру</div>
     </div>
@@ -42,7 +38,7 @@
         <router-link class="RL" to="games">
           <li @click="ChangePage(1)" :class="{t5:true,focusedLi:focus==1}">
             <div style="display:flex">
-              <img class="icon" src="../assets/iconsPA/gamesIcon.svg" />
+              <img :class="{icon:true,iconFocused:focus==1}" src="../assets/iconsPA/gamesIcon.svg" />
               <div>Игры</div>
             </div>
           </li>
@@ -50,7 +46,7 @@
         <router-link class="RL" to>
           <li @click="ChangePage(2)" :class="{t5:true,focusedLi:focus==2}">
             <div style="display:flex">
-              <img class="icon" src="../assets/iconsPA/rulesIcon.svg" />
+              <img :class="{icon:true,iconFocused:focus==2}" src="../assets/iconsPA/rulesIcon.svg" />
               <div>Правила</div>
             </div>
           </li>
@@ -58,7 +54,10 @@
         <router-link class="RL" to="profile">
           <li @click="ChangePage(3)" :class="{t5:true,focusedLi:focus==3}">
             <div style="display:flex">
-              <img class="icon" src="../assets/iconsPA/profileIcon.svg" />
+              <img
+                :class="{icon:true,iconFocused:focus==3}"
+                src="../assets/iconsPA/profileIcon.svg"
+              />
               <div>Профиль</div>
             </div>
           </li>
@@ -66,15 +65,18 @@
         <router-link class="RL" to>
           <li @click="ChangePage(4)" :class="{t5:true,focusedLi:focus==4}">
             <div style="display:flex">
-              <img class="icon" src="../assets/iconsPA/friendsIcon.svg" />
+              <img
+                :class="{icon:true,iconFocused:focus==4}"
+                src="../assets/iconsPA/friendsIcon.svg"
+              />
               <div>Друзья</div>
             </div>
           </li>
         </router-link>
-        <router-link class="RL" to>
+        <router-link class="RL" to="money">
           <li @click="ChangePage(5)" :class="{t5:true,focusedLi:focus==5}">
             <div style="display:flex">
-              <img class="icon" src="../assets/iconsPA/moneyIcon.svg" />
+              <img :class="{icon:true,iconFocused:focus==5}" src="../assets/iconsPA/moneyIcon.svg" />
               <div>Средства</div>
             </div>
           </li>
@@ -82,7 +84,7 @@
         <router-link class="RL" to="loyalityProgram">
           <li @click="ChangePage(6)" :class="{t5:true,focusedLi:focus==6}">
             <div style="display:flex">
-              <img class="icon" src="../assets/iconsPA/familyIcon.svg" />
+              <img :class="{icon:true,iconFocused:focus==6}" src="../assets/iconsPA/familyIcon.svg" />
               <div>Darewin’s family</div>
             </div>
           </li>
@@ -90,7 +92,7 @@
         <router-link class="RL" to="support">
           <li @click="ChangePage(7)" :class="{t5:true,focusedLi:focus==7}">
             <div style="display:flex">
-              <img class="icon" src="../assets/iconsPA/infoIcon.svg" />
+              <img :class="{icon:true,iconFocused:focus==7}" src="../assets/iconsPA/infoIcon.svg" />
               <div>Поддержка</div>
             </div>
           </li>
@@ -138,14 +140,15 @@ body {
 }
 .icon {
   padding-right: 8px;
+  opacity: 0.5;
 }
-.icon:hover {
-  fill: grey !important;
+.iconFocused {
+  opacity: 1;
 }
 .pages {
   position: relative;
   width: 1622px;
-  height: 905px;
+  height: 714px;
   left: 298px;
   top: 160px;
 }

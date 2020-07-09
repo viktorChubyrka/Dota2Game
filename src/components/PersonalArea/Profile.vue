@@ -29,7 +29,40 @@
       <div class="t3">Безопасность</div>
       <div class="t4 changePass">Изменить пароль</div>
       <div class="t3 promoTitle">Darewin’s family промокод</div>
-      <div class="t4 promo">asdke94ld7</div>
+      <div class="t4 promo">Промокод: asdke94ld7</div>
+      <div class="t4 promo2">
+        Реферальная ссылка:
+        <div style="color:#BDBDBD;display:inline">registration/ref=2dfs122vh</div>
+      </div>
+      <i
+        @click="Copy(1)"
+        style="position: absolute;
+                left: 493px;
+                top: 192px;
+                color:#BDBDBD"
+        class="fa fa-copy fa-2x"
+      ></i>
+      <i
+        @click="Copy(2)"
+        style="position: absolute;
+                left: 493px;
+                top: 246px;
+                color:#BDBDBD"
+        class="fa fa-copy fa-2x"
+      ></i>
+    </div>
+    <div class="t3 lengChange">
+      Язык
+      <ul class="lengChangeUl">
+        <li @click="ChangeLang(1)" class="t4">
+          Русский
+          <div :class="{show:show==1}" style="opacity:0;display:inline;color:#BDBDBD">cейчас</div>
+        </li>
+        <li @click="ChangeLang(2)" class="t4">
+          English
+          <div :class="{show:show==2}" style="opacity:0;display:inline;color:#BDBDBD">cейчас</div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -65,16 +98,30 @@ export default {
     },
     SendFile() {
       var blobFile = document.getElementById("filechooser").files[0];
-      console.log(blobFile);
       var formData = new FormData();
       formData.append("file", blobFile);
       formData.append("login", localStorage.getItem("login"));
       this.$store.dispatch("SendFile", { formData, context: this });
+    },
+    Copy(i) {
+      if (i == 1) {
+        let text = "asdke94ld7";
+        document.execCommand("copy", text);
+      } else {
+        let text = "asdke94ld7";
+        document.execCommand("copy", text);
+      }
+    },
+    ChangeLang(i) {
+      localStorage.setItem("leng", i);
     }
   },
   computed: {
     user() {
       return this.$store.getters.userData;
+    },
+    show() {
+      return localStorage.getItem("leng");
     }
   },
   created() {
@@ -83,19 +130,44 @@ export default {
 };
 </script>
 <style scoped>
+.lengChange {
+  position: absolute;
+  height: 38px;
+  left: 721px;
+  top: 394px;
+}
+.lengChangeUl {
+  margin: 0;
+  padding: 0 0 16px 0;
+  list-style-type: none;
+}
+.lengChangeUl li {
+  margin-bottom: 10px;
+  width: 160px !important;
+}
+.lengChangeUl:first-child {
+  margin-top: 16px;
+}
 .promo {
   position: absolute;
-  width: 201px;
+  width: 250px;
   height: 36px;
   left: 0px;
-  top: 208px;
+  top: 192px;
+}
+.promo2 {
+  position: absolute;
+  width: 477px;
+  height: 36px;
+  left: 0px;
+  top: 246px;
 }
 .promoTitle {
   position: absolute;
   width: 292px;
   height: 38px;
   left: 0 px;
-  top: 152px;
+  top: 138px;
 }
 .profileImg {
   position: absolute;
