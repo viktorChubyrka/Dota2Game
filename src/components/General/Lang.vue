@@ -10,7 +10,6 @@
 export default {
   data() {
     return {
-      active: this.$store.getters.lang,
       lengs: ["russian", "english"]
     };
   },
@@ -34,6 +33,11 @@ export default {
   },
   updated() {
     this.active = this.$store.getters.lang;
+  },
+  computed: {
+    active() {
+      return this.$store.getters.lang;
+    }
   }
 };
 </script>

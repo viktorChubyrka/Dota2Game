@@ -82,7 +82,7 @@ export default {
   -moz-transition: background-color 1s;
   -ms-transition: background-color 1s;
   -o-transition: background-color 1s;
-  transition: background-color 1s;
+  transition: background-color 1s, color 1s;
 }
 .moreButton:hover {
   background-color: #f2f2f2;
