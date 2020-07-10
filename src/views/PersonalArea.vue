@@ -62,7 +62,7 @@
             </div>
           </li>
         </router-link>
-        <router-link class="RL" to>
+        <router-link class="RL" to="friends">
           <li @click="ChangePage(4)" :class="{t5:true,focusedLi:focus==4}">
             <div style="display:flex">
               <img

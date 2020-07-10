@@ -13,6 +13,7 @@ import Support from "../components/PersonalArea/Support";
 import LoyalityProgram from "../components/PersonalArea/LoyalityProgram";
 import Games from "../components/PersonalArea/Games";
 import Money from "../components/PersonalArea/Money";
+import Friends from "../components/PersonalArea/Friends";
 
 Vue.use(VueRouter);
 
@@ -81,6 +82,11 @@ const routes = [
         path: "money",
         name: "Money",
         component: Money,
+      },
+      {
+        path: "friends",
+        name: "Friends",
+        component: Friends,
       },
     ],
   },
