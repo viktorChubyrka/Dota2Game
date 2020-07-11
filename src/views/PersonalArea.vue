@@ -7,31 +7,41 @@
       <div class="photo"></div>
       <div id="inform">
         <div class="onlineDot"></div>
-        <div class="onlineText t5">12 Online</div>
+        <div class="onlineText t5">12 {{ $ml.get("online") }}</div>
         <div class="readyDot"></div>
-        <div class="readyText t5">5 Ready</div>
+        <div class="readyText t5">5 {{ $ml.get("redy") }}</div>
         <div class="cash t5">$23 — 23 Darewin’s dollar</div>
         <div class="notification">
-          <i class="fa fa-bell fa-lg"></i>
+          <i class="fa fa-bell fa-lg notif">
+            <ul
+              style="position:fixed; top:10px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
+            >
+              <li v-for="i in 5" :key="i" style="margin-bottom:9px">
+                <Message />
+              </li>
+            </ul>
+          </i>
         </div>
         <div class="nickname t5">{{login}}</div>
-        <div @click="LogOut()" class="logOut">Выйти</div>
+        <div @click="LogOut()" class="logOut">{{$ml.get("LogOut")}}</div>
       </div>
     </div>
     <div class="actions">
       <div class="readyIcon1">
         <img :class="{icon:true,iconFocused:focus==5}" src="../assets/iconsPA/readyIcon.svg" />
       </div>
-      <div class="readyIconText1 t4">Готов!</div>
+      <div class="readyIconText1 t4">{{ $ml.get("redy") }}!</div>
       <div class="readyIcon2">
         <img class="icon" src="../assets/iconsPA/teamUpIcon.svg" />
       </div>
-      <div class="readyIconText2 t4">Собрать команду</div>
+      <div
+        :class="{readyIconText2:true, t4:true, readyIconText2Eng:this.$store.getters.lang==2}"
+      >{{ $ml.get("getComand") }}</div>
 
       <div class="readyIcon3">
         <img class="icon" src="../assets/iconsPA/searchIcon.svg" />
       </div>
-      <div class="readyIconText3 t4">Найти игру</div>
+      <div class="readyIconText3 t4">{{ $ml.get("findG") }}</div>
     </div>
     <div class="sideNavigation">
       <ul class="sideNavUl">
@@ -39,7 +49,7 @@
           <li @click="ChangePage(1)" :class="{t5:true,focusedLi:focus==1}">
             <div style="display:flex">
               <img :class="{icon:true,iconFocused:focus==1}" src="../assets/iconsPA/gamesIcon.svg" />
-              <div>Игры</div>
+              <div>{{ $ml.get("game") }}</div>
             </div>
           </li>
         </router-link>
@@ -47,7 +57,7 @@
           <li @click="ChangePage(2)" :class="{t5:true,focusedLi:focus==2}">
             <div style="display:flex">
               <img :class="{icon:true,iconFocused:focus==2}" src="../assets/iconsPA/rulesIcon.svg" />
-              <div>Правила</div>
+              <div>{{ $ml.get("pravil") }}</div>
             </div>
           </li>
         </router-link>
@@ -58,7 +68,7 @@
                 :class="{icon:true,iconFocused:focus==3}"
                 src="../assets/iconsPA/profileIcon.svg"
               />
-              <div>Профиль</div>
+              <div>{{ $ml.get("prof") }}</div>
             </div>
           </li>
         </router-link>
@@ -69,7 +79,7 @@
                 :class="{icon:true,iconFocused:focus==4}"
                 src="../assets/iconsPA/friendsIcon.svg"
               />
-              <div>Друзья</div>
+              <div>{{ $ml.get("frend") }}</div>
             </div>
           </li>
         </router-link>
@@ -77,7 +87,7 @@
           <li @click="ChangePage(5)" :class="{t5:true,focusedLi:focus==5}">
             <div style="display:flex">
               <img :class="{icon:true,iconFocused:focus==5}" src="../assets/iconsPA/moneyIcon.svg" />
-              <div>Средства</div>
+              <div>{{ $ml.get("money") }}</div>
             </div>
           </li>
         </router-link>
@@ -93,19 +103,21 @@
           <li @click="ChangePage(7)" :class="{t5:true,focusedLi:focus==7}">
             <div style="display:flex">
               <img :class="{icon:true,iconFocused:focus==7}" src="../assets/iconsPA/infoIcon.svg" />
-              <div>Поддержка</div>
+              <div>{{ $ml.get("sup") }}</div>
             </div>
           </li>
         </router-link>
       </ul>
     </div>
-    <div class="pages">
+    <div style="overflow-y:scroll;" class="pages">
       <router-view></router-view>
     </div>
   </div>
 </template>
 <script>
+import Message from "../components/General/Message";
 export default {
+  components: { Message },
   data() {
     return {
       focus: 1
@@ -123,20 +135,12 @@ export default {
     LogOut() {
       this.$store.dispatch("LogOut", { context: this });
     }
-  },
-  created() {
-    window.addEventListener("mousewheel", e => {
-      e.allowDefault();
-    });
   }
 };
 </script>
 <style >
 .RL {
   text-decoration: none;
-}
-body {
-  overflow-y: scroll !important;
 }
 .icon {
   padding-right: 8px;
@@ -205,10 +209,14 @@ body {
   left: 1009px;
   top: 26px;
 }
+.notification i:hover ul {
+  display: inline !important;
+}
 .notification {
   position: absolute;
   left: 1696px;
   top: 30px;
+  z-index: 10;
 }
 .nickname {
   position: absolute;
@@ -273,6 +281,10 @@ body {
   left: 1280px;
   top: 88px;
   color: #f2f2f2;
+}
+
+.readyIconText2Eng {
+  left: 865px;
 }
 .sideNavigation {
   position: absolute;

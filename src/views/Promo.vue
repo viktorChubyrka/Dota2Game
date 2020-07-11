@@ -142,7 +142,6 @@ export default {
     window.addEventListener(
       "mousewheel",
       e => {
-        e.preventDefault();
         switch (this.$store.getters.GetCurrentPage) {
           case 1:
             if (e.deltaY > 0) {

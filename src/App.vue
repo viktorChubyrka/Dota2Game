@@ -11,6 +11,10 @@ export default {
 };
 </script>
 <style>
+template {
+  margin: 0;
+  padding: 0;
+}
 body {
   overflow-y: scroll;
 }
@@ -18,15 +22,9 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
-
-template {
-  margin: 0;
-  padding: 0;
-}
 html {
   scroll-behavior: smooth;
 }
-
 html,
 body {
   font-family: "Roboto";

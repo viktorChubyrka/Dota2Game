@@ -9,29 +9,29 @@
       name="file"
       @change="SendFile()"
     />
-    <div class="t4 changePhoto">Изменить фото</div>
+    <div class="t4 changePhoto">{{$ml.get("changePhoto")}}</div>
 
     <div class="titleBlock">
-      <div class="t3">О себе</div>
-      <button class="t4" @click="changeName()">Изменить</button>
+      <div class="t3">{{$ml.get("aboutYou")}}</div>
+      <button class="t4" @click="changeName()">{{$ml.get("change")}}</button>
     </div>
     <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="user.name" />
     <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="user.surname" />
     <div style="top:413px" class="titleBlock">
-      <div class="t3">Контакты</div>
-      <button class="t4" @click="changeContactData()">Изменить</button>
+      <div class="t3">{{$ml.get("cont")}}</div>
+      <button class="t4" @click="changeContactData()">{{$ml.get("change")}}</button>
     </div>
     <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="user.login" />
     <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="user.email" />
     <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" v-model="user.number" />
     <input id="steamID" class="t5 inputs" type="text" placeholder="SteamID" v-model="user.steamID" />
     <div class="passPromo">
-      <div class="t3">Безопасность</div>
-      <div class="t4 changePass">Изменить пароль</div>
-      <div class="t3 promoTitle">Darewin’s family промокод</div>
-      <div class="t4 promo">Промокод: asdke94ld7</div>
+      <div class="t3">{{$ml.get("sec")}}</div>
+      <div class="t4 changePass">{{$ml.get("changePass")}}</div>
+      <div class="t3 promoTitle">Darewin’s family {{$ml.get("promo").toLowerCase()}}</div>
+      <div class="t4 promo">{{$ml.get("promo")}}: asdke94ld7</div>
       <div class="t4 promo2">
-        Реферальная ссылка:
+        {{$ml.get("refLink")}}:
         <div style="color:#BDBDBD;display:inline">registration/ref=2dfs122vh</div>
       </div>
       <i
@@ -52,15 +52,21 @@
       ></i>
     </div>
     <div class="t3 lengChange">
-      Язык
+      {{$ml.get("lang")}}
       <ul class="lengChangeUl">
         <li @click="ChangeLang(1)" class="t4">
           Русский
-          <div :class="{show:show==1}" style="opacity:0;display:inline;color:#BDBDBD">cейчас</div>
+          <div
+            :class="{show:show==1}"
+            style="opacity:0;display:inline;color:#BDBDBD"
+          >{{$ml.get("now")}}</div>
         </li>
         <li @click="ChangeLang(2)" class="t4">
           English
-          <div :class="{show:show==2}" style="opacity:0;display:inline;color:#BDBDBD">cейчас</div>
+          <div
+            :class="{show:show==2}"
+            style="opacity:0;display:inline;color:#BDBDBD"
+          >{{$ml.get("now")}}</div>
         </li>
       </ul>
     </div>
@@ -114,6 +120,10 @@ export default {
     },
     ChangeLang(i) {
       localStorage.setItem("leng", i);
+      this.$store.commit("SetLang", i);
+      if (i == 1) {
+        this.$ml.change("russian");
+      } else this.$ml.change("english");
     }
   },
   computed: {
@@ -121,11 +131,15 @@ export default {
       return this.$store.getters.userData;
     },
     show() {
-      return localStorage.getItem("leng");
+      return this.$store.getters.lang;
     }
   },
   created() {
     this.$store.dispatch("GetUserData", { context: this });
+    this.$store.commit("SetLang", localStorage.getItem("leng"));
+    if (localStorage.getItem("leng") == 1) {
+      this.$ml.change("russian");
+    } else this.$ml.change("english");
   }
 };
 </script>
@@ -164,7 +178,7 @@ export default {
 }
 .promoTitle {
   position: absolute;
-  width: 292px;
+  width: 320px;
   height: 38px;
   left: 0 px;
   top: 138px;

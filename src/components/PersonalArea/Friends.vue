@@ -1,46 +1,127 @@
 <template>
   <div>
     <div class="partyContainer">
-      <div class="circle1"></div>
-      <div class="circle2"></div>
-      <div class="circle3"></div>
-      <div class="circle4"></div>
+      <div class="circle1">
+        <img src="../../assets/friendicons/exit.svg" />
+      </div>
+      <div class="circle2">sads</div>
+      <div class="circle3">
+        <img src="../../assets/friendicons/krestik.svg" />
+      </div>
+      <div class="circle4">
+        <img src="../../assets/friendicons/plus.svg" />
+      </div>
       <div class="circle5"></div>
       <div class="circleText1">dsfljdsf</div>
       <div class="circleText2">dsfljdsf</div>
       <div class="circleText3">dsfljdsf</div>
       <div class="circleText4">dsfljdsf</div>
       <div class="circleText5">dsfljdsf</div>
-      <ul class="friendsList">
-        <li :style="{top:1*10*i}" v-for="i in 10" :key="i">
-          <div class="friendCircle">d</div>
-          <div>sdadasda</div>
-        </li>
-      </ul>
+      <div class="t3 lastesPlayers">{{$ml.get("last")}}</div>
+      <table class="lastesPlayersTable">
+        <tbody>
+          <tr style v-for="i in 10" :key="i">
+            <td style="padding-bottom:15px;padding-right:16px">
+              <div class="circle"></div>
+            </td>
+            <td style="padding-bottom:15px;">
+              <div class="t3">Ally</div>
+            </td>
+            <td
+              class="addFriend"
+              style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
+            >
+              <i class="fa fa-plus-square fa-2x"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <input placeholder="Fren" class="searchFriend" type="text" />
+    <button class="t5 searchButton">{{$ml.get("search")}}</button>
+    <div
+      class="t3"
+      style="position: absolute;
+width: 82px;
+height: 38px;
+left: 0px;
+top: 240px;"
+    >{{$ml.get("frend")}}</div>
+    <table class="searchTable">
+      <tbody>
+        <tr style v-for="i in 3" :key="i">
+          <td style="padding-bottom:15px;padding-right:16px">
+            <div class="circle"></div>
+          </td>
+          <td style="padding-bottom:15px;">
+            <div class="t3">Fren1</div>
+          </td>
+          <td
+            class="addFriend"
+            style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
+          >
+            <i class="fa fa-plus-square fa-2x"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 <style >
-.friendsList {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  left: 562px;
-  top: 295px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.addFriend i:hover {
+  color: #e0e0e0 !important;
 }
 
-.friendsList li {
-  position: absolute;
-  width: 358px;
+.lastesPlayersTable tbody {
+  display: block;
+  overflow-y: scroll;
+  height: 200px;
+  width: 100%;
 }
-.friendCircle {
+.searchFriend {
+  position: absolute;
+  width: 277px;
+  height: 44px;
+  left: 0px;
+  top: 180px;
+  padding-left: 12px;
+}
+.searchButton {
+  position: absolute;
+  width: 83px;
+  height: 50px;
+  left: 277px;
+  top: 179px;
+  color: white;
+  background-color: #1f2430;
+}
+.searchTable {
+  position: absolute;
+  width: 380px;
+  height: 24px;
+  left: 0px;
+  top: 295px;
+}
+.lastesPlayers {
+  position: absolute;
+  width: 112px;
+  height: 38px;
+  left: 562px;
+  top: 200px;
+}
+.lastesPlayersTable {
+  width: 358px;
+  position: absolute;
+  left: 562px;
+  top: 260px;
+  height: 200px;
+}
+.circle {
   width: 24px;
   height: 24px;
-  background: #1f2430;
+  margin-right: 16pxx;
   border-radius: 12px;
+  background-color: #1f2430;
 }
 .partyContainer {
   position: absolute;
@@ -99,6 +180,15 @@
   background: #f02d3a;
   border-radius: 40px;
 }
+.circle4 img {
+  margin: 12px 0 0 12px;
+}
+.circle1 img {
+  margin: 15px 0 0 15px;
+}
+.circle3 img {
+  margin: 15px 0 0 15px;
+}
 .circle2 {
   position: absolute;
   width: 50px;
@@ -107,6 +197,7 @@
   top: 21px;
   background: #e0e0e0;
   border-radius: 40px;
+  text-align: center;
 }
 .circle3 {
   position: absolute;
@@ -114,7 +205,7 @@
   height: 50px;
   left: 585px;
   top: 21px;
-  background: #e0e0e0;
+  background: #f02d3a;
   border-radius: 40px;
 }
 .circle4 {
@@ -123,10 +214,7 @@
   height: 50px;
   left: 849px;
   top: 21px;
-
-  /* Gray 5 */
-
-  background: #e0e0e0;
+  background: #93e5ab;
   border-radius: 40px;
 }
 .circle5 {
@@ -135,10 +223,7 @@
   height: 50px;
   left: 1113px;
   top: 21px;
-
-  /* Gray 5 */
-
-  background: #e0e0e0;
+  background: #828282;
   border-radius: 40px;
 }
 </style>

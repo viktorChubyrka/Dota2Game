@@ -1,73 +1,81 @@
 <template>
   <div>
-    <div class="balance t4">Баланс: 100 = $100</div>
-    <div class="t3 buttonSolo first activeBtn">Превод</div>
+    <div class="balance t4">{{$ml.get("balans")}}: 100 = $100</div>
+    <div class="t3 buttonSolo first activeBtn">{{$ml.get("trans")}}</div>
     <div class="smVretLine"></div>
-    <div class="t3 buttonSolo second">Вывод</div>
+    <div class="t3 buttonSolo second">{{$ml.get("vuv")}}</div>
     <div class="statTable">
       <table>
         <tr>
-          <th class="tc1 t5">Номер</th>
-          <th class="tc2 t5">Тип</th>
-          <th class="tc3 t5">Сумма</th>
-          <th class="tc4 t5">Дата и время</th>
+          <th class="tc1 t5">{{$ml.get("num")}}</th>
+          <th class="tc2 t5">{{$ml.get("type")}}</th>
+          <th class="tc3 t5">{{$ml.get("sum")}}</th>
+          <th class="tc4 t5">{{$ml.get("dateTime")}}</th>
         </tr>
         <tr v-for="i in 6" :key="i">
           <td class="tc1 t4">{{i}}</td>
-          <td class="tc2 t4">Победа</td>
+          <td class="tc2 t4">{{$ml.get("win")}}</td>
           <td class="tc3 t4">+1 $</td>
           <td class="tc4 t4">12.04.2020 14:34</td>
         </tr>
       </table>
     </div>
-    <div class="t4 moneyTitle">Выберите способ перевода</div>
+    <div class="t4 moneyTitle">{{$ml.get("transMet")}}</div>
     <ul class="tTypes">
-      <li>
-        <i class="fa fa-cc-visa fa-3x"></i>
+      <li @click="focused(1)" :class="{focused:focus==1}">
+        <img src="../../assets/moneyIcons/visa.svg" />
       </li>
-      <li>
-        <i class="fa fa-cc-mastercard fa-3x"></i>
+      <li @click="focused(2)" :class="{focused:focus==2}">
+        <img src="../../assets/moneyIcons/mastercard.svg" />
       </li>
-      <li>
-        <i class="fa fa-paypal fa-3x"></i>
+      <li @click="focused(3)" :class="{focused:focus==3}">
+        <img src="../../assets/moneyIcons/paypal.svg" />
       </li>
-      <li>
-        <i class="fa fa-folder-open fa-3x"></i>
+      <li @click="focused(4)" :class="{focused:focus==4}">
+        <img src="../../assets/moneyIcons/qiwi.png" />
       </li>
-      <li>
-        <i class="fa fa-credit-card fa-3x"></i>
+      <li @click="focused(5)" :class="{focused:focus==5}">
+        <img src="../../assets/moneyIcons/webMoney.svg" />
       </li>
     </ul>
-    <input class="t5 money" type="text" placeholder="Сумма перевода" />
-    <button class="t5 submitMoney">Перевести</button>
-    <div
-      class="t5"
-      style="position: absolute;
-width: 242px;
-height: 32px;
-left: 0;
-top: 634px;"
-    >Политика конфиденциальности</div>
-    <div
-      class="t5"
-      style="position: absolute;
-width: 111px;
-height: 32px;
-left: 334px;
-top: 634px;"
-    >Политика АML</div>
-    <div
-      style="position: absolute;
-width: 169px;
-height: 32px;
-left: 537px;
-top: 634px;
-"
-      class="t5"
-    >Правовое соглашение</div>
+    <input class="t5 money" type="text" :placeholder="trPh()" />
+    <button class="t5 submitMoney">{{$ml.get("transBut")}}</button>
+    <ul class="more">
+      <li class="t5">{{$ml.get("confPol")}}</li>
+      <li class="t5">{{$ml.get("AMLPol")}}</li>
+      <li class="t5">{{$ml.get("pravSog")}}</li>
+    </ul>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      focus: 1,
+      trPh: () => {
+        return this.$ml.get("trPh");
+      }
+    };
+  },
+  methods: {
+    focused(i) {
+      this.focus = i;
+    }
+  }
+};
+</script>
 <style scoped>
+.more {
+  position: absolute;
+  left: 0;
+  top: 634px;
+  margin: 0;
+  padding: 0;
+}
+.more li {
+  display: inline;
+  margin-right: 92px;
+}
 .tTypes {
   position: absolute;
   width: 424px;
@@ -79,11 +87,15 @@ top: 634px;
 }
 .tTypes li {
   display: inline;
-  margin-left: 30px;
+  margin-left: 20px;
+  opacity: 0.5;
+}
+.focused {
+  opacity: 1 !important;
 }
 .moneyTitle {
   position: absolute;
-  width: 258px;
+
   height: 36px;
   left: 0;
   top: 218px;
@@ -147,11 +159,13 @@ top: 634px;
   top: 32px;
 }
 .buttonSolo {
+  width: 80px;
   padding: 16px 48px;
   position: absolute;
   color: black;
   top: 100px;
   border: 1px solid #bdbdbd;
+  text-align: center;
 }
 .first {
   left: 448px;
