@@ -42,7 +42,7 @@
           <tr v-for="i in 10" :key="i">
             <td class="t4 players">№ {{i}}</td>
             <td class="t4">{{$ml.get("win")}}</td>
-            <td class="t4">{{$ml.get("solo")}}</td>
+            <td class="t4">{{button==1?$ml.get("solo"):$ml.get("party")}}</td>
             <td>
               <a
                 v-if="i==1"
@@ -204,7 +204,7 @@
             >{{$ml.get("matchNum")}}</th>
           </tr>
           <tr>
-            <td class="t4 players">{{$ml.get("solo")}}</td>
+            <td class="t4 players">{{button==1?$ml.get("solo"):$ml.get("party")}}</td>
             <td class="t4">9 {{$ml.get("minut")}}</td>
             <td>
               <span class="dot">
