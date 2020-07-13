@@ -90,10 +90,11 @@ top: 240px;"
   position: absolute;
   width: 83px;
   height: 50px;
-  left: 277px;
-  top: 179px;
+  left: 293px;
+  top: 180px;
   color: white;
   background-color: #1f2430;
+  border: 0px;
 }
 .searchTable {
   position: absolute;

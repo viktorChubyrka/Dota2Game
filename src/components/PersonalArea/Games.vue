@@ -348,8 +348,8 @@ export default {
   border-left: 1px solid #bdbdbd;
   border-top: 1px solid #bdbdbd;
   border-right: 1px solid #bdbdbd;
-  border-bottom: 1px solid white;
-  top: 167px;
+  border-bottom: 2px solid white;
+  top: 166px;
 }
 .tab1T {
   left: 255px;

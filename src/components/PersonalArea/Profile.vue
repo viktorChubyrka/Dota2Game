@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div class="profileImg" :style="{background:`url(${user.photo?user.photo:''}) center`}"></div>
+    <div
+      v-if="user.photo"
+      class="profileImg"
+      :style="{background:`url(${user.photo!=''?user.photo:svg}) center`}"
+    ></div>
+    <div else class="photo"></div>
     <input
       id="filechooser"
       class="changePhoto"
@@ -75,7 +80,7 @@
 <script>
 export default {
   data() {
-    return {};
+    return { svg: "../../assets/Darewin.svg" };
   },
   methods: {
     changeName() {
@@ -144,6 +149,26 @@ export default {
 };
 </script>
 <style scoped>
+.photo {
+  background-image: url(../../assets/userEmpty.svg);
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  left: 0;
+  top: 64px;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  border-radius: 70px;
+}
+.changePass:hover {
+  color: #bf0603;
+  cursor: pointer;
+}
+.changePhoto:hover {
+  color: #bf0603 !important;
+}
 .lengChange {
   position: absolute;
   height: 38px;

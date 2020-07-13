@@ -36,6 +36,9 @@ export default {
 };
 </script>
 <style >
+html {
+  scroll-behavior: smooth !important;
+}
 .oldQLink {
   position: absolute;
   width: 332px;

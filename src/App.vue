@@ -18,12 +18,11 @@ template {
 body {
   overflow-y: scroll;
 }
-
 body::-webkit-scrollbar {
   display: none;
 }
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
 }
 html,
 body {

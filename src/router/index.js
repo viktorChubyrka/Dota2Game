@@ -25,7 +25,7 @@ const routes = [
   },
   {
     path: "/registration/ref=:promo",
-    name: "Registration",
+    name: "RegistrationPromo",
     component: Registration,
   },
   {

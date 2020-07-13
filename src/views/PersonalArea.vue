@@ -139,6 +139,12 @@ export default {
 };
 </script>
 <style >
+html {
+  scroll-behavior: smooth;
+}
+.RL li:hover {
+  background: #f3f4f7;
+}
 .RL {
   text-decoration: none;
 }
