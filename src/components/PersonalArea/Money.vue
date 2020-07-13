@@ -1,9 +1,18 @@
 <template>
   <div>
-    <div class="balance t4">{{$ml.get("balans")}}: 100 = $100</div>
-    <div class="t3 buttonSolo first activeBtn">{{$ml.get("trans")}}</div>
+    <div class="balance t4">
+      {{$ml.get("balans")}}: 100
+      <img src="../../assets/moneyIcons/dd.svg" /> = $100
+    </div>
+    <div
+      @click="ActiveButton(1)"
+      :class="{t3:true, buttonSolo:true, first:true, activeBtn:button==1}"
+    >{{$ml.get("trans")}}</div>
     <div class="smVretLine"></div>
-    <div class="t3 buttonSolo second">{{$ml.get("vuv")}}</div>
+    <div
+      @click="ActiveButton(2)"
+      :class="{t3:true, buttonSolo:true, second:true, activeBtn:button==2}"
+    >{{$ml.get("vuv")}}</div>
     <div class="statTable">
       <table>
         <tr>
@@ -39,7 +48,8 @@
       </li>
     </ul>
     <input class="t5 money" type="text" :placeholder="trPh()" />
-    <button class="t5 submitMoney">{{$ml.get("transBut")}}</button>
+    <button v-if="button==1" class="t5 submitMoney">{{$ml.get("transBut")}}</button>
+    <button v-else class="t5 submitMoney">{{$ml.get("enterMoney")}}</button>
     <ul class="more">
       <li class="t5">{{$ml.get("confPol")}}</li>
       <li class="t5">{{$ml.get("AMLPol")}}</li>
@@ -54,12 +64,16 @@ export default {
       focus: 1,
       trPh: () => {
         return this.$ml.get("trPh");
-      }
+      },
+      button: 1
     };
   },
   methods: {
     focused(i) {
       this.focus = i;
+    },
+    ActiveButton(i) {
+      this.button = i;
     }
   }
 };
@@ -153,7 +167,7 @@ export default {
 }
 .balance {
   position: absolute;
-  width: 199px;
+  width: 250px;
   height: 36px;
   left: 563px;
   top: 32px;

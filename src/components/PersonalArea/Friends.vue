@@ -4,7 +4,7 @@
       <div class="circle1">
         <img src="../../assets/friendicons/exit.svg" />
       </div>
-      <div class="circle2">sads</div>
+      <div class="circle2"></div>
       <div class="circle3">
         <img src="../../assets/friendicons/krestik.svg" />
       </div>

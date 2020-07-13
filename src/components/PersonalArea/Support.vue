@@ -2,7 +2,12 @@
   <div>
     <div class="t1 suppotrT">{{ $ml.get("sup") }}</div>
     <div class="t3 supportST">{{$ml.get("writeSup")}}</div>
-    <select class="themeSelect" value="Тема" name="Тема" id="1"></select>
+    <select class="themeSelect t5" value="Тема" name="Тема" id="1">
+      <option value disabled selected>{{$ml.get("topic")}}</option>
+      <option>{{$ml.get("addEnterMoney")}}</option>
+      <option>{{$ml.get("tellAbout")}}</option>
+      <option>{{$ml.get("else")}}</option>
+    </select>
     <textarea class="t5 supportMessage" :placeholder="yq()" type="textarea" />
     <button class="t4 buttonSend">{{$ml.get("supBut")}}</button>
     <div class="t2 oldQuestion">{{$ml.get("pQ")}}</div>
@@ -56,6 +61,8 @@ export default {
   background: #ffffff;
   border: 1px solid #bdbdbd;
   box-sizing: border-box;
+  padding: 6px 21px;
+  color: #828282;
 }
 .suppotrT {
   position: absolute;

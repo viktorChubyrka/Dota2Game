@@ -190,7 +190,7 @@ export default {
 }
 .onlineText {
   position: absolute;
-  width: 67px;
+  width: 80px;
   height: 32px;
   left: 759px;
   top: 26px;
