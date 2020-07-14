@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Chat class="chat" />
     <div class="partyContainer">
       <div class="circle1">
         <img src="../../assets/friendicons/exit.svg" />
@@ -67,7 +68,18 @@ top: 240px;"
     </table>
   </div>
 </template>
+<script>
+import Chat from "./Chat";
+export default {
+  components: { Chat }
+};
+</script>
 <style >
+.chat {
+  position: absolute;
+  top: 184px;
+  right: 40px;
+}
 .addFriend i:hover {
   color: #e0e0e0 !important;
 }
@@ -107,13 +119,13 @@ top: 240px;"
   position: absolute;
   width: 112px;
   height: 38px;
-  left: 562px;
+  left: 362px;
   top: 200px;
 }
 .lastesPlayersTable {
   width: 358px;
   position: absolute;
-  left: 562px;
+  left: 362px;
   top: 260px;
   height: 200px;
 }
