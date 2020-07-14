@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div class="headerPA">
+    <div :class="{headerPA:true,headerPAShow:show}">
       <router-link to="/">
         <div class="logoPA"></div>
       </router-link>
-      <div class="photo"></div>
       <div id="inform">
         <div class="onlineDot"></div>
         <div class="onlineText t5">12 {{ $ml.get("online") }}</div>
@@ -26,24 +25,24 @@
         <div @click="LogOut()" class="logOut">{{$ml.get("LogOut")}}</div>
       </div>
     </div>
-    <div class="actions">
-      <div class="readyIcon1">
+    <div :class="{actions:true,show:show2}">
+      <div :class="{readyIcon1:true,show:show}">
         <img :class="{icon:true,iconFocused:focus==5}" src="../assets/iconsPA/readyIcon.svg" />
       </div>
-      <div class="readyIconText1 t4">{{ $ml.get("redy") }}!</div>
-      <div class="readyIcon2">
+      <div :class="{readyIconText1:true,show:show, t4:true}">{{ $ml.get("redy") }}!</div>
+      <div :class="{readyIcon2:true,show:show}">
         <img class="icon" src="../assets/iconsPA/teamUpIcon.svg" />
       </div>
       <div
-        :class="{readyIconText2:true, t4:true, readyIconText2Eng:this.$store.getters.lang==2}"
+        :class="{readyIconText2:true, t4:true, readyIconText2Eng:this.$store.getters.lang==2,show:show}"
       >{{ $ml.get("getComand") }}</div>
 
-      <div class="readyIcon3">
+      <div :class="{readyIcon3:true,show:show}">
         <img class="icon" src="../assets/iconsPA/searchIcon.svg" />
       </div>
-      <div class="readyIconText3 t4">{{ $ml.get("findG") }}</div>
+      <div :class="{readyIconText3:true,show:show, t4:true}">{{ $ml.get("findG") }}</div>
     </div>
-    <div class="sideNavigation">
+    <div :class="{sideNavigation:true, sideNavigationShow:show}">
       <ul class="sideNavUl">
         <router-link class="RL" to="games">
           <li @click="ChangePage(1)" :class="{t5:true,focusedLi:focus==1}">
@@ -109,7 +108,7 @@
         </router-link>
       </ul>
     </div>
-    <div style="overflow-y:scroll;" class="pages">
+    <div style="overflow-y:scroll;" :class="{pages:true,show:show3}">
       <router-view></router-view>
     </div>
   </div>
@@ -120,13 +119,25 @@ export default {
   components: { Message },
   data() {
     return {
-      focus: 1
+      focus: 1,
+      show: false,
+      show2: false,
+      show3: false
     };
   },
   computed: {
     login() {
       return localStorage.getItem("login");
     }
+  },
+  created() {
+    setTimeout(() => {
+      this.show2 = !this.show2;
+      setTimeout(() => {
+        this.show = true;
+        setTimeout(() => (this.show3 = true), 1000);
+      }, 2000);
+    }, 1);
   },
   methods: {
     ChangePage(i) {
@@ -150,7 +161,7 @@ html {
 }
 .icon {
   padding-right: 8px;
-  opacity: 0.5;
+  opacity: 1;
 }
 .iconFocused {
   opacity: 1;
@@ -160,11 +171,20 @@ html {
   width: 1622px;
   height: 714px;
   left: 298px;
-  top: 160px;
+  top: 246px;
+  opacity: 0;
+  transition: opacity 1.5s;
 }
 .headerPA {
   width: 1920px;
   height: 86px;
+  position: absolute;
+  top: -86px;
+  left: 0px;
+  transition: top 1s;
+}
+.headerPAShow {
+  top: 0px;
 }
 .logoPA {
   background: url("../assets/DarewinLarge.svg");
@@ -243,25 +263,36 @@ html {
   height: 160px;
   left: 0px;
   top: 86px;
+  opacity: 0;
   background-color: #1f2430;
+  transition: opacity 3s;
+}
+.show {
+  opacity: 1;
 }
 .readyIcon1 {
   position: absolute;
   left: 556px;
   top: 36px;
   color: #bdbdbd;
+  opacity: 0;
+  transition: opacity 1s;
 }
 .readyIcon2 {
   position: absolute;
   left: 906px;
   top: 36px;
   color: #bdbdbd;
+  opacity: 0;
+  transition: opacity 1s;
 }
 .readyIcon3 {
   position: absolute;
   left: 1303px;
   top: 36px;
   color: #bdbdbd;
+  opacity: 0;
+  transition: opacity 1s;
 }
 .readyIcon4 {
   position: absolute;
@@ -269,24 +300,32 @@ html {
   top: 45px;
   color: #bdbdbd;
   text-shadow: black 3px 2px;
+  opacity: 0;
+  transition: opacity 1s;
 }
 .readyIconText1 {
   position: absolute;
   left: 541px;
   top: 88px;
   color: #f2f2f2;
+  opacity: 0;
+  transition: opacity 1s;
 }
 .readyIconText2 {
   position: absolute;
   left: 855px;
   top: 88px;
   color: #f2f2f2;
+  opacity: 0;
+  transition: opacity 1s;
 }
 .readyIconText3 {
   position: absolute;
   left: 1280px;
   top: 88px;
   color: #f2f2f2;
+  opacity: 0;
+  transition: opacity 1s;
 }
 
 .readyIconText2Eng {
@@ -294,8 +333,12 @@ html {
 }
 .sideNavigation {
   position: absolute;
-  left: 56px;
+  left: -150px;
   top: 246px;
+  transition: left 1s;
+}
+.sideNavigationShow {
+  left: 56px;
 }
 .sideNavUl {
   margin: 0;

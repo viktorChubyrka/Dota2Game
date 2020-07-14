@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{show:show,content:true}">
     <Chat class="chat" />
     <div class="partyContainer">
       <div class="circle1">
@@ -71,10 +71,25 @@ top: 240px;"
 <script>
 import Chat from "./Chat";
 export default {
-  components: { Chat }
+  data() {
+    return {
+      show: false
+    };
+  },
+  components: { Chat },
+  created() {
+    setTimeout(() => (this.show = true), 10);
+  }
 };
 </script>
 <style >
+.content {
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+.show {
+  opacity: 1;
+}
 .chat {
   position: absolute;
   top: 184px;
