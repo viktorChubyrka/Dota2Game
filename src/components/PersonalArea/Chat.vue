@@ -40,7 +40,7 @@ export default {
     },
   },
   created() {
-    this.socket = new WebSocket("wss://localhost:8081");
+    this.socket = new WebSocket("wss://dota2botbackend.herokuapp.com");
     this.socket.onmessage = (event) => {
       let date = new Date();
       let message = JSON.parse(event.data);
