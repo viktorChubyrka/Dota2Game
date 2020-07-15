@@ -4,7 +4,7 @@
     <div class="chatBody">
       <div class="message t5" v-for="message in chat" :key="message.date">
         {{ message.newDate.hour }}:{{ message.newDate.min }}
-        <strong>Pawunya:</strong>
+        <strong>{{ message.login }}:</strong>
         {{ message.message }}
       </div>
     </div>
@@ -25,17 +25,32 @@ export default {
     return {
       chat: [],
       message: "",
+      socket: null,
     };
   },
   methods: {
     WriteToChat() {
-      let date = new Date();
-      let newDate = { min: date.getMinutes(), hour: date.getHours() };
-      this.chat.push({ newDate, message: this.message });
+      this.socket.send(
+        JSON.stringify({
+          message: this.message,
+          login: localStorage.getItem("login"),
+        })
+      );
       this.message = "";
-      let chat = document.getElementsByClassName("chatBody");
-      chat.scrollBottom(0);
     },
+  },
+  created() {
+    this.socket = new WebSocket("ws://dota2botbackend.herokuapp.com");
+    this.socket.onmessage = (event) => {
+      let date = new Date();
+      let message = JSON.parse(event.data);
+      let newDate = { min: date.getMinutes(), hour: date.getHours() };
+      this.chat.push({
+        newDate,
+        message: message.message,
+        login: message.login,
+      });
+    };
   },
 };
 </script>
