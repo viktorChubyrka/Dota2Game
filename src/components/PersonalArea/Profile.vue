@@ -5,7 +5,7 @@
       class="profileImg"
       :style="{background:`url(${user.photo!=''?user.photo:svg}) center`}"
     ></div>
-    <div else class="photo"></div>
+    <div v-else class="photo"></div>
     <input
       id="filechooser"
       class="changePhoto"
