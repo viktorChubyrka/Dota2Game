@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{show:show,content:true}">
     <div
       v-if="user.photo"
       class="profileImg"
@@ -80,7 +80,7 @@
 <script>
 export default {
   data() {
-    return { svg: "../../assets/Darewin.svg" };
+    return { svg: "../../assets/Darewin.svg", show: false };
   },
   methods: {
     changeName() {
@@ -113,6 +113,7 @@ export default {
       formData.append("file", blobFile);
       formData.append("login", localStorage.getItem("login"));
       this.$store.dispatch("SendFile", { formData, context: this });
+      this.$store.dispatch("GetUserData", { context: this });
     },
     Copy(i) {
       if (i == 1) {
@@ -140,6 +141,7 @@ export default {
     }
   },
   created() {
+    setTimeout(() => (this.show = true), 10);
     this.$store.dispatch("GetUserData", { context: this });
     this.$store.commit("SetLang", localStorage.getItem("leng"));
     if (localStorage.getItem("leng") == 1) {
@@ -149,6 +151,13 @@ export default {
 };
 </script>
 <style scoped>
+.content {
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+.show {
+  opacity: 1;
+}
 .photo {
   background-image: url(../../assets/userEmpty.svg);
   width: 100px;

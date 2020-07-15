@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{show:show,content:true}">
     <div class="t1 suppotrT">{{ $ml.get("sup") }}</div>
     <div class="t3 supportST">{{$ml.get("writeSup")}}</div>
     <select class="themeSelect t5" value="Тема" name="Тема" id="1">
@@ -30,12 +30,23 @@ export default {
     return {
       yq: () => {
         return this.$ml.get("tayQ");
-      }
+      },
+      show: false
     };
+  },
+  created() {
+    setTimeout(() => (this.show = true), 10);
   }
 };
 </script>
 <style >
+.content {
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+.show {
+  opacity: 1;
+}
 html {
   scroll-behavior: smooth !important;
 }

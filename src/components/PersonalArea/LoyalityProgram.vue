@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{show:show,content:true}">
     <div
       :class="{t1:true, title:true, titleEng:this.$store.getters.lang == 2}"
     >{{ $ml.get("LoyalProg") }}</div>
@@ -13,8 +13,27 @@
     <div style="position:absolute;height:93px;width:100%;top:969px"></div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      show: false
+    };
+  },
 
+  created() {
+    setTimeout(() => (this.show = true), 10);
+  }
+};
+</script>
 <style >
+.content {
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+.show {
+  opacity: 1;
+}
 .title {
   position: absolute;
   width: 500px;

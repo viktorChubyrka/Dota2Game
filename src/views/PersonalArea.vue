@@ -2,7 +2,7 @@
   <div>
     <div :class="{headerPA:true,headerPAShow:show}">
       <router-link to="/">
-        <div class="logoPA"></div>
+        <div class="logoPA">{{user}}</div>
       </router-link>
       <div id="inform">
         <div class="onlineDot"></div>
@@ -21,7 +21,13 @@
             </ul>
           </i>
         </div>
-        <div class="nickname t5">{{login}}</div>
+        <div class="profileSmallImage"></div>
+        <router-link to="profile">
+          <div
+            style="color:black"
+            class="nickname t5"
+          >{{login.length>9?login.substr(0, login.length - login.length/2)+"...":login}}</div>
+        </router-link>
         <div @click="LogOut()" class="logOut">{{$ml.get("LogOut")}}</div>
       </div>
     </div>
@@ -128,6 +134,9 @@ export default {
   computed: {
     login() {
       return localStorage.getItem("login");
+    },
+    user() {
+      return this.$store.dispatch.userData;
     }
   },
   created() {
@@ -138,6 +147,7 @@ export default {
         setTimeout(() => (this.show3 = true), 1000);
       }, 2000);
     }, 1);
+    this.$store.dispatch("GetUserData", { context: this });
   },
   methods: {
     ChangePage(i) {
@@ -150,6 +160,17 @@ export default {
 };
 </script>
 <style >
+.profileSmallImage {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  left: 1699px;
+  top: 25px;
+  background: url(../assets/userEmpty.svg);
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -240,7 +261,7 @@ html {
 }
 .notification {
   position: absolute;
-  left: 1696px;
+  left: 1666px;
   top: 30px;
   z-index: 10;
 }
@@ -248,6 +269,9 @@ html {
   position: absolute;
   left: 1742px;
   top: 26px;
+}
+.nickname {
+  cursor: pointer;
 }
 .logOut {
   position: absolute;
@@ -276,7 +300,7 @@ html {
   top: 36px;
   color: #bdbdbd;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1.5s;
 }
 .readyIcon2 {
   position: absolute;
@@ -284,7 +308,7 @@ html {
   top: 36px;
   color: #bdbdbd;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1.5s;
 }
 .readyIcon3 {
   position: absolute;
@@ -292,7 +316,7 @@ html {
   top: 36px;
   color: #bdbdbd;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1.5s;
 }
 .readyIcon4 {
   position: absolute;
@@ -301,7 +325,7 @@ html {
   color: #bdbdbd;
   text-shadow: black 3px 2px;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1.5s;
 }
 .readyIconText1 {
   position: absolute;
@@ -309,7 +333,7 @@ html {
   top: 88px;
   color: #f2f2f2;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1.5s;
 }
 .readyIconText2 {
   position: absolute;
@@ -317,7 +341,7 @@ html {
   top: 88px;
   color: #f2f2f2;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1.5s;
 }
 .readyIconText3 {
   position: absolute;
@@ -325,7 +349,7 @@ html {
   top: 88px;
   color: #f2f2f2;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1.5s;
 }
 
 .readyIconText2Eng {
@@ -338,7 +362,7 @@ html {
   transition: left 1s;
 }
 .sideNavigationShow {
-  left: 56px;
+  left: 46px;
 }
 .sideNavUl {
   margin: 0;
@@ -346,7 +370,8 @@ html {
   list-style-type: none;
 }
 .sideNavUl li {
-  margin-top: 24px;
+  padding: 16px 0 16px 10px;
+  width: 200px;
   color: #bdbdbd;
 }
 .sideNavUl li:hover {

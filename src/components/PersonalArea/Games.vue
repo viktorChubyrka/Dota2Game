@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{show:show,content:true}">
     <div
       @click="Button(1)"
       :class="{t3:true, buttonSolo:true, first:true, activeBtn:button==1}"
@@ -248,7 +248,8 @@ export default {
   data() {
     return {
       selected: 3,
-      button: 1
+      button: 1,
+      show: false
     };
   },
   methods: {
@@ -258,10 +259,27 @@ export default {
     Button(i) {
       this.button = i;
     }
+  },
+  created() {
+    setTimeout(() => (this.show = true), 10);
   }
 };
 </script>
 <style scoped>
+.content {
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+.show {
+  opacity: 1;
+}
+
+.buttonSolo:hover {
+  cursor: pointer;
+}
+.tabTitle:hover {
+  cursor: pointer;
+}
 .enterMath {
   display: flex;
   flex-direction: row;
@@ -282,6 +300,7 @@ export default {
   color: black;
   top: 42px;
   border: 1px solid #bdbdbd;
+  transition: color 0.5s, background-color 0.5s;
 }
 .dot {
   position: relative;

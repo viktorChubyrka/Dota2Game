@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{show:show,content:true}">
     <div class="balance t4">
       {{$ml.get("balans")}}: 100
       <img src="../../assets/moneyIcons/dd.svg" /> = $100
@@ -62,6 +62,7 @@ export default {
   data() {
     return {
       focus: 1,
+      show: false,
       trPh: () => {
         return this.$ml.get("trPh");
       },
@@ -75,10 +76,21 @@ export default {
     ActiveButton(i) {
       this.button = i;
     }
+  },
+
+  created() {
+    setTimeout(() => (this.show = true), 10);
   }
 };
 </script>
 <style scoped>
+.content {
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+.show {
+  opacity: 1;
+}
 .more {
   position: absolute;
   left: 0;
@@ -180,6 +192,10 @@ export default {
   top: 100px;
   border: 1px solid #bdbdbd;
   text-align: center;
+  transition: color 0.5s, background-color 0.5s;
+}
+.buttonSolo {
+  cursor: pointer;
 }
 .first {
   left: 448px;
