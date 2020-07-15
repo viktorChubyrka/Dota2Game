@@ -32,7 +32,7 @@
               class="addFriend"
               style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
             >
-              <i class="fa fa-plus-square fa-2x"></i>
+              <i :id="`plus${i}1`" @click="Click(1,i)" class="fa fa-plus-square fa-2x"></i>
             </td>
           </tr>
         </tbody>
@@ -61,7 +61,7 @@ top: 240px;"
             class="addFriend"
             style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
           >
-            <i class="fa fa-plus-square fa-2x"></i>
+            <i :id="`plus${i}2`" @click="Click(2,i)" class="fa fa-plus-square fa-2x"></i>
           </td>
         </tr>
       </tbody>
@@ -77,12 +77,23 @@ export default {
     };
   },
   components: { Chat },
+  methods: {
+    Click(tableIndex, i) {
+      let el = document.getElementById(`plus${i}${tableIndex}`);
+      el.style = "color:#bdbdbd!important";
+      setTimeout(() => (el.style = ""), 100);
+    }
+  },
   created() {
     setTimeout(() => (this.show = true), 10);
   }
 };
 </script>
 <style >
+.fa-plus-square:hover {
+  color: #e0e0e0;
+}
+
 .content {
   opacity: 0;
   transition: opacity 1.5s;

@@ -6,15 +6,16 @@
       :style="{background:`url(${user.photo!=''?user.photo:svg}) center`}"
     ></div>
     <div v-else class="photo"></div>
+    <label class="t4 changePhoto2" for="filechooser">{{$ml.get("changePhoto")}}</label>
     <input
       id="filechooser"
       class="changePhoto"
-      style="opacity:0;position:absolute;z-index:100"
+      style="opacity:0;position:absolute;z-index:-1"
       type="file"
       name="file"
       @change="SendFile()"
     />
-    <div class="t4 changePhoto">{{$ml.get("changePhoto")}}</div>
+    <div></div>
 
     <div class="titleBlock">
       <div class="t3">{{$ml.get("aboutYou")}}</div>
@@ -94,6 +95,7 @@ export default {
         consext: this
       });
     },
+
     changeContactData() {
       let login = localStorage.getItem("login");
       this.$store.dispatch("ChangeContactInfo", {
@@ -151,6 +153,10 @@ export default {
 };
 </script>
 <style scoped>
+.changePhoto2:hover {
+  cursor: pointer;
+  color: #bf0603 !important;
+}
 .content {
   opacity: 0;
   transition: opacity 1.5s;
@@ -237,6 +243,16 @@ export default {
   text-decoration: underline;
   color: #35a7ff;
 }
+.changePhoto2 {
+  position: absolute;
+  width: 145px;
+  height: 36px;
+  left: 188px;
+  top: 116px;
+  text-decoration: underline;
+  color: #35a7ff;
+}
+
 .changePass {
   position: absolute;
   width: 166px;

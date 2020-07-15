@@ -19,7 +19,7 @@
     </ul>
     <ul class="oldQLink">
       <li style="margin-bottom:10px" v-for="i in 7" :key="i">
-        <a style="color:#35A7FF" class="t5" :href="`#q${i}`">{{$ml.get(`q${i}`)}}</a>
+        <a style="color:#35A7FF" class="t5 linkTo" :href="`#q${i}`">{{$ml.get(`q${i}`)}}</a>
       </li>
     </ul>
   </div>
@@ -40,6 +40,9 @@ export default {
 };
 </script>
 <style >
+.linkTo {
+  text-decoration: none;
+}
 .content {
   opacity: 0;
   transition: opacity 1.5s;

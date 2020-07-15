@@ -46,7 +46,7 @@
             <td>
               <a
                 v-if="i==1"
-                class="t4"
+                class="t4 linkTable"
                 style="float:right;color:#35A7FF;margin-right:80px"
                 href
               >{{$ml.get("sendRep")}}</a>
@@ -266,6 +266,10 @@ export default {
 };
 </script>
 <style scoped>
+.linkTable:hover {
+  color: #bf0603 !important;
+  cursor: pointer;
+}
 .content {
   opacity: 0;
   transition: opacity 1.5s;

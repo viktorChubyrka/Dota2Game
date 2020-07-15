@@ -3,13 +3,18 @@
     <div class="t3 chatTitle">Чат</div>
     <div class="chatBody">
       <div class="message t5" v-for="message in chat" :key="message.date">
-        {{message.newDate.hour}}:{{message.newDate.min}}
+        {{ message.newDate.hour }}:{{ message.newDate.min }}
         <strong>Pawunya:</strong>
-        {{message.message}}
+        {{ message.message }}
       </div>
     </div>
     <div class="chatInputBody">
-      <input placeholder="Ваше собщение" type="text" v-model="message" class="t5 chatInput" />
+      <input
+        placeholder="Ваше собщение"
+        type="text"
+        v-model="message"
+        class="t5 chatInput"
+      />
       <button @click="WriteToChat()" class="t5 chatButton">Чат</button>
     </div>
   </div>
@@ -19,7 +24,7 @@ export default {
   data() {
     return {
       chat: [],
-      message: ""
+      message: "",
     };
   },
   methods: {
@@ -30,11 +35,11 @@ export default {
       this.message = "";
       let chat = document.getElementsByClassName("chatBody");
       chat.scrollBottom(0);
-    }
-  }
+    },
+  },
 };
 </script>
-<style >
+<style>
 .chat {
   width: 454px;
   height: 452px;
