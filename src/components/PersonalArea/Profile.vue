@@ -1,12 +1,16 @@
 <template>
-  <div :class="{show:show,content:true}">
+  <div :class="{ show: show, content: true }">
     <div
       v-if="user.photo"
       class="profileImg"
-      :style="{background:`url(${user.photo!=''?user.photo:svg}) center`}"
+      :style="{
+        background: `url(${user.photo != '' ? user.photo : svg}) center`,
+      }"
     ></div>
     <div v-else class="photo"></div>
-    <label class="t4 changePhoto2" for="filechooser">{{$ml.get("changePhoto")}}</label>
+    <label class="t4 changePhoto2" for="filechooser">{{
+      $ml.get("changePhoto")
+    }}</label>
     <input
       id="filechooser"
       class="changePhoto"
@@ -18,27 +22,102 @@
     <div></div>
 
     <div class="titleBlock">
-      <div class="t3">{{$ml.get("aboutYou")}}</div>
-      <button class="t4" @click="changeName()">{{$ml.get("change")}}</button>
+      <div class="t3">{{ $ml.get("aboutYou") }}</div>
+      <button class="t4" @click="changeName()">{{ $ml.get("change") }}</button>
     </div>
-    <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="user.name" />
-    <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="user.surname" />
+    <input
+      id="name"
+      class="t5 inputs"
+      placeholder="Имя"
+      type="text"
+      v-model="user.name"
+    />
+    <input
+      id="surname"
+      class="t5 inputs"
+      placeholder="Фамилия"
+      type="text"
+      v-model="user.surname"
+    />
     <div style="top:413px" class="titleBlock">
-      <div class="t3">{{$ml.get("cont")}}</div>
-      <button class="t4" @click="changeContactData()">{{$ml.get("change")}}</button>
+      <div class="t3">{{ $ml.get("cont") }}</div>
+      <button class="t4" @click="changeContactData()">
+        {{ $ml.get("change") }}
+      </button>
     </div>
-    <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="user.login" />
-    <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="user.email" />
-    <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" v-model="user.number" />
-    <input id="steamID" class="t5 inputs" type="text" placeholder="SteamID" v-model="user.steamID" />
+    <input
+      id="login"
+      class="t5 inputs"
+      type="text"
+      placeholder="Логин"
+      v-model="user.login"
+    />
+    <input
+      id="email"
+      class="t5 inputs"
+      type="text"
+      placeholder="Емайл"
+      v-model="user.email"
+    />
+    <input
+      id="phone"
+      class="t5 inputs"
+      type="text"
+      placeholder="Телефон"
+      v-model="user.number"
+    />
+    <form
+      class="steamIdForm"
+      action="https://steamcommunity.com/openid/login"
+      method="post"
+    >
+      <input
+        type="hidden"
+        name="openid.identity"
+        value="http://specs.openid.net/auth/2.0/identifier_select"
+      />
+      <input
+        type="hidden"
+        name="openid.claimed_id"
+        value="http://specs.openid.net/auth/2.0/identifier_select"
+      />
+      <input
+        type="hidden"
+        name="openid.ns"
+        value="http://specs.openid.net/auth/2.0"
+      />
+      <input type="hidden" name="openid.mode" value="checkid_setup" />
+      <input
+        type="hidden"
+        name="openid.realm"
+        value="https://dota2gamebot.herokuapp.com/personalArea/profile"
+      />
+      <input
+        type="hidden"
+        name="openid.return_to"
+        value="https://dota2gamebot.herokuapp.com/personalArea/profile"
+      />
+      <Button type="submit">Log in through Steam</Button>
+    </form>
+    <input
+      id="steamID"
+      class="t5 inputs"
+      type="text"
+      placeholder="SteamID"
+      v-model="user.steamID"
+    />
     <div class="passPromo">
-      <div class="t3">{{$ml.get("sec")}}</div>
-      <div class="t4 changePass">{{$ml.get("changePass")}}</div>
-      <div class="t3 promoTitle">Darewin’s family {{$ml.get("promo").toLowerCase()}}</div>
-      <div class="t4 promo">{{$ml.get("promo")}}: asdke94ld7</div>
+      <div class="t3">{{ $ml.get("sec") }}</div>
+      <div class="t4 changePass">{{ $ml.get("changePass") }}</div>
+      <div class="t3 promoTitle">
+        Darewin’s family {{ $ml.get("promo").toLowerCase() }}
+      </div>
+      <div class="t4 promo">{{ $ml.get("promo") }}: asdke94ld7</div>
       <div class="t4 promo2">
-        {{$ml.get("refLink")}}:
-        <div style="color:#BDBDBD;display:inline">registration/ref=2dfs122vh</div>
+        {{ $ml.get("refLink") }}:
+        <div style="color:#BDBDBD;display:inline">
+          registration/ref=2dfs122vh
+        </div>
       </div>
       <i
         @click="Copy(1)"
@@ -58,21 +137,25 @@
       ></i>
     </div>
     <div class="t3 lengChange">
-      {{$ml.get("lang")}}
+      {{ $ml.get("lang") }}
       <ul class="lengChangeUl">
         <li @click="ChangeLang(1)" class="t4">
           Русский
           <div
-            :class="{show:show==1}"
+            :class="{ show: show == 1 }"
             style="opacity:0;display:inline;color:#BDBDBD"
-          >{{$ml.get("now")}}</div>
+          >
+            {{ $ml.get("now") }}
+          </div>
         </li>
         <li @click="ChangeLang(2)" class="t4">
           English
           <div
-            :class="{show:show==2}"
+            :class="{ show: show == 2 }"
             style="opacity:0;display:inline;color:#BDBDBD"
-          >{{$ml.get("now")}}</div>
+          >
+            {{ $ml.get("now") }}
+          </div>
         </li>
       </ul>
     </div>
@@ -90,9 +173,9 @@ export default {
         data: {
           firstName: this.user.name,
           lastName: this.user.surname,
-          login
+          login,
         },
-        consext: this
+        consext: this,
       });
     },
 
@@ -104,9 +187,9 @@ export default {
           phone: this.user.number,
           loginChange: this.user.login,
           steamID: this.user.steamID,
-          login
+          login,
         },
-        consext: this
+        consext: this,
       });
     },
     SendFile() {
@@ -132,7 +215,7 @@ export default {
       if (i == 1) {
         this.$ml.change("russian");
       } else this.$ml.change("english");
-    }
+    },
   },
   computed: {
     user() {
@@ -140,7 +223,7 @@ export default {
     },
     show() {
       return this.$store.getters.lang;
-    }
+    },
   },
   created() {
     setTimeout(() => (this.show = true), 10);
@@ -149,10 +232,30 @@ export default {
     if (localStorage.getItem("leng") == 1) {
       this.$ml.change("russian");
     } else this.$ml.change("english");
-  }
+    let a = window.location.href;
+    setTimeout(() => {
+      try {
+        this.user.steamID = a.split("2Fid%2F")[1].split("&")[0];
+        console.log(a.split("2Fid%2F")[1].split("&")[0]);
+      } catch {
+        console.log(a);
+      }
+    }, 2000);
+  },
 };
 </script>
 <style scoped>
+.steamIdForm {
+  position: absolute;
+  top: 610px;
+  z-index: 100;
+}
+.steamIdForm button {
+  width: 444px;
+  height: 45px;
+  opacity: 0;
+}
+
 .changePhoto2:hover {
   cursor: pointer;
   color: #bf0603 !important;

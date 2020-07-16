@@ -1,25 +1,27 @@
 <template>
-  <div :class="{show:show,content:true}">
+  <div :class="{ show: show, content: true }">
     <div class="t1 suppotrT">{{ $ml.get("sup") }}</div>
-    <div class="t3 supportST">{{$ml.get("writeSup")}}</div>
+    <div class="t3 supportST">{{ $ml.get("writeSup") }}</div>
     <select class="themeSelect t5" value="Тема" name="Тема" id="1">
-      <option value disabled selected>{{$ml.get("topic")}}</option>
-      <option>{{$ml.get("addEnterMoney")}}</option>
-      <option>{{$ml.get("tellAbout")}}</option>
-      <option>{{$ml.get("else")}}</option>
+      <option value disabled selected>{{ $ml.get("topic") }}</option>
+      <option>{{ $ml.get("addEnterMoney") }}</option>
+      <option>{{ $ml.get("tellAbout") }}</option>
+      <option>{{ $ml.get("else") }}</option>
     </select>
     <textarea class="t5 supportMessage" :placeholder="yq()" type="textarea" />
-    <button class="t4 buttonSend">{{$ml.get("supBut")}}</button>
-    <div class="t2 oldQuestion">{{$ml.get("pQ")}}</div>
+    <button class="t4 buttonSend">{{ $ml.get("supBut") }}</button>
+    <div class="t2 oldQuestion">{{ $ml.get("pQ") }}</div>
     <ul class="answersList">
       <li :id="`q${i}`" v-for="i in 7" :key="i">
-        <div class="t3 liTitile">{{$ml.get(`q${i}`)}}</div>
-        <div class="t5 liText">{{$ml.get(`a${i}`)}}</div>
+        <div class="t3 liTitile">{{ $ml.get(`q${i}`) }}</div>
+        <div class="t5 liText">{{ $ml.get(`a${i}`) }}</div>
       </li>
     </ul>
     <ul class="oldQLink">
       <li style="margin-bottom:10px" v-for="i in 7" :key="i">
-        <a style="color:#35A7FF" class="t5 linkTo" :href="`#q${i}`">{{$ml.get(`q${i}`)}}</a>
+        <a style="color:#35A7FF" class="t5 linkTo" :href="`#q${i}`">{{
+          $ml.get(`q${i}`)
+        }}</a>
       </li>
     </ul>
   </div>
@@ -31,15 +33,15 @@ export default {
       yq: () => {
         return this.$ml.get("tayQ");
       },
-      show: false
+      show: false,
     };
   },
   created() {
     setTimeout(() => (this.show = true), 10);
-  }
+  },
 };
 </script>
-<style >
+<style>
 .linkTo {
   text-decoration: none;
 }

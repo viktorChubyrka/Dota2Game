@@ -1,19 +1,31 @@
 <template>
   <div class="chat">
     <div class="t3 chatTitle">Чат</div>
-    <div class="chatBody">
-      <div class="message t5" v-for="message in chat" :key="message.date">
-        {{ message.newDate.hour }}:{{ message.newDate.min }}
+    <div id="chatBody" class="chatBody">
+      <div
+        class="message t5"
+        :id="message.message"
+        v-for="message in chat"
+        :key="message.date"
+      >
+        {{
+          message.newDate.hour +
+            ":" +
+            (message.newDate.min < 10
+              ? "0" + message.newDate.min
+              : message.newDate.min)
+        }}
         <strong>{{ message.login }}:</strong>
-        {{ message.message }}
+        <span>{{ message.message }}</span>
       </div>
     </div>
     <div class="chatInputBody">
       <input
         placeholder="Ваше собщение"
-        type="text"
+        type="text "
         v-model="message"
         class="t5 chatInput"
+        @keydown.enter="WriteToChat()"
       />
       <button @click="WriteToChat()" class="t5 chatButton">Чат</button>
     </div>
@@ -36,11 +48,16 @@ export default {
           login: localStorage.getItem("login"),
         })
       );
+      var chat = document.getElementById("chatBody");
+
+      let height = chat.scrollHeight;
+      console.log(height);
+      chat.scrollTop = height;
       this.message = "";
     },
   },
   created() {
-    this.socket = new WebSocket("wss://dota2botbackend.herokuapp.com");
+    this.socket = new WebSocket("ws://localhost:3000");
     this.socket.onmessage = (event) => {
       let date = new Date();
       let message = JSON.parse(event.data);
