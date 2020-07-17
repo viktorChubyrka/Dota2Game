@@ -10,7 +10,7 @@
 export default {
   data() {
     return {
-      lengs: ["russian", "english"]
+      lengs: ["russian", "english"],
     };
   },
   methods: {
@@ -25,11 +25,13 @@ export default {
         localStorage.setItem("leng", 2);
       }
       this.active = this.$store.getters.lang;
-    }
+    },
   },
   created() {
-    this.$ml.change(this.lengs[localStorage.getItem("leng") - 1]);
-    this.$store.commit("SetLang", localStorage.getItem("leng"));
+    if (localStorage.getItem("leng")) {
+      this.$ml.change(this.lengs[localStorage.getItem("leng") - 1]);
+      this.$store.commit("SetLang", localStorage.getItem("leng"));
+    } else this.$ml.change(this.lengs[0]);
   },
   updated() {
     this.active = this.$store.getters.lang;
@@ -37,8 +39,8 @@ export default {
   computed: {
     active() {
       return this.$store.getters.lang;
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

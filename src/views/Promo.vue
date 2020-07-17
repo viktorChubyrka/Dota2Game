@@ -1,25 +1,48 @@
-<template  >
+<template>
   <div>
-    <div :class="{preloader:true,hidePreloader:start}">
-      <div :class="{preloaderLogo:true,black:start2}"></div>
-      <div :class="{loading:true,load:start}"></div>
+    <div :class="{ preloader: true, hidePreloader: start }">
+      <div :class="{ preloaderLogo: true, black: start2 }"></div>
+      <div :class="{ loading: true, load: start }"></div>
     </div>
-    <div :class="{show:show,comp:true}" id="page1" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page1"
+      style="position:relative"
+    >
       <Main />
     </div>
-    <div :class="{show:show,comp:true}" id="page2" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page2"
+      style="position:relative"
+    >
       <Principes />
     </div>
-    <div :class="{show:show,comp:true}" id="page3" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page3"
+      style="position:relative"
+    >
       <AboutUs />
     </div>
-    <div :class="{show:show,comp:true}" id="page4" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page4"
+      style="position:relative"
+    >
       <FAQ />
     </div>
-    <div :class="{show:show,comp:true}" id="page5" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page5"
+      style="position:relative"
+    >
       <ContactUs />
     </div>
-    <RightDots style="opacity:0;transition:opacity .5s" :class="{showDots:start3}" />
+    <RightDots
+      style="opacity:0;transition:opacity .5s"
+      :class="{ showDots: start3 }"
+    />
   </div>
 </template>
 <script>
@@ -37,7 +60,7 @@ export default {
       start: false,
       start2: false,
       start3: false,
-      show: false
+      show: false,
     };
   },
   methods: {},
@@ -61,7 +84,8 @@ export default {
         this.$store.commit("SetCurrentPage", 1);
       }, 100);
     }
-    document.addEventListener("keydown", e => {
+    document.addEventListener("keydown", (e) => {
+      e.preventDefault();
       switch (this.$store.getters.GetCurrentPage) {
         case 1:
           if (e.keyCode == 40) {
@@ -141,7 +165,7 @@ export default {
     });
     window.addEventListener(
       "mousewheel",
-      e => {
+      (e) => {
         switch (this.$store.getters.GetCurrentPage) {
           case 1:
             if (e.deltaY > 0) {
@@ -221,7 +245,7 @@ export default {
       },
       { passive: false }
     );
-  }
+  },
 };
 </script>
 <style>
