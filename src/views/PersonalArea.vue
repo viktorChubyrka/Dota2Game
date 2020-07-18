@@ -199,7 +199,10 @@ export default {
     },
   },
   created() {
-    this.$store.commit("SetSocket", new WebSocket("ws://localhost:3000"));
+    this.$store.commit(
+      "SetSocket",
+      new WebSocket("wss://dota2botbackend.herokuapp.com")
+    );
     this.socket = this.$store.getters.socket;
     this.socket.onmessage = (event) => {
       let date = new Date();
