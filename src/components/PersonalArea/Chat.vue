@@ -16,7 +16,7 @@
               : message.newDate.min)
         }}
         <strong>{{ message.login }}:</strong>
-        <span>{{ message.message }}</span>
+        <span> {{ message.message }}</span>
       </div>
     </div>
     <div class="chatInputBody">
@@ -35,7 +35,6 @@
 export default {
   data() {
     return {
-      chat: [],
       message: "",
       socket: null,
     };
@@ -57,17 +56,12 @@ export default {
     },
   },
   created() {
-    this.socket = new WebSocket("ws://localhost:3000");
-    this.socket.onmessage = (event) => {
-      let date = new Date();
-      let message = JSON.parse(event.data);
-      let newDate = { min: date.getMinutes(), hour: date.getHours() };
-      this.chat.push({
-        newDate,
-        message: message.message,
-        login: message.login,
-      });
-    };
+    this.socket = this.$store.getters.socket;
+  },
+  computed: {
+    chat() {
+      return this.$store.getters.chat;
+    },
   },
 };
 </script>

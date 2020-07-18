@@ -20,8 +20,14 @@ export default new Vuex.Store({
     anim2: false,
     anim3: false,
     userData: {},
+    allUsers: [],
+    socket: null,
+    chat: [],
   },
   getters: {
+    chat: (state) => {
+      return state.chat;
+    },
     anim1: (state) => {
       return state.anim1;
     },
@@ -55,8 +61,17 @@ export default new Vuex.Store({
     userData: (state) => {
       return state.userData;
     },
+    allUsers: (state) => {
+      return state.allUsers;
+    },
+    socket: (state) => {
+      return state.socket;
+    },
   },
   mutations: {
+    setChat: (state, payload) => {
+      state.chat = [...state.chat, ...payload.chat];
+    },
     SetAnim1: (state) => {
       state.anim1 = true;
     },
@@ -95,6 +110,20 @@ export default new Vuex.Store({
     },
     SetUserData: (state, payload) => {
       state.userData = payload;
+    },
+    SetAllUsers: (state, payload) => {
+      state.allUsers = payload;
+    },
+    SetSocket: (state, payload) => {
+      let M = (type, data) =>
+        payload.send(
+          JSON.stringify({
+            type,
+            data,
+          })
+        );
+      payload.onopen = () => M("join", localStorage.getItem("login"));
+      state.socket = payload;
     },
   },
   actions: {
@@ -155,10 +184,9 @@ export default new Vuex.Store({
         },
         { withCredentials: true }
       );
-      console.log(data.data);
-      if (data.data.data.status == 200)
+      if (data.data.data.status == 200) {
         state.commit("SetUserData", data.data.data.userModel);
-      else payload.context.$router.push("/");
+      } else payload.context.$router.push("/");
     },
     ChangeName: async (state, payload) => {
       let data = await Axios.post(
@@ -196,7 +224,6 @@ export default new Vuex.Store({
       let status = await Axios.post(`${url}/api/user/actions/`, payload.i, {
         withCredentials: true,
       });
-      console.log(status);
       if (status.data == 200) {
         payload.context.$router.push("personalArea/profile");
       } else {
@@ -204,6 +231,14 @@ export default new Vuex.Store({
           payload.context.$router.push("/login");
         } else payload.context.$router.push("/registration");
       }
+    },
+    GetAllUsers: async (state, payload) => {
+      let users = await Axios.get(`${url}/api/user/actions/getAllUsers`, {
+        withCredentials: true,
+      });
+      console.log(users);
+      if (users.status == "200") state.commit("SetAllUsers", users.data.users);
+      else payload.context.$router.push("/login");
     },
   },
   modules: {},

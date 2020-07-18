@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div :class="{headerPA:true,headerPAShow:show}">
+    <div :class="{ headerPA: true, headerPAShow: show }">
       <router-link to="/">
-        <div class="logoPA">{{user}}</div>
+        <div class="logoPA"></div>
       </router-link>
       <div id="inform">
         <div class="onlineDot"></div>
@@ -11,66 +11,103 @@
         <div class="readyText t5">5 {{ $ml.get("redy") }}</div>
         <div class="cash t5">$23 — 23 Darewin’s dollar</div>
         <div class="notification">
+          <span>{{ user.notifications.length }}</span>
           <i class="fa fa-bell fa-lg notif">
             <ul
               style="position:fixed; top:10px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
             >
-              <li v-for="i in 5" :key="i" style="margin-bottom:9px">
-                <Message />
+              <li
+                v-for="not in user.notifications"
+                :key="not.date"
+                style="margin-bottom:9px"
+              >
+                <Message :notification="not" />
               </li>
             </ul>
           </i>
         </div>
         <div class="profileSmallImage"></div>
         <router-link to="profile">
-          <div
-            style="color:black"
-            class="nickname t5"
-          >{{login.length>9?login.substr(0, login.length - login.length/2)+"...":login}}</div>
+          <div style="color:black" class="nickname t5">
+            {{
+              login.length > 9
+                ? login.substr(0, login.length - login.length / 2) + "..."
+                : login
+            }}
+          </div>
         </router-link>
-        <div @click="LogOut()" class="logOut">{{$ml.get("LogOut")}}</div>
+        <div @click="LogOut()" class="logOut">{{ $ml.get("LogOut") }}</div>
       </div>
     </div>
-    <div :class="{actions:true,show:show2}">
-      <div :class="{readyIcon1:true,show:show}">
-        <img :class="{icon:true,iconFocused:focus==5}" src="../assets/iconsPA/readyIcon.svg" />
+    <div :class="{ actions: true, show: show2 }">
+      <div :class="{ readyIcon1: true, show: show }">
+        <img
+          :class="{ icon: true, iconFocused: focus == 5 }"
+          src="../assets/iconsPA/readyIcon.svg"
+        />
       </div>
-      <div :class="{readyIconText1:true,show:show, t4:true}">{{ $ml.get("redy") }}!</div>
-      <div :class="{readyIcon2:true,show:show}">
+      <div :class="{ readyIconText1: true, show: show, t4: true }">
+        {{ $ml.get("redy") }}!
+      </div>
+      <div :class="{ readyIcon2: true, show: show }">
         <img class="icon" src="../assets/iconsPA/teamUpIcon.svg" />
       </div>
       <div
-        :class="{readyIconText2:true, t4:true, readyIconText2Eng:this.$store.getters.lang==2,show:show}"
-      >{{ $ml.get("getComand") }}</div>
+        :class="{
+          readyIconText2: true,
+          t4: true,
+          readyIconText2Eng: this.$store.getters.lang == 2,
+          show: show,
+        }"
+      >
+        {{ $ml.get("getComand") }}
+      </div>
 
-      <div :class="{readyIcon3:true,show:show}">
+      <div :class="{ readyIcon3: true, show: show }">
         <img class="icon" src="../assets/iconsPA/searchIcon.svg" />
       </div>
-      <div :class="{readyIconText3:true,show:show, t4:true}">{{ $ml.get("findG") }}</div>
+      <div :class="{ readyIconText3: true, show: show, t4: true }">
+        {{ $ml.get("findG") }}
+      </div>
     </div>
-    <div :class="{sideNavigation:true, sideNavigationShow:show}">
+    <div :class="{ sideNavigation: true, sideNavigationShow: show }">
       <ul class="sideNavUl">
         <router-link class="RL" to="games">
-          <li @click="ChangePage(1)" :class="{t5:true,focusedLi:focus==1}">
+          <li
+            @click="ChangePage(1)"
+            :class="{ t5: true, focusedLi: focus == 1 }"
+          >
             <div style="display:flex">
-              <img :class="{icon:true,iconFocused:focus==1}" src="../assets/iconsPA/gamesIcon.svg" />
+              <img
+                :class="{ icon: true, iconFocused: focus == 1 }"
+                src="../assets/iconsPA/gamesIcon.svg"
+              />
               <div>{{ $ml.get("game") }}</div>
             </div>
           </li>
         </router-link>
         <router-link class="RL" to>
-          <li @click="ChangePage(2)" :class="{t5:true,focusedLi:focus==2}">
+          <li
+            @click="ChangePage(2)"
+            :class="{ t5: true, focusedLi: focus == 2 }"
+          >
             <div style="display:flex">
-              <img :class="{icon:true,iconFocused:focus==2}" src="../assets/iconsPA/rulesIcon.svg" />
+              <img
+                :class="{ icon: true, iconFocused: focus == 2 }"
+                src="../assets/iconsPA/rulesIcon.svg"
+              />
               <div>{{ $ml.get("pravil") }}</div>
             </div>
           </li>
         </router-link>
         <router-link class="RL" to="profile">
-          <li @click="ChangePage(3)" :class="{t5:true,focusedLi:focus==3}">
+          <li
+            @click="ChangePage(3)"
+            :class="{ t5: true, focusedLi: focus == 3 }"
+          >
             <div style="display:flex">
               <img
-                :class="{icon:true,iconFocused:focus==3}"
+                :class="{ icon: true, iconFocused: focus == 3 }"
                 src="../assets/iconsPA/profileIcon.svg"
               />
               <div>{{ $ml.get("prof") }}</div>
@@ -78,10 +115,13 @@
           </li>
         </router-link>
         <router-link class="RL" to="friends">
-          <li @click="ChangePage(4)" :class="{t5:true,focusedLi:focus==4}">
+          <li
+            @click="ChangePage(4)"
+            :class="{ t5: true, focusedLi: focus == 4 }"
+          >
             <div style="display:flex">
               <img
-                :class="{icon:true,iconFocused:focus==4}"
+                :class="{ icon: true, iconFocused: focus == 4 }"
                 src="../assets/iconsPA/friendsIcon.svg"
               />
               <div>{{ $ml.get("frend") }}</div>
@@ -89,32 +129,50 @@
           </li>
         </router-link>
         <router-link class="RL" to="money">
-          <li @click="ChangePage(5)" :class="{t5:true,focusedLi:focus==5}">
+          <li
+            @click="ChangePage(5)"
+            :class="{ t5: true, focusedLi: focus == 5 }"
+          >
             <div style="display:flex">
-              <img :class="{icon:true,iconFocused:focus==5}" src="../assets/iconsPA/moneyIcon.svg" />
+              <img
+                :class="{ icon: true, iconFocused: focus == 5 }"
+                src="../assets/iconsPA/moneyIcon.svg"
+              />
               <div>{{ $ml.get("money") }}</div>
             </div>
           </li>
         </router-link>
         <router-link class="RL" to="loyalityProgram">
-          <li @click="ChangePage(6)" :class="{t5:true,focusedLi:focus==6}">
+          <li
+            @click="ChangePage(6)"
+            :class="{ t5: true, focusedLi: focus == 6 }"
+          >
             <div style="display:flex">
-              <img :class="{icon:true,iconFocused:focus==6}" src="../assets/iconsPA/familyIcon.svg" />
+              <img
+                :class="{ icon: true, iconFocused: focus == 6 }"
+                src="../assets/iconsPA/familyIcon.svg"
+              />
               <div>Darewin’s family</div>
             </div>
           </li>
         </router-link>
         <router-link class="RL" to="support">
-          <li @click="ChangePage(7)" :class="{t5:true,focusedLi:focus==7}">
+          <li
+            @click="ChangePage(7)"
+            :class="{ t5: true, focusedLi: focus == 7 }"
+          >
             <div style="display:flex">
-              <img :class="{icon:true,iconFocused:focus==7}" src="../assets/iconsPA/infoIcon.svg" />
+              <img
+                :class="{ icon: true, iconFocused: focus == 7 }"
+                src="../assets/iconsPA/infoIcon.svg"
+              />
               <div>{{ $ml.get("sup") }}</div>
             </div>
           </li>
         </router-link>
       </ul>
     </div>
-    <div style="overflow-y:scroll;" :class="{pages:true,show:show3}">
+    <div style="overflow-y:scroll;" :class="{ pages: true, show: show3 }">
       <router-view></router-view>
     </div>
   </div>
@@ -128,7 +186,8 @@ export default {
       focus: 1,
       show: false,
       show2: false,
-      show3: false
+      show3: false,
+      socket: null,
     };
   },
   computed: {
@@ -136,10 +195,39 @@ export default {
       return localStorage.getItem("login");
     },
     user() {
-      return this.$store.dispatch.userData;
-    }
+      return this.$store.getters.userData;
+    },
   },
   created() {
+    this.$store.commit("SetSocket", new WebSocket("ws://localhost:3000"));
+    this.socket = this.$store.getters.socket;
+    this.socket.onmessage = (event) => {
+      let date = new Date();
+      let message = JSON.parse(event.data);
+      switch (message.type) {
+        case "Chat":
+          let newDate = { min: date.getMinutes(), hour: date.getHours() };
+          this.$store.commit("setChat", {
+            chat: [
+              {
+                newDate,
+                message: message.message,
+                login: message.login,
+              },
+            ],
+          });
+          break;
+        case "AddFriend":
+          this.$store.dispatch("GetUserData", { context: this });
+          break;
+        case "AcceptFriend":
+          console.log("Пришло");
+          this.$store.dispatch("GetUserData", { context: this });
+          break;
+        default:
+          break;
+      }
+    };
     setTimeout(() => {
       this.show2 = !this.show2;
       setTimeout(() => {
@@ -155,11 +243,11 @@ export default {
     },
     LogOut() {
       this.$store.dispatch("LogOut", { context: this });
-    }
-  }
+    },
+  },
 };
 </script>
-<style >
+<style>
 .profileSmallImage {
   position: absolute;
   width: 30px;

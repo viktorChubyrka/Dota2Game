@@ -1,5 +1,5 @@
 <template>
-  <div :class="{show:show,content:true}">
+  <div :class="{ show: show, content: true }">
     <Chat class="chat" />
     <div class="partyContainer">
       <div class="circle1">
@@ -18,7 +18,7 @@
       <div class="circleText3">dsfljdsf</div>
       <div class="circleText4">dsfljdsf</div>
       <div class="circleText5">dsfljdsf</div>
-      <div class="t3 lastesPlayers">{{$ml.get("last")}}</div>
+      <div class="t3 lastesPlayers">{{ $ml.get("last") }}</div>
       <table class="lastesPlayersTable">
         <tbody>
           <tr style v-for="i in 10" :key="i">
@@ -32,36 +32,70 @@
               class="addFriend"
               style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
             >
-              <i :id="`plus${i}1`" @click="Click(1,i)" class="fa fa-plus-square fa-2x"></i>
+              <i
+                :id="`plus${i}1`"
+                @click="Click(1, i)"
+                class="fa fa-plus-square fa-2x"
+              ></i>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <input placeholder="Fren" class="searchFriend" type="text" />
-    <button class="t5 searchButton">{{$ml.get("search")}}</button>
+    <input
+      :placeholder="sh()"
+      class="searchFriend"
+      v-model="search"
+      type="text"
+    />
+    <button class="t5 searchButton">{{ $ml.get("search") }}</button>
     <div
+      v-if="search == ''"
       class="t3"
       style="position: absolute;
 width: 82px;
 height: 38px;
 left: 0px;
 top: 240px;"
-    >{{$ml.get("frend")}}</div>
+    >
+      {{ $ml.get("frend") }}
+    </div>
+    <div
+      v-else
+      class="t3"
+      style="position: absolute;
+width: 82px;
+height: 38px;
+left: 0px;
+top: 240px;"
+    >
+      {{ $ml.get("search") }}
+    </div>
     <table class="searchTable">
       <tbody>
-        <tr style v-for="i in 3" :key="i">
+        <tr style v-for="(user, i) in allUsers" :key="user._id">
           <td style="padding-bottom:15px;padding-right:16px">
             <div class="circle"></div>
           </td>
           <td style="padding-bottom:15px;">
-            <div class="t3">Fren1</div>
+            <div class="t3">{{ search == "" ? user : user.login }}</div>
           </td>
           <td
             class="addFriend"
             style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
           >
-            <i :id="`plus${i}2`" @click="Click(2,i)" class="fa fa-plus-square fa-2x"></i>
+            <i
+              v-if="search != ''"
+              :id="`plus${i}2`"
+              @click="Click(2, i), addFriend(user.login)"
+              class="fa fa-plus-square fa-2x"
+            ></i>
+            <i
+              v-else
+              :id="`plus${i}2`"
+              @click="Click(2, i)"
+              class="fa fa-ellipsis-h fa-3x"
+            ></i>
           </td>
         </tr>
       </tbody>
@@ -73,7 +107,10 @@ import Chat from "./Chat";
 export default {
   data() {
     return {
-      show: false
+      show: false,
+      search: "",
+      sh: () => this.$ml.get("search"),
+      socket: null,
     };
   },
   components: { Chat },
@@ -82,18 +119,52 @@ export default {
       let el = document.getElementById(`plus${i}${tableIndex}`);
       el.style = "color:#bdbdbd!important";
       setTimeout(() => (el.style = ""), 100);
-    }
+    },
+    addFriend(login) {
+      this.socket.send(
+        JSON.stringify({
+          userToAdd: login,
+          login: localStorage.getItem("login"),
+          type: "AddFriend",
+        })
+      );
+    },
   },
   created() {
     setTimeout(() => (this.show = true), 10);
-  }
+    this.$store.dispatch("GetAllUsers", { context: this });
+    this.socket = this.$store.getters.socket;
+  },
+  computed: {
+    allUsers() {
+      if (this.search == "") {
+        let userData = this.$store.getters.userData;
+        return userData.friends;
+      } else {
+        let users = this.$store.getters.allUsers;
+        let filteredUsers = [];
+        let regexp = new RegExp(this.search, "i");
+        users.forEach((el) => {
+          if (regexp.test(el.login)) filteredUsers.push(el);
+        });
+        return filteredUsers;
+      }
+    },
+  },
 };
 </script>
-<style >
+<style>
 .fa-plus-square:hover {
   color: #e0e0e0;
 }
-
+.fa-ellipsis-h {
+  margin: 0;
+  padding: 0;
+  margin-right: 10px !important;
+}
+.fa-plus-square {
+  margin-right: 10px !important;
+}
 .content {
   opacity: 0;
   transition: opacity 1.5s;
@@ -113,7 +184,7 @@ export default {
 .lastesPlayersTable tbody {
   display: block;
   overflow-y: scroll;
-  height: 200px;
+  height: 300px;
   width: 100%;
 }
 .searchFriend {
@@ -140,6 +211,12 @@ export default {
   height: 24px;
   left: 0px;
   top: 295px;
+}
+.searchTable tbody {
+  display: block;
+  overflow-y: scroll;
+  height: 300px;
+  width: 100%;
 }
 .lastesPlayers {
   position: absolute;

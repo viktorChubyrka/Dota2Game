@@ -2,18 +2,25 @@
   <div class="main-div4">
     <Header headerColor="#f2f2f2" class="header" />
     <div class="logo"></div>
-    <div style="color:white;position: absolute;
+    <div
+      style="color:white;position: absolute;
 left: 200px;
-top: 166px;" class="t1">FAQ</div>
+top: 166px;"
+      class="t1"
+    >
+      FAQ
+    </div>
     <div>
       <div>
         <ul id="FAQUl">
           <li
             v-for="i in 10"
             :key="i"
-            :class="{ focusedLi: i-1 == focused, t5: true }"
-            @click="ChangeQuestion(i-1)"
-          >{{ $ml.get(`p4q${i}`) }}</li>
+            :class="{ focusedLi: i - 1 == focused, t5: true }"
+            @click="ChangeQuestion(i - 1)"
+          >
+            {{ $ml.get(`p4q${i}`) }}
+          </li>
         </ul>
       </div>
       <div
@@ -22,11 +29,15 @@ top: 166px;" class="t1">FAQ</div>
                     left: 879px;
                     top: 224px;"
       >
-        <div :class="{hiden:true,t2:true,show:show}">{{ $ml.get(`p4q${focused + 1}`) }}</div>
+        <div :class="{ hiden: true, t2: true, show: show }">
+          {{ $ml.get(`p4q${focused + 1}`) }}
+        </div>
         <div
           style="margin-top:24px;"
-          :class="{hiden:true,t4:true,show:show}"
-        >{{ $ml.get(`p4t${focused + 1}`) }}</div>
+          :class="{ hiden: true, t4: true, show: show }"
+        >
+          {{ $ml.get(`p4t${focused + 1}`) }}
+        </div>
       </div>
     </div>
     <Lang />
@@ -44,7 +55,7 @@ export default {
       show: true,
       focused: 0,
       CurrentQuestion: this.$ml.get("p4q1"),
-      CurrentQuestionAnswer: this.$ml.get("p4t1")
+      CurrentQuestionAnswer: this.$ml.get("p4t1"),
     };
   },
   methods: {
@@ -54,8 +65,8 @@ export default {
         this.show = !this.show;
         this.focused = index;
       }, 500);
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

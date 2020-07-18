@@ -191,6 +191,9 @@ export default new MLCreate({
       result: "Result",
       sendRep: "Make a complaint",
       topic: "Topic",
+      friendRequest: "Friend request from",
+      accept: "Accept",
+      cancel: "Reject",
     }),
 
     new MLanguage("russian").create({
@@ -344,7 +347,7 @@ export default new MLCreate({
       type: "Тип",
       dateTime: "Дата и время",
       win: "Победа",
-      search: "Найти",
+      search: "Поиск",
       last: "Недавние",
       changePhoto: "Изменить фото",
       aboutYou: "О себе",
@@ -377,6 +380,9 @@ export default new MLCreate({
       result: "Результат",
       sendRep: "Подать жалобу",
       topic: "Тема",
+      friendRequest: " Запрос в друзья от",
+      accept: "Добавить",
+      cancel: "Отклонить",
     }),
   ],
 });
