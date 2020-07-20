@@ -84,83 +84,85 @@ export default {
         this.$store.commit("SetCurrentPage", 1);
       }, 100);
     }
-    document.addEventListener("keydown", (e) => {
-      e.preventDefault();
-      switch (this.$store.getters.GetCurrentPage) {
-        case 1:
-          if (e.keyCode == 40) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage + 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            this.$store.commit("SetCurrentPage", 2);
-            setTimeout(() => this.$store.commit("SetAnim1"), 1000);
-          }
-          break;
-        case 2:
-          if (e.keyCode == 38) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage - 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
+    window.addEventListener("keydown", (e) => {
+      if ((e.keyCode == 38 || e.keyCode == 40) && e.target.nodeName == "BODY") {
+        e.preventDefault();
+        switch (this.$store.getters.GetCurrentPage) {
+          case 1:
+            if (e.keyCode == 40) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage + 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 2);
+              setTimeout(() => this.$store.commit("SetAnim1"), 1000);
+            }
+            break;
+          case 2:
+            if (e.keyCode == 38) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage - 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
 
-            this.$store.commit("SetCurrentPage", 1);
-          } else if (e.keyCode == 40) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage + 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            this.$store.commit("SetCurrentPage", 3);
-            setTimeout(() => this.$store.commit("SetAnim2"), 1000);
-            setTimeout(() => this.$store.commit("SetAnim3", 4), 2000);
-          }
-          break;
-        case 3:
-          if (e.keyCode == 38) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage - 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            this.$store.commit("SetCurrentPage", 2);
-            setTimeout(() => this.$store.commit("SetAnim1"), 1000);
-          } else if (e.keyCode == 40) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage + 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            this.$store.commit("SetCurrentPage", 4);
-          }
-          break;
-        case 4:
-          if (e.keyCode == 38) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage - 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            this.$store.commit("SetCurrentPage", 3);
-            setTimeout(() => {
-              this.$store.commit("SetAnim2", 3);
-            }, 1000);
-            setTimeout(() => this.$store.commit("SetAnim3", 4), 2000);
-          } else if (e.keyCode == 40) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage + 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            this.$store.commit("SetCurrentPage", 5);
-          }
-          break;
-        case 5:
-          if (e.keyCode == 38) {
-            var top = document.getElementById(
-              `page${this.$store.getters.GetCurrentPage - 1}`
-            ).offsetTop;
-            window.scrollTo(0, top);
-            this.$store.commit("SetCurrentPage", 4);
-          }
-          break;
-        default:
-          break;
+              this.$store.commit("SetCurrentPage", 1);
+            } else if (e.keyCode == 40) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage + 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 3);
+              setTimeout(() => this.$store.commit("SetAnim2"), 1000);
+              setTimeout(() => this.$store.commit("SetAnim3", 4), 2000);
+            }
+            break;
+          case 3:
+            if (e.keyCode == 38) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage - 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 2);
+              setTimeout(() => this.$store.commit("SetAnim1"), 1000);
+            } else if (e.keyCode == 40) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage + 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 4);
+            }
+            break;
+          case 4:
+            if (e.keyCode == 38) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage - 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 3);
+              setTimeout(() => {
+                this.$store.commit("SetAnim2", 3);
+              }, 1000);
+              setTimeout(() => this.$store.commit("SetAnim3", 4), 2000);
+            } else if (e.keyCode == 40) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage + 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 5);
+            }
+            break;
+          case 5:
+            if (e.keyCode == 38) {
+              var top = document.getElementById(
+                `page${this.$store.getters.GetCurrentPage - 1}`
+              ).offsetTop;
+              window.scrollTo(0, top);
+              this.$store.commit("SetCurrentPage", 4);
+            }
+            break;
+          default:
+            break;
+        }
       }
     });
     window.addEventListener(
