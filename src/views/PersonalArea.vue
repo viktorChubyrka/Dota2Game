@@ -17,8 +17,8 @@
               style="position:fixed; top:10px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
             >
               <li
-                v-for="not in user.notifications"
-                :key="not.date"
+                v-for="(not, i) in user.notifications"
+                :key="i"
                 style="margin-bottom:9px"
               >
                 <Message :notification="not" />
@@ -221,16 +221,16 @@ export default {
             ],
           });
           break;
-        case "AddFriend":
-          this.$store.dispatch("GetUserData", { context: this });
-          break;
-        case "AcceptFriend":
-          this.$store.dispatch("GetUserData", { context: this });
-          break;
-        case "notAcceptFriend":
-          this.$store.dispatch("GetUserData", { context: this });
-          break;
+        // case "AddFriend":
+        //   this.$store.dispatch("GetUserData", { context: this });
+        //   break;
+        // case "AcceptFriend":
+        //   this.$store.dispatch("GetUserData", { context: this });
+        //   break;
+        // case "notAcceptFriend":
+        //   break;
         default:
+          this.$store.dispatch("GetUserData", { context: this });
           break;
       }
     };
