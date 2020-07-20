@@ -11,7 +11,7 @@
         <div class="readyText t5">5 {{ $ml.get("redy") }}</div>
         <div class="cash t5">$23 — 23 Darewin’s dollar</div>
         <div class="notification">
-          <span>{{ user.notifications.length }}</span>
+          <span v-if="user.notifications">{{ user.notifications.length }}</span>
           <i class="fa fa-bell fa-lg notif">
             <ul
               style="position:fixed; top:10px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
@@ -207,6 +207,7 @@ export default {
     this.socket.onmessage = (event) => {
       let date = new Date();
       let message = JSON.parse(event.data);
+      console.log(message);
       switch (message.type) {
         case "Chat":
           let newDate = { min: date.getMinutes(), hour: date.getHours() };
@@ -224,7 +225,9 @@ export default {
           this.$store.dispatch("GetUserData", { context: this });
           break;
         case "AcceptFriend":
-          console.log("Пришло");
+          this.$store.dispatch("GetUserData", { context: this });
+          break;
+        case "notAcceptFriend":
           this.$store.dispatch("GetUserData", { context: this });
           break;
         default:

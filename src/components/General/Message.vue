@@ -35,7 +35,7 @@ top: 42px;"
       <button @click="acceptFriend()" class="buttonMessage b1 t5">
         {{ $ml.get("accept") }}
       </button>
-      <button class="buttonMessage b2 t5">
+      <button @click="notAcceptFriend()" class="buttonMessage b2 t5">
         {{ $ml.get("cancel") }}
       </button>
     </div>
@@ -65,6 +65,15 @@ export default {
           login: localStorage.getItem("login"),
           friendLogin: this.notification.login,
           type: "AcceptFriend",
+        })
+      );
+    },
+    notAcceptFriend() {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          friendLogin: this.notification.login,
+          type: "notAcceptFriend",
         })
       );
     },
