@@ -4,7 +4,7 @@
     <div class="partyContainer">
       <div
         :class="{ circle1: true, noPhoto: user.photo ? false : true }"
-        :style="`background:${user.image}`"
+        :style="`background:url(${user.image})`"
       ></div>
       <div class="circle2"></div>
       <div class="circle3">
