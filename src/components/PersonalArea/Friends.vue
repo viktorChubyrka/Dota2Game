@@ -2,9 +2,10 @@
   <div :class="{ show: show, content: true }">
     <Chat class="chat" />
     <div class="partyContainer">
-      <div :class="{ circle1: true, noPhoto: user.photo ? false : true }">
-        <img v-if="user.photo" :src="user.photo" alt="" />
-      </div>
+      <div
+        :class="{ circle1: true, noPhoto: user.photo ? false : true }"
+        :style="`background:${user.image}`"
+      ></div>
       <div class="circle2"></div>
       <div class="circle3">
         <img src="../../assets/friendicons/krestik.svg" />
@@ -160,8 +161,6 @@ export default {
 <style>
 .noPhoto {
   background: url("../../assets/userEmpty.svg") center;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
 }
 
 .fa-plus-square:hover {
@@ -304,6 +303,8 @@ export default {
   left: 107px;
   top: 21px;
   border-radius: 25px;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 .circle4 img {
   margin: 12px 0 0 12px;
