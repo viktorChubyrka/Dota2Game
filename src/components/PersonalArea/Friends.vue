@@ -2,8 +2,8 @@
   <div :class="{ show: show, content: true }">
     <Chat class="chat" />
     <div class="partyContainer">
-      <div class="circle1">
-        <img src="../../assets/friendicons/exit.svg" />
+      <div :class="{ circle1: true, noPhoto: user.photo ? false : true }">
+        <img v-if="user.photo" :src="user.photo" alt="" />
       </div>
       <div class="circle2"></div>
       <div class="circle3">
@@ -13,7 +13,7 @@
         <img src="../../assets/friendicons/plus.svg" />
       </div>
       <div class="circle5"></div>
-      <div class="circleText1">dsfljdsf</div>
+      <div class="circleText1">{{ user.login }}</div>
       <div class="circleText2">dsfljdsf</div>
       <div class="circleText3">dsfljdsf</div>
       <div class="circleText4">dsfljdsf</div>
@@ -104,6 +104,7 @@ top: 240px;"
 </template>
 <script>
 import Chat from "./Chat";
+
 export default {
   data() {
     return {
@@ -150,10 +151,19 @@ export default {
         return filteredUsers;
       }
     },
+    user() {
+      return this.$store.getters.userData;
+    },
   },
 };
 </script>
 <style>
+.noPhoto {
+  background: url("../../assets/userEmpty.svg") center;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
 .fa-plus-square:hover {
   color: #e0e0e0;
 }
@@ -293,8 +303,7 @@ export default {
   height: 50px;
   left: 107px;
   top: 21px;
-  background: #f02d3a;
-  border-radius: 40px;
+  border-radius: 25px;
 }
 .circle4 img {
   margin: 12px 0 0 12px;
