@@ -214,7 +214,11 @@ export default {
       this.$store.commit("SetLang", i);
       if (i == 1) {
         this.$ml.change("russian");
-      } else this.$ml.change("english");
+        this.show = 1;
+      } else {
+        this.$ml.change("english");
+        this.show = 2;
+      }
     },
   },
   computed: {
@@ -301,6 +305,7 @@ export default {
 .lengChangeUl li {
   margin-bottom: 10px;
   width: 160px !important;
+  cursor: pointer;
 }
 .lengChangeUl:first-child {
   margin-top: 16px;
@@ -419,10 +424,18 @@ export default {
   float: right;
   width: 170px;
   height: 40px;
-  background: #f2f2f2;
+  background-color: #f2f2f2;
   border: none;
   border-radius: 6px;
   color: #1f2430;
+  transition: color 0.5s, background-color 0.5s;
+}
+.titleBlock button:hover {
+  color: #f2f2f2;
+  background-color: #1f2430;
+}
+.titleBlock button:active {
+  background-color: #394154;
 }
 .passPromo {
   position: absolute;
