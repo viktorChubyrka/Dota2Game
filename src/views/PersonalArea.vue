@@ -75,11 +75,11 @@
         <router-link class="RL" to="games">
           <li
             @click="ChangePage(1)"
-            :class="{ t5: true, focusedLi: focus == 1 }"
+            :class="{ t5: true, iconFocused: focus == 1 }"
           >
             <div style="display:flex">
               <img
-                :class="{ icon: true, iconFocused: focus == 1 }"
+                :class="{ icon: true }"
                 src="../assets/iconsPA/gamesIcon.svg"
               />
               <div>{{ $ml.get("game") }}</div>
@@ -89,11 +89,11 @@
         <router-link class="RL" to>
           <li
             @click="ChangePage(2)"
-            :class="{ t5: true, focusedLi: focus == 2 }"
+            :class="{ t5: true, iconFocused: focus == 2 }"
           >
             <div style="display:flex">
               <img
-                :class="{ icon: true, iconFocused: focus == 2 }"
+                :class="{ icon: true }"
                 src="../assets/iconsPA/rulesIcon.svg"
               />
               <div>{{ $ml.get("pravil") }}</div>
@@ -103,11 +103,11 @@
         <router-link class="RL" to="profile">
           <li
             @click="ChangePage(3)"
-            :class="{ t5: true, focusedLi: focus == 3 }"
+            :class="{ t5: true, iconFocused: focus == 3 }"
           >
             <div style="display:flex">
               <img
-                :class="{ icon: true, iconFocused: focus == 3 }"
+                :class="{ icon: true }"
                 src="../assets/iconsPA/profileIcon.svg"
               />
               <div>{{ $ml.get("prof") }}</div>
@@ -117,11 +117,11 @@
         <router-link class="RL" to="friends">
           <li
             @click="ChangePage(4)"
-            :class="{ t5: true, focusedLi: focus == 4 }"
+            :class="{ t5: true, iconFocused: focus == 4 }"
           >
             <div style="display:flex">
               <img
-                :class="{ icon: true, iconFocused: focus == 4 }"
+                :class="{ icon: true }"
                 src="../assets/iconsPA/friendsIcon.svg"
               />
               <div>{{ $ml.get("frend") }}</div>
@@ -131,11 +131,11 @@
         <router-link class="RL" to="money">
           <li
             @click="ChangePage(5)"
-            :class="{ t5: true, focusedLi: focus == 5 }"
+            :class="{ t5: true, iconFocused: focus == 5 }"
           >
             <div style="display:flex">
               <img
-                :class="{ icon: true, iconFocused: focus == 5 }"
+                :class="{ icon: true }"
                 src="../assets/iconsPA/moneyIcon.svg"
               />
               <div>{{ $ml.get("money") }}</div>
@@ -145,25 +145,28 @@
         <router-link class="RL" to="loyalityProgram">
           <li
             @click="ChangePage(6)"
-            :class="{ t5: true, focusedLi: focus == 6 }"
+            :class="{ t5: true, iconFocused: focus == 6 }"
           >
             <div style="display:flex">
               <img
-                :class="{ icon: true, iconFocused: focus == 6 }"
+                :class="{ icon: true }"
                 src="../assets/iconsPA/familyIcon.svg"
               />
               <div>Darewin’s family</div>
             </div>
           </li>
         </router-link>
-        <router-link class="RL" to="support">
+        <router-link
+          :class="{ RL: true, iconFocused: focus == 7 }"
+          to="support"
+        >
           <li
             @click="ChangePage(7)"
-            :class="{ t5: true, focusedLi: focus == 7 }"
+            :class="{ t5: true, iconFocused: focus == 7 }"
           >
             <div style="display:flex">
               <img
-                :class="{ icon: true, iconFocused: focus == 7 }"
+                :class="{ icon: true }"
                 src="../assets/iconsPA/infoIcon.svg"
               />
               <div>{{ $ml.get("sup") }}</div>
@@ -202,6 +205,7 @@ export default {
     this.$store.commit(
       "SetSocket",
       new WebSocket("wss://dota2botbackend.herokuapp.com")
+      //new WebSocket("ws://localhost:3000")
     );
     this.socket = this.$store.getters.socket;
     this.socket.onmessage = (event) => {
@@ -271,15 +275,27 @@ html {
 .RL li:hover {
   background: #f3f4f7;
 }
+.RL li {
+  font-weight: bold;
+  transition: margin-left 0.5s;
+  opacity: 0.6;
+}
+.RL li:hover {
+  margin-left: 15px;
+  opacity: 1;
+}
 .RL {
   text-decoration: none;
 }
 .icon {
   padding-right: 8px;
-  opacity: 1;
 }
 .iconFocused {
+  opacity: 1 !important;
+  color: black;
+  margin-left: 15px;
   opacity: 1;
+  font-weight: bold;
 }
 .pages {
   position: relative;
@@ -466,7 +482,7 @@ html {
 .sideNavUl li {
   padding: 16px 0 16px 10px;
   width: 200px;
-  color: #bdbdbd;
+  color: black;
 }
 .sideNavUl li:hover {
   cursor: pointer;
@@ -475,6 +491,6 @@ html {
   margin-right: 15px;
 }
 .focusedLi {
-  color: #1f2430 !important;
+  color: black !important;
 }
 </style>

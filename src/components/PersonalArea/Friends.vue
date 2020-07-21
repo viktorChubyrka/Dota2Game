@@ -2,23 +2,8 @@
   <div :class="{ show: show, content: true }">
     <Chat class="chat" />
     <div class="partyContainer">
-      <div
-        :class="{ circle1: true, noPhoto: user.photo ? false : true }"
-        :style="`background:url(${user.photo})`"
-      ></div>
-      <div class="circle2"></div>
-      <div class="circle3">
-        <img src="../../assets/friendicons/krestik.svg" />
-      </div>
-      <div class="circle4">
-        <img src="../../assets/friendicons/plus.svg" />
-      </div>
-      <div class="circle5"></div>
-      <div class="circleText1">{{ user.login }}</div>
-      <div class="circleText2">dsfljdsf</div>
-      <div class="circleText3">dsfljdsf</div>
-      <div class="circleText4">dsfljdsf</div>
-      <div class="circleText5">dsfljdsf</div>
+      <PartySlot :login="user.login" :photo="user.photo ? user.photo : svg" />
+      <PartySlot v-for="i in 4" :key="i" />
       <div class="t3 lastesPlayers">{{ $ml.get("last") }}</div>
       <table class="lastesPlayersTable">
         <tbody>
@@ -105,7 +90,7 @@ top: 240px;"
 </template>
 <script>
 import Chat from "./Chat";
-
+import PartySlot from "./PartySlot";
 export default {
   data() {
     return {
@@ -115,7 +100,7 @@ export default {
       socket: null,
     };
   },
-  components: { Chat },
+  components: { Chat, PartySlot },
   methods: {
     Click(tableIndex, i) {
       let el = document.getElementById(`plus${i}${tableIndex}`);
@@ -159,10 +144,6 @@ export default {
 };
 </script>
 <style>
-.noPhoto {
-  background: url("../../assets/userEmpty.svg") center;
-}
-
 .fa-plus-square:hover {
   color: #e0e0e0;
 }
@@ -255,6 +236,7 @@ export default {
   left: 149px;
   top: 38px;
   background: #1f2430;
+  display: flex;
 }
 .circleText1 {
   position: absolute;
@@ -303,17 +285,21 @@ export default {
   left: 107px;
   top: 21px;
   border-radius: 25px;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
 }
 .circle4 img {
   margin: 12px 0 0 12px;
 }
 .circle1 img {
-  margin: 15px 0 0 15px;
+  margin: 12px 0 0 12px;
 }
 .circle3 img {
-  margin: 15px 0 0 15px;
+  margin: 12px 0 0 12px;
+}
+.circle2 img {
+  margin: 12px 0 0 12px;
+}
+.circle5 img {
+  margin: 12px 0 0 12px;
 }
 .circle2 {
   position: absolute;
@@ -321,9 +307,8 @@ export default {
   height: 50px;
   left: 321px;
   top: 21px;
-  background: #e0e0e0;
+  background: #93e5ab;
   border-radius: 40px;
-  text-align: center;
 }
 .circle3 {
   position: absolute;
@@ -331,7 +316,7 @@ export default {
   height: 50px;
   left: 585px;
   top: 21px;
-  background: #f02d3a;
+  background: #93e5ab;
   border-radius: 40px;
 }
 .circle4 {
@@ -349,7 +334,7 @@ export default {
   height: 50px;
   left: 1113px;
   top: 21px;
-  background: #828282;
+  background: #93e5ab;
   border-radius: 40px;
 }
 </style>
