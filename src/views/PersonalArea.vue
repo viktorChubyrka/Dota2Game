@@ -6,13 +6,15 @@
       </router-link>
       <div id="inform">
         <div class="onlineDot"></div>
-        <div class="onlineText t5">12 {{ $ml.get("online") }}</div>
+        <div class="onlineText t5">{{ online }} {{ $ml.get("online") }}</div>
         <div class="readyDot"></div>
-        <div class="readyText t5">5 {{ $ml.get("redy") }}</div>
-        <div class="cash t5">$23 — 23 Darewin’s dollar</div>
+        <div class="readyText t5">{{ ready }} {{ $ml.get("redy") }}</div>
+        <div class="cash t5">
+          ${{ user.purse }} — {{ user.purse }} Darewin’s dollar
+        </div>
         <div class="notification">
-          <span v-if="user.notifications">{{ user.notifications.length }}</span>
           <i class="fa fa-bell fa-lg notif">
+            <div class="indicator" v-if="user.notifications.length > 0"></div>
             <ul
               style="position:fixed; top:10px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
             >
@@ -40,14 +42,16 @@
       </div>
     </div>
     <div :class="{ actions: true, show: show2 }">
-      <div :class="{ readyIcon1: true, show: show }">
-        <img
-          :class="{ icon: true, iconFocused: focus == 5 }"
-          src="../assets/iconsPA/readyIcon.svg"
-        />
-      </div>
-      <div :class="{ readyIconText1: true, show: show, t4: true }">
-        {{ $ml.get("redy") }}!
+      <div @click="SetReady()">
+        <div :class="{ readyIcon1: true, show: show }">
+          <img
+            :class="{ icon: true, iconFocused: focus == 5 }"
+            src="../assets/iconsPA/readyIcon.svg"
+          />
+        </div>
+        <div :class="{ readyIconText1: true, show: show, t4: true }">
+          {{ $ml.get("redy") }}!
+        </div>
       </div>
       <div :class="{ readyIcon2: true, show: show }">
         <img class="icon" src="../assets/iconsPA/teamUpIcon.svg" />
@@ -62,12 +66,13 @@
       >
         {{ $ml.get("getComand") }}
       </div>
-
-      <div :class="{ readyIcon3: true, show: show }">
-        <img class="icon" src="../assets/iconsPA/searchIcon.svg" />
-      </div>
-      <div :class="{ readyIconText3: true, show: show, t4: true }">
-        {{ $ml.get("findG") }}
+      <div style="cursor:pointer" @click="SearchGame()">
+        <div :class="{ readyIcon3: true, show: show }">
+          <img class="icon" src="../assets/iconsPA/searchIcon.svg" />
+        </div>
+        <div :class="{ readyIconText3: true, show: show, t4: true }">
+          {{ $ml.get("findG") }}
+        </div>
       </div>
     </div>
     <div :class="{ sideNavigation: true, sideNavigationShow: show }">
@@ -191,6 +196,8 @@ export default {
       show2: false,
       show3: false,
       socket: null,
+      online: 0,
+      ready: 0,
     };
   },
   computed: {
@@ -211,7 +218,6 @@ export default {
     this.socket.onmessage = (event) => {
       let date = new Date();
       let message = JSON.parse(event.data);
-      console.log(message);
       switch (message.type) {
         case "Chat":
           let newDate = { min: date.getMinutes(), hour: date.getHours() };
@@ -225,14 +231,16 @@ export default {
             ],
           });
           break;
-        // case "AddFriend":
-        //   this.$store.dispatch("GetUserData", { context: this });
-        //   break;
-        // case "AcceptFriend":
-        //   this.$store.dispatch("GetUserData", { context: this });
-        //   break;
-        // case "notAcceptFriend":
-        //   break;
+        case "LobbyUpdate":
+          this.$store.dispatch("GetAllMatches");
+          break;
+        case "online":
+          this.online = message.online;
+          if (message.ready) this.ready = message.ready;
+          break;
+        case "ready":
+          this.ready = message.ready;
+          break;
         default:
           this.$store.dispatch("GetUserData", { context: this });
           break;
@@ -248,6 +256,22 @@ export default {
     this.$store.dispatch("GetUserData", { context: this });
   },
   methods: {
+    SearchGame() {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          type: "SearchGame",
+        })
+      );
+    },
+    SetReady() {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          type: "setReady",
+        })
+      );
+    },
     ChangePage(i) {
       this.focus = i;
     },
@@ -258,6 +282,15 @@ export default {
 };
 </script>
 <style>
+.notification .indicator {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: red;
+}
 .profileSmallImage {
   position: absolute;
   width: 30px;

@@ -23,8 +23,20 @@ export default new Vuex.Store({
     allUsers: [],
     socket: null,
     chat: [],
+    activeMatches: [],
+    upcomingMatches: [],
+    pastMatches: [],
   },
   getters: {
+    activeMatches: (state) => {
+      return state.activeMatches;
+    },
+    upcomingMatches: (state) => {
+      return state.upcomingMatches;
+    },
+    pastMatches: (state) => {
+      return state.pastMAtches;
+    },
     chat: (state) => {
       return state.chat;
     },
@@ -69,6 +81,15 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setUpcomingMatches: (state, payload) => {
+      state.upcomingMatches = payload;
+    },
+    setActiveMatches: (state, payload) => {
+      state.activeMatches = payload;
+    },
+    setPastMatches: (state, payload) => {
+      state.pastMatches = payload;
+    },
     setChat: (state, payload) => {
       state.chat = [...state.chat, ...payload.chat];
     },
@@ -148,7 +169,6 @@ export default new Vuex.Store({
         payload.context.$router.push("/personalArea/profile");
         localStorage.setItem("login", data.data.data.login);
       } else {
-        console.log("Dsad");
         state.commit("SetLoginError", data.data.data.message);
       }
     },
@@ -157,7 +177,6 @@ export default new Vuex.Store({
         `${url}/api/user/actions/newPassword`,
         payload.data
       );
-      console.log(data);
       if (data.data.data.status == 200) {
         state.commit("SetChangePasswordError", data.data.data.message);
         payload.context.$router.push("/passwordResetSucces");
@@ -209,7 +228,6 @@ export default new Vuex.Store({
       if (data.data.data.status != 200) payload.context.$router.push("/");
     },
     SendFile: async (state, payload) => {
-      console.log(payload.formData);
       let headers = {
         "Content-Type": "multipart/form-data",
       };
@@ -218,7 +236,6 @@ export default new Vuex.Store({
         payload.formData,
         headers
       );
-      console.log(data);
     },
     CheckSession: async (state, payload) => {
       let status = await Axios.post(`${url}/api/user/actions/`, payload.i, {
@@ -236,9 +253,39 @@ export default new Vuex.Store({
       let users = await Axios.get(`${url}/api/user/actions/getAllUsers`, {
         withCredentials: true,
       });
-      console.log(users);
       if (users.status == "200") state.commit("SetAllUsers", users.data.users);
       else payload.context.$router.push("/login");
+    },
+    GetAllMatches: async (state) => {
+      let matches = await Axios.get(`${url}/api/game/getAllGames`, {
+        withCredentials: true,
+      });
+      let active = [];
+      let past = [];
+      let upcoming = [];
+      matches.data.forEach((el) => {
+        switch (el.status) {
+          case "upcoming":
+            let isInGame = false;
+            [...el.playersT1, ...el.playersT2].forEach((el) => {
+              if (el == localStorage.getItem("login")) isInGame = true;
+            });
+            if (isInGame) active.push(el);
+            else upcoming.push(el);
+            break;
+          case "active":
+            active.push(el);
+            break;
+          case "past":
+            past.push(el);
+            break;
+          default:
+            break;
+        }
+      });
+      state.commit("setUpcomingMatches", upcoming);
+      state.commit("setPastMatches", past);
+      state.commit("setActiveMatches", active);
     },
   },
   modules: {},

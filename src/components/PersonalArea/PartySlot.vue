@@ -2,7 +2,6 @@
   <div>
     <div class="partySlot">
       <div
-        @mouseover=""
         :class="{
           circle: true,
           noPhoto: login ? (photo ? false : true) : false,

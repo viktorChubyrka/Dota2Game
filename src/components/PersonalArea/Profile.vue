@@ -359,6 +359,7 @@ export default {
   top: 116px;
   text-decoration: underline;
   color: #35a7ff;
+  transition: color 0.25s;
 }
 
 .changePass {
@@ -369,6 +370,7 @@ export default {
   top: 54px;
   text-decoration: underline;
   color: #35a7ff;
+  transition: color 0.25s;
 }
 .AboutUser {
   position: absolute;

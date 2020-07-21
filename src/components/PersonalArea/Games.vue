@@ -1,55 +1,90 @@
 <template>
-  <div :class="{show:show,content:true}">
+  <div :class="{ show: show, content: true }">
     <div
       @click="Button(1)"
-      :class="{t3:true, buttonSolo:true, first:true, activeBtn:button==1}"
-    >{{$ml.get("solo")}}</div>
+      :class="{
+        t3: true,
+        buttonSolo: true,
+        first: true,
+        activeBtn: button == 1,
+        toHover: button != 1,
+      }"
+    >
+      {{ $ml.get("solo") }}
+    </div>
     <div
       @click="Button(2)"
-      :class="{t3:true, buttonSolo:true, second:true, activeBtn:button==2}"
-    >{{$ml.get("party")}}</div>
+      :class="{
+        t3: true,
+        buttonSolo: true,
+        second: true,
+        activeBtn: button == 2,
+        toHover: button != 2,
+      }"
+    >
+      {{ $ml.get("party") }}
+    </div>
     <div class="smVretLine"></div>
     <div>
       <div
         @click="Select(1)"
-        :class="{t4:true, tabTitle:true, tab1T:true,tabTSelected:selected==1}"
-      >{{$ml.get("match1")}}</div>
-      <div :class="{tabContent:true, tab1C:true,tabCSelected:selected==1}">
+        :class="{
+          t4: true,
+          tabTitle: true,
+          tab1T: true,
+          tabTSelected: selected == 1,
+        }"
+      >
+        {{ $ml.get("match1") }}
+      </div>
+      <div
+        :class="{ tabContent: true, tab1C: true, tabCSelected: selected == 1 }"
+      >
         <table class="gamesTable">
           <tr>
             <th
               class="t5"
               style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
-            >{{$ml.get("matchNum").split(" ")[0]}}</th>
+            >
+              {{ $ml.get("matchNum").split(" ")[0] }}
+            </th>
             <th
               class="t5"
               style="color: #828282;width:110px;text-align: left;padding-bottom:20px"
-            >{{$ml.get("result")}}</th>
+            >
+              {{ $ml.get("result") }}
+            </th>
             <th
               class="t5"
               style="width:100px;color: #828282;text-align: left;padding-bottom:20px"
-            >{{$ml.get("matchType")}}</th>
+            >
+              {{ $ml.get("matchType") }}
+            </th>
             <th style="width:628px;"></th>
-            <th
-              class="t5"
-              style="color: #828282;width:190px;text-align: left;"
-            >{{$ml.get("dateTime")}}</th>
+            <th class="t5" style="color: #828282;width:190px;text-align: left;">
+              {{ $ml.get("dateTime") }}
+            </th>
             <th
               class="t5"
               style="color: #828282;width:117px;text-align: right;"
-            >{{$ml.get("matchNum").split(" ")[0]}} Dotabuff</th>
+            >
+              {{ $ml.get("matchNum").split(" ")[0] }} Dotabuff
+            </th>
           </tr>
           <tr v-for="i in 10" :key="i">
-            <td class="t4 players">№ {{i}}</td>
-            <td class="t4">{{$ml.get("win")}}</td>
-            <td class="t4">{{button==1?$ml.get("solo"):$ml.get("party")}}</td>
+            <td class="t4 players">№ {{ i }}</td>
+            <td class="t4">{{ $ml.get("win") }}</td>
+            <td class="t4">
+              {{ button == 1 ? $ml.get("solo") : $ml.get("party") }}
+            </td>
             <td>
               <a
-                v-if="i==1"
+                v-if="i == 1"
                 class="t4 linkTable"
                 style="float:right;color:#35A7FF;margin-right:80px"
                 href
-              >{{$ml.get("sendRep")}}</a>
+                >{{ $ml.get("sendRep") }}</a
+              >
             </td>
             <td class="t4">21/05/2020 11:31:32</td>
             <td class="t4" style="padding-left:20px">3522211212</td>
@@ -58,74 +93,66 @@
       </div>
       <div
         @click="Select(2)"
-        :class="{t4:true, tabTitle:true, tab2T:true,tabTSelected:selected==2}"
-      >{{$ml.get("match2")}}</div>
-      <div :class="{tabContent:true, tab2C:true,tabCSelected:selected==2}">
+        :class="{
+          t4: true,
+          tabTitle: true,
+          tab2T: true,
+          tabTSelected: selected == 2,
+        }"
+      >
+        {{ $ml.get("match2") }}
+      </div>
+      <div
+        :class="{ tabContent: true, tab2C: true, tabCSelected: selected == 2 }"
+      >
         <table class="gamesTable">
           <tr>
             <th
               class="t5"
               style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
-            >{{$ml.get("players")}}</th>
+            >
+              {{ $ml.get("players") }}
+            </th>
             <th style="width:304px;text-align: left;"></th>
             <th style="width:598px;"></th>
-            <th
-              class="t5"
-              style="color: #828282;width:190px;text-align: left;"
-            >{{$ml.get("dateTime")}}</th>
-            <th
-              class="t5"
-              style="color: #828282;width:113px;item-align: left;"
-            >{{$ml.get("matchNum")}}</th>
+            <th class="t5" style="color: #828282;width:190px;text-align: left;">
+              {{ $ml.get("dateTime") }}
+            </th>
+            <th class="t5" style="color: #828282;width:113px;item-align: left;">
+              {{ $ml.get("matchNum") }}
+            </th>
           </tr>
-          <tr>
-            <td class="players">9/10</td>
+          <tr v-for="el in UpcomingMatches" :key="el._id">
+            <td class="players">
+              {{ [...el.playersT1, ...el.playersT2].length }}/10
+            </td>
             <td>
-              <span class="dot">
+              <span
+                v-for="login in [...el.playersT1, ...el.playersT2]"
+                :key="login"
+                class="dot"
+              >
                 <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
+                <div class="t4 playerName">{{ login }}</div>
               </span>
             </td>
             <td>
-              <button class="enterMath t4">{{$ml.get("enterMatch")}}</button>
+              <button class="enterMath t4">{{ $ml.get("enterMatch") }}</button>
             </td>
-            <td class="t4">21/05/2020 11:31:32</td>
-            <td class="t4" style="padding-left:20px">3522211212</td>
+            <td class="t4">
+              {{
+                `${el.creationDate.split("T")[0]} ${
+                  el.creationDate.split("T")[1].split(".")[0]
+                }`
+              }}
+            </td>
+            <td class="t4" style="padding-left:20px">{{ el.matchNumber }}</td>
           </tr>
         </table>
-        <div class="t3" style="margin:36px 0 16px 0">{{$ml.get("playing")}}</div>
+
+        <div class="t3" style="margin:36px 0 16px 0">
+          {{ $ml.get("playing") }}
+        </div>
         <table class="gamesTable">
           <tr v-for="i in 5" :key="i">
             <td style="width:87px" class="players">10/10</td>
@@ -172,71 +199,80 @@
               </span>
             </td>
             <td style="width:562px;"></td>
-            <td style="width:190px;text-align:left;" class="t4">21/05/2020 11:31:32</td>
+            <td style="width:190px;text-align:left;" class="t4">
+              21/05/2020 11:31:32
+            </td>
             <td class="t4" style="width:113px;padding-left:20px">3522211212</td>
           </tr>
         </table>
       </div>
       <div
         @click="Select(3)"
-        :class="{t4:true, tabTitle:true, tab3T:true,tabTSelected:selected==3}"
-      >{{$ml.get("match3")}}</div>
-      <div :class="{tabContent:true, tab3C:true,tabCSelected:selected==3}">
+        :class="{
+          t4: true,
+          tabTitle: true,
+          tab3T: true,
+          tabTSelected: selected == 3,
+        }"
+      >
+        {{ $ml.get("match3") }}
+      </div>
+      <div
+        :class="{ tabContent: true, tab3C: true, tabCSelected: selected == 3 }"
+      >
         <table class="gamesTable">
           <tr>
             <th
               class="t5"
               style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
-            >{{$ml.get("matchType")}}</th>
+            >
+              {{ $ml.get("matchType") }}
+            </th>
             <th
               class="t5"
               style="width:180px;text-align: left;;padding-bottom:20px;color: #828282;"
-            >{{$ml.get("regEnd")}}</th>
+            >
+              {{ $ml.get("regEnd") }}
+            </th>
             <th style="width:400px;"></th>
             <th style="width:230px"></th>
-            <th
-              class="t5"
-              style="color: #828282;width:190px;text-align: left;"
-            >{{$ml.get("gameStart")}}</th>
-            <th
-              class="t5"
-              style="color: #828282;width:113px;item-align: left;"
-            >{{$ml.get("matchNum")}}</th>
+            <th class="t5" style="color: #828282;width:190px;text-align: left;">
+              {{ $ml.get("gameStart") }}
+            </th>
+            <th class="t5" style="color: #828282;width:113px;item-align: left;">
+              {{ $ml.get("matchNum") }}
+            </th>
           </tr>
-          <tr>
-            <td class="t4 players">{{button==1?$ml.get("solo"):$ml.get("party")}}</td>
-            <td class="t4">9 {{$ml.get("minut")}}</td>
+          <tr v-for="el in ActiveMatches" :key="el._id">
+            <td class="t4 players">
+              {{ button == 1 ? $ml.get("solo") : $ml.get("party") }}
+            </td>
+            <td class="t4">
+              <Timer :date="el.creationDate" /> {{ $ml.get("minut") }}
+            </td>
             <td>
-              <span class="dot">
+              <span
+                v-for="(player, index) in [...el.playersT1, ...el.playersT2]"
+                :key="index"
+                class="dot"
+              >
                 <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
+                <div class="t4 playerName">{{ player }}</div>
               </span>
             </td>
             <td>
-              <button class="enterMath t4">{{$ml.get("cancel")}}</button>
+              <button @click="LeaveGame(el.matchNumber)" class="enterMath t4">
+                {{ $ml.get("cancel") }}
+              </button>
             </td>
-            <td class="t4">21/05/2020 11:31:32</td>
-            <td class="t4" style="padding-left:20px">3522211212</td>
+            <td class="t4">
+              {{
+                `${el.creationDate.split("T")[0]} ${
+                  el.creationDate.split("T")[1].split(".")[0]
+                }`
+              }}
+            </td>
+            <td class="t4" style="padding-left:20px">{{ el.matchNumber }}</td>
           </tr>
         </table>
       </div>
@@ -244,12 +280,15 @@
   </div>
 </template>
 <script>
+import Timer from "../General/Timer";
 export default {
+  components: { Timer },
   data() {
     return {
       selected: 3,
       button: 1,
-      show: false
+      show: false,
+      socket: null,
     };
   },
   methods: {
@@ -258,11 +297,22 @@ export default {
     },
     Button(i) {
       this.button = i;
-    }
+    },
+    LeaveGame(matchNumber) {},
+  },
+  computed: {
+    ActiveMatches() {
+      return this.$store.getters.activeMatches;
+    },
+    UpcomingMatches() {
+      return this.$store.getters.upcomingMatches;
+    },
   },
   created() {
+    this.socket = this.$store.getters.socket;
     setTimeout(() => (this.show = true), 10);
-  }
+    this.$store.dispatch("GetAllMatches");
+  },
 };
 </script>
 <style scoped>
@@ -306,6 +356,13 @@ export default {
   border: 1px solid #bdbdbd;
   transition: color 0.5s, background-color 0.5s;
 }
+.toHover:hover {
+  background: #f3f4f7;
+}
+.toHover {
+  background: white;
+}
+
 .dot {
   position: relative;
   padding: 0;
@@ -371,7 +428,7 @@ export default {
   border-left: 1px solid #bdbdbd;
   border-top: 1px solid #bdbdbd;
   border-right: 1px solid #bdbdbd;
-  border-bottom: 2px solid white;
+  border-bottom: 3px solid white;
   top: 166px;
 }
 .tab1T {
@@ -397,14 +454,17 @@ export default {
 .tab1C {
   z-index: 2;
   opacity: 0;
+  transition: z-index 2s, opacity 1s;
 }
 .tab2C {
   z-index: 2;
   opacity: 0;
+  transition: z-index 2s, opacity 1s;
 }
 .tab3C {
   z-index: 2;
   opacity: 0;
+  transition: z-index 2s, opacity 1s;
 }
 .tabTSelected {
   z-index: 4 !important;
