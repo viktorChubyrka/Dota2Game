@@ -272,13 +272,11 @@ export default {
 html {
   scroll-behavior: smooth;
 }
-.RL li:hover {
-  background: #f3f4f7;
-}
+
 .RL li {
   font-weight: bold;
-  transition: margin-left 0.5s;
   opacity: 0.6;
+  transition: opacity 0.5s, margin-left 0.5s;
 }
 .RL li:hover {
   margin-left: 15px;

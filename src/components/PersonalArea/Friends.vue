@@ -104,7 +104,7 @@ export default {
   methods: {
     Click(tableIndex, i) {
       let el = document.getElementById(`plus${i}${tableIndex}`);
-      el.style = "color:#bdbdbd!important";
+      el.style = "color:#908e8e!important";
       setTimeout(() => (el.style = ""), 100);
     },
     addFriend(login) {
@@ -145,15 +145,20 @@ export default {
 </script>
 <style>
 .fa-plus-square:hover {
-  color: #e0e0e0;
+  color: #bdbdbd !important;
 }
 .fa-ellipsis-h {
   margin: 0;
   padding: 0;
   margin-right: 10px !important;
+  color: #e0e0e0;
+}
+.fa-ellipsis-h:hover {
+  color: #bdbdbd !important;
 }
 .fa-plus-square {
   margin-right: 10px !important;
+  color: #e0e0e0;
 }
 .content {
   opacity: 0;
@@ -166,9 +171,6 @@ export default {
   position: absolute;
   top: 184px;
   right: 40px;
-}
-.addFriend i:hover {
-  color: #e0e0e0 !important;
 }
 
 .lastesPlayersTable tbody {
