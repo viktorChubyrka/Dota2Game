@@ -33,6 +33,7 @@
           tabTitle: true,
           tab1T: true,
           tabTSelected: selected == 1,
+          tabTitleSelected: selected == 1,
         }"
       >
         {{ $ml.get("match1") }}
@@ -98,6 +99,7 @@
           tabTitle: true,
           tab2T: true,
           tabTSelected: selected == 2,
+          tabTitleSelected: selected == 2,
         }"
       >
         {{ $ml.get("match2") }}
@@ -137,7 +139,9 @@
               </span>
             </td>
             <td>
-              <button class="enterMath t4">{{ $ml.get("enterMatch") }}</button>
+              <button @click="EnterMatch(el.matchNumber)" class="enterMath t4">
+                {{ $ml.get("enterMatch") }}
+              </button>
             </td>
             <td class="t4">
               {{
@@ -213,6 +217,7 @@
           tabTitle: true,
           tab3T: true,
           tabTSelected: selected == 3,
+          tabTitleSelected: selected == 3,
         }"
       >
         {{ $ml.get("match3") }}
@@ -248,7 +253,8 @@
               {{ button == 1 ? $ml.get("solo") : $ml.get("party") }}
             </td>
             <td class="t4">
-              <Timer :date="el.creationDate" /> {{ $ml.get("minut") }}
+              <Timer :date="el.creationDate" :partyLeader="el.creatorLogin" />
+              {{ $ml.get("minut") }}
             </td>
             <td>
               <span
@@ -298,7 +304,24 @@ export default {
     Button(i) {
       this.button = i;
     },
-    LeaveGame(matchNumber) {},
+    EnterMatch(matchNumber) {
+      this.socket.send(
+        JSON.stringify({
+          matchNumber,
+          login: localStorage.getItem("login"),
+          type: "EnterLobby",
+        })
+      );
+    },
+    LeaveGame(matchNumber) {
+      this.socket.send(
+        JSON.stringify({
+          matchNumber,
+          login: localStorage.getItem("login"),
+          type: "LeaveLobby",
+        })
+      );
+    },
   },
   computed: {
     ActiveMatches() {
@@ -428,8 +451,14 @@ export default {
   border-left: 1px solid #bdbdbd;
   border-top: 1px solid #bdbdbd;
   border-right: 1px solid #bdbdbd;
-  border-bottom: 3px solid white;
+  border-bottom: 1px solid #bdbdbd;
   top: 166px;
+  transition: top 0.5s, height 0.5s, border-bottom 0.5s;
+}
+.tabTitleSelected {
+  top: 156px !important;
+  height: 46px;
+  border-bottom: 3px solid white;
 }
 .tab1T {
   left: 255px;

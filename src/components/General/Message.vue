@@ -50,6 +50,17 @@ top: 42px;"
     >
       <strong>{{ notification.login }}</strong> {{ notification.message }}
     </div>
+    <div
+      v-if="notification.type == 'LobbyDestroed'"
+      class="t5"
+      style="position: absolute;
+width: 270px;
+height: 32px;
+left: 12px;
+top: 42px;"
+    >
+      {{ notification.message }}
+    </div>
   </div>
 </template>
 <script>

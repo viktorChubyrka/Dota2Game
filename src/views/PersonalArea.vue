@@ -14,7 +14,10 @@
         </div>
         <div class="notification">
           <i class="fa fa-bell fa-lg notif">
-            <div class="indicator" v-if="user.notifications.length > 0"></div>
+            <div
+              class="indicator"
+              v-if="user.notifications.length > 0 || false"
+            ></div>
             <ul
               style="position:fixed; top:10px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
             >
@@ -202,7 +205,7 @@ export default {
   },
   computed: {
     login() {
-      return localStorage.getItem("login");
+      return localStorage.getItem("login") || "";
     },
     user() {
       return this.$store.getters.userData;
@@ -233,6 +236,10 @@ export default {
           break;
         case "LobbyUpdate":
           this.$store.dispatch("GetAllMatches");
+          break;
+        case "LobbyDestroyed":
+          this.$store.dispatch("GetAllMatches");
+          this.$store.dispatch("GetUserData", { context: this });
           break;
         case "online":
           this.online = message.online;

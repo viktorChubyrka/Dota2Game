@@ -1,6 +1,8 @@
 <template>
   <div class="reg-container">
-    <h1 style="color:red;position:absolute;left:790px;top:355px" class="t5">{{error}}</h1>
+    <h1 style="color:red;position:absolute;left:790px;top:355px" class="t5">
+      {{ error }}
+    </h1>
     <div style="position:absolute;z-index:20;"></div>
     <Header headerColor="#f5f5f5" class="header" />
     <Lang />
@@ -12,7 +14,9 @@ width: 181px;
 height: 48px;
 left: 790px;
 top: 252px;"
-    >{{ this.$ml.get("register") }}</div>
+    >
+      {{ this.$ml.get("register") }}
+    </div>
     <div
       class="t4"
       style=" color:#f2f2f2;position: absolute;
@@ -22,10 +26,7 @@ left: 790px;
 top: 332px;"
     >
       {{ this.$ml.get("readyAcc") }}
-      <a
-        style="color:white"
-        href="/logIn"
-      >{{ this.$ml.get("logggin") }}</a>
+      <a style="color:white" href="/logIn">{{ this.$ml.get("logggin") }}</a>
     </div>
 
     <div
@@ -54,10 +55,15 @@ top: 664px;
 border:0px solid black;
 background: #626878;
 border-radius: 4px;"
-    >{{ $ml.get("toRegist") }}</button>
-    <div class="t6" style="color:#f2f2f2;position: absolute;
+    >
+      {{ $ml.get("toRegist") }}
+    </button>
+    <div
+      class="t6"
+      style="color:#f2f2f2;position: absolute;
 left: 820px;
-top: 730px;">
+top: 730px;"
+    >
       <input
         v-model="accept"
         style="display:inline;
@@ -116,7 +122,7 @@ export default {
       },
       pr: () => {
         return this.$ml.get("promo");
-      }
+      },
     };
   },
   methods: {
@@ -126,19 +132,19 @@ export default {
         login: this.login,
         password: this.password,
         cpassword: this.cpassword,
-        promoCode: this.promoCode
+        promoCode: this.promoCode,
       };
       this.$store.dispatch("Registration", { user, context: this });
-    }
+    },
   },
   computed: {
     error() {
       return this.$store.getters.registrationError;
-    }
+    },
   },
   created() {
     this.$store.commit("SetCurrentPage", 0);
-  }
+  },
 };
 </script>
 <style>

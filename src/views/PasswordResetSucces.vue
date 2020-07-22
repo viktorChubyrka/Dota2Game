@@ -11,7 +11,9 @@ width: 343px;
 height: 48px;
 left: 790px;
 top: 306px;"
-    >{{ this.$ml.get("ready") }}</div>
+    >
+      {{ this.$ml.get("ready") }}
+    </div>
     <div
       class="t5"
       style="position: absolute;
@@ -20,7 +22,9 @@ width:343px;
 height: 64px;
 left: 790px;
 top: 386px;"
-    >{{ $ml.get("readyT") }}</div>
+    >
+      {{ $ml.get("readyT") }}
+    </div>
 
     <button
       @click="goToLogin()"
@@ -35,7 +39,9 @@ top: 466px;
 border:0px solid black;
 background: #626878;
 border-radius: 4px;"
-    >{{ $ml.get("confirm") }}</button>
+    >
+      {{ $ml.get("confirm") }}
+    </button>
   </div>
 </template>
 <script>
@@ -50,8 +56,9 @@ export default {
   methods: {
     goToLogin() {
       this.$router.push("/login");
-    }
-  }
+    },
+  },
+  created() {},
 };
 </script>
 <style>
