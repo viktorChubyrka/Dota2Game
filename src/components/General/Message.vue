@@ -113,6 +113,7 @@ export default {
           login: localStorage.getItem("login"),
           friendLogin: this.notification.login,
           type: "AcceptParty",
+          partyID: this.notification.partyID,
         })
       );
     },
@@ -121,7 +122,8 @@ export default {
         JSON.stringify({
           login: localStorage.getItem("login"),
           friendLogin: this.notification.login,
-          type: "notAcceptLobby",
+          type: "notAcceptParty",
+          partyID: this.notification.partyID,
         })
       );
     },

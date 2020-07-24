@@ -8,7 +8,10 @@
           noPhoto: login ? (photo ? false : true) : false,
         }"
       >
-        <i v-if="!login && status != 'waiting'" class="fa fa-ellipsis-h fa-2x">
+        <i
+          v-if="!login && status != 'waiting' && party[index] ? false : true"
+          class="fa fa-ellipsis-h fa-2x"
+        >
           <ul
             @mouseleave="(showFriends = false), (show = false)"
             v-if="showFriends"
@@ -45,7 +48,7 @@
     <div
       @click="showFriends = true"
       @mouseleave="show = false"
-      v-if="show"
+      v-if="show && !party && !party[index]"
       class="circleL"
     >
       <i class="fa fa-plus fa-2x"></i>
@@ -59,7 +62,7 @@
     <div v-if="status == 'waiting'" class="circleK">
       <i class="fa fa-times fa-2x"></i>
     </div>
-    <img v-if="photo" :src="photo" alt="" />
+    <img v-if="status == 'you'" :src="photo" />
   </div>
 </template>
 <script>
@@ -134,6 +137,7 @@ export default {
   background-size: cover !important;
   background-position: center;
 }
+
 .circleT {
   position: absolute;
   top: 0;
