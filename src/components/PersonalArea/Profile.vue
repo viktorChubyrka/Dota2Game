@@ -120,38 +120,39 @@
         </div>
       </div>
       <i
+        id="copy1"
         @click="Copy(1)"
         style="position: absolute;
                 left: 493px;
                 top: 192px;
-                color:#BDBDBD"
+                color:#BDBDBD;transition:color 0.5s"
         class="fa fa-copy fa-2x"
       ></i>
       <i
+        id="copy2"
         @click="Copy(2)"
         style="position: absolute;
                 left: 493px;
                 top: 246px;
-                color:#BDBDBD"
+                color:#BDBDBD;transition:color 0.5s"
         class="fa fa-copy fa-2x"
       ></i>
     </div>
     <div class="t3 lengChange">
-      {{ $ml.get("lang") }}
       <ul class="lengChangeUl">
-        <li @click="ChangeLang(1)" class="t4">
+        <li @click="ChangeLang(1)" class="t4 langBtn">
           Русский
           <div
-            :class="{ show: show == 1 }"
+            :class="{ show: show2 == 1 }"
             style="opacity:0;display:inline;color:#BDBDBD"
           >
             {{ $ml.get("now") }}
           </div>
         </li>
-        <li @click="ChangeLang(2)" class="t4">
+        <li @click="ChangeLang(2)" class="t4 langBtn">
           English
           <div
-            :class="{ show: show == 2 }"
+            :class="{ show: show2 == 2 }"
             style="opacity:0;display:inline;color:#BDBDBD"
           >
             {{ $ml.get("now") }}
@@ -214,10 +215,10 @@ export default {
       this.$store.commit("SetLang", i);
       if (i == 1) {
         this.$ml.change("russian");
-        this.show = 1;
+        this.show2 = 1;
       } else {
         this.$ml.change("english");
-        this.show = 2;
+        this.show2 = 2;
       }
     },
   },
@@ -225,7 +226,7 @@ export default {
     user() {
       return this.$store.getters.userData;
     },
-    show() {
+    show2() {
       return this.$store.getters.lang;
     },
   },
@@ -235,7 +236,11 @@ export default {
     this.$store.commit("SetLang", localStorage.getItem("leng"));
     if (localStorage.getItem("leng") == 1) {
       this.$ml.change("russian");
-    } else this.$ml.change("english");
+      this.show = 1;
+    } else {
+      this.$ml.change("english");
+      this.show = 2;
+    }
     let a = window.location.href;
     setTimeout(() => {
       try {
@@ -249,6 +254,15 @@ export default {
 };
 </script>
 <style scoped>
+.langBtn:hover {
+  text-shadow: 1px 1px 10px #737e98;
+}
+#copy1:hover {
+  color: #35a7ffaf !important;
+}
+#copy2:hover {
+  color: #35a7ffaf !important;
+}
 .steamIdForm {
   position: absolute;
   top: 610px;

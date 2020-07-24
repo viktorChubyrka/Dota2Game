@@ -26,7 +26,7 @@ export default {
         this.socket.send(
           JSON.stringify({
             login: this.partyLeader,
-            type: "DestroyParty",
+            type: "DestroyLobby",
           })
         );
         interval.clearInterval();

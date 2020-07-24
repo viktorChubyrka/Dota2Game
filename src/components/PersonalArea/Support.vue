@@ -45,6 +45,9 @@ export default {
 .linkTo {
   text-decoration: none;
 }
+.linkTo:hover {
+  color: rgb(0, 179, 255) !important;
+}
 .content {
   opacity: 0;
   transition: opacity 1.5s;
@@ -116,9 +119,16 @@ html {
   height: 40px;
   left: 619px;
   top: 482px;
-  background: #1f2430;
+  background-color: #1f2430;
+  border-width: 0px;
   border-radius: 6px;
   color: white;
+  transition: color 0.5s, background-color 0.5s;
+}
+.buttonSend:hover {
+  color: black;
+  border: 1px solid #bdbdbd;
+  background-color: rgb(236, 240, 239);
 }
 .oldQuestion {
   position: absolute;

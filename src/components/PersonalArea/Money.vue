@@ -7,6 +7,7 @@
     <div
       @click="ActiveButton(1)"
       :class="{
+        toHover: button != 1,
         t3: true,
         buttonSolo: true,
         first: true,
@@ -19,6 +20,7 @@
     <div
       @click="ActiveButton(2)"
       :class="{
+        toHover: button != 2,
         t3: true,
         buttonSolo: true,
         second: true,
@@ -178,8 +180,21 @@ export default {
   left: 268px;
   top: 378px;
   padding: 2px 0px;
-  background: #1f2430;
+  border-width: 0px;
+  background-color: #1f2430;
   color: #f2f2f2;
+  transition: color 0.5s, background-color 0.5s;
+}
+.submitMoney:hover {
+  color: black;
+  border: 1px solid #bdbdbd;
+  background-color: rgb(236, 240, 239);
+}
+.toHover:hover {
+  background: #f3f4f7;
+}
+.toHover {
+  background: white;
 }
 .tc1 {
   width: 114px;

@@ -161,46 +161,7 @@
           <tr v-for="i in 5" :key="i">
             <td style="width:87px" class="players">10/10</td>
             <td style="width:336px;text-align: left;">
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
-              <span class="dot">
-                <div class="arrow-up"></div>
-                <div class="t4 playerName">Имя игрока</div>
-              </span>
+              <span class="dot" v-for="i in 10" :key="i"> </span>
             </td>
             <td style="width:562px;"></td>
             <td style="width:190px;text-align:left;" class="t4">
@@ -263,11 +224,14 @@
                 class="dot"
               >
                 <div class="arrow-up"></div>
-                <div class="t4 playerName">{{ player }}</div>
               </span>
             </td>
             <td>
-              <button @click="LeaveGame(el.matchNumber)" class="enterMath t4">
+              <button
+                id="enterMath"
+                @click="LeaveGame(el.matchNumber)"
+                class="enterMath t4"
+              >
                 {{ $ml.get("cancel") }}
               </button>
             </td>
@@ -291,7 +255,6 @@ export default {
   components: { Timer },
   data() {
     return {
-      selected: 3,
       button: 1,
       show: false,
       socket: null,
@@ -299,12 +262,19 @@ export default {
   },
   methods: {
     Select(i) {
-      this.selected = i;
+      this.$store.commit("setSelectedTab", i);
     },
     Button(i) {
       this.button = i;
     },
     EnterMatch(matchNumber) {
+      let btn = document.getElementsByClassName("enterMath")[0];
+      let style = btn.style;
+      btn.style = "background: #E7E7E7;";
+      setTimeout(() => {
+        btn.style = style;
+      }, 200);
+
       this.socket.send(
         JSON.stringify({
           matchNumber,
@@ -314,6 +284,13 @@ export default {
       );
     },
     LeaveGame(matchNumber) {
+      let btn = document.getElementById("enterMath");
+
+      let style = btn.style;
+      btn.style = "background: #E7E7E7;";
+      setTimeout(() => {
+        btn.style = style;
+      }, 200);
       this.socket.send(
         JSON.stringify({
           matchNumber,
@@ -324,6 +301,9 @@ export default {
     },
   },
   computed: {
+    selected() {
+      return this.$store.getters.selectedTab;
+    },
     ActiveMatches() {
       return this.$store.getters.activeMatches;
     },
@@ -367,6 +347,10 @@ export default {
   border-radius: 8px;
   float: right;
   margin-right: 61px;
+  transition: background 0.5s;
+}
+.enterMath:hover {
+  background: #f3f4f7;
 }
 .players {
   padding-left: 12px;

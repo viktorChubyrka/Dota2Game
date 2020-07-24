@@ -1,32 +1,37 @@
 <template>
   <div :class="{ show: show, content: true }">
+    <table class="lastesPlayersTable">
+      <tbody>
+        <tr style v-for="i in 10" :key="i">
+          <td style="padding-bottom:15px;padding-right:16px">
+            <div class="circle"></div>
+          </td>
+          <td style="padding-bottom:15px;">
+            <div class="t3">Ally</div>
+          </td>
+          <td
+            class="addFriend"
+            style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
+          >
+            <i
+              :id="`plus${i}1`"
+              @click="Click(1, i)"
+              class="fa fa-plus-square fa-2x"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="t3 lastesPlayers">{{ $ml.get("last") }}</div>
     <Chat class="chat" />
     <div class="partyContainer">
-      <PartySlot :login="user.login" :photo="user.photo ? user.photo : svg" />
-      <PartySlot v-for="i in 4" :key="i" />
-      <div class="t3 lastesPlayers">{{ $ml.get("last") }}</div>
-      <table class="lastesPlayersTable">
-        <tbody>
-          <tr style v-for="i in 10" :key="i">
-            <td style="padding-bottom:15px;padding-right:16px">
-              <div class="circle"></div>
-            </td>
-            <td style="padding-bottom:15px;">
-              <div class="t3">Ally</div>
-            </td>
-            <td
-              class="addFriend"
-              style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
-            >
-              <i
-                :id="`plus${i}1`"
-                @click="Click(1, i)"
-                class="fa fa-plus-square fa-2x"
-              ></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <PartySlot
+        :friends="user.friends"
+        :login="user.login"
+        :photo="user.photo"
+        :status="'you'"
+      />
+      <PartySlot :party="party || ''" :index="i - 1" v-for="i in 4" :key="i" />
     </div>
     <input
       :placeholder="sh()"
@@ -34,7 +39,6 @@
       v-model="search"
       type="text"
     />
-    <button class="t5 searchButton">{{ $ml.get("search") }}</button>
     <div
       v-if="search == ''"
       class="t3"
@@ -120,9 +124,15 @@ export default {
   created() {
     setTimeout(() => (this.show = true), 10);
     this.$store.dispatch("GetAllUsers", { context: this });
+    let userData = this.$store.getters.userData;
+    this.$store.dispatch("GetParty", userData.partyID);
+    if (userData.party) this.$store.dispatch("GetParty");
     this.socket = this.$store.getters.socket;
   },
   computed: {
+    party() {
+      return this.$store.getters.party;
+    },
     allUsers() {
       if (this.search == "") {
         let userData = this.$store.getters.userData;
@@ -181,22 +191,13 @@ export default {
 }
 .searchFriend {
   position: absolute;
-  width: 277px;
+  width: 360px;
   height: 44px;
   left: 0px;
   top: 180px;
   padding-left: 12px;
 }
-.searchButton {
-  position: absolute;
-  width: 83px;
-  height: 50px;
-  left: 293px;
-  top: 180px;
-  color: white;
-  background-color: #1f2430;
-  border: 0px;
-}
+
 .searchTable {
   position: absolute;
   width: 380px;
@@ -214,14 +215,14 @@ export default {
   position: absolute;
   width: 112px;
   height: 38px;
-  left: 362px;
-  top: 200px;
+  left: 500px;
+  top: 240px;
 }
 .lastesPlayersTable {
   width: 358px;
   position: absolute;
-  left: 362px;
-  top: 260px;
+  left: 500px;
+  top: 290px;
   height: 200px;
 }
 .circle {

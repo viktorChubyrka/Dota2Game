@@ -26,8 +26,16 @@ export default new Vuex.Store({
     activeMatches: [],
     upcomingMatches: [],
     pastMatches: [],
+    selectedTab: 2,
+    party: false,
   },
   getters: {
+    party: (state) => {
+      return state.party;
+    },
+    selectedTab: (state) => {
+      return state.selectedTab;
+    },
     activeMatches: (state) => {
       return state.activeMatches;
     },
@@ -81,6 +89,12 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setParty: (state, payload) => {
+      state.party = payload;
+    },
+    setSelectedTab: (state, payload) => {
+      state.selectedTab = payload;
+    },
     setUpcomingMatches: (state, payload) => {
       state.upcomingMatches = payload;
     },
@@ -286,6 +300,25 @@ export default new Vuex.Store({
       state.commit("setUpcomingMatches", upcoming);
       state.commit("setPastMatches", past);
       state.commit("setActiveMatches", active);
+    },
+    GetParty: async (state, payload) => {
+      console.log(payload);
+      let party = await Axios.post(
+        `${url}/api/game/party`,
+        { partyId: payload },
+        {
+          withCredentials: true,
+        }
+      );
+      let indexUser = null;
+      if (party) {
+        party.data.players.forEach((el, index) => {
+          if (el.login == localStorage.getItem("login")) indexUser = index;
+        });
+      }
+
+      party.data.players.splice(indexUser, 1);
+      state.commit("setParty", party.data.players);
     },
   },
   modules: {},

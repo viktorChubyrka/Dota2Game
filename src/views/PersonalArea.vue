@@ -220,6 +220,7 @@ export default {
     this.socket = this.$store.getters.socket;
     this.socket.onmessage = (event) => {
       let date = new Date();
+      let user = this.$store.getters.userData;
       let message = JSON.parse(event.data);
       switch (message.type) {
         case "Chat":
@@ -236,10 +237,12 @@ export default {
           break;
         case "LobbyUpdate":
           this.$store.dispatch("GetAllMatches");
+          if (message.Tab) this.$store.commit("setSelectedTab", message.Tab);
           break;
         case "LobbyDestroyed":
           this.$store.dispatch("GetAllMatches");
           this.$store.dispatch("GetUserData", { context: this });
+          if (message.Tab) this.$store.commit("setSelectedTab", message.Tab);
           break;
         case "online":
           this.online = message.online;
@@ -247,6 +250,10 @@ export default {
           break;
         case "ready":
           this.ready = message.ready;
+          break;
+        case "PartyUpdate":
+          this.$store.dispatch("GetUserData", { context: this });
+          this.$store.dispatch("GetParty", user.partyID);
           break;
         default:
           this.$store.dispatch("GetUserData", { context: this });
@@ -465,6 +472,9 @@ html {
   color: #bdbdbd;
   opacity: 0;
   transition: opacity 1.5s;
+}
+.readyIcon:hover {
+  color: black !important;
 }
 .readyIcon4 {
   position: absolute;

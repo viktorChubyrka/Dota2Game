@@ -373,7 +373,7 @@ export default new MLCreate({
       else: "Другое",
       enterMoney: "Вывести",
       cancel: "Отказатся",
-      minet: "минут",
+      minut: "минут",
       gameStart: "Начало игры",
       regEnd: "До конца регистрации",
       matchType: "Тип матча",

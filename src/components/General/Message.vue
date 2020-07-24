@@ -2,7 +2,9 @@
   <div
     :class="{
       containerMessage: true,
-      addTofriendMessage: notification.type == 'AddTooFriends',
+      addTofriendMessage:
+        notification.type == 'AddTooFriends' ||
+        notification.type == 'AddTooParty',
     }"
   >
     <div
@@ -36,6 +38,23 @@ top: 42px;"
         {{ $ml.get("accept") }}
       </button>
       <button @click="notAcceptFriend()" class="buttonMessage b2 t5">
+        {{ $ml.get("cancel") }}
+      </button>
+    </div>
+    <div
+      v-if="notification.type == 'AddTooParty'"
+      class="t5 "
+      style="position: absolute;
+width: 270px;
+height: 140px;
+left: 12px;
+top: 42px;"
+    >
+      {{ notification.message }} <strong>{{ notification.login }}</strong>
+      <button @click="acceptLobby()" class="buttonMessage b1 t5">
+        {{ $ml.get("accept") }}
+      </button>
+      <button @click="notAcceptLobby()" class="buttonMessage b2 t5">
         {{ $ml.get("cancel") }}
       </button>
     </div>
@@ -84,7 +103,25 @@ export default {
         JSON.stringify({
           login: localStorage.getItem("login"),
           friendLogin: this.notification.login,
-          type: "notAcceptFriend",
+          type: "notAcceptParty",
+        })
+      );
+    },
+    acceptLobby() {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          friendLogin: this.notification.login,
+          type: "AcceptParty",
+        })
+      );
+    },
+    notAcceptLobby() {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          friendLogin: this.notification.login,
+          type: "notAcceptLobby",
         })
       );
     },
