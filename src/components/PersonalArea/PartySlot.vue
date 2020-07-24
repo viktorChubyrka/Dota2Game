@@ -48,7 +48,11 @@
     <div
       @click="showFriends = true"
       @mouseleave="show = false"
-      v-if="show && !party && !party[index]"
+      v-if="
+        show &&
+          (party ? (party[index] ? false : true) : true) &&
+          status != 'you'
+      "
       class="circleL"
     >
       <i class="fa fa-plus fa-2x"></i>

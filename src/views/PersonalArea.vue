@@ -253,7 +253,7 @@ export default {
           break;
         case "PartyUpdate":
           this.$store.dispatch("GetUserData", { context: this });
-          this.$store.dispatch("GetParty", user.partyID);
+          this.$store.dispatch("GetParty", message.party);
           break;
         default:
           this.$store.dispatch("GetUserData", { context: this });
