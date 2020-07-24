@@ -311,7 +311,8 @@ export default new Vuex.Store({
         }
       );
       let indexUser = null;
-      if (party) {
+      console.log(party);
+      if (party != false) {
         party.data.players.forEach((el, index) => {
           if (el.login == localStorage.getItem("login")) indexUser = index;
         });

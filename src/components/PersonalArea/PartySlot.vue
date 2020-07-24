@@ -4,12 +4,18 @@
       <div
         @mouseover="show = true"
         :class="{
+          readyBorder: true,
           circle: true,
           noPhoto: login ? (photo ? false : true) : false,
         }"
       >
         <i
-          v-if="!login && status != 'waiting' && party[index] ? false : true"
+          @mouseover="show2 = true"
+          v-if="
+            !show2 && !login && status != 'waiting' && party && party[index]
+              ? false
+              : true
+          "
           class="fa fa-ellipsis-h fa-2x"
         >
           <ul
@@ -42,17 +48,14 @@
       @mouseleave="show = false"
       v-if="status == 'you' && show"
       class="circleT"
+      @click="LeveLobby(User.partyID)"
     >
       <i class="fa fa-external-link fa-2x"></i>
     </div>
     <div
       @click="showFriends = true"
-      @mouseleave="show = false"
-      v-if="
-        show &&
-          (party ? (party[index] ? false : true) : true) &&
-          status != 'you'
-      "
+      @mouseleave="show2 = false"
+      v-if="show2 && !login"
       class="circleL"
     >
       <i class="fa fa-plus fa-2x"></i>
@@ -63,10 +66,15 @@
     >
       <i class="fa fa-hourglass fa-lg"></i>
     </div>
-    <div v-if="status == 'waiting'" class="circleK">
+    <div
+      @mouseleave="show = false"
+      @click="CickPlayer(party[index].login, User.partyID)"
+      v-if="show && party && party[index] && party[index].status == 'inLobby'"
+      class="circleK"
+    >
       <i class="fa fa-times fa-2x"></i>
     </div>
-    <img v-if="status == 'you'" :src="photo" />
+    <img v-if="status" :src="photo" />
   </div>
 </template>
 <script>
@@ -75,6 +83,7 @@ export default {
   data() {
     return {
       show: false,
+      show2: false,
       socket: null,
       showFriends: false,
     };
@@ -86,19 +95,34 @@ export default {
   },
   components: {},
   methods: {
+    CickPlayer(cickLogin, partyID) {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          partyID,
+          cickLogin,
+          type: "CickPlayer",
+        })
+      );
+    },
+    LeveLobby(partyID) {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          partyID,
+          type: "LeveParty",
+        })
+      );
+    },
     SendPartyInvite(f, lobby) {
       this.created2 = false;
       this.socket.send(
         JSON.stringify({
           login: localStorage.getItem("login"),
           friendLogin: f,
-          lobby,
           type: "AddToParty",
         })
       );
-    },
-    LeveLobby() {
-      console.log("Leve");
     },
   },
   created() {
@@ -108,6 +132,10 @@ export default {
 };
 </script>
 <style scoped>
+.readyBorder {
+  border: 4px solid blueviolet;
+  border-radius: 50% !important;
+}
 .selectFriend {
   position: absolute;
   padding: 0;
@@ -131,7 +159,7 @@ export default {
   height: 121px;
 }
 .circle {
-  margin: 21px 0 0 107px;
+  margin: 17px 0 0 103px;
   width: 50px;
   height: 50px;
   background: #828282;
@@ -201,13 +229,13 @@ export default {
   margin: 12px 12px;
 }
 .circleL i {
-  margin: 12px 12px;
+  margin: 12px 13px;
 }
 .circleW i {
   margin: 18px 16px;
 }
 .circleK i {
-  margin: 10px 12px;
+  margin: 8px 12px;
 }
 .circleText {
   color: white;
