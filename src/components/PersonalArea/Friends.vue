@@ -30,6 +30,7 @@
         :login="user.login"
         :photo="user.photo"
         :status="'you'"
+        :ready="user.ready"
       />
       <PartySlot :party="party || ''" :index="i - 1" v-for="i in 4" :key="i" />
     </div>

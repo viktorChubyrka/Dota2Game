@@ -4,41 +4,52 @@
       <div
         @mouseover="show = true"
         :class="{
-          readyBorder: true,
+          readyBorder: ready || (party && party[index] && party[index].ready),
           circle: true,
           noPhoto: login ? (photo ? false : true) : false,
         }"
       >
-        <i
+        <svg
           @mouseover="show2 = true"
           v-if="
             !show2 && !login && status != 'waiting' && party && party[index]
               ? false
+              : true && login
+              ? photo
+                ? true
+                : false
               : true
           "
-          class="fa fa-ellipsis-h fa-2x"
+          width="50"
+          height="50"
+          viewBox="0 0 50 50"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <ul
-            @mouseleave="(showFriends = false), (show = false)"
-            v-if="showFriends"
-            class="selectFriend"
+          <rect x="11" y="22" width="6" height="6" rx="3" fill="#E0E0E0" />
+          <rect x="22" y="22" width="6" height="6" rx="3" fill="#E0E0E0" />
+          <rect x="33" y="22" width="6" height="6" rx="3" fill="#E0E0E0" />
+        </svg>
+        <ul
+          @mouseleave="(showFriends = false), (show = false)"
+          v-if="showFriends"
+          class="selectFriend"
+        >
+          <li
+            class="t3"
+            v-for="f in User.friends"
+            @click="SendPartyInvite(f, User.partyID)"
+            :key="f"
           >
-            <li
-              class="t3"
-              v-for="f in User.friends"
-              @click="SendPartyInvite(f, User.partyID)"
-              :key="f"
-            >
-              {{ f }}
-            </li>
-          </ul>
-        </i>
+            {{ f }}
+          </li>
+        </ul>
       </div>
       <div v-if="login" class="circleText">
         {{ login }}
       </div>
       <div v-if="party" class="circleText">
-        {{ party[index] ? party[index].login : index + 1 }}
+        {{ party[index] ? party[index].login : index + 2 }}
       </div>
       <div v-if="!party && index + 1" class="circleText">
         {{ index + 2 }}
@@ -50,7 +61,18 @@
       class="circleT"
       @click="LeveLobby(User.partyID)"
     >
-      <i class="fa fa-external-link fa-2x"></i>
+      <svg
+        width="20"
+        height="19"
+        viewBox="0 0 20 19"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 19V8.31134H19M19 8.31134L11.4231 15.6227M19 8.31134L11.4231 1"
+          stroke="white"
+        />
+      </svg>
     </div>
     <div
       @click="showFriends = true"
@@ -58,13 +80,39 @@
       v-if="show2 && !login"
       class="circleL"
     >
-      <i class="fa fa-plus fa-2x"></i>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M11.0023 13.0023L11.0023 23.7335H13.0023L13.0023 13.0023L23.7335 13.0023L23.7335 11.0023L13.0023 11.0023L13.0023 0.271133H11.0023L11.0023 11.0023L0.271113 11.0023L0.271112 13.0023L11.0023 13.0023Z"
+          fill="white"
+        />
+      </svg>
     </div>
     <div
       v-if="party && party[index] && party[index].status == 'waiting'"
       class="circleW"
     >
-      <i class="fa fa-hourglass fa-lg"></i>
+      <svg
+        width="24"
+        height="20"
+        viewBox="0 0 24 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M0.585693 0H23.4141L13.4141 10L23.4141 20H0.585693L10.5857 10L0.585693 0ZM11.9999 8.58579L18.5857 2H5.41412L11.9999 8.58579ZM11.9999 11.4142L5.41412 18H18.5857L11.9999 11.4142Z"
+          fill="#F2F2F2"
+        />
+      </svg>
     </div>
     <div
       @mouseleave="show = false"
@@ -72,14 +120,27 @@
       v-if="show && party && party[index] && party[index].status == 'inLobby'"
       class="circleK"
     >
-      <i class="fa fa-times fa-2x"></i>
+      <svg
+        width="19"
+        height="19"
+        viewBox="0 0 19 19"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M9.00232 10.4165L16.5904 18.0046L18.0046 16.5904L10.4165 9.00232L18.0046 1.41425L16.5904 4.02437e-05L9.00232 7.58811L1.41421 0L0 1.41421L7.58811 9.00232L0 16.5904L1.41421 18.0046L9.00232 10.4165Z"
+          fill="white"
+        />
+      </svg>
     </div>
     <img v-if="status" :src="photo" />
   </div>
 </template>
 <script>
 export default {
-  props: ["login", "photo", "status", "index", "party"],
+  props: ["login", "photo", "status", "index", "party", "ready"],
   data() {
     return {
       show: false,
@@ -135,11 +196,12 @@ export default {
 .readyBorder {
   border: 4px solid blueviolet;
   border-radius: 50% !important;
+  margin: 17px 0 0 103px !important;
 }
 .selectFriend {
   position: absolute;
   padding: 0;
-  width: 238px;
+  width: 264px;
   background: #ffffff;
   margin: 10px 0 0 -107px;
   list-style-type: none;
@@ -159,7 +221,7 @@ export default {
   height: 121px;
 }
 .circle {
-  margin: 17px 0 0 103px;
+  margin: 21px 0 0 107px;
   width: 50px;
   height: 50px;
   background: #828282;
@@ -168,6 +230,7 @@ export default {
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background-position: center;
+  transition: border 0.5s, margin 0.1s;
 }
 
 .circleT {
@@ -222,20 +285,20 @@ export default {
   background-size: cover !important;
   background-position: center;
 }
-.circle i {
-  margin: 12px 12px;
+.circle svg {
+  margin: 0px 0px;
 }
-.circleT i {
-  margin: 12px 12px;
+.circleT svg {
+  margin: 15px 15px;
 }
-.circleL i {
-  margin: 12px 13px;
+.circleL svg {
+  margin: 12px 14px;
 }
-.circleW i {
-  margin: 18px 16px;
+.circleW svg {
+  margin: 15px 15px;
 }
-.circleK i {
-  margin: 8px 12px;
+.circleK svg {
+  margin: 15px 16px;
 }
 .circleText {
   color: white;
