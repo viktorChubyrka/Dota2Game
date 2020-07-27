@@ -55,7 +55,7 @@
     </div>
     <div :class="{ actions: true, show: show2 }">
       <div>
-        <div :class="{ readyIcon1: true, show: show }">
+        <div @click="SetActive()" :class="{ readyIcon1: true, show: show }">
           <svg
             :class="{ icon: true }"
             width="28"
@@ -82,7 +82,7 @@
           {{ $ml.get("redy") }}!
         </div>
       </div>
-      <div :class="{ readyIcon2: true, show: show }">
+      <div @click="FindPartyGame()" :class="{ readyIcon2: true, show: show }">
         <svg
           class="icon hoverIcon"
           width="64"
@@ -330,6 +330,12 @@ export default {
           }
           this.$store.dispatch("GetAllReadyUsers");
           break;
+        case "ReadyUpdate":
+          this.$store.dispatch("GetAllReadyUsers");
+          this.$store.dispatch("GetUserData", { context: this });
+          if (message.partyID)
+            this.$store.dispatch("GetParty", message.partyID);
+          break;
         case "LobbyDestroyed":
           this.$store.dispatch("GetAllMatches");
           this.$store.dispatch("GetUserData", { context: this });
@@ -365,6 +371,14 @@ export default {
     this.$store.dispatch("GetUserData", { context: this });
   },
   methods: {
+    SetActive() {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          type: "SetActive",
+        })
+      );
+    },
     SearchGame() {
       this.socket.send(
         JSON.stringify({
@@ -373,7 +387,14 @@ export default {
         })
       );
     },
-
+    FindPartyGame() {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          type: "SearchPartyGame",
+        })
+      );
+    },
     ChangePage(i) {
       this.focus = i;
     },

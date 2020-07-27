@@ -139,26 +139,30 @@
       ></i>
     </div>
     <div class="t3 lengChange">
-      <ul class="lengChangeUl">
-        <li @click="ChangeLang(1)" class="t4 langBtn">
-          Русский
-          <div
+      <table class="lengChangeUl">
+        <tr class="t4 ">
+          <td class=" langBtn" @click="ChangeLang(1)" style="width:120px">
+            Русский
+          </td>
+          <td
             :class="{ show: show2 == 1 }"
             style="opacity:0;display:inline;color:#BDBDBD"
           >
             {{ $ml.get("now") }}
-          </div>
-        </li>
-        <li @click="ChangeLang(2)" class="t4 langBtn">
-          English
-          <div
+          </td>
+        </tr>
+        <tr class="t4 ">
+          <td class=" langBtn" @click="ChangeLang(2)" style="width:120px">
+            English
+          </td>
+          <td
             :class="{ show: show2 == 2 }"
             style="opacity:0;display:inline;color:#BDBDBD"
           >
             {{ $ml.get("now") }}
-          </div>
-        </li>
-      </ul>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -313,9 +317,8 @@ export default {
 .lengChangeUl {
   margin: 0;
   padding: 0 0 16px 0;
-  list-style-type: none;
 }
-.lengChangeUl li {
+.lengChangeUl tr {
   margin-bottom: 10px;
   width: 160px !important;
   cursor: pointer;

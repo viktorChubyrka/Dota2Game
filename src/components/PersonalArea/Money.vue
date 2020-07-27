@@ -237,8 +237,8 @@ export default {
   top: 32px;
 }
 .buttonSolo {
-  width: 80px;
-  padding: 16px 48px;
+  width: 150px;
+  padding: 16px;
   position: absolute;
   color: black;
   top: 100px;

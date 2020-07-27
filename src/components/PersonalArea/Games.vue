@@ -7,7 +7,7 @@
         buttonSolo: true,
         first: true,
         activeBtn: button == 1,
-        toHover: button != 1,
+        toHover1: button != 1,
       }"
     >
       {{ $ml.get("solo") }}
@@ -19,7 +19,7 @@
         buttonSolo: true,
         second: true,
         activeBtn: button == 2,
-        toHover: button != 2,
+        toHover1: button != 2,
       }"
     >
       {{ $ml.get("party") }}
@@ -72,7 +72,7 @@
               {{ $ml.get("matchNum").split(" ")[0] }} Dotabuff
             </th>
           </tr>
-          <tr v-for="i in 10" :key="i">
+          <tr class="toHover" v-for="i in 10" :key="i">
             <td class="t4 players">№ {{ i }}</td>
             <td class="t4">{{ $ml.get("win") }}</td>
             <td class="t4">
@@ -124,7 +124,7 @@
               {{ $ml.get("matchNum") }}
             </th>
           </tr>
-          <tr v-for="el in UpcomingMatches" :key="el._id">
+          <tr class="toHover" v-for="el in UpcomingMatches" :key="el._id">
             <td class="players">
               {{ [...el.playersT1, ...el.playersT2].length }}/10
             </td>
@@ -158,7 +158,7 @@
           {{ $ml.get("playing") }}
         </div>
         <table class="gamesTable">
-          <tr v-for="i in 5" :key="i">
+          <tr class="toHover" v-for="i in 5" :key="i">
             <td style="width:87px" class="players">10/10</td>
             <td style="width:336px;text-align: left;">
               <span class="dot" v-for="i in 10" :key="i"> </span>
@@ -209,7 +209,7 @@
               {{ $ml.get("matchNum") }}
             </th>
           </tr>
-          <tr v-for="el in ActiveMatches" :key="el._id">
+          <tr class="toHover" v-for="el in ActiveMatches" :key="el._id">
             <td class="t4 players">
               {{ button == 1 ? $ml.get("solo") : $ml.get("party") }}
             </td>
@@ -294,7 +294,7 @@
               {{ $ml.get("matchNum").split(" ")[0] }} Dotabuff
             </th>
           </tr>
-          <tr v-for="i in 4" :key="i">
+          <tr class="toHover" v-for="i in 4" :key="i">
             <td class="t4 players">№ {{ i }}</td>
             <td class="t4">{{ $ml.get("win") }}</td>
             <td class="t4">
@@ -346,7 +346,7 @@
               {{ $ml.get("matchNum") }}
             </th>
           </tr>
-          <tr v-for="el in UpcomingMatchesParty" :key="el._id">
+          <tr class="toHover" v-for="el in UpcomingMatchesParty" :key="el._id">
             <td class="players">
               {{ [...el.playersT1, ...el.playersT2].length }}/10
             </td>
@@ -380,7 +380,7 @@
           {{ $ml.get("playing") }}
         </div>
         <table class="gamesTable">
-          <tr v-for="i in 2" :key="i">
+          <tr class="toHover" v-for="i in 2" :key="i">
             <td style="width:87px" class="players">10/10</td>
             <td style="width:336px;text-align: left;">
               <span class="dot" v-for="i in 10" :key="i"> </span>
@@ -431,7 +431,7 @@
               {{ $ml.get("matchNum") }}
             </th>
           </tr>
-          <tr v-for="el in ActiveMatchesParty" :key="el._id">
+          <tr class="toHover" v-for="el in ActiveMatchesParty" :key="el._id">
             <td class="t4 players">
               {{ button == 1 ? $ml.get("solo") : $ml.get("party") }}
             </td>
@@ -545,13 +545,24 @@ export default {
   cursor: pointer;
 }
 .content {
+  position: absolute;
+  left: 10px;
   opacity: 0;
   transition: opacity 1.5s;
 }
 .show {
   opacity: 1;
 }
-
+.toHover {
+  z-index: 1;
+  transition: box-shadow 0.5s;
+  margin-bottom: 5px !important;
+}
+.toHover:hover {
+  background-color: white !important;
+  z-index: 10;
+  box-shadow: 0 0 10px 4px #cbcaca;
+}
 .buttonSolo:hover {
   cursor: pointer;
 }
@@ -584,10 +595,10 @@ export default {
   border: 1px solid #bdbdbd;
   transition: color 0.5s, background-color 0.5s;
 }
-.toHover:hover {
+.toHover1:hover {
   background: #f3f4f7;
 }
-.toHover {
+.toHover1 {
   background: white;
 }
 
@@ -658,7 +669,7 @@ export default {
   border-right: 1px solid #bdbdbd;
   border-bottom: 1px solid #bdbdbd;
   top: 166px;
-  transition: top 0.5s, height 0.5s, border-bottom 0.5s;
+  transition: top 0.5s, height 0.5s, border-bottom 0.25s;
 }
 .tabTitleSelected {
   top: 156px !important;
