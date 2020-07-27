@@ -93,6 +93,17 @@ top: 42px;"
     >
       {{ notification.message }}
     </div>
+    <div
+      v-if="notification.type == 'notAcceptParty'"
+      :class="{ t5: true }"
+      style="position: absolute;
+width: 270px;
+height: 32px;
+left: 12px;
+top: 42px;"
+    >
+      {{ notification.message }} <strong>{{ notification.login }}</strong>
+    </div>
   </div>
 </template>
 <script>

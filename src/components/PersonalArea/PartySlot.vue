@@ -146,7 +146,7 @@
     <img
       @mouseover="show = true"
       style="width:50px;height:50px;border-radius:25px;position:absolute;top:21px;left:107px;"
-      v-if="party && party[index]"
+      v-if="party && party[index] && party[index].status != 'waiting'"
       :src="party[index].photo"
     />
   </div>

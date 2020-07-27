@@ -199,7 +199,6 @@ export default {
       formData.append("file", blobFile);
       formData.append("login", localStorage.getItem("login"));
       this.$store.dispatch("SendFile", { formData, context: this });
-      this.$store.dispatch("GetUserData", { context: this });
     },
     Copy(i) {
       if (i == 1) {

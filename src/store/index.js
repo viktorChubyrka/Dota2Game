@@ -28,8 +28,12 @@ export default new Vuex.Store({
     pastMatches: [],
     selectedTab: 2,
     party: false,
+    ready: 0,
   },
   getters: {
+    ready: (state) => {
+      return state.ready;
+    },
     party: (state) => {
       return state.party;
     },
@@ -89,6 +93,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setReady: (state, payload) => {
+      state.ready = payload;
+    },
     setParty: (state, payload) => {
       state.party = payload;
     },
@@ -245,11 +252,12 @@ export default new Vuex.Store({
       let headers = {
         "Content-Type": "multipart/form-data",
       };
-      let data = await Axios.post(
+      await Axios.post(
         `${url}/api/user/actions/sendFile`,
         payload.formData,
         headers
       );
+      this.$store.dispatch("GetUserData", { context: payload.context });
     },
     CheckSession: async (state, payload) => {
       let status = await Axios.post(`${url}/api/user/actions/`, payload.i, {
@@ -257,6 +265,7 @@ export default new Vuex.Store({
       });
       if (status.data == 200) {
         payload.context.$router.push("personalArea/profile");
+        state.dispatch("GetAllReadyUsers");
       } else {
         if (payload.i == 1) {
           payload.context.$router.push("/login");
@@ -267,8 +276,10 @@ export default new Vuex.Store({
       let users = await Axios.get(`${url}/api/user/actions/getAllUsers`, {
         withCredentials: true,
       });
-      if (users.status == "200") state.commit("SetAllUsers", users.data.users);
-      else payload.context.$router.push("/login");
+      if (users.status == "200") {
+        state.commit("SetAllUsers", users.data.users);
+        state.dispatch("GetAllReadyUsers");
+      } else payload.context.$router.push("/login");
     },
     GetAllMatches: async (state) => {
       let matches = await Axios.get(`${url}/api/game/getAllGames`, {
@@ -300,6 +311,7 @@ export default new Vuex.Store({
       state.commit("setUpcomingMatches", upcoming);
       state.commit("setPastMatches", past);
       state.commit("setActiveMatches", active);
+      state.dispatch("GetAllReadyUsers");
     },
     GetParty: async (state, payload) => {
       if (payload) {
@@ -319,7 +331,14 @@ export default new Vuex.Store({
         }
         party.data.players.splice(indexUser, 1);
         state.commit("setParty", party.data.players);
+        state.dispatch("GetAllReadyUsers");
       } else state.commit("setParty", []);
+    },
+    GetAllReadyUsers: async (state) => {
+      let ready = await Axios.get(`${url}/api/user/actions/getAllReadyUsers`, {
+        withCredentials: true,
+      });
+      state.commit("setReady", ready.data.ready);
     },
   },
   modules: {},

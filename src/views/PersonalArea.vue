@@ -268,10 +268,12 @@ export default {
       show3: false,
       socket: null,
       online: 0,
-      ready: 0,
     };
   },
   computed: {
+    ready() {
+      return this.$store.getters.ready;
+    },
     login() {
       return localStorage.getItem("login") || "";
     },
@@ -326,28 +328,30 @@ export default {
             this.$store.commit("setSelectedTab", message.Tab);
             this.$router.push("games");
           }
+          this.$store.dispatch("GetAllReadyUsers");
           break;
         case "LobbyDestroyed":
           this.$store.dispatch("GetAllMatches");
           this.$store.dispatch("GetUserData", { context: this });
           if (message.Tab) this.$store.commit("setSelectedTab", message.Tab);
+          this.$store.dispatch("GetAllReadyUsers");
           break;
         case "NotificationUpdate":
           this.$store.dispatch("GetUserData", { context: this });
+          this.$store.dispatch("GetAllReadyUsers");
           break;
         case "online":
           this.online = message.online;
-          if (message.ready) this.ready = message.ready;
-          break;
-        case "ready":
-          this.ready = message.ready;
+          this.$store.dispatch("GetAllReadyUsers");
           break;
         case "PartyUpdate":
           this.$store.dispatch("GetUserData", { context: this });
           this.$store.dispatch("GetParty", message.party);
+          this.$store.dispatch("GetAllReadyUsers");
           break;
         default:
           this.$store.dispatch("GetUserData", { context: this });
+          this.$store.dispatch("GetAllReadyUsers");
           break;
       }
     };
