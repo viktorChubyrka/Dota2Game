@@ -1,8 +1,14 @@
 <template>
-  <div :class="{show:show,content:true}">
+  <div :class="{ show: show, content: true }">
     <div
-      :class="{t1:true, title:true, titleEng:this.$store.getters.lang == 2}"
-    >{{ $ml.get("LoyalProg") }}</div>
+      :class="{
+        t1: true,
+        title: true,
+        titleEng: this.$store.getters.lang == 2,
+      }"
+    >
+      {{ $ml.get("LoyalProg") }}
+    </div>
     <div class="t3 subTitle1">{{ $ml.get("firstCitTitle") }}</div>
     <div class="t5 autor1">{{ $ml.get("firstCitAutor") }}</div>
     <div class="t3 subTitle2">{{ $ml.get("secondCitTitle") }}</div>
@@ -17,16 +23,16 @@
 export default {
   data() {
     return {
-      show: false
+      show: false,
     };
   },
 
   created() {
     setTimeout(() => (this.show = true), 10);
-  }
+  },
 };
 </script>
-<style >
+<style>
 .content {
   opacity: 0;
   transition: opacity 1.5s;
@@ -38,18 +44,18 @@ export default {
   position: absolute;
   width: 500px;
   height: 58px;
-  left: 455px;
+  left: 465px;
   top: 43px;
 }
 .titleEng {
-  left: 520px;
+  left: 530px;
 }
 .subTitle1 {
   padding-left: 30px;
   position: absolute;
   width: 632px;
   height: 48px;
-  left: 0;
+  left: 10px;
   top: 166px;
   font-style: italic;
 }
@@ -57,7 +63,7 @@ export default {
   position: absolute;
   width: 631px;
   height: 76px;
-  left: 700px;
+  left: 710px;
   top: 166px;
 
   font-style: italic;
@@ -66,36 +72,48 @@ export default {
   position: absolute;
   width: 3px;
   height: 662px;
-  left: 662px;
+  left: 672px;
   top: 307px;
   background: #828282;
 }
 .autor1 {
   position: absolute;
   height: 32px;
-  right: 989px;
+  right: 979px;
   top: 262px;
 }
 .autor2 {
   position: absolute;
   height: 32px;
-  right: 298px;
+  right: 288px;
   top: 262px;
 }
 .bigText1 {
   position: absolute;
   width: 552px;
-  left: 0;
+  left: 10px;
   top: 322px;
   padding: 40px;
   background: #f2f2f2;
+  transition: box-shadow 0.5s;
 }
 .bigText2 {
   position: absolute;
   width: 552px;
-  left: 691px;
+  left: 701px;
   top: 322px;
   padding: 40px;
   background: #f2f2f2;
+  transition: box-shadow 0.5s;
+}
+.bigText1:hover {
+  -webkit-box-shadow: 0 0 10px 6px #cbcaca;
+  -moz-box-shadow: 0 0 10px 6px #cbcaca;
+  box-shadow: 0 0 10px 6px #cbcaca;
+}
+.bigText2:hover {
+  -webkit-box-shadow: 0 0 10px 6px #cbcaca;
+  -moz-box-shadow: 0 0 10px 6px #cbcaca;
+  box-shadow: 0 0 10px 6px #cbcaca;
 }
 </style>

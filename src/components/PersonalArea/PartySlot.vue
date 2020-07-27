@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position:relative">
     <div class="partySlot">
       <div
         @mouseover="show = true"
@@ -59,6 +59,7 @@
       @mouseleave="show = false"
       v-if="status == 'you' && show"
       class="circleT"
+      style="z-index:10"
       @click="LeveLobby(User.partyID)"
     >
       <svg
@@ -119,6 +120,7 @@
       @click="CickPlayer(party[index].login, User.partyID)"
       v-if="show && party && party[index] && party[index].status == 'inLobby'"
       class="circleK"
+      style="z-index:10"
     >
       <svg
         width="19"
@@ -135,7 +137,18 @@
         />
       </svg>
     </div>
-    <img v-if="status" :src="photo" />
+    <img
+      @mouseover="show = true"
+      style="width:50px;height:50px;border-radius:25px;position:absolute;top:21px;left:107px;"
+      v-if="status"
+      :src="photo"
+    />
+    <img
+      @mouseover="show = true"
+      style="width:50px;height:50px;border-radius:25px;position:absolute;top:21px;left:107px;"
+      v-if="party && party[index]"
+      :src="party[index].photo"
+    />
   </div>
 </template>
 <script>

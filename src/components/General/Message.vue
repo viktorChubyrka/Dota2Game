@@ -1,7 +1,9 @@
 <template>
   <div
+    @click="DeleteNotification()"
     :class="{
       containerMessage: true,
+      delete: isDeleted,
       addTofriendMessage:
         notification.type == 'AddTooFriends' ||
         notification.type == 'AddTooParty',
@@ -59,8 +61,19 @@ top: 42px;"
       </button>
     </div>
     <div
-      v-else
-      class="t5"
+      v-if="notification.type == 'AcceptLobby'"
+      :class="{ t5: true }"
+      style="position: absolute;
+width: 270px;
+height: 32px;
+left: 12px;
+top: 42px;"
+    >
+      <strong>{{ notification.login }}</strong> {{ notification.message }}
+    </div>
+    <div
+      v-if="notification.type == 'notAcceptFriend'"
+      :class="{ t5: true }"
       style="position: absolute;
 width: 270px;
 height: 32px;
@@ -71,7 +84,7 @@ top: 42px;"
     </div>
     <div
       v-if="notification.type == 'LobbyDestroed'"
-      class="t5"
+      :class="{ t5: true }"
       style="position: absolute;
 width: 270px;
 height: 32px;
@@ -86,9 +99,19 @@ top: 42px;"
 export default {
   props: ["notification"],
   data() {
-    return { socket: null };
+    return { socket: null, isDeleted: false };
   },
   methods: {
+    DeleteNotification() {
+      this.socket.send(
+        JSON.stringify({
+          login: localStorage.getItem("login"),
+          date: this.notification.date,
+          type: "DeleteNotification",
+        })
+      );
+      this.isDeleted = true;
+    },
     acceptFriend() {
       this.socket.send(
         JSON.stringify({
@@ -103,7 +126,7 @@ export default {
         JSON.stringify({
           login: localStorage.getItem("login"),
           friendLogin: this.notification.login,
-          type: "notAcceptParty",
+          type: "notAcceptFriend",
         })
       );
     },
@@ -134,6 +157,20 @@ export default {
 };
 </script>
 <style>
+.delete {
+  animation: callAnim;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+@keyframes callAnim {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
 .containerMessage {
   width: 347px;
   height: 90px;

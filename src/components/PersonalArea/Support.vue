@@ -46,7 +46,7 @@ export default {
   text-decoration: none;
 }
 .linkTo:hover {
-  color: rgb(0, 179, 255) !important;
+  color: rgb(0, 42, 255) !important;
 }
 .content {
   opacity: 0;

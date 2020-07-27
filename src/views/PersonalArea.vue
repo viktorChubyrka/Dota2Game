@@ -14,15 +14,12 @@
         </div>
         <div class="notification">
           <i class="fa fa-bell fa-lg notif">
-            <div
-              class="indicator"
-              v-if="user.notifications.length > 0 || false"
-            ></div>
+            <div class="indicator" v-if="newNotifications"></div>
             <ul
               style="position:fixed; top:10px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
             >
               <li
-                v-for="(not, i) in user.notifications"
+                v-for="(not, i) in notifications"
                 :key="i"
                 style="margin-bottom:9px"
               >
@@ -31,7 +28,19 @@
             </ul>
           </i>
         </div>
-        <div class="profileSmallImage"></div>
+        <div v-if="!user.photo" class="profileSmallImage"></div>
+        <img
+          v-if="user.photo"
+          style="position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  left: 1699px;
+  top: 25px;"
+          :src="user.photo"
+          alt=""
+        />
+
         <router-link to="profile">
           <div style="color:black" class="nickname t5">
             {{
@@ -45,7 +54,7 @@
       </div>
     </div>
     <div :class="{ actions: true, show: show2 }">
-      <div @click="SetReady()">
+      <div>
         <div :class="{ readyIcon1: true, show: show }">
           <svg
             :class="{ icon: true }"
@@ -250,6 +259,7 @@
 import Message from "../components/General/Message";
 export default {
   components: { Message },
+
   data() {
     return {
       focus: 1,
@@ -267,6 +277,22 @@ export default {
     },
     user() {
       return this.$store.getters.userData;
+    },
+    notifications() {
+      let not = this.user.notifications;
+      if (this.user.notifications.length <= 8) {
+        return this.user.notifications;
+      } else {
+        not.splice(0, this.user.notifications.length - 8);
+        return not;
+      }
+    },
+    newNotifications() {
+      if (this.user.notifications)
+        for (let i = 0; i < this.user.notifications.length; i++) {
+          if (this.user.notifications[i].new) return true;
+        }
+      return false;
     },
   },
   created() {
@@ -294,13 +320,20 @@ export default {
           });
           break;
         case "LobbyUpdate":
+          this.$store.dispatch("GetUserData", { context: this });
           this.$store.dispatch("GetAllMatches");
-          if (message.Tab) this.$store.commit("setSelectedTab", message.Tab);
+          if (message.Tab) {
+            this.$store.commit("setSelectedTab", message.Tab);
+            this.$router.push("games");
+          }
           break;
         case "LobbyDestroyed":
           this.$store.dispatch("GetAllMatches");
           this.$store.dispatch("GetUserData", { context: this });
           if (message.Tab) this.$store.commit("setSelectedTab", message.Tab);
+          break;
+        case "NotificationUpdate":
+          this.$store.dispatch("GetUserData", { context: this });
           break;
         case "online":
           this.online = message.online;
@@ -336,14 +369,7 @@ export default {
         })
       );
     },
-    SetReady() {
-      this.socket.send(
-        JSON.stringify({
-          login: localStorage.getItem("login"),
-          type: "setReady",
-        })
-      );
-    },
+
     ChangePage(i) {
       this.focus = i;
     },
