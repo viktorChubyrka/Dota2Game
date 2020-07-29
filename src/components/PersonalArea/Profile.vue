@@ -101,7 +101,7 @@
     </form>
     <input
       id="steamID"
-      class="t5 inputs"
+      :class="{ t5: true, inputs: true, shine: !user.steamID }"
       type="text"
       placeholder="SteamID"
       v-model="user.steamID"
@@ -146,7 +146,7 @@
           </td>
           <td
             :class="{ show: show2 == 1 }"
-            style="opacity:0;display:inline;color:#BDBDBD"
+            style="width:105px;opacity:0;display:inline;color:#BDBDBD"
           >
             {{ $ml.get("now") }}
           </td>
@@ -157,7 +157,7 @@
           </td>
           <td
             :class="{ show: show2 == 2 }"
-            style="opacity:0;display:inline;color:#BDBDBD"
+            style="width:105px;opacity:0;display:inline;color:#BDBDBD"
           >
             {{ $ml.get("now") }}
           </td>
@@ -257,6 +257,9 @@ export default {
 };
 </script>
 <style scoped>
+.shine {
+  box-shadow: 0 0 5px 2px #bf0603;
+}
 .langBtn:hover {
   text-shadow: 1px 1px 10px #737e98;
 }
@@ -282,6 +285,8 @@ export default {
   color: #bf0603 !important;
 }
 .content {
+  position: absolute;
+  left: 10px;
   opacity: 0;
   transition: opacity 1.5s;
 }
@@ -315,12 +320,13 @@ export default {
   top: 394px;
 }
 .lengChangeUl {
+  width: 300px !important;
   margin: 0;
   padding: 0 0 16px 0;
 }
 .lengChangeUl tr {
   margin-bottom: 10px;
-  width: 160px !important;
+  width: 225px !important;
   cursor: pointer;
 }
 .lengChangeUl:first-child {

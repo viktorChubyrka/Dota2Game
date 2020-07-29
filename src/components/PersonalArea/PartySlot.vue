@@ -190,13 +190,27 @@ export default {
     },
     SendPartyInvite(f, lobby) {
       this.created2 = false;
-      this.socket.send(
-        JSON.stringify({
-          login: localStorage.getItem("login"),
-          friendLogin: f,
-          type: "AddToParty",
-        })
-      );
+      let match = this.$store.getters.activeMatches;
+      if (match[0])
+        this.socket.send(
+          JSON.stringify({
+            login: localStorage.getItem("login"),
+            friendLogin: f,
+            type: "AddToParty",
+            partyID: lobby,
+            matchID: match ? match[0]._id : "",
+          })
+        );
+      else
+        this.socket.send(
+          JSON.stringify({
+            login: localStorage.getItem("login"),
+            friendLogin: f,
+            type: "AddToParty",
+            partyID: lobby,
+            matchID: "",
+          })
+        );
     },
   },
   created() {

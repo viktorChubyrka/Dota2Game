@@ -23,6 +23,9 @@ export default new Vuex.Store({
     allUsers: [],
     socket: null,
     chat: [],
+    activeMatchesParty: [],
+    upcomingMatchesParty: [],
+    pastMatchesParty: [],
     activeMatches: [],
     upcomingMatches: [],
     pastMatches: [],
@@ -48,6 +51,15 @@ export default new Vuex.Store({
     },
     pastMatches: (state) => {
       return state.pastMAtches;
+    },
+    activeMatchesParty: (state) => {
+      return state.activeMatchesParty;
+    },
+    upcomingMatchesParty: (state) => {
+      return state.upcomingMatchesParty;
+    },
+    pastMatchesParty: (state) => {
+      return state.pastMAtchesParty;
     },
     chat: (state) => {
       return state.chat;
@@ -110,6 +122,15 @@ export default new Vuex.Store({
     },
     setPastMatches: (state, payload) => {
       state.pastMatches = payload;
+    },
+    setUpcomingMatchesParty: (state, payload) => {
+      state.upcomingMatchesParty = payload;
+    },
+    setActiveMatchesParty: (state, payload) => {
+      state.activeMatchesParty = payload;
+    },
+    setPastMatchesParty: (state, payload) => {
+      state.pastMatchesParty = payload;
     },
     setChat: (state, payload) => {
       state.chat = [...state.chat, ...payload.chat];
@@ -226,6 +247,8 @@ export default new Vuex.Store({
       );
       if (data.data.data.status == 200) {
         state.commit("SetUserData", data.data.data.userModel);
+        let user = state.getters.userData;
+        if (user.partyID) state.dispatch("GetParty", user.partyID);
       } else payload.context.$router.push("/");
     },
     ChangeName: async (state, payload) => {
@@ -288,22 +311,121 @@ export default new Vuex.Store({
       let active = [];
       let past = [];
       let upcoming = [];
-      matches.data.forEach((el) => {
+      let activeParty = [];
+      let pastParty = [];
+      let upcomingParty = [];
+
+      matches.data.forEach(async (el) => {
         switch (el.status) {
           case "upcoming":
             let isInGame = false;
             [...el.playersT1, ...el.playersT2].forEach((el) => {
               if (el == localStorage.getItem("login")) isInGame = true;
             });
-            if (isInGame) active.push(el);
-            else upcoming.push(el);
+            let players1 = [];
+            let players2 = [];
+
+            if (el.playersT1[0])
+              players1 = await state.dispatch(
+                "GetPartyPlayers",
+                el.playersT1[0]
+              );
+            if (el.playersT2[0])
+              players2 = await state.dispatch(
+                "GetPartyPlayers",
+                el.playersT2[0]
+              );
+
+            [...players1, ...players2].forEach((el) => {
+              if (el.login == localStorage.getItem("login")) isInGame = true;
+            });
+            if (isInGame) {
+              if (el.gameType == "Solo") active.push(el);
+              else {
+                if (el.playersT1[0]) {
+                  let players1 = await state.dispatch(
+                    "GetPartyPlayers",
+                    el.playersT1
+                  );
+                  el.playersT1 = players1;
+                }
+                if (el.playersT2[0]) {
+                  let players2 = await state.dispatch(
+                    "GetPartyPlayers",
+                    el.playersT2
+                  );
+                  el.playersT2 = players2;
+                }
+                activeParty.push(el);
+              }
+            } else {
+              if (el.gameType == "Solo") upcoming.push(el);
+              else {
+                if (el.playersT1[0]) {
+                  let players1 = await state.dispatch(
+                    "GetPartyPlayers",
+                    el.playersT1
+                  );
+                  el.playersT1 = players1;
+                }
+                if (el.playersT2[0]) {
+                  let players2 = await state.dispatch(
+                    "GetPartyPlayers",
+                    el.playersT2
+                  );
+                  el.playersT2 = players2;
+                }
+                upcomingParty.push(el);
+              }
+            }
             break;
           case "active":
-            active.push(el);
+            if (el.gameType == "Solo") active.push(el);
+            else {
+              if (el.playersT1[0]) {
+                let players1 = await state.dispatch(
+                  "GetPartyPlayers",
+                  el.playersT1
+                );
+                el.playersT1 = players1;
+              }
+              if (el.playersT2[0]) {
+                let players2 = await state.dispatch(
+                  "GetPartyPlayers",
+                  el.playersT2
+                );
+                el.playersT2 = players2;
+              }
+              if (
+                el.players1.includes(localStorage.getItem("login")) ||
+                el.players2.includes(localStorage.getItem("login"))
+              )
+                upcomingParty.push(el);
+              else activeParty.push(el);
+            }
             break;
           case "past":
-            past.push(el);
+            if (el.gameType == "Solo") past.push(el);
+            else {
+              if (el.playersT1[0]) {
+                let players1 = await state.dispatch(
+                  "GetPartyPlayers",
+                  el.playersT1
+                );
+                el.playersT1 = players1;
+              }
+              if (el.playersT2[0]) {
+                let players2 = await state.dispatch(
+                  "GetPartyPlayers",
+                  el.playersT2
+                );
+                el.playersT2 = players2;
+              }
+
+              pastParty.push(el);
+            }
             break;
+
           default:
             break;
         }
@@ -311,6 +433,9 @@ export default new Vuex.Store({
       state.commit("setUpcomingMatches", upcoming);
       state.commit("setPastMatches", past);
       state.commit("setActiveMatches", active);
+      state.commit("setUpcomingMatchesParty", upcomingParty);
+      state.commit("setPastMatchesParty", pastParty);
+      state.commit("setActiveMatchesParty", activeParty);
       state.dispatch("GetAllReadyUsers");
     },
     GetParty: async (state, payload) => {
@@ -323,7 +448,6 @@ export default new Vuex.Store({
           }
         );
         let indexUser = null;
-        console.log(party);
         if (party != false) {
           party.data.players.forEach((el, index) => {
             if (el.login == localStorage.getItem("login")) indexUser = index;
@@ -333,6 +457,16 @@ export default new Vuex.Store({
         state.commit("setParty", party.data.players);
         state.dispatch("GetAllReadyUsers");
       } else state.commit("setParty", []);
+    },
+    GetPartyPlayers: async (state, payload) => {
+      let party = await Axios.post(
+        `${url}/api/game/party`,
+        { partyId: payload },
+        {
+          withCredentials: true,
+        }
+      );
+      return party.data.players;
     },
     GetAllReadyUsers: async (state) => {
       let ready = await Axios.get(`${url}/api/user/actions/getAllReadyUsers`, {

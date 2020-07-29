@@ -148,6 +148,7 @@ export default {
           friendLogin: this.notification.login,
           type: "AcceptParty",
           partyID: this.notification.partyID,
+          matchID: this.notification.matchID,
         })
       );
     },

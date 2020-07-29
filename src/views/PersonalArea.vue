@@ -9,20 +9,14 @@
         <div class="onlineText t5">{{ online }} {{ $ml.get("online") }}</div>
         <div class="readyDot"></div>
         <div class="readyText t5">{{ ready }} {{ $ml.get("redy") }}</div>
-        <div class="cash t5">
-          ${{ user.purse }} — {{ user.purse }} Darewin’s dollar
-        </div>
+        <div class="cash t5">${{ user.purse }} — {{ user.purse }} Darewin’s dollar</div>
         <div class="notification">
           <i class="fa fa-bell fa-lg notif">
             <div class="indicator" v-if="newNotifications"></div>
             <ul
               style="position:fixed; top:10px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
             >
-              <li
-                v-for="(not, i) in notifications"
-                :key="i"
-                style="margin-bottom:9px"
-              >
+              <li v-for="(not, i) in notifications" :key="i" style="margin-bottom:9px">
                 <Message :notification="not" />
               </li>
             </ul>
@@ -38,15 +32,15 @@
   left: 1699px;
   top: 25px;"
           :src="user.photo"
-          alt=""
+          alt
         />
 
         <router-link to="profile">
           <div style="color:black" class="nickname t5">
             {{
-              login.length > 9
-                ? login.substr(0, login.length - login.length / 2) + "..."
-                : login
+            login.length > 9
+            ? login.substr(0, login.length - login.length / 2) + "..."
+            : login
             }}
           </div>
         </router-link>
@@ -78,9 +72,7 @@
             </defs>
           </svg>
         </div>
-        <div :class="{ readyIconText1: true, show: show, t4: true }">
-          {{ $ml.get("redy") }}!
-        </div>
+        <div :class="{ readyIconText1: true, show: show, t4: true }">{{ $ml.get("redy") }}!</div>
       </div>
       <div @click="FindPartyGame()" :class="{ readyIcon2: true, show: show }">
         <svg
@@ -120,9 +112,7 @@
           readyIconText2Eng: this.$store.getters.lang == 2,
           show: show,
         }"
-      >
-        {{ $ml.get("getComand") }}
-      </div>
+      >{{ $ml.get("getComand") }}</div>
       <div style="cursor:pointer" @click="SearchGame()">
         <div :class="{ readyIcon3: true, show: show }">
           <svg
@@ -140,110 +130,63 @@
             />
           </svg>
         </div>
-        <div :class="{ readyIconText3: true, show: show, t4: true }">
-          {{ $ml.get("findG") }}
-        </div>
+        <div :class="{ readyIconText3: true, show: show, t4: true }">{{ $ml.get("findG") }}</div>
       </div>
     </div>
     <div :class="{ sideNavigation: true, sideNavigationShow: show }">
       <ul class="sideNavUl">
         <router-link class="RL" to="games">
-          <li
-            @click="ChangePage(1)"
-            :class="{ t5: true, iconFocused: focus == 1 }"
-          >
+          <li @click="ChangePage(1)" :class="{ t5: true, iconFocused: focus == 1 }">
             <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/gamesIcon.svg"
-              />
+              <img :class="{ icon: true }" src="../assets/iconsPA/gamesIcon.svg" />
               <div>{{ $ml.get("game") }}</div>
             </div>
           </li>
         </router-link>
         <router-link class="RL" to>
-          <li
-            @click="ChangePage(2)"
-            :class="{ t5: true, iconFocused: focus == 2 }"
-          >
+          <li @click="ChangePage(2)" :class="{ t5: true, iconFocused: focus == 2 }">
             <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/rulesIcon.svg"
-              />
+              <img :class="{ icon: true }" src="../assets/iconsPA/rulesIcon.svg" />
               <div>{{ $ml.get("pravil") }}</div>
             </div>
           </li>
         </router-link>
         <router-link class="RL" to="profile">
-          <li
-            @click="ChangePage(3)"
-            :class="{ t5: true, iconFocused: focus == 3 }"
-          >
+          <li @click="ChangePage(3)" :class="{ t5: true, iconFocused: focus == 3 }">
             <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/profileIcon.svg"
-              />
+              <img :class="{ icon: true }" src="../assets/iconsPA/profileIcon.svg" />
               <div>{{ $ml.get("prof") }}</div>
             </div>
           </li>
         </router-link>
         <router-link class="RL" to="friends">
-          <li
-            @click="ChangePage(4)"
-            :class="{ t5: true, iconFocused: focus == 4 }"
-          >
+          <li @click="ChangePage(4)" :class="{ t5: true, iconFocused: focus == 4 }">
             <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/friendsIcon.svg"
-              />
+              <img :class="{ icon: true }" src="../assets/iconsPA/friendsIcon.svg" />
               <div>{{ $ml.get("frend") }}</div>
             </div>
           </li>
         </router-link>
         <router-link class="RL" to="money">
-          <li
-            @click="ChangePage(5)"
-            :class="{ t5: true, iconFocused: focus == 5 }"
-          >
+          <li @click="ChangePage(5)" :class="{ t5: true, iconFocused: focus == 5 }">
             <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/moneyIcon.svg"
-              />
+              <img :class="{ icon: true }" src="../assets/iconsPA/moneyIcon.svg" />
               <div>{{ $ml.get("money") }}</div>
             </div>
           </li>
         </router-link>
         <router-link class="RL" to="loyalityProgram">
-          <li
-            @click="ChangePage(6)"
-            :class="{ t5: true, iconFocused: focus == 6 }"
-          >
+          <li @click="ChangePage(6)" :class="{ t5: true, iconFocused: focus == 6 }">
             <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/familyIcon.svg"
-              />
+              <img :class="{ icon: true }" src="../assets/iconsPA/familyIcon.svg" />
               <div>Darewin’s family</div>
             </div>
           </li>
         </router-link>
-        <router-link
-          :class="{ RL: true, iconFocused: focus == 7 }"
-          to="support"
-        >
-          <li
-            @click="ChangePage(7)"
-            :class="{ t5: true, iconFocused: focus == 7 }"
-          >
+        <router-link :class="{ RL: true, iconFocused: focus == 7 }" to="support">
+          <li @click="ChangePage(7)" :class="{ t5: true, iconFocused: focus == 7 }">
             <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/infoIcon.svg"
-              />
+              <img :class="{ icon: true }" src="../assets/iconsPA/infoIcon.svg" />
               <div>{{ $ml.get("sup") }}</div>
             </div>
           </li>
@@ -282,11 +225,13 @@ export default {
     },
     notifications() {
       let not = this.user.notifications;
-      if (this.user.notifications.length <= 8) {
-        return this.user.notifications;
-      } else {
-        not.splice(0, this.user.notifications.length - 8);
-        return not;
+      if (not) {
+        if (this.user.notifications.length <= 8) {
+          return this.user.notifications;
+        } else {
+          not.splice(0, this.user.notifications.length - 8);
+          return not;
+        }
       }
     },
     newNotifications() {
@@ -298,6 +243,7 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch("GetAllMatches");
     this.$store.commit(
       "SetSocket",
       new WebSocket("wss://dota2botbackend.herokuapp.com")
@@ -330,6 +276,14 @@ export default {
           }
           this.$store.dispatch("GetAllReadyUsers");
           break;
+        case "LobbyUpdateParty":
+          this.$store.dispatch("GetUserData", { context: this });
+          this.$store.dispatch("GetAllMatches");
+          this.$store.dispatch("GetAllReadyUsers");
+          if (this.user.partyID)
+            this.$store.dispatch("GetParty", this.user.partyID);
+          this.$router.push("friends");
+          break;
         case "ReadyUpdate":
           this.$store.dispatch("GetAllReadyUsers");
           this.$store.dispatch("GetUserData", { context: this });
@@ -351,9 +305,11 @@ export default {
           this.$store.dispatch("GetAllReadyUsers");
           break;
         case "PartyUpdate":
+          this.$store.dispatch("GetAllMatches");
           this.$store.dispatch("GetUserData", { context: this });
           this.$store.dispatch("GetParty", message.party);
           this.$store.dispatch("GetAllReadyUsers");
+          if (message.matchID) this.$store.dispatch("GetAllMatches");
           break;
         default:
           this.$store.dispatch("GetUserData", { context: this });
@@ -380,20 +336,24 @@ export default {
       );
     },
     SearchGame() {
-      this.socket.send(
-        JSON.stringify({
-          login: localStorage.getItem("login"),
-          type: "SearchGame",
-        })
-      );
+      if (this.user.steamID)
+        this.socket.send(
+          JSON.stringify({
+            login: localStorage.getItem("login"),
+            type: "SearchGame",
+          })
+        );
+      else this.$router.push("profile");
     },
     FindPartyGame() {
-      this.socket.send(
-        JSON.stringify({
-          login: localStorage.getItem("login"),
-          type: "SearchPartyGame",
-        })
-      );
+      if (this.user.steamID)
+        this.socket.send(
+          JSON.stringify({
+            login: localStorage.getItem("login"),
+            type: "SearchPartyGame",
+          })
+        );
+      else this.$router.push("profile");
     },
     ChangePage(i) {
       this.focus = i;

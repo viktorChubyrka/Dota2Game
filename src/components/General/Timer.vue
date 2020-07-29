@@ -1,7 +1,5 @@
 <template>
-  <span>
-    {{ number }}
-  </span>
+  <span>{{ number }}</span>
 </template>
 <script>
 export default {
@@ -10,6 +8,7 @@ export default {
     return {
       number: 1,
       socket: null,
+      interval: null,
     };
   },
   created() {
@@ -17,7 +16,7 @@ export default {
     let date = new Date(this.date);
     this.number =
       10 - +((nowDate - date.getTime()) / 1000 / 60).toString().split(".")[0];
-    let interval = setInterval(() => {
+    this.interval = setInterval(() => {
       let nowDate = Date.now();
       let date = new Date(this.date);
       this.number =
@@ -29,7 +28,7 @@ export default {
             type: "DestroyLobby",
           })
         );
-        interval.clearInterval();
+        this.interval.clearInterval();
       }
     }, 60000);
     this.socket = this.$store.getters.socket;
