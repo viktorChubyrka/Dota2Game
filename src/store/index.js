@@ -314,120 +314,49 @@ export default new Vuex.Store({
       let activeParty = [];
       let pastParty = [];
       let upcomingParty = [];
-
       matches.data.forEach(async (el) => {
-        switch (el.status) {
-          case "upcoming":
-            let isInGame = false;
-            [...el.playersT1, ...el.playersT2].forEach((el) => {
-              if (el == localStorage.getItem("login")) isInGame = true;
-            });
-            let players1 = [];
-            let players2 = [];
-
+        if (el.gameType == "Solo") {
+          if (el.status == "upcoming") {
+            if (
+              el.playersT1.includes(localStorage.getItem("login")) ||
+              el.playersT2.includes(localStorage.getItem("login"))
+            )
+              active.push(el);
+            else upcoming.push(el);
+          }
+        } else {
+          if (el.status == "upcoming") {
+            let p1;
+            let p2;
             if (el.playersT1[0])
-              players1 = await state.dispatch(
-                "GetPartyPlayers",
-                el.playersT1[0]
-              );
+              p1 = await state.dispatch("GetPartyPlayers", el.playersT1[0]);
+
             if (el.playersT2[0])
-              players2 = await state.dispatch(
-                "GetPartyPlayers",
-                el.playersT2[0]
-              );
-
-            [...players1, ...players2].forEach((el) => {
-              if (el.login == localStorage.getItem("login")) isInGame = true;
-            });
-            if (isInGame) {
-              if (el.gameType == "Solo") active.push(el);
-              else {
-                if (el.playersT1[0]) {
-                  let players1 = await state.dispatch(
-                    "GetPartyPlayers",
-                    el.playersT1
-                  );
-                  el.playersT1 = players1;
+              p2 = await state.dispatch("GetPartyPlayers", el.playersT2[0]);
+            if (p1) {
+              for (let i = 0; i < p1.length; i++) {
+                if (p1[i].login == localStorage.getItem("login")) {
+                  console.log("dasd");
+                  el.playersT1 = p1;
+                  el.playersT2 = p2 ? p2 : [];
+                  activeParty.push(el);
+                  console.log(activeParty);
                 }
-                if (el.playersT2[0]) {
-                  let players2 = await state.dispatch(
-                    "GetPartyPlayers",
-                    el.playersT2
-                  );
-                  el.playersT2 = players2;
+              }
+            } else if (p2) {
+              for (let i = 0; i < p2.length; i++) {
+                if (p2[i].login == localStorage.getItem("login")) {
+                  console.log("dasd");
+                  el.playersT1 = p1 ? p1 : [];
+                  el.playersT2 = p2;
+                  activeParty.push(el);
+                  console.log(activeParty);
                 }
-                activeParty.push(el);
               }
-            } else {
-              if (el.gameType == "Solo") upcoming.push(el);
-              else {
-                if (el.playersT1[0]) {
-                  let players1 = await state.dispatch(
-                    "GetPartyPlayers",
-                    el.playersT1
-                  );
-                  el.playersT1 = players1;
-                }
-                if (el.playersT2[0]) {
-                  let players2 = await state.dispatch(
-                    "GetPartyPlayers",
-                    el.playersT2
-                  );
-                  el.playersT2 = players2;
-                }
-                upcomingParty.push(el);
-              }
-            }
-            break;
-          case "active":
-            if (el.gameType == "Solo") active.push(el);
-            else {
-              if (el.playersT1[0]) {
-                let players1 = await state.dispatch(
-                  "GetPartyPlayers",
-                  el.playersT1
-                );
-                el.playersT1 = players1;
-              }
-              if (el.playersT2[0]) {
-                let players2 = await state.dispatch(
-                  "GetPartyPlayers",
-                  el.playersT2
-                );
-                el.playersT2 = players2;
-              }
-              if (
-                el.players1.includes(localStorage.getItem("login")) ||
-                el.players2.includes(localStorage.getItem("login"))
-              )
-                upcomingParty.push(el);
-              else activeParty.push(el);
-            }
-            break;
-          case "past":
-            if (el.gameType == "Solo") past.push(el);
-            else {
-              if (el.playersT1[0]) {
-                let players1 = await state.dispatch(
-                  "GetPartyPlayers",
-                  el.playersT1
-                );
-                el.playersT1 = players1;
-              }
-              if (el.playersT2[0]) {
-                let players2 = await state.dispatch(
-                  "GetPartyPlayers",
-                  el.playersT2
-                );
-                el.playersT2 = players2;
-              }
-
-              pastParty.push(el);
-            }
-            break;
-
-          default:
-            break;
+            } else upcomingParty.push(el);
+            console.log(upcomingParty);
+            console.log(activeParty);
+          }
         }
       });
       state.commit("setUpcomingMatches", upcoming);

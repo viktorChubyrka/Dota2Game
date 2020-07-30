@@ -190,7 +190,7 @@
             <td>
               <button
                 id="enterMath"
-                @click="LeaveGame(el.matchNumber)"
+                @click="LeaveGame(el.matchNumber,el.gameType)"
                 class="enterMath t4"
               >{{ $ml.get("cancel") }}</button>
             </td>
