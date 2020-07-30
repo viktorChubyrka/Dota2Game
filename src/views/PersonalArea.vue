@@ -246,8 +246,8 @@ export default {
     this.$store.dispatch("GetAllMatches");
     this.$store.commit(
       "SetSocket",
-      new WebSocket("wss://dota2botbackend.herokuapp.com")
-      //new WebSocket("ws://localhost:3000")
+      //new WebSocket("wss://dota2botbackend.herokuapp.com")
+      new WebSocket("ws://localhost:3000")
     );
     this.socket = this.$store.getters.socket;
     this.socket.onmessage = (event) => {

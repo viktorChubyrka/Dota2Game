@@ -308,6 +308,8 @@ export default new Vuex.Store({
       let matches = await Axios.get(`${url}/api/game/getAllGames`, {
         withCredentials: true,
       });
+      let act = false;
+      let up = false;
       let active = [];
       let past = [];
       let upcoming = [];
@@ -326,36 +328,40 @@ export default new Vuex.Store({
           }
         } else {
           if (el.status == "upcoming") {
+            console.log(el);
             let p1;
             let p2;
             if (el.playersT1[0])
               p1 = await state.dispatch("GetPartyPlayers", el.playersT1[0]);
-
             if (el.playersT2[0])
               p2 = await state.dispatch("GetPartyPlayers", el.playersT2[0]);
             if (p1) {
               for (let i = 0; i < p1.length; i++) {
                 if (p1[i].login == localStorage.getItem("login")) {
-                  console.log("dasd");
                   el.playersT1 = p1;
                   el.playersT2 = p2 ? p2 : [];
-                  activeParty.push(el);
-                  console.log(activeParty);
+                  act = true;
+                } else {
+                  el.playersT1 = p1;
+                  el.playersT2 = p2 ? p2 : [];
+                  up = true;
                 }
               }
             } else if (p2) {
               for (let i = 0; i < p2.length; i++) {
                 if (p2[i].login == localStorage.getItem("login")) {
-                  console.log("dasd");
                   el.playersT1 = p1 ? p1 : [];
                   el.playersT2 = p2;
-                  activeParty.push(el);
-                  console.log(activeParty);
+                  ct = true;
+                } else {
+                  el.playersT2 = p2;
+                  el.playersT1 = p1 ? p1 : [];
+                  up = true;
                 }
               }
-            } else upcomingParty.push(el);
-            console.log(upcomingParty);
-            console.log(activeParty);
+            }
+            if (act) activeParty.push(el);
+            if (up) upcomingParty.push(el);
           }
         }
       });
