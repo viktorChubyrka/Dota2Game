@@ -328,7 +328,6 @@ export default new Vuex.Store({
           }
         } else {
           if (el.status == "upcoming") {
-            console.log(el);
             let p1;
             let p2;
             if (el.playersT1[0])
@@ -341,27 +340,30 @@ export default new Vuex.Store({
                   el.playersT1 = p1;
                   el.playersT2 = p2 ? p2 : [];
                   act = true;
-                } else {
-                  el.playersT1 = p1;
-                  el.playersT2 = p2 ? p2 : [];
-                  up = true;
                 }
               }
-            } else if (p2) {
+            }
+            if (p2) {
               for (let i = 0; i < p2.length; i++) {
                 if (p2[i].login == localStorage.getItem("login")) {
                   el.playersT1 = p1 ? p1 : [];
                   el.playersT2 = p2;
-                  ct = true;
-                } else {
-                  el.playersT2 = p2;
-                  el.playersT1 = p1 ? p1 : [];
-                  up = true;
+                  act = true;
                 }
               }
             }
-            if (act) activeParty.push(el);
-            if (up) upcomingParty.push(el);
+            if (act)
+              if (!activeParty.includes(el)) {
+                activeParty.push(el);
+              }
+            if (!act) {
+              if (!upcomingParty.includes(el)) {
+                el.playersT1 = p1 ? p1 : [];
+                el.playersT2 = p2 ? p2 : [];
+                upcomingParty.push(el);
+                console.log(1);
+              }
+            }
           }
         }
       });
