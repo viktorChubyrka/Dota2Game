@@ -28,9 +28,9 @@ export default {
             type: "DestroyLobby",
           })
         );
-        this.interval.clearInterval();
       }
     }, 60000);
+    setTimeout(() => this.interval.clearInterval(), this.number * 60000);
     this.socket = this.$store.getters.socket;
   },
 };

@@ -19,11 +19,11 @@ top: 16px;
 color:#BDBDBD"
     >
       {{
-        `${notification.date.split("T")[1].split(":")[0]}:${
-          notification.date.split("T")[1].split(":")[1]
-        } ${notification.date.split("-")[2].split("T")[0]}-${
-          notification.date.split("-")[1]
-        }`
+      `${notification.date.split("T")[1].split(":")[0]}:${
+      notification.date.split("T")[1].split(":")[1]
+      } ${notification.date.split("-")[2].split("T")[0]}-${
+      notification.date.split("-")[1]
+      }`
       }}
     </div>
     <div
@@ -35,30 +35,24 @@ height: 32px;
 left: 12px;
 top: 42px;"
     >
-      {{ $ml.get("friendRequest") }} <strong>{{ notification.login }}</strong>
-      <button @click="acceptFriend()" class="buttonMessage b1 t5">
-        {{ $ml.get("accept") }}
-      </button>
-      <button @click="notAcceptFriend()" class="buttonMessage b2 t5">
-        {{ $ml.get("cancel") }}
-      </button>
+      {{ $ml.get("friendRequest") }}
+      <strong>{{ notification.login }}</strong>
+      <button @click="acceptFriend()" class="buttonMessage b1 t5">{{ $ml.get("accept") }}</button>
+      <button @click="notAcceptFriend()" class="buttonMessage b2 t5">{{ $ml.get("cancel") }}</button>
     </div>
     <div
       v-if="notification.type == 'AddTooParty'"
-      class="t5 "
+      class="t5"
       style="position: absolute;
 width: 270px;
 height: 140px;
 left: 12px;
 top: 42px;"
     >
-      {{ notification.message }} <strong>{{ notification.login }}</strong>
-      <button @click="acceptLobby()" class="buttonMessage b1 t5">
-        {{ $ml.get("accept") }}
-      </button>
-      <button @click="notAcceptLobby()" class="buttonMessage b2 t5">
-        {{ $ml.get("cancel") }}
-      </button>
+      {{ notification.message }}
+      <strong>{{ notification.login }}</strong>
+      <button @click="acceptLobby()" class="buttonMessage b1 t5">{{ $ml.get("accept") }}</button>
+      <button @click="notAcceptLobby()" class="buttonMessage b2 t5">{{ $ml.get("cancel") }}</button>
     </div>
     <div
       v-if="notification.type == 'AcceptLobby'"
@@ -69,7 +63,8 @@ height: 32px;
 left: 12px;
 top: 42px;"
     >
-      <strong>{{ notification.login }}</strong> {{ notification.message }}
+      <strong>{{ notification.login }}</strong>
+      {{ notification.message }}
     </div>
     <div
       v-if="notification.type == 'notAcceptFriend'"
@@ -80,7 +75,8 @@ height: 32px;
 left: 12px;
 top: 42px;"
     >
-      <strong>{{ notification.login }}</strong> {{ notification.message }}
+      <strong>{{ notification.login }}</strong>
+      {{ notification.message }}
     </div>
     <div
       v-if="notification.type == 'LobbyDestroed'"
@@ -90,9 +86,7 @@ width: 270px;
 height: 32px;
 left: 12px;
 top: 42px;"
-    >
-      {{ notification.message }}
-    </div>
+    >{{ notification.message }}</div>
     <div
       v-if="notification.type == 'notAcceptParty'"
       :class="{ t5: true }"
@@ -102,7 +96,8 @@ height: 32px;
 left: 12px;
 top: 42px;"
     >
-      {{ notification.message }} <strong>{{ notification.login }}</strong>
+      {{ notification.message }}
+      <strong>{{ notification.login }}</strong>
     </div>
   </div>
 </template>
@@ -189,6 +184,7 @@ export default {
   background: #ffffff;
   z-index: 100;
   position: relative;
+  transition: box-shadow 0.5s;
 }
 .addTofriendMessage {
   height: 140px !important;
@@ -208,5 +204,10 @@ export default {
 .b2 {
   background: #e0e0e0;
   color: #1f2430;
+}
+.containerMessage:hover {
+  -webkit-box-shadow: 0 0 10px 6px #cbcaca;
+  -moz-box-shadow: 0 0 10px 6px #cbcaca;
+  box-shadow: 0 0 10px 6px #cbcaca;
 }
 </style>

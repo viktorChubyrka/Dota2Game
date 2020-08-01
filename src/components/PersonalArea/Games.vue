@@ -47,7 +47,7 @@
               class="t5"
               style="width:100px;color: #828282;text-align: left;padding-bottom:20px"
             >{{ $ml.get("matchType") }}</th>
-            <th style="width:628px;"></th>
+            <th style="width:678px;"></th>
             <th
               class="t5"
               style="color: #828282;width:190px;text-align: left;"

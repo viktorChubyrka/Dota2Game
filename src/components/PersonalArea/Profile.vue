@@ -8,9 +8,11 @@
       }"
     ></div>
     <div v-else class="photo"></div>
-    <label class="t4 changePhoto2" for="filechooser">{{
+    <label class="t4 changePhoto2" for="filechooser">
+      {{
       $ml.get("changePhoto")
-    }}</label>
+      }}
+    </label>
     <input
       id="filechooser"
       class="changePhoto"
@@ -25,52 +27,16 @@
       <div class="t3">{{ $ml.get("aboutYou") }}</div>
       <button class="t4" @click="changeName()">{{ $ml.get("change") }}</button>
     </div>
-    <input
-      id="name"
-      class="t5 inputs"
-      placeholder="Имя"
-      type="text"
-      v-model="user.name"
-    />
-    <input
-      id="surname"
-      class="t5 inputs"
-      placeholder="Фамилия"
-      type="text"
-      v-model="user.surname"
-    />
+    <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="user.name" />
+    <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="user.surname" />
     <div style="top:413px" class="titleBlock">
       <div class="t3">{{ $ml.get("cont") }}</div>
-      <button class="t4" @click="changeContactData()">
-        {{ $ml.get("change") }}
-      </button>
+      <button class="t4" @click="changeContactData()">{{ $ml.get("change") }}</button>
     </div>
-    <input
-      id="login"
-      class="t5 inputs"
-      type="text"
-      placeholder="Логин"
-      v-model="user.login"
-    />
-    <input
-      id="email"
-      class="t5 inputs"
-      type="text"
-      placeholder="Емайл"
-      v-model="user.email"
-    />
-    <input
-      id="phone"
-      class="t5 inputs"
-      type="text"
-      placeholder="Телефон"
-      v-model="user.number"
-    />
-    <form
-      class="steamIdForm"
-      action="https://steamcommunity.com/openid/login"
-      method="post"
-    >
+    <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="user.login" />
+    <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="user.email" />
+    <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" v-model="user.number" />
+    <form class="steamIdForm" action="https://steamcommunity.com/openid/login" method="post">
       <input
         type="hidden"
         name="openid.identity"
@@ -81,11 +47,7 @@
         name="openid.claimed_id"
         value="http://specs.openid.net/auth/2.0/identifier_select"
       />
-      <input
-        type="hidden"
-        name="openid.ns"
-        value="http://specs.openid.net/auth/2.0"
-      />
+      <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0" />
       <input type="hidden" name="openid.mode" value="checkid_setup" />
       <input
         type="hidden"
@@ -109,15 +71,11 @@
     <div class="passPromo">
       <div class="t3">{{ $ml.get("sec") }}</div>
       <div class="t4 changePass">{{ $ml.get("changePass") }}</div>
-      <div class="t3 promoTitle">
-        Darewin’s family {{ $ml.get("promo").toLowerCase() }}
-      </div>
+      <div class="t3 promoTitle">Darewin’s family {{ $ml.get("promo").toLowerCase() }}</div>
       <div class="t4 promo">{{ $ml.get("promo") }}: asdke94ld7</div>
       <div class="t4 promo2">
         {{ $ml.get("refLink") }}:
-        <div style="color:#BDBDBD;display:inline">
-          registration/ref=2dfs122vh
-        </div>
+        <div style="color:#BDBDBD;display:inline">registration/ref=2dfs122vh</div>
       </div>
       <i
         id="copy1"
@@ -140,27 +98,19 @@
     </div>
     <div class="t3 lengChange">
       <table class="lengChangeUl">
-        <tr class="t4 ">
-          <td class=" langBtn" @click="ChangeLang(1)" style="width:120px">
-            Русский
-          </td>
+        <tr class="t4">
+          <td class="langBtn" @click="ChangeLang(1)" style="width:120px">Русский</td>
           <td
             :class="{ show: show2 == 1 }"
             style="width:105px;opacity:0;display:inline;color:#BDBDBD"
-          >
-            {{ $ml.get("now") }}
-          </td>
+          >{{ $ml.get("now") }}</td>
         </tr>
-        <tr class="t4 ">
-          <td class=" langBtn" @click="ChangeLang(2)" style="width:120px">
-            English
-          </td>
+        <tr class="t4">
+          <td class="langBtn" @click="ChangeLang(2)" style="width:120px">English</td>
           <td
             :class="{ show: show2 == 2 }"
             style="width:105px;opacity:0;display:inline;color:#BDBDBD"
-          >
-            {{ $ml.get("now") }}
-          </td>
+          >{{ $ml.get("now") }}</td>
         </tr>
       </table>
     </div>
@@ -203,6 +153,7 @@ export default {
       formData.append("file", blobFile);
       formData.append("login", localStorage.getItem("login"));
       this.$store.dispatch("SendFile", { formData, context: this });
+      this.$store.dispatch("GetUserData", { context: this });
     },
     Copy(i) {
       if (i == 1) {
