@@ -127,7 +127,10 @@
           </tr>
         </table>
 
-        <div class="t3" style="margin:36px 0 16px 0">{{ $ml.get("playing") }}</div>
+        <div
+          class="t3 slide-right"
+          style="margin:36px 0 16px 0;width:170px"
+        >{{ $ml.get("playing") }}</div>
         <table class="gamesTable">
           <tr class="toHover" v-for="i in 5" :key="i">
             <td style="width:87px" class="players">10/10</td>
@@ -313,7 +316,7 @@
           </tr>
         </table>
 
-        <div class="t3" style="margin:36px 0 16px 0">{{ $ml.get("playing") }}</div>
+        <div class="t3 slide-right" style="margin:36px 0 16px 0">{{ $ml.get("playing") }}</div>
         <table class="gamesTable">
           <tr class="toHover" v-for="i in 2" :key="i">
             <td style="width:87px" class="players">10/10</td>
@@ -486,9 +489,17 @@ export default {
 .show {
   opacity: 1;
 }
+.slide-right {
+  font-weight: 400;
+  transition: font-weight 0.1s, margin-left 0.5s;
+}
+.slide-right:hover {
+  margin-left: 20px !important;
+  font-weight: 600;
+}
 .toHover {
   z-index: 1;
-  transition: box-shadow 0.5s;
+  transition: box-shadow 0.3s;
   margin-bottom: 5px !important;
 }
 .toHover:hover {

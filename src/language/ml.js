@@ -136,7 +136,7 @@ export default new MLCreate({
         "Our club has a clear match analysis system and a competent support service algorithm. If the result of the match in which you participated was canceled, then this could happen for several reasons, for example, your victory was not worthy, because the opposing team had a ruiner, either a cheater was present in the game, or players from different teams were caught in teaming to disrupt the match. In short, if you played honestly and did not violate the rules of the club, in any case your time spent and efforts will be compensated in monetary terms, and violators will be punished.",
       pQ: "Top Questions",
       tayQ: "Tell us about the problem.",
-      money: "Facilities",
+      money: "Transactions",
       frend: "Friends",
       prof: "Profile",
       pravil: "Rules",

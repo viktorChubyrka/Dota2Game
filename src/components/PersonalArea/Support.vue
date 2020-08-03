@@ -35,7 +35,7 @@
     </ul>
     <ul class="oldQLink">
       <li style="margin-bottom:10px" :to="`#q${i}`" v-for="i in 7" :key="i">
-        <a style="color:#35A7FF" class="t5 linkTo" :href="`#q${i}`">
+        <a class="t5 linkTo" :href="`#q${i}`">
           {{i}}. {{
           $ml.get(`q${i}`)
           }}
@@ -68,6 +68,7 @@ export default {
   display: block;
   width: 100%;
   height: 100%;
+  color: #828282;
 }
 .slide-right {
   font-weight: 400;
@@ -158,7 +159,7 @@ html {
   border: 1px solid #bdbdbd;
   box-sizing: border-box;
   padding: 6px 21px;
-  color: #828282;
+  color: #1f2430;
 }
 .themeSelect option {
   color: #1f2430;

@@ -40,20 +40,12 @@
             v-for="f in User.friends"
             @click="SendPartyInvite(f, User.partyID)"
             :key="f"
-          >
-            {{ f }}
-          </li>
+          >{{ f }}</li>
         </ul>
       </div>
-      <div v-if="login" class="circleText">
-        {{ login }}
-      </div>
-      <div v-if="party" class="circleText">
-        {{ party[index] ? party[index].login : index + 2 }}
-      </div>
-      <div v-if="!party && index + 1" class="circleText">
-        {{ index + 2 }}
-      </div>
+      <div v-if="login" class="circleText">{{ login }}</div>
+      <div v-if="party" class="circleText">{{ party[index] ? party[index].login : index + 2 }}</div>
+      <div v-if="!party && index + 1" class="circleText">{{ index + 2 }}</div>
     </div>
     <div
       @mouseleave="show = false"
@@ -69,10 +61,7 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M1 19V8.31134H19M19 8.31134L11.4231 15.6227M19 8.31134L11.4231 1"
-          stroke="white"
-        />
+        <path d="M1 19V8.31134H19M19 8.31134L11.4231 15.6227M19 8.31134L11.4231 1" stroke="white" />
       </svg>
     </div>
     <div
@@ -97,7 +86,8 @@
       </svg>
     </div>
     <div
-      v-if="party && party[index] && party[index].status == 'waiting'"
+      @mouseover="show==true"
+      v-if="!show &&party && party[index] && party[index].status == 'waiting'"
       class="circleW"
     >
       <svg
@@ -118,9 +108,9 @@
     <div
       @mouseleave="show = false"
       @click="CickPlayer(party[index].login, User.partyID)"
-      v-if="show && party && party[index] && party[index].status == 'inLobby'"
+      v-if="show && party && party[index] && (party[index].status == 'inLobby' || party[index].status == 'waiting')"
       class="circleK"
-      style="z-index:10"
+      style="z-index:20"
     >
       <svg
         width="19"
@@ -146,7 +136,7 @@
     <img
       @mouseover="show = true"
       style="width:50px;height:50px;border-radius:25px;position:absolute;top:21px;left:107px;"
-      v-if="party && party[index] && party[index].status != 'waiting'"
+      v-if="party && party[index] && party[index].status != 'waiting' && party[index].photo"
       :src="party[index].photo"
     />
   </div>
@@ -302,6 +292,7 @@ export default {
 .circleW {
   position: absolute;
   top: 0;
+  z-index: 10;
   margin: 21px 0 0 107px;
   width: 50px;
   height: 50px;

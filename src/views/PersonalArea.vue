@@ -14,15 +14,11 @@
           <i @click="ShowNotifications()" class="fa fa-bell fa-lg notif">
             <div class="indicator" v-if="newNotifications"></div>
             <ul
+              @mouseleave="notification=false"
               :class="{notificationUl:notification}"
               style="position:fixed; top:90px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
             >
-              <li
-                @mouseleave="notification=false"
-                v-for="(not, i) in notifications"
-                :key="i"
-                style="margin-bottom:9px"
-              >
+              <li v-for="(not, i) in notifications" :key="i" style="margin-bottom:9px">
                 <Message :notification="not" />
               </li>
             </ul>
@@ -189,7 +185,7 @@
             </div>
           </li>
         </router-link>
-        <router-link :class="{ RL: true, iconFocused: focus == 7 }" to="support">
+        <router-link style="margin:0" :class="{ RL: true, iconFocused: focus == 7 }" to="support">
           <li @click="ChangePage(7)" :class="{ t5: true, iconFocused: focus == 7 }">
             <div style="display:flex">
               <img :class="{ icon: true }" src="../assets/iconsPA/infoIcon.svg" />
@@ -220,7 +216,7 @@ export default {
 
   data() {
     return {
-      focus: 1,
+      focus: 3,
       show: false,
       show2: false,
       show3: false,
@@ -266,6 +262,8 @@ export default {
     },
   },
   created() {
+    if (localStorage.getItem("PersonalAreaPage"))
+      this.focus = localStorage.getItem("PersonalAreaPage");
     this.$store.dispatch("GetAllMatches");
     this.$store.commit(
       "SetSocket",
@@ -347,7 +345,10 @@ export default {
         setTimeout(() => (this.show3 = true), 1000);
       }, 2000);
     }, 1);
-    this.$store.dispatch("GetUserData", { context: this });
+    setTimeout(
+      () => this.$store.dispatch("GetUserData", { context: this }),
+      20
+    );
   },
   methods: {
     ShowNotifications() {
@@ -392,6 +393,7 @@ export default {
     },
     ChangePage(i) {
       this.focus = i;
+      localStorage.setItem("PersonalAreaPage", i);
     },
     LogOut() {
       this.$store.dispatch("LogOut", { context: this });
@@ -538,7 +540,7 @@ path {
 }
 .cash {
   position: absolute;
-  width: 182px;
+  width: 300px;
   height: 32px;
   left: 1009px;
   top: 26px;

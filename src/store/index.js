@@ -385,14 +385,16 @@ export default new Vuex.Store({
           }
         );
         let indexUser = null;
-        if (party != false) {
+        console.log(party, "ssssss");
+        if (party.data) {
           party.data.players.forEach((el, index) => {
             if (el.login == localStorage.getItem("login")) indexUser = index;
           });
-        }
-        party.data.players.splice(indexUser, 1);
-        state.commit("setParty", party.data.players);
-        state.dispatch("GetAllReadyUsers");
+
+          party.data.players.splice(indexUser, 1);
+          state.commit("setParty", party.data.players);
+          state.dispatch("GetAllReadyUsers");
+        } else state.commit("setParty", []);
       } else state.commit("setParty", []);
     },
     GetPartyPlayers: async (state, payload) => {
