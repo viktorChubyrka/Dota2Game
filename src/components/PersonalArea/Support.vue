@@ -3,8 +3,8 @@
     <div class="t1 suppotrT slide-right">{{ $ml.get("sup") }}</div>
     <div :class="`t3 supportST ${focus?'text-to-left':''}`">{{ $ml.get("writeSup") }}</div>
     <select
-      @mouseleave="focus=false"
       @focus="focus=true"
+      @focusout="focus=false"
       class="themeSelect t5"
       value="Тема"
       name="Тема"
@@ -16,11 +16,12 @@
       <option>{{ $ml.get("else") }}</option>
     </select>
     <textarea
-      @mouseleave="focus=false"
       @focus="focus=true"
+      @focusout="focus=false"
       class="t5 supportMessage"
       :placeholder="yq()"
       type="textarea"
+      id="textArea"
     />
     <button class="t4 buttonSend">{{ $ml.get("supBut") }}</button>
     <div class="t2 oldQuestion slide-right">{{ $ml.get("pQ") }}</div>
