@@ -5,14 +5,17 @@
         t1: true,
         title: true,
         titleEng: this.$store.getters.lang == 2,
+        slideRight2:true
       }"
-    >
-      {{ $ml.get("LoyalProg") }}
+    >{{ $ml.get("LoyalProg") }}</div>
+    <div class="slide-right">
+      <div class="t3 subTitle1 first">{{ $ml.get("firstCitTitle") }}</div>
+      <div class="t5 autor1 second">{{ $ml.get("firstCitAutor") }}</div>
     </div>
-    <div class="t3 subTitle1">{{ $ml.get("firstCitTitle") }}</div>
-    <div class="t5 autor1">{{ $ml.get("firstCitAutor") }}</div>
-    <div class="t3 subTitle2">{{ $ml.get("secondCitTitle") }}</div>
-    <div class="t5 autor2">{{ $ml.get("secondCitAutor") }}</div>
+    <div class="slide-right">
+      <div class="t3 subTitle2 first">{{ $ml.get("secondCitTitle") }}</div>
+      <div class="t5 autor2 second">{{ $ml.get("secondCitAutor") }}</div>
+    </div>
     <div class="t5 bigText1">{{ $ml.get("firstCitText") }}</div>
     <div class="vertLine"></div>
     <div class="t5 bigText2">{{ $ml.get("secondCitText") }}</div>
@@ -33,6 +36,28 @@ export default {
 };
 </script>
 <style>
+.slide-right div {
+  font-weight: 400;
+  transition: font-weight 0.1s, margin-left 0.8s, margin-right 0.8s;
+}
+.slide-right:hover .first {
+  margin-left: 20px;
+  font-weight: 600;
+  cursor: default;
+}
+.slide-right:hover .second {
+  margin-right: 20px;
+  font-weight: 600;
+  cursor: default;
+}
+.slideRight2 {
+  font-weight: 400;
+  transition: font-weight 0.1s, margin-left 0.5s;
+}
+.slideRight2:hover {
+  margin-left: 20px;
+  font-weight: 600;
+}
 .content {
   opacity: 0;
   transition: opacity 1.5s;

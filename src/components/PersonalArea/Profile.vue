@@ -24,18 +24,24 @@
     <div></div>
 
     <div class="titleBlock">
-      <div class="t3">{{ $ml.get("aboutYou") }}</div>
-      <button class="t4" @click="changeName()">{{ $ml.get("change") }}</button>
+      <div class="t3 slide-right">{{ $ml.get("aboutYou") }}</div>
+      <button v-if="user.name == name && user.surname==surname" class="t4">{{ $ml.get("change") }}</button>
+      <button v-else class="t4" @click="changeName()">{{ $ml.get("apply") }}</button>
     </div>
-    <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="user.name" />
-    <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="user.surname" />
+    <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="name" />
+    <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="surname" />
     <div style="top:413px" class="titleBlock">
-      <div class="t3">{{ $ml.get("cont") }}</div>
-      <button class="t4" @click="changeContactData()">{{ $ml.get("change") }}</button>
+      <div class="t3 slide-right">{{ $ml.get("cont") }}</div>
+      <button
+        v-if="user.login == login && user.number ==number && user.steamID == steamID && user.email == email"
+        class="t4"
+      >{{ $ml.get("change") }}</button>
+      <button v-else class="t4" @click="changeContactData()">{{ $ml.get("apply") }}</button>
     </div>
-    <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="user.login" />
-    <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="user.email" />
-    <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" v-model="user.number" />
+    <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="login" />
+    <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="email" />
+    <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" v-model="number" />
+    <div class="t3 steamIDTitile slide-right">Steam ID</div>
     <form class="steamIdForm" action="https://steamcommunity.com/openid/login" method="post">
       <input
         type="hidden"
@@ -68,10 +74,14 @@
       placeholder="SteamID"
       v-model="user.steamID"
     />
+    <i
+      :style="`color:${user.steamID?'#2a475e':'rgb(187, 185, 185)'}`"
+      class="fa fa-steam-square fa-2x"
+    ></i>
     <div class="passPromo">
-      <div class="t3">{{ $ml.get("sec") }}</div>
+      <div class="t3 slide-right">{{ $ml.get("sec") }}</div>
       <div class="t4 changePass">{{ $ml.get("changePass") }}</div>
-      <div class="t3 promoTitle">Darewin’s family {{ $ml.get("promo").toLowerCase() }}</div>
+      <div class="t3 slide-right promoTitle">Darewin’s family {{ $ml.get("promo").toLowerCase() }}</div>
       <div class="t4 promo">{{ $ml.get("promo") }}: asdke94ld7</div>
       <div class="t4 promo2">
         {{ $ml.get("refLink") }}:
@@ -96,6 +106,7 @@
         class="fa fa-copy fa-2x"
       ></i>
     </div>
+    <div class="t3 LenTitle slide-right">{{ $ml.get("len") }}</div>
     <div class="t3 lengChange">
       <table class="lengChangeUl">
         <tr class="t4">
@@ -119,15 +130,24 @@
 <script>
 export default {
   data() {
-    return { svg: "../../assets/Darewin.svg", show: false };
+    return {
+      svg: "../../assets/Darewin.svg",
+      show: false,
+      name: "",
+      surname: "",
+      email: "",
+      number: "",
+      login: "",
+      steamID: "",
+    };
   },
   methods: {
     changeName() {
       let login = localStorage.getItem("login");
       this.$store.dispatch("ChangeName", {
         data: {
-          firstName: this.user.name,
-          lastName: this.user.surname,
+          firstName: this.name,
+          lastName: this.surname,
           login,
         },
         consext: this,
@@ -138,10 +158,10 @@ export default {
       let login = localStorage.getItem("login");
       this.$store.dispatch("ChangeContactInfo", {
         data: {
-          email: this.user.email,
-          phone: this.user.number,
-          loginChange: this.user.login,
-          steamID: this.user.steamID,
+          email: this.email,
+          phone: this.number,
+          loginChange: this.login,
+          steamID: this.steamID,
           login,
         },
         consext: this,
@@ -184,9 +204,18 @@ export default {
       return this.$store.getters.lang;
     },
   },
+  beforeUpdate() {
+    if (this.user && !this.name) this.name = this.user.name;
+    if (this.user.surname && !this.surname) this.surname = this.user.surname;
+    if (this.user.email && !this.email) this.email = this.user.email;
+    if (this.user.number && !this.number) this.number = this.user.number;
+    if (this.user.login && !this.login) this.login = this.user.login;
+    if (this.user.steamID && !this.steamID) this.steamID = this.user.steamID;
+  },
   created() {
     setTimeout(() => (this.show = true), 10);
     this.$store.dispatch("GetUserData", { context: this });
+
     this.$store.commit("SetLang", localStorage.getItem("leng"));
     if (localStorage.getItem("leng") == 1) {
       this.$ml.change("russian");
@@ -208,6 +237,20 @@ export default {
 };
 </script>
 <style scoped>
+.slide-right {
+  font-weight: 400;
+  transition: font-weight 0.1s, margin-left 0.5s;
+}
+.slide-right:hover {
+  margin-left: 20px;
+  font-weight: 600;
+}
+.LenTitle {
+  position: absolute;
+  height: 38px;
+  left: 721px;
+  top: 376px;
+}
 .shine {
   box-shadow: 0 0 5px 2px #bf0603;
 }
@@ -222,7 +265,8 @@ export default {
 }
 .steamIdForm {
   position: absolute;
-  top: 610px;
+  top: 562px;
+  left: 721px;
   z-index: 100;
 }
 .steamIdForm button {
@@ -268,7 +312,7 @@ export default {
   position: absolute;
   height: 38px;
   left: 721px;
-  top: 394px;
+  top: 400px;
 }
 .lengChangeUl {
   width: 300px !important;
@@ -382,8 +426,20 @@ export default {
   top: 564px;
 }
 #steamID {
-  left: 0;
-  top: 612px;
+  left: 721px;
+  top: 562px;
+  padding-left: 40px;
+}
+.fa-steam-square {
+  position: absolute;
+  left: 725px;
+  top: 566px;
+}
+.steamIDTitile {
+  position: absolute;
+  left: 721px;
+  top: 512px;
+  width: 100px;
 }
 .titleBlock {
   position: absolute;

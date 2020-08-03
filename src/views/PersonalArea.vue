@@ -11,12 +11,18 @@
         <div class="readyText t5">{{ ready }} {{ $ml.get("redy") }}</div>
         <div class="cash t5">${{ user.purse }} — {{ user.purse }} Darewin’s dollar</div>
         <div class="notification">
-          <i class="fa fa-bell fa-lg notif">
+          <i @click="ShowNotifications()" class="fa fa-bell fa-lg notif">
             <div class="indicator" v-if="newNotifications"></div>
             <ul
-              style="position:fixed; top:10px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
+              :class="{notificationUl:notification}"
+              style="position:fixed; top:90px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
             >
-              <li v-for="(not, i) in notifications" :key="i" style="margin-bottom:9px">
+              <li
+                @mouseleave="notification=false"
+                v-for="(not, i) in notifications"
+                :key="i"
+                style="margin-bottom:9px"
+              >
                 <Message :notification="not" />
               </li>
             </ul>
@@ -193,8 +199,17 @@
         </router-link>
       </ul>
     </div>
-    <div style="overflow-y:scroll;" :class="{ pages: true, show: show3 }">
+
+    <div
+      @scroll="setScroll()"
+      id="router"
+      style="overflow-y:scroll;scroll-behavior:smooth"
+      :class="{ pages: true, show: show3 }"
+    >
       <router-view></router-view>
+    </div>
+    <div v-if="scrollTop" @click="scrollUp()" class="scrollTopBtn">
+      <i style="position:absolute;top:10px;left:15px" class="fa fa-chevron-up fa-3x"></i>
     </div>
   </div>
 </template>
@@ -211,9 +226,17 @@ export default {
       show3: false,
       socket: null,
       online: 0,
+      scroll: 0,
+      notification: false,
     };
   },
   computed: {
+    scrollTop() {
+      if (this.scroll) {
+        if (this.scroll >= 750) return true;
+        else return false;
+      } else return false;
+    },
     ready() {
       return this.$store.getters.ready;
     },
@@ -246,7 +269,7 @@ export default {
     this.$store.dispatch("GetAllMatches");
     this.$store.commit(
       "SetSocket",
-      new WebSocket("wss://dota2botbackend.herokuapp.com")
+      new WebSocket("wss://safe-inlet-79254.herokuapp.com")
       //new WebSocket("ws://localhost:3000")
     );
     this.socket = this.$store.getters.socket;
@@ -327,6 +350,18 @@ export default {
     this.$store.dispatch("GetUserData", { context: this });
   },
   methods: {
+    ShowNotifications() {
+      this.notification = true;
+    },
+    setScroll() {
+      this.scroll = document.getElementById("router").scrollTop;
+    },
+    scrollUp() {
+      let router = document.getElementById("router");
+      console.log(router);
+      console.log(router.scrollTop);
+      router.scrollTop = 0;
+    },
     SetActive() {
       this.socket.send(
         JSON.stringify({
@@ -365,6 +400,22 @@ export default {
 };
 </script>
 <style>
+.scrollTopBtn {
+  position: fixed;
+  right: 700px;
+  bottom: 50px;
+  width: 80px;
+  height: 80px;
+
+  border-radius: 40px;
+  background: #f2f2f2;
+  color: #1f2430;
+  transition: background 0.5s, color 0.5s;
+}
+.scrollTopBtn:hover {
+  color: #f2f2f2;
+  background: #1f2430;
+}
 .notification .indicator {
   position: absolute;
   top: 0px;
@@ -492,7 +543,7 @@ path {
   left: 1009px;
   top: 26px;
 }
-.notification i:hover ul {
+.notificationUl {
   display: inline !important;
 }
 .notification {
@@ -597,7 +648,7 @@ path {
 .sideNavigation {
   position: absolute;
   left: -150px;
-  top: 246px;
+  top: 266px;
   transition: left 1s;
 }
 .sideNavigationShow {

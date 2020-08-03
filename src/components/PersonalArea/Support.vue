@@ -1,27 +1,45 @@
 <template>
   <div :class="{ show: show, content: true }">
-    <div class="t1 suppotrT">{{ $ml.get("sup") }}</div>
-    <div class="t3 supportST">{{ $ml.get("writeSup") }}</div>
-    <select class="themeSelect t5" value="Тема" name="Тема" id="1">
-      <option value disabled selected>{{ $ml.get("topic") }}</option>
+    <div class="t1 suppotrT slide-right">{{ $ml.get("sup") }}</div>
+    <div :class="`t3 supportST ${focus?'text-to-left':''}`">{{ $ml.get("writeSup") }}</div>
+    <select
+      @mouseleave="focus=false"
+      @focus="focus=true"
+      class="themeSelect t5"
+      value="Тема"
+      name="Тема"
+      id="1"
+    >
+      <option style="color:#828282" value disabled selected>{{ $ml.get("topic") }}</option>
       <option>{{ $ml.get("addEnterMoney") }}</option>
       <option>{{ $ml.get("tellAbout") }}</option>
       <option>{{ $ml.get("else") }}</option>
     </select>
-    <textarea class="t5 supportMessage" :placeholder="yq()" type="textarea" />
+    <textarea
+      @mouseleave="focus=false"
+      @focus="focus=true"
+      class="t5 supportMessage"
+      :placeholder="yq()"
+      type="textarea"
+    />
     <button class="t4 buttonSend">{{ $ml.get("supBut") }}</button>
-    <div class="t2 oldQuestion">{{ $ml.get("pQ") }}</div>
+    <div class="t2 oldQuestion slide-right">{{ $ml.get("pQ") }}</div>
     <ul class="answersList">
       <li :id="`q${i}`" v-for="i in 7" :key="i">
-        <div class="t3 liTitile">{{ $ml.get(`q${i}`) }}</div>
-        <div class="t5 liText">{{ $ml.get(`a${i}`) }}</div>
+        <div class="t3 liTitile">
+          {{i}}.
+          <span class="slide-right">{{ $ml.get(`q${i}`)}}</span>
+        </div>
+        <div :style="`${i==7?'margin-bottom:470px':''}`" class="t5 liText">{{ $ml.get(`a${i}`) }}</div>
       </li>
     </ul>
     <ul class="oldQLink">
-      <li style="margin-bottom:10px" v-for="i in 7" :key="i">
-        <a style="color:#35A7FF" class="t5 linkTo" :href="`#q${i}`">{{
+      <li style="margin-bottom:10px" :to="`#q${i}`" v-for="i in 7" :key="i">
+        <a style="color:#35A7FF" class="t5 linkTo" :href="`#q${i}`">
+          {{i}}. {{
           $ml.get(`q${i}`)
-        }}</a>
+          }}
+        </a>
       </li>
     </ul>
   </div>
@@ -34,20 +52,60 @@ export default {
         return this.$ml.get("tayQ");
       },
       show: false,
+      scroll: 0,
+      focus: false,
     };
   },
   created() {
     setTimeout(() => (this.show = true), 10);
   },
+  computed: {},
+  methods: {},
 };
 </script>
 <style>
+.oldQLink li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.slide-right {
+  font-weight: 400;
+  transition: font-weight 0.1s, margin-left 0.5s;
+}
+.slide-right:hover {
+  margin-left: 20px;
+  font-weight: 600;
+}
+.text-to-left {
+  margin-left: 20px;
+  font-weight: 600;
+}
+.oldQLink li {
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 410px;
+  transition: box-shadow 0.3s, margin-left 0.3s;
+}
+.oldQLink li:hover {
+  -webkit-box-shadow: 0 0 10px 6px #cbcaca;
+  -moz-box-shadow: 0 0 10px 6px #cbcaca;
+  box-shadow: 0 0 10px 6px #cbcaca;
+  cursor: pointer;
+  margin-left: 20px;
+  font-weight: bold !important;
+}
+.oldQLink li a {
+  transition: font-weight 0.3s;
+}
+.oldQLink li:hover a {
+  font-weight: bold;
+  font-size: 17px;
+}
 .linkTo {
   text-decoration: none;
 }
-.linkTo:hover {
-  color: rgb(0, 42, 255) !important;
-}
+
 .content {
   opacity: 0;
   transition: opacity 1.5s;
@@ -58,21 +116,37 @@ export default {
 html {
   scroll-behavior: smooth !important;
 }
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
 .oldQLink {
-  position: absolute;
-  width: 332px;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 400px;
   height: 386px;
-  left: 992px;
-  top: 42px;
+  left: 1290px;
+  top: 288px;
   list-style-type: none;
 }
 .liTitile {
   width: 785px;
   margin-bottom: 14px;
+  cursor: default;
 }
 .liText {
   width: 785px;
   margin-bottom: 32px;
+  padding-left: 10px;
+  transition: background-color 0.5s, box-shadow 0.5s;
+  cursor: default;
+}
+.liText:hover {
+  background-color: #ececec;
+  -webkit-box-shadow: 0 0 10px 6px #cbcaca;
+  -moz-box-shadow: 0 0 10px 6px #cbcaca;
+  box-shadow: 0 0 10px 6px #cbcaca;
 }
 .themeSelect {
   position: absolute;
@@ -85,6 +159,9 @@ html {
   box-sizing: border-box;
   padding: 6px 21px;
   color: #828282;
+}
+.themeSelect option {
+  color: #1f2430;
 }
 .suppotrT {
   position: absolute;
@@ -99,6 +176,7 @@ html {
   height: 38px;
   left: 0;
   top: 132px;
+  transition: font-weight 0.1s, margin-left 0.5s;
 }
 .supportMessage {
   position: absolute;
@@ -112,6 +190,7 @@ html {
   border: 1px solid #bdbdbd;
   box-sizing: border-box;
   border-radius: 4px;
+  font-weight: 400;
 }
 .buttonSend {
   position: absolute;
@@ -135,7 +214,7 @@ html {
   width: 311px;
   height: 48px;
   left: 0;
-  top: 675px;
+  top: 625px;
 }
 .answersList {
   margin: 0;
@@ -146,5 +225,6 @@ html {
   left: 0;
   top: 755px;
   list-style-type: none;
+  margin-left: 10px;
 }
 </style>

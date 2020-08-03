@@ -13,9 +13,7 @@
         first: true,
         activeBtn: button == 1,
       }"
-    >
-      {{ $ml.get("trans") }}
-    </div>
+    >{{ $ml.get("trans") }}</div>
     <div class="smVretLine"></div>
     <div
       @click="ActiveButton(2)"
@@ -26,9 +24,7 @@
         second: true,
         activeBtn: button == 2,
       }"
-    >
-      {{ $ml.get("vuv") }}
-    </div>
+    >{{ $ml.get("vuv") }}</div>
     <div class="statTable">
       <table>
         <tr>
@@ -37,7 +33,7 @@
           <th class="tc3 t5">{{ $ml.get("sum") }}</th>
           <th class="tc4 t5">{{ $ml.get("dateTime") }}</th>
         </tr>
-        <tr v-for="i in 6" :key="i">
+        <tr class="toHover" v-for="i in 6" :key="i">
           <td class="tc1 t4">{{ i }}</td>
           <td class="tc2 t4">{{ $ml.get("win") }}</td>
           <td class="tc3 t4">+1 $</td>
@@ -64,9 +60,7 @@
       </li>
     </ul>
     <input class="t5 money" type="text" :placeholder="trPh()" />
-    <button @click="Pay()" v-if="button == 1" class="t5 submitMoney">
-      {{ $ml.get("transBut") }}
-    </button>
+    <button @click="Pay()" v-if="button == 1" class="t5 submitMoney">{{ $ml.get("transBut") }}</button>
     <button v-else class="t5 submitMoney">{{ $ml.get("enterMoney") }}</button>
     <ul class="more">
       <li class="t5">{{ $ml.get("confPol") }}</li>
@@ -123,6 +117,16 @@ export default {
 };
 </script>
 <style scoped>
+.toHover {
+  z-index: 1;
+  transition: box-shadow 0.5s;
+  padding-top: 8px !important;
+}
+.toHover:hover {
+  background-color: white !important;
+  z-index: 10;
+  box-shadow: 0 0 10px 4px #cbcaca;
+}
 .content {
   opacity: 0;
   transition: opacity 1.5s;
@@ -199,7 +203,6 @@ export default {
 .tc1 {
   width: 114px;
   text-align: left;
-  padding-bottom: 16px;
 }
 .tc2 {
   width: 259px;

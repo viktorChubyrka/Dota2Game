@@ -113,13 +113,13 @@ export default new MLCreate({
       sup: "Support",
       writeSup: "Write to support",
       supBut: "Apply",
-      q1: "1. How do I start playing?",
-      q2: "2. There was a ruiner in my team, what should I do?",
-      q3: "3. How do I withdraw money and are there any limits?",
-      q4: "4. How do I play with my friend?",
-      q5: "5. Why are strong opponents against me?",
-      q6: "6. I forgot my password, what should I do?",
-      q7: "7. I won the game, but the game results were canceled. Why?",
+      q1: " How do I start playing?",
+      q2: " There was a ruiner in my team, what should I do?",
+      q3: " How do I withdraw money and are there any limits?",
+      q4: " How do I play with my friend?",
+      q5: " Why are strong opponents against me?",
+      q6: " I forgot my password, what should I do?",
+      q7: " I won the game, but the game results were canceled. Why?",
       a1:
         'In order to start your first game, your balance must be at least 1 DWD (Darewin’s Dollar). You can purchase DWD in the Funds section. Next, click the "Find a Game" button or go to the "Games" section and select the "Current Matches" subsection. If there are no seats in accessible lobbies, then the platform will automatically create a lobby and enroll you in the upcoming match. Good luck!',
       a2:
@@ -194,6 +194,8 @@ export default new MLCreate({
       friendRequest: "Friend request from",
       accept: "Accept",
       cancel: "Reject",
+      len: "Languages",
+      apply: "Apply",
     }),
 
     new MLanguage("russian").create({
@@ -336,7 +338,7 @@ export default new MLCreate({
       online: "Онлайн",
       LogOut: "Выйти",
       pravSog: "Правовое соглашение",
-      trans: "Превод",
+      trans: "Перевод",
       vuv: "Вывод",
       balans: "Баланс",
       transMet: "Выберите способ перевода",
@@ -383,6 +385,8 @@ export default new MLCreate({
       friendRequest: " Запрос в друзья от",
       accept: "Добавить",
       cancel: "Отклонить",
+      len: "Языки",
+      apply: "Применить",
     }),
   ],
 });
