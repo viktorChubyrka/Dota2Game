@@ -33,7 +33,7 @@
           <th class="tc3 t5">{{ $ml.get("sum") }}</th>
           <th class="tc4 t5">{{ $ml.get("dateTime") }}</th>
         </tr>
-        <tr class="toHover" v-for="i in 6" :key="i">
+        <tr class="toHover1" v-for="i in 6" :key="i">
           <td class="tc1 t4">{{ i }}</td>
           <td class="tc2 t4">{{ $ml.get("win") }}</td>
           <td class="tc3 t4">+1 $</td>
@@ -117,14 +117,14 @@ export default {
 };
 </script>
 <style scoped>
-.toHover {
-  z-index: 1;
-  transition: box-shadow 0.5s;
-  padding-top: 8px !important;
+.toHover1 {
+  z-index: 1 !important;
+  transition: box-shadow 0.3s;
+  margin-bottom: 5px !important;
 }
-.toHover:hover {
+.toHover1:hover {
   background-color: white !important;
-  z-index: 10;
+  z-index: 10 !important;
   box-shadow: 0 0 10px 4px #cbcaca;
 }
 .content {
@@ -203,21 +203,19 @@ export default {
 .tc1 {
   width: 114px;
   text-align: left;
+  padding: 10px;
 }
 .tc2 {
   width: 259px;
   text-align: left;
-  padding-bottom: 16px;
 }
 .tc3 {
   width: 103px;
   text-align: left;
-  padding-bottom: 16px;
 }
 .tc4 {
   width: 156px;
   text-align: left;
-  padding-bottom: 16px;
 }
 .statTable {
   position: absolute;

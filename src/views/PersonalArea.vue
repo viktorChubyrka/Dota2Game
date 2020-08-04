@@ -585,27 +585,50 @@ path {
 }
 .readyIcon1 {
   position: absolute;
+  width: 50px;
+  height: 50px;
+  margin-left: -15px;
+  padding-left: 15px;
   left: 556px;
   top: 36px;
   color: #bdbdbd;
   opacity: 0;
+  cursor: pointer;
   transition: opacity 1.5s;
+}
+div.readyIcon1:hover svg g path.hoverIcon {
+  fill: #ffffff !important;
 }
 .readyIcon2 {
   position: absolute;
+  width: 70px;
+  height: 50px;
   left: 906px;
   top: 36px;
+  margin-left: -5px;
+  padding-left: 5px;
   color: #bdbdbd;
   opacity: 0;
+  cursor: pointer;
   transition: opacity 1.5s;
+}
+div.readyIcon2:hover svg path.hoverIcon {
+  fill: #ffffff !important;
 }
 .readyIcon3 {
   position: absolute;
+  width: 60px;
+  height: 60px;
+  margin-left: -5px;
+  padding-left: 5px;
   left: 1303px;
   top: 36px;
   color: #bdbdbd;
   opacity: 0;
   transition: opacity 1.5s;
+}
+div.readyIcon3:hover svg path.hoverIcon {
+  fill: #ffffff !important;
 }
 .readyIcon:hover {
   color: black !important;

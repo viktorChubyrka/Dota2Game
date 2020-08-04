@@ -38,24 +38,21 @@ export default {
 <style>
 .slide-right div {
   font-weight: 400;
-  transition: font-weight 0.1s, margin-left 0.8s, margin-right 0.8s;
+  transition: font-weight 0.1s;
 }
 .slide-right:hover .first {
-  margin-left: 20px;
   font-weight: 600;
   cursor: default;
 }
 .slide-right:hover .second {
-  margin-right: 20px;
   font-weight: 600;
   cursor: default;
 }
 .slideRight2 {
   font-weight: 400;
-  transition: font-weight 0.1s, margin-left 0.5s;
+  transition: font-weight 0.1s;
 }
 .slideRight2:hover {
-  margin-left: 20px;
   font-weight: 600;
 }
 .content {

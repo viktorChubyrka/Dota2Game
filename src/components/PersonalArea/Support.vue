@@ -73,14 +73,12 @@ export default {
 }
 .slide-right {
   font-weight: 400;
-  transition: font-weight 0.1s, margin-left 0.5s;
+  transition: font-weight 0.1s;
 }
 .slide-right:hover {
-  margin-left: 20px;
   font-weight: 600;
 }
 .text-to-left {
-  margin-left: 20px;
   font-weight: 600;
 }
 .oldQLink li {
@@ -138,6 +136,7 @@ html {
   cursor: default;
 }
 .liText {
+  background-color: #ececec;
   width: 785px;
   margin-bottom: 32px;
   padding-left: 10px;
@@ -145,7 +144,6 @@ html {
   cursor: default;
 }
 .liText:hover {
-  background-color: #ececec;
   -webkit-box-shadow: 0 0 10px 6px #cbcaca;
   -moz-box-shadow: 0 0 10px 6px #cbcaca;
   box-shadow: 0 0 10px 6px #cbcaca;

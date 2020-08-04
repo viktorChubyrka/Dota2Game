@@ -245,11 +245,12 @@ export default new Vuex.Store({
         },
         { withCredentials: true }
       );
+      console.log(data.data.data);
       if (data.data.data.status == 200) {
         state.commit("SetUserData", data.data.data.userModel);
         let user = state.getters.userData;
         if (user.partyID) state.dispatch("GetParty", user.partyID);
-      } else payload.context.$router.push("/");
+      } else payload.context.$router.push("/").catch(() => {});
     },
     ChangeName: async (state, payload) => {
       let data = await Axios.post(
@@ -260,6 +261,7 @@ export default new Vuex.Store({
         }
       );
       if (data.data.data.status != 200) payload.context.$router.push("/");
+      state.dispatch("GetUserData", payload.context);
     },
     ChangeContactInfo: async (state, payload) => {
       let data = await Axios.post(
@@ -270,6 +272,7 @@ export default new Vuex.Store({
         }
       );
       if (data.data.data.status != 200) payload.context.$router.push("/");
+      state.dispatch("GetUserData", payload.context);
     },
     SendFile: async (state, payload) => {
       let headers = {

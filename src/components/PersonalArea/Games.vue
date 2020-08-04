@@ -491,10 +491,9 @@ export default {
 }
 .slide-right {
   font-weight: 400;
-  transition: font-weight 0.1s, margin-left 0.5s;
+  transition: font-weight 0.1s;
 }
 .slide-right:hover {
-  margin-left: 20px !important;
   font-weight: 600;
 }
 .toHover {

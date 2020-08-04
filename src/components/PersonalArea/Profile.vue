@@ -155,16 +155,16 @@ export default {
     },
 
     changeContactData() {
-      let login = localStorage.getItem("login");
+      localStorage.setItem("login", this.login);
       this.$store.dispatch("ChangeContactInfo", {
         data: {
           email: this.email,
           phone: this.number,
           loginChange: this.login,
           steamID: this.steamID,
-          login,
+          login: this.user.login,
         },
-        consext: this,
+        context: this,
       });
     },
     SendFile() {
@@ -225,6 +225,7 @@ export default {
       this.show = 2;
     }
     let a = window.location.href;
+    console.log(a);
     setTimeout(() => {
       try {
         this.user.steamID = a.split("2Fid%2F")[1].split("&")[0];
@@ -239,11 +240,11 @@ export default {
 <style scoped>
 .slide-right {
   font-weight: 400;
-  transition: font-weight 0.1s, margin-left 0.5s;
+  transition: font-weight 0.1s;
 }
 .slide-right:hover {
-  margin-left: 20px;
   font-weight: 600;
+  cursor: pointer;
 }
 .LenTitle {
   position: absolute;
