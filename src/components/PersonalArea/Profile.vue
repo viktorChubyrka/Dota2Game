@@ -55,27 +55,23 @@
       />
       <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0" />
       <input type="hidden" name="openid.mode" value="checkid_setup" />
-      <input
-        type="hidden"
-        name="openid.realm"
-        value="https://dota2gamebot.herokuapp.com/personalArea/profile"
-      />
+      <input type="hidden" name="openid.realm" value="https://localhost:8080/personalArea/profile" />
       <input
         type="hidden"
         name="openid.return_to"
-        value="https://dota2gamebot.herokuapp.com/personalArea/profile"
+        value="https://localhost:8080/personalArea/profile"
       />
       <Button type="submit">Log in through Steam</Button>
     </form>
     <input
       id="steamID"
-      :class="{ t5: true, inputs: true, shine: !user.steamID.id }"
+      :class="{ t5: true, inputs: true, shine: user.steamID }"
       type="text"
       placeholder="SteamID"
-      v-model="user.steamID.name"
+      v-model="steamID.name"
     />
     <i
-      :style="`color:${user.steamID.id?'#2a475e':'rgb(187, 185, 185)'}`"
+      :style="`color:${user.steamID?'#2a475e':'rgb(187, 185, 185)'}`"
       class="fa fa-steam-square fa-2x"
     ></i>
     <div class="passPromo">
@@ -138,7 +134,7 @@ export default {
       email: "",
       number: "",
       login: "",
-      steamID: "",
+      steamID: { name: "", id: "" },
     };
   },
   methods: {
@@ -210,7 +206,7 @@ export default {
     if (this.user.email && !this.email) this.email = this.user.email;
     if (this.user.number && !this.number) this.number = this.user.number;
     if (this.user.login && !this.login) this.login = this.user.login;
-    if (this.user.steamID.id && !this.steamID) this.steamID = this.user.steamID;
+    if (this.user.steamID && !this.steamID) this.steamID = this.user.steamID;
   },
   created() {
     setTimeout(() => (this.show = true), 10);
@@ -228,8 +224,9 @@ export default {
 
     setTimeout(() => {
       try {
-        this.user.steamID.name = a.split("2Fid%2F")[1].split("&")[0];
+        this.user.steamID.id = a.split("2Fid%2F")[1].split("&")[0];
         console.log(a.split("2Fid%2F")[1].split("&")[0]);
+        changeContactData();
       } catch {}
     }, 2000);
   },
