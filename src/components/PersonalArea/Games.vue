@@ -178,7 +178,12 @@
           <tr class="toHover" v-for="el in ActiveMatches" :key="el._id">
             <td class="t4 players">{{ button == 1 ? $ml.get("solo") : $ml.get("party") }}</td>
             <td class="t4">
-              <Timer :date="el.creationDate" :partyLeader="el.creatorLogin" />
+              <Timer
+                :date="el.creationDate"
+                :matchNum="el.matchNumber"
+                :matchType="el.gameType"
+                :partyLeader="el.creatorLogin"
+              />
               {{ $ml.get("minut") }}
             </td>
             <td>

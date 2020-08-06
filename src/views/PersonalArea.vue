@@ -372,14 +372,19 @@ export default {
       );
     },
     SearchGame() {
-      if (this.user.steamID)
+      if (this.user.steamID) {
         this.socket.send(
           JSON.stringify({
             login: localStorage.getItem("login"),
             type: "SearchGame",
           })
         );
-      else this.$router.push("profile");
+        this.socket.send(
+          JSON.stringify({
+            type: "StartGame",
+          })
+        );
+      } else this.$router.push("profile");
     },
     FindPartyGame() {
       if (this.user.steamID)
@@ -585,10 +590,9 @@ path {
 }
 .readyIcon1 {
   position: absolute;
-  width: 50px;
+  width: 60px;
   height: 50px;
   margin-left: -15px;
-  padding-left: 15px;
   left: 556px;
   top: 36px;
   color: #bdbdbd;
@@ -596,36 +600,45 @@ path {
   cursor: pointer;
   transition: opacity 1.5s;
 }
+.readyIcon1 svg {
+  margin-left: 15px;
+}
 div.readyIcon1:hover svg g path.hoverIcon {
   fill: #ffffff !important;
 }
 .readyIcon2 {
   position: absolute;
-  width: 70px;
+  width: 90px;
   height: 50px;
   left: 906px;
   top: 36px;
-  margin-left: -5px;
-  padding-left: 5px;
+  margin-left: -15px;
+
   color: #bdbdbd;
   opacity: 0;
   cursor: pointer;
   transition: opacity 1.5s;
+}
+.readyIcon2 svg {
+  margin-left: 15px;
 }
 div.readyIcon2:hover svg path.hoverIcon {
   fill: #ffffff !important;
 }
 .readyIcon3 {
   position: absolute;
-  width: 60px;
+  width: 80px;
   height: 60px;
-  margin-left: -5px;
-  padding-left: 5px;
+  margin-left: -15px;
+
   left: 1303px;
   top: 36px;
   color: #bdbdbd;
   opacity: 0;
   transition: opacity 1.5s;
+}
+.readyIcon3 svg {
+  margin-left: 15px;
 }
 div.readyIcon3:hover svg path.hoverIcon {
   fill: #ffffff !important;

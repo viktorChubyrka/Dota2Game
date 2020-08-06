@@ -264,6 +264,11 @@ export default new Vuex.Store({
       state.dispatch("GetUserData", payload.context);
     },
     ChangeContactInfo: async (state, payload) => {
+      let name = await Axios.get(
+        "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=DD3E4897973E8764BB4DCE6B44F266CA&format=json&steamids=" +
+          payload.data.steamID
+      );
+      console.log(name);
       let data = await Axios.post(
         `${url}/api/user/actions/changeContactInfo`,
         payload.data,
