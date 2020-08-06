@@ -33,7 +33,7 @@
     <div style="top:413px" class="titleBlock">
       <div class="t3 slide-right">{{ $ml.get("cont") }}</div>
       <button
-        v-if="user.login == login && user.number ==number && user.steamID == steamID && user.email == email"
+        v-if="user.login == login && user.number ==number && user.steamID.id == steamID.id && user.email == email"
         class="t4"
       >{{ $ml.get("change") }}</button>
       <button v-else class="t4" @click="changeContactData()">{{ $ml.get("apply") }}</button>
@@ -69,7 +69,7 @@
     </form>
     <input
       id="steamID"
-      :class="{ t5: true, inputs: true, shine: user.steamID }"
+      :class="{ t5: true, inputs: true, shine: !user.steamID }"
       type="text"
       placeholder="SteamID"
       v-model="steamID.name"
@@ -210,7 +210,8 @@ export default {
     if (this.user.email && !this.email) this.email = this.user.email;
     if (this.user.number && !this.number) this.number = this.user.number;
     if (this.user.login && !this.login) this.login = this.user.login;
-    if (this.user.steamID && !this.steamID) this.steamID = this.user.steamID;
+    if (this.user.steamID && !this.steamID.name)
+      this.steamID = this.user.steamID;
   },
   created() {
     setTimeout(() => (this.show = true), 10);
