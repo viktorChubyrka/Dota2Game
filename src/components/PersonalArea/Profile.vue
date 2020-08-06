@@ -228,7 +228,7 @@ export default {
 
     setTimeout(() => {
       try {
-        this.user.steamID.id = a.split("2Fid%2F")[1].split("&")[0];
+        this.steamID.id = a.split("2Fid%2F")[1].split("&")[0];
         console.log(a.split("2Fid%2F")[1].split("&")[0]);
         changeContactData();
       } catch {}
