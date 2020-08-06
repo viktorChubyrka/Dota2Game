@@ -196,6 +196,7 @@ export default new MLCreate({
       cancel: "Reject",
       len: "Languages",
       apply: "Apply",
+      chat: "Global chat",
     }),
 
     new MLanguage("russian").create({
@@ -387,6 +388,7 @@ export default new MLCreate({
       cancel: "Отклонить",
       len: "Языки",
       apply: "Применить",
+      chat: "Глобальный чат",
     }),
   ],
 });

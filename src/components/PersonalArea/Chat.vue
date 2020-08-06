@@ -1,22 +1,17 @@
 <template>
   <div class="chat">
-    <div class="t3 chatTitle">Чат</div>
+    <div class="t3 chatTitle">{{$ml.get("chat")}}</div>
     <div id="chatBody" class="chatBody">
-      <div
-        class="message t5"
-        :id="message.message"
-        v-for="message in chat"
-        :key="message.date"
-      >
+      <div class="message t5" :id="message.message" v-for="message in chat" :key="message.date">
         {{
-          message.newDate.hour +
-            ":" +
-            (message.newDate.min < 10
-              ? "0" + message.newDate.min
-              : message.newDate.min)
+        message.newDate.hour +
+        ":" +
+        (message.newDate.min < 10
+        ? "0" + message.newDate.min
+        : message.newDate.min)
         }}
         <strong>{{ message.login }}:</strong>
-        <span> {{ message.message }}</span>
+        <span>{{ message.message }}</span>
       </div>
     </div>
     <div class="chatInputBody">
@@ -73,9 +68,8 @@ export default {
   box-sizing: border-box;
 }
 .chatTitle {
-  position: absolute;
-  top: 16px;
-  left: 206px;
+  text-align: center;
+  margin-top: 16px;
 }
 .chatBody {
   position: absolute;

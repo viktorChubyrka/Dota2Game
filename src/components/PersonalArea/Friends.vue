@@ -7,22 +7,18 @@
             <div class="circle"></div>
           </td>
           <td style="padding-bottom:15px;">
-            <div class="t3">Ally</div>
+            <div class="t5">Ally</div>
           </td>
           <td
             class="addFriend"
             style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
           >
-            <i
-              :id="`plus${i}1`"
-              @click="Click(1, i)"
-              class="fa fa-plus-square fa-2x"
-            ></i>
+            <i :id="`plus${i}1`" @click="Click(1, i)" class="fa fa-plus-square fa-lg"></i>
           </td>
         </tr>
       </tbody>
     </table>
-    <div class="t3 lastesPlayers">{{ $ml.get("last") }}</div>
+    <div class="t4 lastesPlayers">{{ $ml.get("last") }}</div>
     <Chat class="chat" />
     <div class="partyContainer">
       <PartySlot
@@ -34,34 +30,25 @@
       />
       <PartySlot :party="party || ''" :index="i - 1" v-for="i in 4" :key="i" />
     </div>
-    <input
-      :placeholder="sh()"
-      class="searchFriend"
-      v-model="search"
-      type="text"
-    />
+    <input :placeholder="sh()" class="searchFriend" v-model="search" type="text" />
     <div
       v-if="search == ''"
-      class="t3"
+      class="t4"
       style="position: absolute;
 width: 82px;
 height: 38px;
-left: 0px;
+left: 149px;
 top: 240px;"
-    >
-      {{ $ml.get("frend") }}
-    </div>
+    >{{ $ml.get("frend") }}</div>
     <div
       v-else
-      class="t3"
+      class="t4"
       style="position: absolute;
 width: 82px;
 height: 38px;
-left: 0px;
+left: 149px;
 top: 240px;"
-    >
-      {{ $ml.get("search") }}
-    </div>
+    >{{ $ml.get("search") }}</div>
     <table class="searchTable">
       <tbody>
         <tr style v-for="(user, i) in allUsers" :key="user._id">
@@ -69,7 +56,7 @@ top: 240px;"
             <div class="circle"></div>
           </td>
           <td style="padding-bottom:15px;">
-            <div class="t3">{{ search == "" ? user : user.login }}</div>
+            <div class="t5">{{ search == "" ? user : user.login }}</div>
           </td>
           <td
             class="addFriend"
@@ -79,14 +66,9 @@ top: 240px;"
               v-if="search != ''"
               :id="`plus${i}2`"
               @click="Click(2, i), addFriend(user.login)"
-              class="fa fa-plus-square fa-2x"
+              class="fa fa-plus-square fa-lg"
             ></i>
-            <i
-              v-else
-              :id="`plus${i}2`"
-              @click="Click(2, i)"
-              class="fa fa-ellipsis-h fa-3x"
-            ></i>
+            <i v-else :id="`plus${i}2`" @click="Click(2, i)" class="fa fa-ellipsis-h fa-2x"></i>
           </td>
         </tr>
       </tbody>
@@ -181,7 +163,7 @@ export default {
 .chat {
   position: absolute;
   top: 184px;
-  right: 40px;
+  right: 149px;
 }
 
 .lastesPlayersTable tbody {
@@ -190,20 +172,37 @@ export default {
   height: 300px;
   width: 100%;
 }
+.lastesPlayersTable tbody::-webkit-scrollbar {
+  width: 2px;
+}
+
+.lastesPlayersTable tbody::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 3px;
+}
+
+.lastesPlayersTable tbody::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 3px;
+}
 .searchFriend {
   position: absolute;
-  width: 360px;
-  height: 44px;
-  left: 0px;
+  width: 277px;
+  height: 34px;
+  left: 149px;
   top: 180px;
+  font-size: 12px;
   padding-left: 12px;
+  border-radius: 8px;
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
 }
 
 .searchTable {
   position: absolute;
   width: 380px;
   height: 24px;
-  left: 0px;
+  left: 149px;
   top: 295px;
 }
 .searchTable tbody {
@@ -212,23 +211,36 @@ export default {
   height: 300px;
   width: 100%;
 }
+.searchTable tbody::-webkit-scrollbar {
+  width: 2px;
+}
+
+.searchTable tbody::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 3px;
+}
+
+.searchTable tbody::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 3px;
+}
 .lastesPlayers {
   position: absolute;
   width: 112px;
   height: 38px;
-  left: 500px;
+  left: 582px;
   top: 240px;
 }
 .lastesPlayersTable {
   width: 358px;
   position: absolute;
-  left: 500px;
+  left: 582px;
   top: 290px;
   height: 200px;
 }
 .circle {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   margin-right: 16pxx;
   border-radius: 12px;
   background-color: #1f2430;
