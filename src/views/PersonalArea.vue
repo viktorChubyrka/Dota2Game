@@ -379,11 +379,6 @@ export default {
             type: "SearchGame",
           })
         );
-        this.socket.send(
-          JSON.stringify({
-            type: "StartGame",
-          })
-        );
       } else this.$router.push("profile");
     },
     FindPartyGame() {
