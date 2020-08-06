@@ -69,13 +69,13 @@
     </form>
     <input
       id="steamID"
-      :class="{ t5: true, inputs: true, shine: !user.steamID }"
+      :class="{ t5: true, inputs: true, shine: !user.steamID.id }"
       type="text"
       placeholder="SteamID"
       v-model="user.steamID.name"
     />
     <i
-      :style="`color:${user.steamID?'#2a475e':'rgb(187, 185, 185)'}`"
+      :style="`color:${user.steamID.id?'#2a475e':'rgb(187, 185, 185)'}`"
       class="fa fa-steam-square fa-2x"
     ></i>
     <div class="passPromo">
@@ -161,7 +161,7 @@ export default {
           email: this.email,
           phone: this.number,
           loginChange: this.login,
-          steamID: this.steamID.name,
+          steamID: this.steamID.id,
           login: this.user.login,
         },
         context: this,
@@ -210,8 +210,7 @@ export default {
     if (this.user.email && !this.email) this.email = this.user.email;
     if (this.user.number && !this.number) this.number = this.user.number;
     if (this.user.login && !this.login) this.login = this.user.login;
-    if (this.user.steamID && !this.steamID)
-      this.steamID = this.user.steamID.name;
+    if (this.user.steamID.id && !this.steamID) this.steamID = this.user.steamID;
   },
   created() {
     setTimeout(() => (this.show = true), 10);
@@ -226,7 +225,7 @@ export default {
       this.show = 2;
     }
     let a = window.location.href;
-    console.log(a);
+
     setTimeout(() => {
       try {
         this.user.steamID.name = a.split("2Fid%2F")[1].split("&")[0];
