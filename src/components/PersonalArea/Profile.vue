@@ -55,11 +55,15 @@
       />
       <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0" />
       <input type="hidden" name="openid.mode" value="checkid_setup" />
-      <input type="hidden" name="openid.realm" value="https://localhost:8080/personalArea/profile" />
+      <input
+        type="hidden"
+        name="openid.realm"
+        value="https://dota2gamebot.herokuapp.com/personalArea/profile"
+      />
       <input
         type="hidden"
         name="openid.return_to"
-        value="https://localhost:8080/personalArea/profile"
+        value="https://dota2gamebot.herokuapp.com/personalArea/profile"
       />
       <Button type="submit">Log in through Steam</Button>
     </form>
