@@ -34,44 +34,52 @@
       >{{ $ml.get("match1") }}</div>
       <div :class="{ tabContent: true, tab1C: true, tabCSelected: selected == 1 }">
         <table class="gamesTable">
-          <tr>
-            <th
-              class="t5"
-              style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
-            >{{ $ml.get("matchNum").split(" ")[0] }}</th>
-            <th
-              class="t5"
-              style="color: #828282;width:110px;text-align: left;padding-bottom:20px"
-            >{{ $ml.get("result") }}</th>
-            <th
-              class="t5"
-              style="width:100px;color: #828282;text-align: left;padding-bottom:20px"
-            >{{ $ml.get("matchType") }}</th>
-            <th style="width:678px;"></th>
-            <th
-              class="t5"
-              style="color: #828282;width:190px;text-align: left;"
-            >{{ $ml.get("dateTime") }}</th>
-            <th
-              class="t5"
-              style="color: #828282;width:117px;text-align: right;"
-            >{{ $ml.get("matchNum").split(" ")[0] }} Dotabuff</th>
-          </tr>
-          <tr class="toHover" v-for="i in 10" :key="i">
-            <td class="t4 players">№ {{ i }}</td>
-            <td class="t4">{{ $ml.get("win") }}</td>
-            <td class="t4">{{ button == 1 ? $ml.get("solo") : $ml.get("party") }}</td>
-            <td>
-              <a
-                v-if="i == 1"
-                class="t4 linkTable"
-                style="float:right;color:#35A7FF;margin-right:80px"
-                href
-              >{{ $ml.get("sendRep") }}</a>
-            </td>
-            <td class="t4">21/05/2020 11:31:32</td>
-            <td class="t4" style="padding-left:20px">3522211212</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th
+                class="t5"
+                style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
+              >{{ $ml.get("matchNum").split(" ")[0] }}</th>
+              <th
+                class="t5"
+                style="color: #828282;width:110px;text-align: left;padding-bottom:20px"
+              >{{ $ml.get("result") }}</th>
+              <th
+                class="t5"
+                style="width:100px;color: #828282;text-align: left;padding-bottom:20px"
+              >{{ $ml.get("matchType") }}</th>
+              <th style="width:678px;"></th>
+              <th
+                class="t5"
+                style="color: #828282;width:190px;text-align: left;"
+              >{{ $ml.get("dateTime") }}</th>
+              <th
+                class="t5"
+                style="color: #828282;width:117px;text-align: right;"
+              >{{ $ml.get("matchNum").split(" ")[0] }} Dotabuff</th>
+            </tr>
+            <tr class="toHover" v-for="(match,i) in user.matches.reverse()" :key="i">
+              <td class="t4 players">№ {{ i+1 }}</td>
+              <td class="t4">{{ match.status }}</td>
+              <td class="t4">{{match.gameType}}</td>
+              <td>
+                <a
+                  v-if="i == 1"
+                  class="t4 linkTable"
+                  style="float:right;color:#35A7FF;margin-right:80px"
+                  href
+                >{{ $ml.get("sendRep") }}</a>
+              </td>
+              <td class="t4">
+                {{
+                `${match.creationDate.split("T")[0]} ${
+                match.creationDate.split("T")[1].split(".")[0]
+                }`
+                }}
+              </td>
+              <td class="t4" style="padding-left:20px">{{ match.matchNumber }}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div
@@ -481,6 +489,23 @@ export default {
 };
 </script>
 <style scoped>
+.gamesTable tbody {
+  display: block;
+  overflow-y: scroll;
+}
+.gamesTable tbody::-webkit-scrollbar {
+  width: 2px;
+}
+
+.gamesTable tbody::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 3px;
+}
+
+.gamesTable tbody::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 3px;
+}
 .linkTable:hover {
   color: #bf0603 !important;
   cursor: pointer;
