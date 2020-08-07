@@ -3,7 +3,7 @@
     <Header headerColor="#f2f2f2" class="header" />
     <div class="logo"></div>
     <img
-      :class="{hidetImg:true,showImg:$store.getters.currentAnimation == 3 || $store.getters.anim2}"
+      :class="{shine:true,hidetImg:true,showImg:$store.getters.currentAnimation == 3 || $store.getters.anim2}"
       style="position: absolute;
 width: 464px;
 height: 612px;
@@ -39,10 +39,13 @@ import Header from "../components/General/Header";
 import Lang from "./General/Lang";
 
 export default {
-  components: { Header, Lang }
+  components: { Header, Lang },
 };
 </script>
 <style>
+.shine:hover {
+  box-shadow: 0 0 10px 6px #cbcaca;
+}
 .main-div3 {
   width: 100%;
   height: 100vh;
@@ -72,14 +75,14 @@ export default {
 }
 .hidetImg {
   opacity: 0;
-  transition: opacity 2s;
+  transition: opacity 2s, box-shadow 0.5s;
 }
 .showImg {
   opacity: 1;
 }
 .hidetText {
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1s, box-shadow 0.5;
 }
 .showText {
   opacity: 1;

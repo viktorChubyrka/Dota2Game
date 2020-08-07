@@ -110,7 +110,7 @@ export default {
     return {
       ActiveSlide: 1,
       countdown: 5000,
-      counter: [0, 1, 1, 1]
+      counter: [0, 1, 1, 1],
     };
   },
   methods: {
@@ -134,16 +134,20 @@ export default {
     CounterTimer(i) {
       this.counter[i - 1] = 1;
       setTimeout(() => (this.counter[i] -= 1), 500);
-    }
+    },
   },
   created() {
     this.CountdownTimer();
-  }
+  },
 };
 </script>
 <style>
-.active {
+div.active {
   width: 1132px !important;
+  z-index: 10 !important;
+}
+.active:hover {
+  box-shadow: 0 0 10px 6px #1f2430;
 }
 .slidet1 {
   right: 1524px !important;
@@ -197,7 +201,7 @@ export default {
   right: 0px;
   z-index: 4;
   background: url(../../assets/Principes/fourth.jpg) no-repeat;
-  transition: width 1s;
+  transition: width 1s, box-shadow 0.5s;
 }
 #second {
   width: 196px;
@@ -206,7 +210,7 @@ export default {
   right: 196px;
   z-index: 3;
   background: url(../../assets/Principes/third.jpg) no-repeat;
-  transition: width 1s, right 1s;
+  transition: width 1s, right 1s, box-shadow 0.5s;
 }
 #third {
   width: 196px;
@@ -215,7 +219,7 @@ export default {
   right: 392px;
   z-index: 2;
   background: url(../../assets/Principes/second.jpg) no-repeat;
-  transition: width 1s, right 1s;
+  transition: width 1s, right 1s, box-shadow 0.5s;
 }
 
 #fourth {
@@ -225,6 +229,6 @@ export default {
   right: 588px;
   z-index: 1;
   background: url(../../assets/Principes/first.jpg) no-repeat;
-  transition: width 1s, right 1s;
+  transition: width 1s, right 1s, box-shadow 0.5s;
 }
 </style>

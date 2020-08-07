@@ -37,7 +37,7 @@
       style="position: absolute;
 width: 82px;
 height: 38px;
-left: 149px;
+left: 100px;
 top: 240px;"
     >{{ $ml.get("frend") }}</div>
     <div
@@ -46,7 +46,7 @@ top: 240px;"
       style="position: absolute;
 width: 82px;
 height: 38px;
-left: 149px;
+left: 100px;
 top: 240px;"
     >{{ $ml.get("search") }}</div>
     <table class="searchTable">
@@ -92,7 +92,7 @@ export default {
     Click(tableIndex, i) {
       let el = document.getElementById(`plus${i}${tableIndex}`);
       el.style = "color:#908e8e!important";
-      setTimeout(() => (el.style = ""), 100);
+      setTimeout(() => (el.style = "display:none"), 300);
     },
     addFriend(login) {
       this.socket.send(
@@ -163,7 +163,7 @@ export default {
 .chat {
   position: absolute;
   top: 184px;
-  right: 149px;
+  right: 198px;
 }
 
 .lastesPlayersTable tbody {
@@ -189,7 +189,7 @@ export default {
   position: absolute;
   width: 277px;
   height: 34px;
-  left: 149px;
+  left: 100px;
   top: 180px;
   font-size: 12px;
   padding-left: 12px;
@@ -202,7 +202,7 @@ export default {
   position: absolute;
   width: 380px;
   height: 24px;
-  left: 149px;
+  left: 100px;
   top: 295px;
 }
 .searchTable tbody {
@@ -228,13 +228,13 @@ export default {
   position: absolute;
   width: 112px;
   height: 38px;
-  left: 582px;
+  left: 533px;
   top: 240px;
 }
 .lastesPlayersTable {
   width: 358px;
   position: absolute;
-  left: 582px;
+  left: 533px;
   top: 290px;
   height: 200px;
 }
@@ -249,7 +249,7 @@ export default {
   position: absolute;
   width: 1324px;
   height: 121px;
-  left: 149px;
+  left: 100px;
   top: 38px;
   background: #1f2430;
   display: flex;

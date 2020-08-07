@@ -8,18 +8,14 @@
                 
                 left: 200px;
                 top: 202px;"
-        class="t3"
-      >
-        {{ $ml.get("header5") }}
-      </div>
+        class="t3 slide-right"
+      >{{ $ml.get("header5") }}</div>
       <div
         style="position: absolute;
                 left: 970px;
                 top: 202px;"
-        class="t3"
-      >
-        {{ $ml.get("ask") }}
-      </div>
+        class="t3 slide-right"
+      >{{ $ml.get("ask") }}</div>
       <table class="t4" id="contactTable">
         <tr>
           <td>{{ $ml.get("phone") }}</td>
@@ -69,9 +65,7 @@
                 border-size:0px;
                 background: #1F2430;
                 border-radius: 4px;"
-        >
-          {{ $ml.get("ask") }}
-        </button>
+        >{{ $ml.get("ask") }}</button>
       </div>
     </div>
     <div class="second-div">
@@ -82,46 +76,52 @@
                 bottom:58px;
                 color:#e0e0e0"
         class="t6"
-      >
-        Darewin’s club, 2020. All rights reserved.
-      </div>
+      >Darewin’s club, 2020. All rights reserved.</div>
       <div
         style="position: absolute;
                 left: 612px;
                 bottom:288px;
                 color:#f2f2f2"
-        class="t3"
-      >
-        {{ $ml.get("map") }}
-      </div>
+        class="t3 slide-right"
+      >{{ $ml.get("map") }}</div>
       <ul class="t6" id="pageMap">
         <li>
-          <a @click="SetCurentPage(1)" href="#page1">{{
+          <a @click="SetCurentPage(1)" href="#page1">
+            {{
             $ml.get("header1")
-          }}</a>
+            }}
+          </a>
         </li>
         <li>
-          <a @click="SetCurentPage(2)" href="#page2">{{
+          <a @click="SetCurentPage(2)" href="#page2">
+            {{
             $ml.get("header2")
-          }}</a>
+            }}
+          </a>
         </li>
         <li>
-          <a @click="SetCurentPage(3)" href="#page3">{{
+          <a @click="SetCurentPage(3)" href="#page3">
+            {{
             $ml.get("header3")
-          }}</a>
+            }}
+          </a>
         </li>
         <li>
-          <a @click="SetCurentPage(4)" href="#page4">{{
+          <a @click="SetCurentPage(4)" href="#page4">
+            {{
             $ml.get("header4")
-          }}</a>
+            }}
+          </a>
         </li>
         <li>
           <a href="/personalArea">{{ $ml.get("userCab") }}</a>
         </li>
         <li>
-          <a @click="SetCurentPage(5)" href="#page5">{{
+          <a @click="SetCurentPage(5)" href="#page5">
+            {{
             $ml.get("header5")
-          }}</a>
+            }}
+          </a>
         </li>
       </ul>
       <div
@@ -129,10 +129,8 @@
                 left: 920px;
                 bottom:288px;
                 color:#f2f2f2"
-        class="t3"
-      >
-        {{ $ml.get("pp") }}
-      </div>
+        class="t3 slide-right"
+      >{{ $ml.get("pp") }}</div>
       <ul style="left:920px;bottom:166px" class="t6" id="pageMap">
         <li>{{ $ml.get("usePol") }}</li>
         <li>{{ $ml.get("confPol") }}</li>
@@ -140,14 +138,18 @@
       </ul>
       <ul class="t4" id="fotterLogInUl">
         <li>
-          <router-link class="link" to="/login">{{
+          <router-link class="link" to="/login">
+            {{
             $ml.get("logIn")
-          }}</router-link>
+            }}
+          </router-link>
         </li>
         <li>
-          <router-link class="link" to="/registration">{{
+          <router-link class="link" to="/registration">
+            {{
             $ml.get("register")
-          }}</router-link>
+            }}
+          </router-link>
         </li>
       </ul>
       <Lang />
@@ -200,6 +202,13 @@ export default {
 };
 </script>
 <style>
+.slide-right {
+  font-weight: 400;
+  transition: font-weight 0.1s;
+}
+.slide-right:hover {
+  font-weight: 600;
+}
 .first-div {
   width: 100%;
   height: 61vh;
