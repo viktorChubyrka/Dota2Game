@@ -25,10 +25,10 @@ export default new Vuex.Store({
     chat: [],
     activeMatchesParty: [],
     upcomingMatchesParty: [],
-    pastMatchesParty: [],
+    playingMatchesParty: [],
     activeMatches: [],
     upcomingMatches: [],
-    pastMatches: [],
+    playingMatches: [],
     selectedTab: 2,
     party: false,
     ready: 0,
@@ -49,8 +49,8 @@ export default new Vuex.Store({
     upcomingMatches: (state) => {
       return state.upcomingMatches;
     },
-    pastMatches: (state) => {
-      return state.pastMAtches;
+    playingMatches: (state) => {
+      return state.playingMatches;
     },
     activeMatchesParty: (state) => {
       return state.activeMatchesParty;
@@ -58,8 +58,8 @@ export default new Vuex.Store({
     upcomingMatchesParty: (state) => {
       return state.upcomingMatchesParty;
     },
-    pastMatchesParty: (state) => {
-      return state.pastMAtchesParty;
+    playingMatchesParty: (state) => {
+      return state.playingMAtchesParty;
     },
     chat: (state) => {
       return state.chat;
@@ -120,8 +120,8 @@ export default new Vuex.Store({
     setActiveMatches: (state, payload) => {
       state.activeMatches = payload;
     },
-    setPastMatches: (state, payload) => {
-      state.pastMatches = payload;
+    setPlayingMatches: (state, payload) => {
+      state.playingMatches = payload;
     },
     setUpcomingMatchesParty: (state, payload) => {
       state.upcomingMatchesParty = payload;
@@ -129,8 +129,8 @@ export default new Vuex.Store({
     setActiveMatchesParty: (state, payload) => {
       state.activeMatchesParty = payload;
     },
-    setPastMatchesParty: (state, payload) => {
-      state.pastMatchesParty = payload;
+    setPlayingMatchesParty: (state, payload) => {
+      state.playingMatchesParty = payload;
     },
     setChat: (state, payload) => {
       state.chat = [...state.chat, ...payload.chat];
@@ -247,7 +247,9 @@ export default new Vuex.Store({
       );
       console.log(data.data.data);
       if (data.data.data.status == 200) {
-        state.commit("SetUserData", data.data.data.userModel);
+        let userToSave = data.data.data.userModel;
+        userToSave.matches = data.data.data.userModel.matches.reverse();
+        state.commit("SetUserData", userToSave);
         let user = state.getters.userData;
         if (user.partyID) state.dispatch("GetParty", user.partyID);
       } else payload.context.$router.push("/").catch(() => {});
@@ -314,12 +316,21 @@ export default new Vuex.Store({
       let act = false;
       let up = false;
       let active = [];
-      let past = [];
+      let playing = [];
       let upcoming = [];
       let activeParty = [];
-      let pastParty = [];
+      let playingParty = [];
       let upcomingParty = [];
       matches.data.forEach(async (el) => {
+        if (el.status == "playing") {
+          if (el.gameType == "Party") {
+            p1 = await state.dispatch("GetPartyPlayers", el.playersT1[0]);
+            p2 = await state.dispatch("GetPartyPlayers", el.playersT2[0]);
+            el.playersT1 = p1;
+            el.playersT2 = p2;
+            playingParty.push(el);
+          } else playing.push(el);
+        }
         if (el.gameType == "Solo") {
           if (el.status == "upcoming") {
             if (
@@ -371,10 +382,10 @@ export default new Vuex.Store({
         }
       });
       state.commit("setUpcomingMatches", upcoming);
-      state.commit("setPastMatches", past);
+      state.commit("setPlayingMatches", playing);
       state.commit("setActiveMatches", active);
       state.commit("setUpcomingMatchesParty", upcomingParty);
-      state.commit("setPastMatchesParty", pastParty);
+      state.commit("setPlayingMatchesParty", playingParty);
       state.commit("setActiveMatchesParty", activeParty);
       state.dispatch("GetAllReadyUsers");
     },

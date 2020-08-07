@@ -34,7 +34,7 @@
       >{{ $ml.get("match1") }}</div>
       <div :class="{ tabContent: true, tab1C: true, tabCSelected: selected == 1 }">
         <table class="gamesTable">
-          <tbody>
+          <tbody v-if="user && user.matches">
             <tr>
               <th
                 class="t5"
@@ -58,13 +58,13 @@
                 style="color: #828282;width:117px;text-align: right;"
               >{{ $ml.get("matchNum").split(" ")[0] }} Dotabuff</th>
             </tr>
-            <tr class="toHover" v-for="(match,i) in user.matches.reverse()" :key="i">
+            <tr class="toHover" v-for="(match,i) in user.matches " :key="i">
               <td class="t4 players">№ {{ i+1 }}</td>
               <td class="t4">{{ match.status }}</td>
               <td class="t4">{{match.gameType}}</td>
               <td>
                 <a
-                  v-if="i == 1"
+                  v-if="i+1 == 1"
                   class="t4 linkTable"
                   style="float:right;color:#35A7FF;margin-right:80px"
                   href
@@ -140,14 +140,20 @@
           style="margin:36px 0 16px 0;width:170px"
         >{{ $ml.get("playing") }}</div>
         <table class="gamesTable">
-          <tr class="toHover" v-for="i in 5" :key="i">
-            <td style="width:87px" class="players">10/10</td>
+          <tr class="toHover" v-for="(el,i) in PlayingMatches" :key="i">
+            <td style="width:87px" class="players">{{[...el.playersT1,...el.playersT2].length}}/10</td>
             <td style="width:336px;text-align: left;">
-              <span class="dot" v-for="i in 10" :key="i"></span>
+              <span class="dot" v-for="i in [...el.playersT1,...el.playersT2]" :key="i"></span>
             </td>
             <td style="width:562px;"></td>
-            <td style="width:190px;text-align:left;" class="t4">21/05/2020 11:31:32</td>
-            <td class="t4" style="width:113px;padding-left:20px">3522211212</td>
+            <td style="width:190px;text-align:left;" class="t4">
+              {{
+              `${el.creationDate.split("T")[0]} ${
+              el.creationDate.split("T")[1].split(".")[0]
+              }`
+              }}
+            </td>
+            <td class="t4" style="width:113px;padding-left:20px">{{ el.matchNumber }}</td>
           </tr>
         </table>
       </div>
@@ -470,6 +476,9 @@ export default {
     },
     UpcomingMatches() {
       return this.$store.getters.upcomingMatches;
+    },
+    PlayingMatches() {
+      return this.$store.getters.playingMatches;
     },
     ActiveMatchesParty() {
       return this.$store.getters.activeMatchesParty;
