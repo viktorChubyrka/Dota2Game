@@ -25,18 +25,11 @@
 
     <div class="titleBlock">
       <div class="t3 slide-right">{{ $ml.get("aboutYou") }}</div>
-      <button v-if="user.name == name && user.surname==surname" class="t4">{{ $ml.get("change") }}</button>
-      <button v-else class="t4" @click="changeName()">{{ $ml.get("apply") }}</button>
     </div>
     <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="name" />
     <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="surname" />
     <div style="top:413px" class="titleBlock">
       <div class="t3 slide-right">{{ $ml.get("cont") }}</div>
-      <button
-        v-if="user.login == login && user.number ==number && user.steamID.id == steamID.id && user.email == email"
-        class="t4"
-      >{{ $ml.get("change") }}</button>
-      <button v-else class="t4" @click="changeContactData()">{{ $ml.get("apply") }}</button>
     </div>
     <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="login" />
     <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="email" />
@@ -125,6 +118,12 @@
         </tr>
       </table>
     </div>
+
+    <button
+      v-if="user.login != login || user.number != number || user.steamID.id != steamID.id || user.email != email || user.name != name || user.surname!= surname "
+      class="t4 change-btn"
+      @click="changeContactData(), changeName()"
+    >{{ $ml.get("apply") }}</button>
   </div>
 </template>
 <script>
@@ -452,8 +451,10 @@ export default {
 .titleBlock div {
   float: left;
 }
-.titleBlock button {
-  float: right;
+.change-btn {
+  position: absolute;
+  left: 1400px;
+  top: 560px;
   width: 170px;
   height: 40px;
   background-color: #f2f2f2;
@@ -462,11 +463,11 @@ export default {
   color: #1f2430;
   transition: color 0.5s, background-color 0.5s;
 }
-.titleBlock button:hover {
+.change-btn:hover {
   color: #f2f2f2;
   background-color: #1f2430;
 }
-.titleBlock button:active {
+.change-btn:active {
   background-color: #394154;
 }
 .passPromo {
