@@ -29,6 +29,9 @@ body {
   font-family: "Roboto";
   margin: 0;
   padding: 0;
+  -webkit-user-select:none;
+  -moz-user-select-none;
+  -ms-user-select:none;
 }
 .t1,
 .t2,
