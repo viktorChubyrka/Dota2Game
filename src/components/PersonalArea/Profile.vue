@@ -1,129 +1,131 @@
 <template>
-  <div :class="{ show: show, content: true }">
-    <div
-      v-if="user.photo"
-      class="profileImg"
-      :style="{
+  <div>
+    <div :class="{ show: show, content: true }">
+      <div
+        v-if="user.photo"
+        class="profileImg"
+        :style="{
         background: `url(${user.photo != '' ? user.photo : svg}) center`,
       }"
-    ></div>
-    <div v-else class="photo"></div>
-    <label class="t4 changePhoto2" for="filechooser">
-      {{
-      $ml.get("changePhoto")
-      }}
-    </label>
-    <input
-      id="filechooser"
-      class="changePhoto"
-      style="opacity:0;position:absolute;z-index:-1"
-      type="file"
-      name="file"
-      @change="SendFile()"
-    />
-    <div></div>
+      ></div>
+      <div v-else class="photo"></div>
+      <label class="t4 changePhoto2" for="filechooser">
+        {{
+        $ml.get("changePhoto")
+        }}
+      </label>
+      <input
+        id="filechooser"
+        class="changePhoto"
+        style="opacity:0;position:absolute;z-index:-1"
+        type="file"
+        name="file"
+        @change="SendFile()"
+      />
+      <div></div>
 
-    <div class="titleBlock">
-      <div class="t3 slide-right">{{ $ml.get("aboutYou") }}</div>
-    </div>
-    <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="name" />
-    <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="surname" />
-    <div style="top:413px" class="titleBlock">
-      <div class="t3 slide-right">{{ $ml.get("cont") }}</div>
-    </div>
-    <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="login" />
-    <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="email" />
-    <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" v-model="number" />
-    <div class="t3 steamIDTitile slide-right">Steam ID</div>
-    <form class="steamIdForm" action="https://steamcommunity.com/openid/login" method="post">
-      <input
-        type="hidden"
-        name="openid.identity"
-        value="http://specs.openid.net/auth/2.0/identifier_select"
-      />
-      <input
-        type="hidden"
-        name="openid.claimed_id"
-        value="http://specs.openid.net/auth/2.0/identifier_select"
-      />
-      <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0" />
-      <input type="hidden" name="openid.mode" value="checkid_setup" />
-      <input
-        type="hidden"
-        name="openid.realm"
-        value="https://dota2gamebot.herokuapp.com/personalArea/profile"
-      />
-      <input
-        type="hidden"
-        name="openid.return_to"
-        value="https://dota2gamebot.herokuapp.com/personalArea/profile"
-      />
-      <Button type="submit">Log in through Steam</Button>
-    </form>
-    <input
-      id="steamID"
-      :class="{ t5: true, inputs: true, shine: !user.steamID }"
-      type="text"
-      placeholder="SteamID"
-      v-model="steamID.name"
-    />
-    <i
-      :style="`color:${user.steamID?'#2a475e':'rgb(187, 185, 185)'}`"
-      class="fa fa-steam-square fa-2x"
-    ></i>
-    <div class="passPromo">
-      <div class="t3 slide-right">{{ $ml.get("sec") }}</div>
-      <div class="t4 changePass">{{ $ml.get("changePass") }}</div>
-      <div class="t3 slide-right promoTitle">Darewin’s family {{ $ml.get("promo").toLowerCase() }}</div>
-      <div class="t4 promo">{{ $ml.get("promo") }}: asdke94ld7</div>
-      <div class="t4 promo2">
-        {{ $ml.get("refLink") }}:
-        <div style="color:#BDBDBD;display:inline">registration/ref=2dfs122vh</div>
+      <div class="titleBlock">
+        <div class="t3 slide-right">{{ $ml.get("aboutYou") }}</div>
       </div>
+      <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="name" />
+      <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="surname" />
+      <div style="top:413px" class="titleBlock">
+        <div class="t3 slide-right">{{ $ml.get("cont") }}</div>
+      </div>
+      <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="login" />
+      <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="email" />
+      <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" v-model="number" />
+      <div class="t3 steamIDTitile slide-right">Steam ID</div>
+      <form class="steamIdForm" action="https://steamcommunity.com/openid/login" method="post">
+        <input
+          type="hidden"
+          name="openid.identity"
+          value="http://specs.openid.net/auth/2.0/identifier_select"
+        />
+        <input
+          type="hidden"
+          name="openid.claimed_id"
+          value="http://specs.openid.net/auth/2.0/identifier_select"
+        />
+        <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0" />
+        <input type="hidden" name="openid.mode" value="checkid_setup" />
+        <input
+          type="hidden"
+          name="openid.realm"
+          value="https://dota2gamebot.herokuapp.com/personalArea/profile"
+        />
+        <input
+          type="hidden"
+          name="openid.return_to"
+          value="https://dota2gamebot.herokuapp.com/personalArea/profile"
+        />
+        <Button type="submit">Log in through Steam</Button>
+      </form>
+      <input
+        id="steamID"
+        :class="{ t5: true, inputs: true, shine: !user.steamID }"
+        type="text"
+        placeholder="SteamID"
+        v-model="steamID.name"
+      />
       <i
-        id="copy1"
-        @click="Copy(1)"
-        style="position: absolute;
+        :style="`color:${user.steamID?'#2a475e':'rgb(187, 185, 185)'}`"
+        class="fa fa-steam-square fa-2x"
+      ></i>
+      <div class="passPromo">
+        <div class="t3 slide-right">{{ $ml.get("sec") }}</div>
+        <div class="t4 changePass">{{ $ml.get("changePass") }}</div>
+        <div class="t3 slide-right promoTitle">Darewin’s family {{ $ml.get("promo").toLowerCase() }}</div>
+        <div class="t4 promo">{{ $ml.get("promo") }}: asdke94ld7</div>
+        <div class="t4 promo2">
+          {{ $ml.get("refLink") }}:
+          <div style="color:#BDBDBD;display:inline">registration/ref=2dfs122vh</div>
+        </div>
+        <i
+          id="copy1"
+          @click="Copy(1)"
+          style="position: absolute;
                 left: 493px;
                 top: 192px;
                 color:#BDBDBD;transition:color 0.5s"
-        class="fa fa-copy fa-2x"
-      ></i>
-      <i
-        id="copy2"
-        @click="Copy(2)"
-        style="position: absolute;
+          class="fa fa-copy fa-2x"
+        ></i>
+        <i
+          id="copy2"
+          @click="Copy(2)"
+          style="position: absolute;
                 left: 493px;
                 top: 246px;
                 color:#BDBDBD;transition:color 0.5s"
-        class="fa fa-copy fa-2x"
-      ></i>
-    </div>
-    <div class="t3 LenTitle slide-right">{{ $ml.get("len") }}</div>
-    <div class="t3 lengChange">
-      <table class="lengChangeUl">
-        <tr class="t4">
-          <td class="langBtn" @click="ChangeLang(1)" style="width:120px">Русский</td>
-          <td
-            :class="{ show: show2 == 1 }"
-            style="width:105px;opacity:0;display:inline;color:#BDBDBD"
-          >{{ $ml.get("now") }}</td>
-        </tr>
-        <tr class="t4">
-          <td class="langBtn" @click="ChangeLang(2)" style="width:120px">English</td>
-          <td
-            :class="{ show: show2 == 2 }"
-            style="width:105px;opacity:0;display:inline;color:#BDBDBD"
-          >{{ $ml.get("now") }}</td>
-        </tr>
-      </table>
-    </div>
+          class="fa fa-copy fa-2x"
+        ></i>
+      </div>
+      <div class="t3 LenTitle slide-right">{{ $ml.get("len") }}</div>
+      <div class="t3 lengChange">
+        <table class="lengChangeUl">
+          <tr class="t4">
+            <td class="langBtn" @click="ChangeLang(1)" style="width:120px">Русский</td>
+            <td
+              :class="{ show: show2 == 1 }"
+              style="width:105px;opacity:0;display:inline;color:#BDBDBD"
+            >{{ $ml.get("now") }}</td>
+          </tr>
+          <tr class="t4">
+            <td class="langBtn" @click="ChangeLang(2)" style="width:120px">English</td>
+            <td
+              :class="{ show: show2 == 2 }"
+              style="width:105px;opacity:0;display:inline;color:#BDBDBD"
+            >{{ $ml.get("now") }}</td>
+          </tr>
+        </table>
+      </div>
 
-    <button
-      v-if="user.login != login || user.number != number || user.steamID.id != steamID.id || user.email != email || user.name != name || user.surname!= surname "
-      class="t4 change-btn"
-      @click="changeContactData(), changeName()"
-    >{{ $ml.get("apply") }}</button>
+      <button
+        v-if="user.login != login || user.number != number || user.steamID.id != steamID.id || user.email != email || user.name != name || user.surname!= surname "
+        class="t4 change-btn"
+        @click="changeContactData(), changeName()"
+      >{{ $ml.get("apply") }}</button>
+    </div>
   </div>
 </template>
 <script>
@@ -149,7 +151,7 @@ export default {
           lastName: this.surname,
           login,
         },
-        consext: this,
+        context: this,
       });
     },
 
@@ -213,7 +215,7 @@ export default {
       this.steamID = this.user.steamID;
   },
   created() {
-    setTimeout(() => (this.show = true), 10);
+    setTimeout(() => (this.show = true), 20);
     this.$store.dispatch("GetUserData", { context: this });
 
     this.$store.commit("SetLang", localStorage.getItem("leng"));
@@ -280,13 +282,12 @@ export default {
   color: #bf0603 !important;
 }
 .content {
-  position: absolute;
-  left: 10px;
-  opacity: 0;
-  transition: opacity 1.5s;
+  opacity: 0 !important;
+  transition-property: opacity;
+  transition-duration: 1.5s;
 }
 .show {
-  opacity: 1;
+  opacity: 1 !important;
 }
 .photo {
   background-image: url(../../assets/userEmpty.svg);
@@ -453,8 +454,8 @@ export default {
 }
 .change-btn {
   position: absolute;
-  left: 1400px;
-  top: 560px;
+  left: 0px;
+  top: 615px;
   width: 170px;
   height: 40px;
   background-color: #f2f2f2;

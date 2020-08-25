@@ -38,15 +38,15 @@
             <tr>
               <th
                 class="t5"
-                style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
+                style="color: #828282;width:100px;text-align: left;"
               >{{ $ml.get("matchNum").split(" ")[0] }}</th>
               <th
                 class="t5"
-                style="color: #828282;width:110px;text-align: left;padding-bottom:20px"
+                style="color: #828282;width:110px;text-align: left;"
               >{{ $ml.get("result") }}</th>
               <th
                 class="t5"
-                style="width:100px;color: #828282;text-align: left;padding-bottom:20px"
+                style="width:100px;color: #828282;text-align: left;"
               >{{ $ml.get("matchType") }}</th>
               <th style="width:678px;"></th>
               <th
@@ -97,7 +97,7 @@
           <tr>
             <th
               class="t5"
-              style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
+              style="color: #828282;width:100px;text-align: left;"
             >{{ $ml.get("players") }}</th>
             <th style="width:304px;text-align: left;"></th>
             <th style="width:598px;"></th>
@@ -172,11 +172,11 @@
           <tr>
             <th
               class="t5"
-              style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
+              style="color: #828282;width:100px;text-align: left;"
             >{{ $ml.get("matchType") }}</th>
             <th
               class="t5"
-              style="width:180px;text-align: left;;padding-bottom:20px;color: #828282;"
+              style="width:180px;text-align: left;color: #828282;"
             >{{ $ml.get("regEnd") }}</th>
             <th style="width:400px;"></th>
             <th style="width:230px"></th>
@@ -244,15 +244,15 @@
           <tr>
             <th
               class="t5"
-              style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
+              style="color: #828282;width:100px;text-align: left;"
             >{{ $ml.get("matchNum").split(" ")[0] }}</th>
             <th
               class="t5"
-              style="color: #828282;width:110px;text-align: left;padding-bottom:20px"
+              style="color: #828282;width:110px;text-align: left;"
             >{{ $ml.get("result") }}</th>
             <th
               class="t5"
-              style="width:100px;color: #828282;text-align: left;padding-bottom:20px"
+              style="width:100px;color: #828282;text-align: left;"
             >{{ $ml.get("matchType") }}</th>
             <th style="width:628px;"></th>
             <th
@@ -296,7 +296,7 @@
           <tr>
             <th
               class="t5"
-              style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
+              style="color: #828282;width:100px;text-align: left;"
             >{{ $ml.get("players") }}</th>
             <th style="width:304px;text-align: left;"></th>
             <th style="width:598px;"></th>
@@ -363,11 +363,11 @@
           <tr>
             <th
               class="t5"
-              style="color: #828282;width:100px;text-align: left;padding-bottom:20px"
+              style="color: #828282;width:100px;text-align: left;"
             >{{ $ml.get("matchType") }}</th>
             <th
               class="t5"
-              style="width:180px;text-align: left;;padding-bottom:20px;color: #828282;"
+              style="width:180px;text-align: left;color: #828282;"
             >{{ $ml.get("regEnd") }}</th>
             <th style="width:400px;"></th>
             <th style="width:230px"></th>

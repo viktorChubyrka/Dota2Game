@@ -72,11 +72,11 @@ export default {
   color: #828282;
 }
 .slide-right {
-  font-weight: 400;
-  transition: font-weight 0.1s;
+  font-weight: 100;
+  transition: font-weight 0.5s;
 }
 .slide-right:hover {
-  font-weight: 600;
+  font-weight: 900;
 }
 .text-to-left {
   font-weight: 600;
@@ -100,7 +100,6 @@ export default {
 }
 .oldQLink li:hover a {
   font-weight: bold;
-  font-size: 17px;
 }
 .linkTo {
   text-decoration: none;

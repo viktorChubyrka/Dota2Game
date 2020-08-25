@@ -11,7 +11,11 @@
         <div class="readyText t5">{{ ready }} {{ $ml.get("redy") }}</div>
         <div class="cash t5">${{ user.purse }} — {{ user.purse }} Darewin’s dollar</div>
         <div class="notification">
-          <i @click="ShowNotifications()" class="fa fa-bell fa-lg notif">
+          <i
+            @click="ShowNotifications()"
+            :style="{color:newNotifications?'':'grey'}"
+            class="fa fa-bell fa-lg notif"
+          >
             <div class="indicator" v-if="newNotifications"></div>
             <ul
               @mouseleave="notification=false"
@@ -205,7 +209,7 @@
       <router-view></router-view>
     </div>
     <div v-if="scrollTop" @click="scrollUp()" class="scrollTopBtn">
-      <i style="position:absolute;top:10px;left:15px" class="fa fa-chevron-up fa-3x"></i>
+      <i class="fa fa-chevron-up"></i>
     </div>
   </div>
 </template>
@@ -406,9 +410,11 @@ export default {
   position: fixed;
   right: 700px;
   bottom: 50px;
-  width: 80px;
-  height: 80px;
-
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 40px;
   background: #f2f2f2;
   color: #1f2430;
@@ -548,6 +554,7 @@ path {
 .notificationUl {
   display: inline !important;
 }
+
 .notification {
   position: absolute;
   left: 1666px;
