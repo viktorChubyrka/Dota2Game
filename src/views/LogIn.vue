@@ -1,61 +1,59 @@
 <template>
-  <div class="reg-container">
+  <div :class="{'reg-container':true,}">
     <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
-    <Header headerColor="#f5f5f5" class="header" />
-    <Lang />
-    <div class="logoR"></div>
-    <div
-      class="t2"
-      style="color:#f2f2f2;position: absolute;
+    <Header headerColor="#f5f5f5" :class="{header:true,'show':show
+    }" />
+    <Lang :class="{Lang:true,'show':show
+    }" />
+    <div :class="{logoR:true,'show':show}"></div>
+    <div :class="{loginForm:true,'show':show2}">
+      <div
+        class="t2"
+        style="color:#f2f2f2;position: absolute;
 width: 82px;
 height: 58px;
 left: 790px;
 top: 330px;"
-    >
-      {{ this.$ml.get("enter") }}
-    </div>
-    <div
-      class="t4"
-      style=" color:#f2f2f2;position:absolute;
+      >{{ this.$ml.get("enter") }}</div>
+      <div
+        class="t4"
+        style=" color:#f2f2f2;position:absolute;
 height: 36px;
 left: 790px;
 top: 524px;"
-    >
-      <a style="color:white" href="/forgotPassword">
-        {{ this.$ml.get("forgotPass") }}
-      </a>
-    </div>
-    <div
-      class="t4"
-      style=" color:#f2f2f2;position: absolute;
+      >
+        <a style="color:white" href="/forgotPassword">{{ this.$ml.get("forgotPass") }}</a>
+      </div>
+      <div
+        class="t4"
+        style=" color:#f2f2f2;position: absolute;
 width: 327px;
 height: 36px;
 left: 790px;
 top: 584px;"
-    >
-      {{ this.$ml.get("noAcc") }}
-      <a style="color:white" href="/registration">
-        {{ this.$ml.get("createHere") }}
-      </a>
-    </div>
-    <h1 style="color:red;position:absolute;left:790px;top:355px" class="t5">
-      {{ error }}
-    </h1>
-    <div
-      class="inputs"
-      style="position: absolute;
+      >
+        {{ this.$ml.get("noAcc") }}
+        <a
+          style="color:white"
+          href="/registration"
+        >{{ this.$ml.get("createHere") }}</a>
+      </div>
+      <h1 style="color:red;position:absolute;left:790px;top:355px" class="t5">{{ error }}</h1>
+      <div
+        class="inputs"
+        style="position: absolute;
 width: 339px;
 height: 32px;
 left: 790px;
 top: 400px;"
-    >
-      <input type="text" v-model="login" :placeholder="l()" />
-      <input type="password" v-model="password" :placeholder="p()" />
-    </div>
-    <button
-      @click="LogIn()"
-      class="t4"
-      style="position: absolute;
+      >
+        <input type="text" v-model="login" :placeholder="l()" />
+        <input type="password" v-model="password" :placeholder="p()" />
+      </div>
+      <button
+        @click="LogIn()"
+        class="t4"
+        style="position: absolute;
       color:white;
 width: 339px;
 height: 44px;
@@ -64,9 +62,8 @@ top: 644px;
 border:0px solid black;
 background: #626878;
 border-radius: 4px;"
-    >
-      {{ $ml.get("logIn") }}
-    </button>
+      >{{ $ml.get("logIn") }}</button>
+    </div>
   </div>
 </template>
 <script>
@@ -85,6 +82,8 @@ export default {
       l: () => {
         return this.$ml.get("login");
       },
+      show: false,
+      show2: false,
     };
   },
   methods: {
@@ -102,11 +101,23 @@ export default {
     },
   },
   created() {
+    setTimeout(() => {
+      this.show = true;
+      setTimeout(() => (this.show2 = true), 500);
+    }, 500);
     this.$store.commit("SetCurrentPage", 0);
   },
 };
 </script>
 <style>
+.loginForm {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.Lang {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
 .inputs input {
   margin-bottom: 16px;
   width: 339px;
@@ -124,6 +135,8 @@ export default {
   float: right;
   margin-top: 60px;
   margin-right: 164px;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 .logoR {
   background: url(../assets/DarewinLargeWhite.svg);
@@ -132,10 +145,15 @@ export default {
   top: 60px;
   width: 174px;
   height: 36px;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 .reg-container {
   background: #1f2430;
   width: 100%;
   height: 100vh;
+}
+.show {
+  opacity: 1;
 }
 </style>

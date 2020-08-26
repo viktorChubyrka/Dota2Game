@@ -123,7 +123,7 @@
       <button
         v-if="user.login != login || user.number != number || user.steamID.id != steamID.id || user.email != email || user.name != name || user.surname!= surname "
         class="t4 change-btn"
-        @click="changeContactData(), changeName()"
+        @click="changeName(),changeContactData()"
       >{{ $ml.get("apply") }}</button>
     </div>
   </div>
@@ -156,7 +156,6 @@ export default {
     },
 
     changeContactData() {
-      localStorage.setItem("login", this.login);
       this.$store.dispatch("ChangeContactInfo", {
         data: {
           email: this.email,
@@ -167,6 +166,7 @@ export default {
         },
         context: this,
       });
+      localStorage.setItem("login", this.login);
     },
     SendFile() {
       var blobFile = document.getElementById("filechooser").files[0];
@@ -215,16 +215,15 @@ export default {
       this.steamID = this.user.steamID;
   },
   created() {
-    setTimeout(() => (this.show = true), 20);
+    setTimeout(() => (this.show = true), 10);
     this.$store.dispatch("GetUserData", { context: this });
-
     this.$store.commit("SetLang", localStorage.getItem("leng"));
     if (localStorage.getItem("leng") == 1) {
       this.$ml.change("russian");
-      this.show = 1;
+      this.show2 = 1;
     } else {
       this.$ml.change("english");
-      this.show = 2;
+      this.show2 = 2;
     }
     let a = window.location.href;
 
@@ -233,6 +232,7 @@ export default {
         this.steamID.id = a.split("2Fid%2F")[1].split("&")[0];
         console.log(a.split("2Fid%2F")[1].split("&")[0]);
         changeContactData();
+        this.$store.dispatch("GetUserData", { context: this });
       } catch {}
     }, 2000);
   },
@@ -282,12 +282,11 @@ export default {
   color: #bf0603 !important;
 }
 .content {
-  opacity: 0 !important;
-  transition-property: opacity;
-  transition-duration: 1.5s;
+  opacity: 0;
+  transition: opacity 1.5s;
 }
 .show {
-  opacity: 1 !important;
+  opacity: 1;
 }
 .photo {
   background-image: url(../../assets/userEmpty.svg);

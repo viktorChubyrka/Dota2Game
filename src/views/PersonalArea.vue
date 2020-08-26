@@ -13,7 +13,7 @@
         <div class="notification">
           <i
             @click="ShowNotifications()"
-            :style="{color:newNotifications?'':'grey'}"
+            :style="`${notification?'transition:color 0.5s':'transition:color 0.5s;color:grey'}`"
             class="fa fa-bell fa-lg notif"
           >
             <div class="indicator" v-if="newNotifications"></div>
@@ -349,10 +349,9 @@ export default {
         setTimeout(() => (this.show3 = true), 1000);
       }, 2000);
     }, 1);
-    setTimeout(
-      () => this.$store.dispatch("GetUserData", { context: this }),
-      20
-    );
+    setTimeout(() => {
+      this.$store.dispatch("GetUserData", { context: this }), console.log(this);
+    }, 20);
   },
   methods: {
     ShowNotifications() {
@@ -560,6 +559,9 @@ path {
   left: 1666px;
   top: 30px;
   z-index: 10;
+}
+.notification:hover i.fa.fa-bell.fa-lg.notif {
+  color: #1f2430 !important;
 }
 .nickname {
   position: absolute;
