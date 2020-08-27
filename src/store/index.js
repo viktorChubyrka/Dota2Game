@@ -209,7 +209,7 @@ export default new Vuex.Store({
       );
       if (data.data.data.status == 200) {
         payload.context.$router.push("/personalArea/profile");
-        localStorage.setItem("login", data.data.data.login);
+        localStorage.setItem("login", payload.user.login);
       } else {
         state.commit("SetLoginError", data.data.data.message);
       }
@@ -235,10 +235,13 @@ export default new Vuex.Store({
       let data = await Axios.get(`${url}/api/user/autorization/logOut`, {
         withCredentials: true,
       });
-      if (data.status == 200) payload.context.$router.push("/");
+      if (data.status == 200) {
+        payload.context.$router.push("/");
+        localStorage.setItem("login", "");
+      }
     },
     GetUserData: async (state, payload) => {
-      if (localStorage.login) {
+      if (localStorage.getItem("login")) {
         let data = await Axios.post(
           `${url}/api/user/actions/getUserData`,
           {
@@ -293,7 +296,7 @@ export default new Vuex.Store({
       let status = await Axios.post(`${url}/api/user/actions/`, payload.i, {
         withCredentials: true,
       });
-      if (status.data == 200 && localStorage.login) {
+      if (status.data == 200 && localStorage.getItem("login")) {
         payload.context.$router.push("personalArea/profile");
         state.dispatch("GetAllReadyUsers");
       } else {
