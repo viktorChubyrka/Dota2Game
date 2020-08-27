@@ -238,20 +238,22 @@ export default new Vuex.Store({
       if (data.status == 200) payload.context.$router.push("/");
     },
     GetUserData: async (state, payload) => {
-      let data = await Axios.post(
-        `${url}/api/user/actions/getUserData`,
-        {
-          login: localStorage.getItem("login"),
-        },
-        { withCredentials: true }
-      );
-      console.log(data.data.data);
-      if (data.data.data.status == 200) {
-        let userToSave = data.data.data.userModel;
-        userToSave.matches = data.data.data.userModel.matches.reverse();
-        state.commit("SetUserData", userToSave);
-        let user = state.getters.userData;
-        if (user.partyID) state.dispatch("GetParty", user.partyID);
+      if (localStorage.login) {
+        let data = await Axios.post(
+          `${url}/api/user/actions/getUserData`,
+          {
+            login: localStorage.getItem("login"),
+          },
+          { withCredentials: true }
+        );
+        console.log(data.data.data);
+        if (data.data.data.status == 200) {
+          let userToSave = data.data.data.userModel;
+          userToSave.matches = data.data.data.userModel.matches.reverse();
+          state.commit("SetUserData", userToSave);
+          let user = state.getters.userData;
+          if (user.partyID) state.dispatch("GetParty", user.partyID);
+        } else payload.context.$router.push("/").catch(() => {});
       } else payload.context.$router.push("/").catch(() => {});
     },
     ChangeName: async (state, payload) => {
@@ -291,7 +293,7 @@ export default new Vuex.Store({
       let status = await Axios.post(`${url}/api/user/actions/`, payload.i, {
         withCredentials: true,
       });
-      if (status.data == 200) {
+      if (status.data == 200 && localStorage.login) {
         payload.context.$router.push("personalArea/profile");
         state.dispatch("GetAllReadyUsers");
       } else {
