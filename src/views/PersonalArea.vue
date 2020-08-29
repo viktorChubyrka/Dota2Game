@@ -271,8 +271,8 @@ export default {
     this.$store.dispatch("GetAllMatches");
     this.$store.commit(
       "SetSocket",
-      new WebSocket("wss://safe-inlet-79254.herokuapp.com")
-      //new WebSocket("ws://localhost:3000")
+      //new WebSocket("wss://safe-inlet-79254.herokuapp.com")
+      new WebSocket("ws://localhost:3000")
     );
     this.socket = this.$store.getters.socket;
     this.socket.onmessage = (event) => {
@@ -386,12 +386,13 @@ export default {
     },
     FindPartyGame() {
       if (this.user.steamID)
-        this.socket.send(
-          JSON.stringify({
-            login: localStorage.getItem("login"),
-            type: "SearchPartyGame",
-          })
-        );
+        // this.socket.send(
+        //   JSON.stringify({
+        //     login: localStorage.getItem("login"),
+        //     type: "SearchPartyGame",
+        //   })
+        // );
+        this.$router.push("friends");
       else this.$router.push("profile");
     },
     ChangePage(i) {

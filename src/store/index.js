@@ -208,7 +208,9 @@ export default new Vuex.Store({
         { withCredentials: true }
       );
       if (data.data.data.status == 200) {
-        payload.context.$router.push("/personalArea/profile");
+        if (data.data.data.hasSteamConnected) {
+          payload.context.$router.push("/personalArea/games");
+        } else payload.context.$router.push("/personalArea/profile");
         localStorage.setItem("login", payload.user.login);
       } else {
         state.commit("SetLoginError", data.data.data.message);

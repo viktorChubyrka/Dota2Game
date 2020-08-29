@@ -37,23 +37,23 @@ export default {
 </script>
 <style>
 .slide-right div {
-  font-weight: 400;
-  transition: font-weight 0.1s;
+  color: rgb(101, 100, 100);
+  transition: color 0.5s;
 }
 .slide-right:hover .first {
-  font-weight: 600;
+  color: #1f2430;
   cursor: default;
 }
 .slide-right:hover .second {
-  font-weight: 600;
+  color: #1f2430;
   cursor: default;
 }
 .slideRight2 {
-  font-weight: 400;
-  transition: font-weight 0.1s;
+  color: rgb(101, 100, 100);
+  transition: color 0.5s;
 }
 .slideRight2:hover {
-  font-weight: 600;
+  color: #1f2430;
 }
 .content {
   opacity: 0;

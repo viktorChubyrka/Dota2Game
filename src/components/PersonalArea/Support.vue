@@ -64,7 +64,7 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 .oldQLink li a {
   display: block;
   width: 100%;
@@ -72,11 +72,11 @@ export default {
   color: #828282;
 }
 .slide-right {
-  font-weight: 100;
-  transition: font-weight 0.5s;
+  color: rgb(101, 100, 100);
+  transition: color 0.5s;
 }
 .slide-right:hover {
-  font-weight: 900;
+  color: #1f2430;
 }
 .text-to-left {
   font-weight: 600;
@@ -93,7 +93,6 @@ export default {
   box-shadow: 0 0 10px 6px #cbcaca;
   cursor: pointer;
   margin-left: 20px;
-  font-weight: bold !important;
 }
 .oldQLink li a {
   transition: font-weight 0.3s;
@@ -175,7 +174,7 @@ html {
   height: 38px;
   left: 0;
   top: 132px;
-  transition: font-weight 0.1s, margin-left 0.5s;
+  transition: color 0.5s, margin-left 0.5s;
 }
 .supportMessage {
   position: absolute;

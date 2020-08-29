@@ -61,16 +61,11 @@
         />
         <Button type="submit">Log in through Steam</Button>
       </form>
-      <input
-        id="steamID"
-        :class="{ t5: true, inputs: true, shine: !user.steamID }"
-        type="text"
-        placeholder="SteamID"
-        v-model="steamID.name"
-      />
+      <input id="steamID" :class="{ t5: true, inputs: true}" type="text" v-model="steamID.name" />
+      <div :class="{steamIconShadow:true, shine: !steamID.name}"></div>
       <i
-        :style="`color:${user.steamID?'#2a475e':'rgb(187, 185, 185)'}`"
-        class="fa fa-steam-square fa-2x"
+        :style="`color:${steamID.name?'#2a475e':'rgb(187, 185, 185)'}`"
+        :class="{fa:true, 'fa-steam-square':true, 'fa-3x':true }"
       ></i>
       <div class="passPromo">
         <div class="t3 slide-right">{{ $ml.get("sec") }}</div>
@@ -166,7 +161,7 @@ export default {
         },
         context: this,
       });
-      localStorage.setItem("login", this.login);
+      localStorage.setItem("login", this.user.login);
     },
     SendFile() {
       var blobFile = document.getElementById("filechooser").files[0];
@@ -240,11 +235,11 @@ export default {
 </script>
 <style scoped>
 .slide-right {
-  font-weight: 400;
-  transition: font-weight 0.1s;
+  color: rgb(101, 100, 100);
+  transition: color 0.5s;
 }
 .slide-right:hover {
-  font-weight: 600;
+  color: #1f2430;
   cursor: pointer;
 }
 .LenTitle {
@@ -255,6 +250,9 @@ export default {
 }
 .shine {
   box-shadow: 0 0 5px 2px #bf0603;
+  border-radius: 7.5px;
+  width: 41px;
+  height: 40.7px;
 }
 .langBtn:hover {
   text-shadow: 1px 1px 10px #737e98;
@@ -267,14 +265,15 @@ export default {
 }
 .steamIdForm {
   position: absolute;
-  top: 562px;
-  left: 721px;
+  left: 830px;
+  top: 495px;
   z-index: 100;
 }
 .steamIdForm button {
-  width: 444px;
-  height: 45px;
+  width: 42px;
+  height: 48px;
   opacity: 0;
+  border-radius: 2px;
 }
 
 .changePhoto2:hover {
@@ -428,12 +427,18 @@ export default {
 #steamID {
   left: 721px;
   top: 562px;
-  padding-left: 40px;
+  padding: 0;
+  border: none;
+}
+.steamIconShadow {
+  position: absolute;
+  left: 830px;
+  top: 498.5px;
 }
 .fa-steam-square {
   position: absolute;
-  left: 725px;
-  top: 566px;
+  left: 830px;
+  top: 495px;
 }
 .steamIDTitile {
   position: absolute;
