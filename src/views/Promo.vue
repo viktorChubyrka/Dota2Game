@@ -4,45 +4,22 @@
       <div :class="{ preloaderLogo: true, black: start2 }"></div>
       <div :class="{ loading: true, load: start }"></div>
     </div>
-    <div
-      :class="{ show: show, comp: true }"
-      id="page1"
-      style="position:relative"
-    >
+    <div :class="{ show: show, comp: true }" id="page1" style="position:relative">
       <Main />
     </div>
-    <div
-      :class="{ show: show, comp: true }"
-      id="page2"
-      style="position:relative"
-    >
+    <div :class="{ show: show, comp: true }" id="page2" style="position:relative">
       <Principes />
     </div>
-    <div
-      :class="{ show: show, comp: true }"
-      id="page3"
-      style="position:relative"
-    >
+    <div :class="{ show: show, comp: true }" id="page3" style="position:relative">
       <AboutUs />
     </div>
-    <div
-      :class="{ show: show, comp: true }"
-      id="page4"
-      style="position:relative"
-    >
+    <div :class="{ show: show, comp: true }" id="page4" style="position:relative">
       <FAQ />
     </div>
-    <div
-      :class="{ show: show, comp: true }"
-      id="page5"
-      style="position:relative"
-    >
+    <div :class="{ show: show, comp: true }" id="page5" style="position:relative">
       <ContactUs />
     </div>
-    <RightDots
-      style="opacity:0;transition:opacity .5s"
-      :class="{ showDots: start3 }"
-    />
+    <RightDots style="opacity:0;transition:opacity .5s" :class="{ showDots: start3 }" />
   </div>
 </template>
 <script>
@@ -64,7 +41,7 @@ export default {
     };
   },
   methods: {},
-  mounted: function() {
+  mounted: function () {
     setTimeout(() => {
       this.start2 = true;
       setTimeout(() => {
@@ -130,6 +107,8 @@ export default {
               ).offsetTop;
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 4);
+              setTimeout(() => this.$store.commit("SetAnim4"), 1000);
+              setTimeout(() => this.$store.commit("SetAnim5", 4), 2000);
             }
             break;
           case 4:
@@ -158,6 +137,8 @@ export default {
               ).offsetTop;
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 4);
+              setTimeout(() => this.$store.commit("SetAnim4"), 1000);
+              setTimeout(() => this.$store.commit("SetAnim5", 4), 2000);
             }
             break;
           default:
@@ -211,6 +192,8 @@ export default {
               ).offsetTop;
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 4);
+              setTimeout(() => this.$store.commit("SetAnim4"), 1000);
+              setTimeout(() => this.$store.commit("SetAnim5", 4), 2000);
             }
             break;
           case 4:
@@ -239,6 +222,8 @@ export default {
               ).offsetTop;
               window.scrollTo(0, top);
               this.$store.commit("SetCurrentPage", 4);
+              setTimeout(() => this.$store.commit("SetAnim4"), 1000);
+              setTimeout(() => this.$store.commit("SetAnim5", 4), 2000);
             }
             break;
           default:

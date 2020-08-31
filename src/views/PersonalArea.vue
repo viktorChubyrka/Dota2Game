@@ -78,7 +78,14 @@
             </defs>
           </svg>
         </div>
-        <div :class="{ readyIconText1: true, show: show, t4: true }">{{ $ml.get("redy") }}!</div>
+        <div
+          v-if="user.ready"
+          :class="{ readyIconText1: true, show: show, t4: true }"
+        >{{ $ml.get("redy") }}!</div>
+        <div
+          v-else
+          :class="{ readyIconText12: true, show: show, t4: true }"
+        >{{ $ml.get("notReady") }}</div>
       </div>
       <div @click="FindPartyGame()" :class="{ readyIcon2: true, show: show }">
         <svg
@@ -682,6 +689,14 @@ div.readyIcon3:hover svg path.hoverIcon {
 .readyIconText3 {
   position: absolute;
   left: 1280px;
+  top: 88px;
+  color: #f2f2f2;
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+.readyIconText12 {
+  position: absolute;
+  left: 528px;
   top: 88px;
   color: #f2f2f2;
   opacity: 0;

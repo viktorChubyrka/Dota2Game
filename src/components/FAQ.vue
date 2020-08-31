@@ -2,11 +2,14 @@
   <div class="main-div4">
     <Header headerColor="#f2f2f2" class="header" />
     <div class="logo"></div>
-    <div style="color:white;position: absolute;
+    <div
+      style="color:white;position: absolute;
 left: 200px;
-top: 166px;" class="t1">FAQ</div>
+top: 166px;"
+      :class="{t1:true,hidetText:true,showText:$store.getters.anim4}"
+    >FAQ</div>
     <div>
-      <div>
+      <div :class="{hidetText:true,showText:$store.getters.anim4}">
         <ul id="FAQUl">
           <li
             v-for="i in 10"
@@ -17,6 +20,7 @@ top: 166px;" class="t1">FAQ</div>
         </ul>
       </div>
       <div
+        :class="{hidetText:true,showText:$store.getters.anim5}"
         style="color:white;position: absolute;
                     max-width:840px;
                     left: 879px;

@@ -207,6 +207,7 @@
                 class="dot"
               >
                 <div class="arrow-up"></div>
+                <div class="t4 playerName">{{ player }}</div>
               </span>
             </td>
             <td>
@@ -254,7 +255,7 @@
               class="t5"
               style="width:100px;color: #828282;text-align: left;"
             >{{ $ml.get("matchType") }}</th>
-            <th style="width:628px;"></th>
+            <th style="width:680px;"></th>
             <th
               class="t5"
               style="color: #828282;width:190px;text-align: left;"
@@ -316,7 +317,10 @@
                 v-for="login in [...el.playersT1, ...el.playersT2]"
                 :key="login.login"
                 class="dot"
-              ></span>
+              >
+                <div class="arrow-up"></div>
+                <div class="t4 playerName">{{ login }}</div>
+              </span>
             </td>
             <td>
               <button
@@ -393,6 +397,7 @@
                 class="dot"
               >
                 <div class="arrow-up"></div>
+                <div class="t4 playerName">{{ i }}</div>
               </span>
             </td>
             <td>

@@ -30,6 +30,14 @@ top: 208px;"
             top: 544px;font-style: italic;"
       class="t4"
     >{{ $ml.get("p3Text2") }}</div>
+    <div
+      :class="{t4:true,hidetText:true,showText:$store.getters.anim3}"
+      style="color:white;position: absolute;
+            width: 951px;
+            height: 144px;
+            left: 1600px;
+            top: 700px;font-style: italic;"
+    >{{$ml.get("brothersF")}}</div>
     <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
     <Lang />
   </div>

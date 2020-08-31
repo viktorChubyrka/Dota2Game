@@ -19,6 +19,8 @@ export default new Vuex.Store({
     anim1: false,
     anim2: false,
     anim3: false,
+    anim4: false,
+    anim5: false,
     userData: {},
     allUsers: [],
     socket: null,
@@ -31,11 +33,15 @@ export default new Vuex.Store({
     playingMatches: [],
     selectedTab: 2,
     party: false,
+    partyLeader: "",
     ready: 0,
   },
   getters: {
     ready: (state) => {
       return state.ready;
+    },
+    partyLeader: (state) => {
+      return state.partyLeader;
     },
     party: (state) => {
       return state.party;
@@ -73,6 +79,12 @@ export default new Vuex.Store({
     anim3: (state) => {
       return state.anim3;
     },
+    anim4: (state) => {
+      return state.anim4;
+    },
+    anim5: (state) => {
+      return state.anim5;
+    },
     changePasswordError: (state) => {
       return state.changePasswordError;
     },
@@ -105,6 +117,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setPartyLeader: (state, payload) => {
+      return (state.partyLeader = payload);
+    },
     setReady: (state, payload) => {
       state.ready = payload;
     },
@@ -143,6 +158,12 @@ export default new Vuex.Store({
     },
     SetAnim3: (state) => {
       state.anim3 = true;
+    },
+    SetAnim4: (state) => {
+      state.anim4 = true;
+    },
+    SetAnim5: (state) => {
+      state.anim5 = true;
     },
     SetChangePasswordError: (state, payload) => {
       state.changePasswordError = payload;
@@ -413,6 +434,7 @@ export default new Vuex.Store({
           });
 
           party.data.players.splice(indexUser, 1);
+          state.commit("setPartyLeader", party.data.partyLeader);
           state.commit("setParty", party.data.players);
           state.dispatch("GetAllReadyUsers");
         } else state.commit("setParty", []);

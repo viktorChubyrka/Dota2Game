@@ -18,8 +18,8 @@
 export default {
   data() {
     return {
-      page: i => `#page${i}`,
-      show: false
+      page: (i) => `#page${i}`,
+      show: false,
     };
   },
   methods: {
@@ -29,16 +29,19 @@ export default {
       if (index == 3) {
         setTimeout(() => this.$store.commit("SetAnim2"), 1000);
         setTimeout(() => this.$store.commit("SetAnim3"), 2000);
-      } else {
+      } else if (index == 2) {
         setTimeout(() => this.$store.commit("SetAnim1"), 1000);
+      } else if (index == 4) {
+        setTimeout(() => this.$store.commit("SetAnim4"), 1000);
+        setTimeout(() => this.$store.commit("SetAnim5", 4), 2000);
       }
-    }
+    },
   },
   created() {
     setTimeout(() => {
       this.show = true;
     }, 2500);
-  }
+  },
 };
 </script>
 

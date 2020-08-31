@@ -1,10 +1,14 @@
 <template>
   <div style="position:relative">
     <div class="partySlot">
+      <div :class="{'arrow-up':true,'showModal':showModal}"></div>
+      <div :class="{t4:true, playerName:true,'showModal':showModal}">{{ $ml.get("notLider") }}</div>
+      <i class="fa fa-crown"></i>
       <div
         @mouseover="show = true"
         :class="{
-          readyBorder: ready || (party && party[index] && party[index].ready),
+          readyBorder: ready || (party && party[index] && party[index].ready && !partyLeader),
+          leaderBorder:((login && partyLeader == login) || (party[index] && partyLeader == party[index].login))&& ( ready || (party && party[index] && party[index].ready && !partyLeader)),
           circle: true,
           noPhoto: login ? (photo ? false : true) : false,
         }"
@@ -54,14 +58,10 @@
       style="z-index:10"
       @click="LeveLobby(User.partyID)"
     >
-      <svg
-        width="20"
-        height="19"
-        viewBox="0 0 20 19"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M1 19V8.31134H19M19 8.31134L11.4231 15.6227M19 8.31134L11.4231 1" stroke="white" />
+      <svg width="20" height="19" viewBox="0 0 20 19" fill="white">
+        <path
+          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
       </svg>
     </div>
     <div
@@ -150,6 +150,7 @@ export default {
       show2: false,
       socket: null,
       showFriends: false,
+      showModal: false,
     };
   },
   computed: {
@@ -160,14 +161,22 @@ export default {
   components: {},
   methods: {
     CickPlayer(cickLogin, partyID) {
-      this.socket.send(
-        JSON.stringify({
-          login: localStorage.getItem("login"),
-          partyID,
-          cickLogin,
-          type: "CickPlayer",
-        })
-      );
+      if (
+        this.party &&
+        this.party.partyLeader != localStorage.getItem("login")
+      ) {
+        this.showModal = true;
+        setTimeout(() => (this.showModal = false), 2000);
+      } else {
+        this.socket.send(
+          JSON.stringify({
+            login: localStorage.getItem("login"),
+            partyID,
+            cickLogin,
+            type: "CickPlayer",
+          })
+        );
+      }
     },
     LeveLobby(partyID) {
       this.socket.send(
@@ -207,11 +216,59 @@ export default {
     this.socket = this.$store.getters.socket;
     this.login2 = localStorage.getItem("login");
   },
+  computed: {
+    partyLeader() {
+      return this.$store.getters.partyLeader;
+    },
+  },
 };
 </script>
 <style scoped>
+.fa-crown {
+  position: absolute;
+  color: white;
+}
+.arrow-up {
+  opacity: 0;
+  position: absolute;
+  top: 4px;
+  left: 125px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 16px solid #f2f2f2;
+  transition: opacity 0.5s;
+}
+.playerName {
+  opacity: 0;
+  position: fixed;
+  top: -42px;
+  left: 10px;
+  text-align: center;
+  background-color: #f2f2f2;
+  position: absolute;
+  width: 250px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  transition: opacity 0.5s;
+}
+.showModal {
+  opacity: 1;
+}
 .readyBorder {
   border: 4px solid blueviolet;
+  border-radius: 50% !important;
+  margin: 17px 0 0 103px !important;
+}
+.leaderBorder {
+  border: 4px solid gold;
   border-radius: 50% !important;
   margin: 17px 0 0 103px !important;
 }
@@ -307,7 +364,7 @@ export default {
   margin: 0px 0px;
 }
 .circleT svg {
-  margin: 15px 15px;
+  margin: 13px 13px;
 }
 .circleL svg {
   margin: 12px 14px;

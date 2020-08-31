@@ -197,6 +197,9 @@ export default new MLCreate({
       len: "Languages",
       apply: "Apply",
       chat: "Global chat",
+      brothersF: "Brothers F.",
+      notLider: "You are not a party leader",
+      notReady: "Not ready",
     }),
 
     new MLanguage("russian").create({
@@ -389,6 +392,9 @@ export default new MLCreate({
       len: "Языки",
       apply: "Применить",
       chat: "Глобальный чат",
+      brothersF: "Братья Ф.",
+      notLider: "Вы не лидер группы",
+      notReady: "Не готов",
     }),
   ],
 });
