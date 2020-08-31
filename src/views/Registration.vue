@@ -37,11 +37,11 @@ height: 32px;
 left: 790px;
 top: 400px;"
       >
-        <input type="email" v-model="email" :placeholder="ea()" />
-        <input type="text" v-model="login" :placeholder="l()" />
-        <input type="password" v-model="password" :placeholder="p()" />
-        <input type="password" v-model="cpassword" :placeholder="cp()" />
-        <input type="text" v-model="promoCode" :placeholder="pr()" />
+        <input @keydown.enter="Regist()" type="email" v-model="email" :placeholder="ea()" />
+        <input @keydown.enter="Regist()" type="text" v-model="login" :placeholder="l()" />
+        <input @keydown.enter="Regist()" type="password" v-model="password" :placeholder="p()" />
+        <input @keydown.enter="Regist()" type="password" v-model="cpassword" :placeholder="cp()" />
+        <input @keydown.enter="Regist()" type="text" v-model="promoCode" :placeholder="pr()" />
       </div>
       <button
         :disabled="!accept"
@@ -149,7 +149,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .loginForm {
   opacity: 0;
   transition: opacity 0.5s;

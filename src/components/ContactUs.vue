@@ -203,11 +203,12 @@ export default {
 </script>
 <style>
 .slide-right {
-  font-weight: 400;
-  transition: font-weight 0.1s;
+  color: rgb(101, 100, 100);
+  transition: color 0.5s;
 }
 .slide-right:hover {
-  font-weight: 600;
+  color: #1f2430;
+  cursor: default;
 }
 .first-div {
   width: 100%;

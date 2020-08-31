@@ -82,7 +82,7 @@ export default {
 }
 .hidetText {
   opacity: 0;
-  transition: opacity 1s, box-shadow 0.5;
+  transition: opacity 1s, box-shadow 0.5s;
 }
 .showText {
   opacity: 1;

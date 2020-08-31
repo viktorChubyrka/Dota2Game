@@ -479,6 +479,9 @@ html {
   opacity: 0;
   transition: opacity 1.5s;
 }
+.pages::-webkit-scrollbar {
+  width: 0px;
+}
 .headerPA {
   width: 1920px;
   height: 86px;

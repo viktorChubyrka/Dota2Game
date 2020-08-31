@@ -47,8 +47,8 @@ height: 32px;
 left: 790px;
 top: 400px;"
       >
-        <input type="text" v-model="login" :placeholder="l()" />
-        <input type="password" v-model="password" :placeholder="p()" />
+        <input @keydown.enter="LogIn()" type="text" v-model="login" :placeholder="l()" />
+        <input @keydown.enter="LogIn()" type="password" v-model="password" :placeholder="p()" />
       </div>
       <button
         @click="LogIn()"
@@ -109,7 +109,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .loginForm {
   opacity: 0;
   transition: opacity 0.5s;
