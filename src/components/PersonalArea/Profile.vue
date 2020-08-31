@@ -226,7 +226,7 @@ export default {
       try {
         this.steamID.id = a.split("2Fid%2F")[1].split("&")[0];
         console.log(a.split("2Fid%2F")[1].split("&")[0]);
-        changeContactData();
+        this.changeContactData();
         this.$store.dispatch("GetUserData", { context: this });
       } catch {}
     }, 2000);
