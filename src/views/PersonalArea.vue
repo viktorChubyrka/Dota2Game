@@ -271,8 +271,8 @@ export default {
     this.$store.dispatch("GetAllMatches");
     this.$store.commit(
       "SetSocket",
-      //new WebSocket("wss://safe-inlet-79254.herokuapp.com")
-      new WebSocket("ws://localhost:3000")
+      new WebSocket("wss://safe-inlet-79254.herokuapp.com")
+      //new WebSocket("ws://localhost:3000")
     );
     this.socket = this.$store.getters.socket;
     this.socket.onmessage = (event) => {
