@@ -319,7 +319,7 @@
                 class="dot"
               >
                 <div class="arrow-up"></div>
-                <div class="t4 playerName">{{ login }}</div>
+                <div class="t4 playerName">{{ login.login }}</div>
               </span>
             </td>
             <td>
@@ -397,7 +397,7 @@
                 class="dot"
               >
                 <div class="arrow-up"></div>
-                <div class="t4 playerName">{{ i }}</div>
+                <div class="t4 playerName">{{ i.login }}</div>
               </span>
             </td>
             <td>
