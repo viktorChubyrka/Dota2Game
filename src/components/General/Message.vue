@@ -109,14 +109,16 @@ export default {
   },
   methods: {
     DeleteNotification() {
-      this.socket.send(
-        JSON.stringify({
-          login: localStorage.getItem("login"),
-          date: this.notification.date,
-          type: "DeleteNotification",
-        })
-      );
       this.isDeleted = true;
+      setTimeout(() => {
+        this.socket.send(
+          JSON.stringify({
+            login: localStorage.getItem("login"),
+            date: this.notification.date,
+            type: "DeleteNotification",
+          })
+        );
+      }, 500);
     },
     acceptFriend() {
       this.socket.send(
@@ -164,27 +166,18 @@ export default {
 };
 </script>
 <style>
-.delete {
-  animation: callAnim;
-  animation-duration: 1s;
-  animation-iteration-count: 1;
+div.delete.containerMessage {
+  margin-top: -150px;
+  z-index: 10;
 }
-@keyframes callAnim {
-  0% {
-    opacity: 1;
-  }
 
-  100% {
-    opacity: 0;
-  }
-}
 .containerMessage {
   width: 347px;
   height: 90px;
   background: #ffffff;
   z-index: 100;
   position: relative;
-  transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s, margin-top 0.5s;
 }
 .addTofriendMessage {
   height: 140px !important;

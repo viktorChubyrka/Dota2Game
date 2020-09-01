@@ -1,5 +1,14 @@
 <template>
   <div>
+    <ul
+      @mouseleave="notification=false"
+      :class="{notificationUl:notification,notificationContainer:true}"
+      :style="{'top':!notification?`-${notificationHeight}px`:'96px'}"
+    >
+      <li v-for="(not, i) in notifications" :key="i" style="margin-bottom:10px">
+        <Message :notification="not" />
+      </li>
+    </ul>
     <div :class="{ headerPA: true, headerPAShow: show }">
       <router-link to="/">
         <div class="logoPA"></div>
@@ -17,26 +26,17 @@
             class="fa fa-bell fa-lg notif"
           >
             <div class="indicator" v-if="newNotifications"></div>
-            <ul
-              @mouseleave="notification=false"
-              :class="{notificationUl:notification}"
-              style="position:fixed; top:90px;right:200px;z-index:100;list-style-type:none;margin:0;padding:0;display:none"
-            >
-              <li v-for="(not, i) in notifications" :key="i" style="margin-bottom:9px">
-                <Message :notification="not" />
-              </li>
-            </ul>
           </i>
         </div>
         <div v-if="!user.photo" class="profileSmallImage"></div>
         <img
           v-if="user.photo"
           style="position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  left: 1699px;
-  top: 25px;"
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            left: 1699px;
+            top: 25px;"
           :src="user.photo"
           alt
         />
@@ -149,7 +149,7 @@
     <div :class="{ sideNavigation: true, sideNavigationShow: show }">
       <ul class="sideNavUl">
         <router-link class="RL" to="games">
-          <li @click="ChangePage(1)" :class="{ t5: true, iconFocused: focus == 1 }">
+          <li @click="ChangePage(1)" :class="{ t5: true, iconFocused: windowLocation=='games' }">
             <div style="display:flex">
               <img :class="{ icon: true }" src="../assets/iconsPA/gamesIcon.svg" />
               <div>{{ $ml.get("game") }}</div>
@@ -157,7 +157,7 @@
           </li>
         </router-link>
         <router-link class="RL" to>
-          <li @click="ChangePage(2)" :class="{ t5: true, iconFocused: focus == 2 }">
+          <li @click="ChangePage(2)" :class="{ t5: true, iconFocused: windowLocation=='rules' }">
             <div style="display:flex">
               <img :class="{ icon: true }" src="../assets/iconsPA/rulesIcon.svg" />
               <div>{{ $ml.get("pravil") }}</div>
@@ -165,7 +165,7 @@
           </li>
         </router-link>
         <router-link class="RL" to="profile">
-          <li @click="ChangePage(3)" :class="{ t5: true, iconFocused: focus == 3 }">
+          <li @click="ChangePage(3)" :class="{ t5: true, iconFocused: windowLocation=='profile' }">
             <div style="display:flex">
               <img :class="{ icon: true }" src="../assets/iconsPA/profileIcon.svg" />
               <div>{{ $ml.get("prof") }}</div>
@@ -173,7 +173,7 @@
           </li>
         </router-link>
         <router-link class="RL" to="friends">
-          <li @click="ChangePage(4)" :class="{ t5: true, iconFocused: focus == 4 }">
+          <li @click="ChangePage(4)" :class="{ t5: true, iconFocused: windowLocation=='friends' }">
             <div style="display:flex">
               <img :class="{ icon: true }" src="../assets/iconsPA/friendsIcon.svg" />
               <div>{{ $ml.get("frend") }}</div>
@@ -181,7 +181,7 @@
           </li>
         </router-link>
         <router-link class="RL" to="money">
-          <li @click="ChangePage(5)" :class="{ t5: true, iconFocused: focus == 5 }">
+          <li @click="ChangePage(5)" :class="{ t5: true, iconFocused: windowLocation=='money' }">
             <div style="display:flex">
               <img :class="{ icon: true }" src="../assets/iconsPA/moneyIcon.svg" />
               <div>{{ $ml.get("money") }}</div>
@@ -189,15 +189,18 @@
           </li>
         </router-link>
         <router-link class="RL" to="loyalityProgram">
-          <li @click="ChangePage(6)" :class="{ t5: true, iconFocused: focus == 6 }">
+          <li
+            @click="ChangePage(6)"
+            :class="{ t5: true, iconFocused: windowLocation=='loyalityProgram'  }"
+          >
             <div style="display:flex">
               <img :class="{ icon: true }" src="../assets/iconsPA/familyIcon.svg" />
               <div>Darewin’s family</div>
             </div>
           </li>
         </router-link>
-        <router-link style="margin:0" :class="{ RL: true, iconFocused: focus == 7 }" to="support">
-          <li @click="ChangePage(7)" :class="{ t5: true, iconFocused: focus == 7 }">
+        <router-link style="margin:0" :class="{ RL: true,  }" to="support">
+          <li @click="ChangePage(7)" :class="{ t5: true, iconFocused: windowLocation=='support' }">
             <div style="display:flex">
               <img :class="{ icon: true }" src="../assets/iconsPA/infoIcon.svg" />
               <div>{{ $ml.get("sup") }}</div>
@@ -238,6 +241,9 @@ export default {
     };
   },
   computed: {
+    windowLocation() {
+      return this.$route.path.split("/")[2];
+    },
     scrollTop() {
       if (this.scroll) {
         if (this.scroll >= 750) return true;
@@ -263,6 +269,11 @@ export default {
           return not;
         }
       }
+    },
+    notificationHeight() {
+      try {
+        return this.notifications.length * 150;
+      } catch {}
     },
     newNotifications() {
       if (this.user.notifications)
@@ -413,6 +424,16 @@ export default {
 };
 </script>
 <style>
+.notificationContainer {
+  position: fixed;
+  right: 200px;
+  z-index: 100;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  transition: top 1s;
+}
 .scrollTopBtn {
   position: fixed;
   right: 700px;
@@ -493,9 +514,11 @@ html {
   width: 1920px;
   height: 86px;
   position: absolute;
+  background: white;
   top: -86px;
   left: 0px;
   transition: top 1s;
+  z-index: 10;
 }
 .headerPAShow {
   top: 0px;
