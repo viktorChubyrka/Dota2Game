@@ -8,7 +8,7 @@
         @mouseover="show = true"
         :class="{
           readyBorder: ready || (party && party[index] && party[index].ready && partyLeader != party[index].login),
-          leaderBorder:((login && partyLeader == login) || (index && party[index] && partyLeader == party[index].login)) && ( ready || (party && party[index] && party[index].ready && partyLeader!=party[index].login)),
+          leaderBorder:(ready&&login && partyLeader==login) || (party && party[index] && party[index].ready && partyLeader == party[index].login),
           circle: true,
           noPhoto: login ? (photo ? false : true) : false,
         }"
@@ -136,7 +136,7 @@
     <img
       @mouseover="show = true"
       style="width:50px;height:50px;border-radius:25px;position:absolute;top:21px;left:107px;"
-      v-if="photo&&party && party[index] && party[index].status != 'waiting' && party[index].photo"
+      v-if=" party && party[index] && party[index].status != 'waiting' && party[index].photo"
       :src="party[index].photo"
     />
   </div>
