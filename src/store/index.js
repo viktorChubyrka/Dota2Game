@@ -118,7 +118,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setPartyLeader: (state, payload) => {
-      return (state.partyLeader = payload);
+      state.partyLeader = payload;
     },
     setReady: (state, payload) => {
       state.ready = payload;
@@ -434,7 +434,8 @@ export default new Vuex.Store({
           });
 
           party.data.players.splice(indexUser, 1);
-          state.commit("setPartyLeader", party.data.partyLeader);
+          console.log(party.data);
+          state.commit("setPartyLeader", party.data.creatorLogin);
           state.commit("setParty", party.data.players);
           state.dispatch("GetAllReadyUsers");
         } else state.commit("setParty", []);
