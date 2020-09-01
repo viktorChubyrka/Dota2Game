@@ -7,7 +7,7 @@
       <div
         @mouseover="show = true"
         :class="{
-          readyBorder: ready || (party && party[index] && party[index].ready && !partyLeader),
+          readyBorder: ready || (party && party[index] && party[index].ready && partyLeader != party[index].login),
           leaderBorder:((login && partyLeader == login) || (index&&party[index] && partyLeader == party[index].login))&& ( ready || (party && party[index] && party[index].ready && !partyLeader)),
           circle: true,
           noPhoto: login ? (photo ? false : true) : false,
