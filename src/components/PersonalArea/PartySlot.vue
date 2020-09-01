@@ -8,7 +8,7 @@
         @mouseover="show = true"
         :class="{
           readyBorder: ready || (party && party[index] && party[index].ready && !partyLeader),
-          leaderBorder:((login && partyLeader == login) || (party[index] && partyLeader == party[index].login))&& ( ready || (party && party[index] && party[index].ready && !partyLeader)),
+          leaderBorder:((login && partyLeader == login) || (index&&party[index] && partyLeader == party[index].login))&& ( ready || (party && party[index] && party[index].ready && !partyLeader)),
           circle: true,
           noPhoto: login ? (photo ? false : true) : false,
         }"
@@ -157,14 +157,14 @@ export default {
     User() {
       return this.$store.getters.userData;
     },
+    partyLeader() {
+      return this.$store.getters.partyLeader;
+    },
   },
   components: {},
   methods: {
     CickPlayer(cickLogin, partyID) {
-      if (
-        this.party &&
-        this.party.partyLeader != localStorage.getItem("login")
-      ) {
+      if (this.party && this.partyLeader != localStorage.getItem("login")) {
         this.showModal = true;
         setTimeout(() => (this.showModal = false), 2000);
       } else {
@@ -215,11 +215,6 @@ export default {
   created() {
     this.socket = this.$store.getters.socket;
     this.login2 = localStorage.getItem("login");
-  },
-  computed: {
-    partyLeader() {
-      return this.$store.getters.partyLeader;
-    },
   },
 };
 </script>
