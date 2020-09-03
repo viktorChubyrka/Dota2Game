@@ -199,7 +199,7 @@
             </div>
           </li>
         </router-link>
-        <router-link style="margin:0" :class="{ RL: true,  }" to="support">
+        <router-link style="margin:0" :class="{ RL: true,  }" to="support0">
           <li @click="ChangePage(7)" :class="{ t5: true, iconFocused: windowLocation=='support' }">
             <div style="display:flex">
               <img :class="{ icon: true }" src="../assets/iconsPA/infoIcon.svg" />

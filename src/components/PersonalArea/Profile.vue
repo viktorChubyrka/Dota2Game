@@ -69,16 +69,16 @@
       ></i>
       <div class="passPromo">
         <div class="t3 slide-right">{{ $ml.get("sec") }}</div>
-        <div class="t4 changePass">{{ $ml.get("changePass") }}</div>
+        <div @click="ChangePassword()" class="t4 changePass">{{ $ml.get("changePass") }}</div>
         <div class="t3 slide-right promoTitle">Darewin’s family {{ $ml.get("promo").toLowerCase() }}</div>
-        <div class="t4 promo">{{ $ml.get("promo") }}: asdke94ld7</div>
+        <div class="t4 promo">{{ $ml.get("promo") }}: {{user.promoCode}}</div>
         <div class="t4 promo2">
           {{ $ml.get("refLink") }}:
-          <div style="color:#BDBDBD;display:inline">registration/ref=2dfs122vh</div>
+          <div style="color:#BDBDBD;display:inline">registration/ref={{user.promoCode}}</div>
         </div>
         <i
           id="copy1"
-          @click="Copy(1)"
+          @click="fallbackCopyTextToClipboard(user.promoCode)"
           style="position: absolute;
                 left: 493px;
                 top: 192px;
@@ -87,7 +87,7 @@
         ></i>
         <i
           id="copy2"
-          @click="Copy(2)"
+          @click="fallbackCopyTextToClipboard(`https://dota2gamebot.herokuapp.com/registration/ref=${user.promoCode}`)"
           style="position: absolute;
                 left: 493px;
                 top: 246px;
@@ -138,6 +138,10 @@ export default {
     };
   },
   methods: {
+    ChangePassword() {
+      console.log(1);
+      this.$router.push(`/recoweryPassword/${this.user.email}/${Date.now()}`);
+    },
     changeName() {
       let login = localStorage.getItem("login");
       this.$store.dispatch("ChangeName", {
@@ -149,7 +153,29 @@ export default {
         context: this,
       });
     },
+    fallbackCopyTextToClipboard(text) {
+      var textArea = document.createElement("textarea");
+      textArea.value = text;
 
+      // Avoid scrolling to bottom
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.position = "fixed";
+
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      try {
+        var successful = document.execCommand("copy");
+        var msg = successful ? "successful" : "unsuccessful";
+        console.log("Fallback: Copying text command was " + msg);
+      } catch (err) {
+        console.error("Fallback: Oops, unable to copy", err);
+      }
+
+      document.body.removeChild(textArea);
+    },
     changeContactData() {
       this.$store.dispatch("ChangeContactInfo", {
         data: {

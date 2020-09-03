@@ -64,7 +64,7 @@ const routes = [
         component: Profile,
       },
       {
-        path: "support",
+        path: "support:reportTopic",
         name: "Support",
         component: Support,
       },

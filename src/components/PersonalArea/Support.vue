@@ -6,9 +6,9 @@
       @focus="focus=true"
       @focusout="focus=false"
       class="themeSelect t5"
-      value="Тема"
       name="Тема"
       id="1"
+      v-model="topic"
     >
       <option style="color:#828282" value disabled selected>{{ $ml.get("topic") }}</option>
       <option>{{ $ml.get("addEnterMoney") }}</option>
@@ -55,10 +55,14 @@ export default {
       show: false,
       scroll: 0,
       focus: false,
+      topic: "",
     };
   },
   created() {
     setTimeout(() => (this.show = true), 10);
+    if (+this.$route.params.reportTopic) {
+      this.topic = this.$ml.get("tellAbout");
+    }
   },
   computed: {},
   methods: {},

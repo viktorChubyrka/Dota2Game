@@ -86,8 +86,8 @@ export default {
 .chatInputBody {
   position: relative;
   top: 382px;
-  left: 0;
-  width: 454px;
+  left: -2px;
+  width: 455px;
   height: 70px;
   background-color: #f2f2f2;
 

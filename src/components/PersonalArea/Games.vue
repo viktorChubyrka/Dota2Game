@@ -63,12 +63,12 @@
               <td class="t4">{{ match.status }}</td>
               <td class="t4">{{match.gameType}}</td>
               <td>
-                <a
+                <router-link
                   v-if="i+1 == 1"
                   class="t4 linkTable"
                   style="float:right;color:#35A7FF;margin-right:80px"
-                  href
-                >{{ $ml.get("sendRep") }}</a>
+                  to="support1"
+                >{{ $ml.get("sendRep") }}</router-link>
               </td>
               <td class="t4">
                 {{
@@ -270,12 +270,12 @@
             <td class="t4">{{ $ml.get("win") }}</td>
             <td class="t4">{{ button == 1 ? $ml.get("solo") : $ml.get("party") }}</td>
             <td>
-              <a
+              <router-link
                 v-if="i == 1"
                 class="t4 linkTable"
                 style="float:right;color:#35A7FF;margin-right:80px"
-                href
-              >{{ $ml.get("sendRep") }}</a>
+                to="support1"
+              >{{ $ml.get("sendRep") }}</router-link>
             </td>
             <td class="t4">21/05/2020 11:31:32</td>
             <td class="t4" style="padding-left:20px">3522211212</td>
