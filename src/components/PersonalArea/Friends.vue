@@ -124,10 +124,12 @@ export default {
         let users = this.$store.getters.allUsers;
         let filteredUsers = [];
         let regexp = new RegExp(this.search, "i");
-        users.forEach((el) => {
-          if (regexp.test(el.login)) filteredUsers.push(el);
-        });
-        return filteredUsers;
+        try {
+          users.forEach((el) => {
+            if (regexp.test(el.login)) filteredUsers.push(el);
+          });
+          return filteredUsers;
+        } catch {}
       }
     },
     user() {
