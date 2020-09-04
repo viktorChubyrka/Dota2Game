@@ -373,7 +373,7 @@ export default {
   },
   methods: {
     ShowNotifications() {
-      this.notification = true;
+      this.notification = !this.notification;
     },
     setScroll() {
       this.scroll = document.getElementById("router").scrollTop;
@@ -433,6 +433,7 @@ export default {
   padding: 0;
   z-index: 1;
   transition: top 1s;
+  width: 500px;
 }
 .scrollTopBtn {
   position: fixed;

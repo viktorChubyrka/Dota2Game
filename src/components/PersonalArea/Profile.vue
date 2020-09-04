@@ -61,8 +61,13 @@
         />
         <Button type="submit">Log in through Steam</Button>
       </form>
-      <input id="steamID" :class="{ t5: true, inputs: true}" type="text" v-model="steamID.name" />
-      <div :class="{steamIconShadow:true, shine: !steamID.name}"></div>
+      <input
+        id="steamID"
+        :class="{ t5: true, inputs: true, shine: !steamID.name}"
+        type="text"
+        v-model="steamID.name"
+      />
+      <div :class="{steamIconShadow:true}"></div>
       <i
         :style="`color:${steamID.name?'#2a475e':'rgb(187, 185, 185)'}`"
         :class="{fa:true, 'fa-steam-square':true, 'fa-2x':true }"
@@ -473,7 +478,7 @@ export default {
 #steamID {
   left: 950px;
   top: 170px;
-  padding: 0;
+  padding: 10px;
   width: 342px;
   padding-left: 40px;
 }
