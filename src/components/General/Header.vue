@@ -34,10 +34,10 @@ export default {
   props: ["headerColor"],
   data() {
     return {
-      page: i => `#page${i}`,
-      pageStr: i => {
+      page: (i) => `#page${i}`,
+      pageStr: (i) => {
         return `#page${i}`;
-      }
+      },
     };
   },
   methods: {
@@ -50,17 +50,20 @@ export default {
         setTimeout(() => this.$store.commit("SetAnim3", 4), 2000);
       } else if (index == 2) {
         setTimeout(() => this.$store.commit("SetAnim1", index), 1000);
+      } else if (index == 4) {
+        setTimeout(() => this.$store.commit("SetAnim4"), 1000);
+        setTimeout(() => this.$store.commit("SetAnim5", 4), 2000);
       }
     },
     ChekLoginIn(i) {
       this.$store.dispatch("CheckSession", { i, context: this });
-    }
+    },
   },
   computed: {
     currentPage() {
       return this.$store.getters.GetCurrentPage;
-    }
-  }
+    },
+  },
 };
 </script>
 
