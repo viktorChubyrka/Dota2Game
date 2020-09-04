@@ -65,54 +65,51 @@
       <div :class="{steamIconShadow:true, shine: !steamID.name}"></div>
       <i
         :style="`color:${steamID.name?'#2a475e':'rgb(187, 185, 185)'}`"
-        :class="{fa:true, 'fa-steam-square':true, 'fa-3x':true }"
+        :class="{fa:true, 'fa-steam-square':true, 'fa-2x':true }"
       ></i>
       <div class="passPromo">
         <div class="t3 slide-right">{{ $ml.get("sec") }}</div>
         <div @click="ChangePassword()" class="t4 changePass">{{ $ml.get("changePass") }}</div>
         <div class="t3 slide-right promoTitle">Darewin’s family {{ $ml.get("promo").toLowerCase() }}</div>
-        <div class="t4 promo">{{ $ml.get("promo") }}: {{user.promoCode}}</div>
-        <div class="t4 promo2">
-          {{ $ml.get("refLink") }}:
-          <div style="color:#BDBDBD;display:inline">registration/ref={{user.promoCode}}</div>
-        </div>
+        <div class="t4 promo">{{ $ml.get("promo") }}:</div>
+        <div class="t4 promoCode" style="color:#BDBDBD;">{{user.promoCode}}</div>
+        <div class="t4 promo2">{{ $ml.get("refLink") }}:</div>
+        <div class="t4 promoCode2" style="color:#BDBDBD;">registration/ref={{user.promoCode}}</div>
         <i
           id="copy1"
           @click="fallbackCopyTextToClipboard(user.promoCode)"
           style="position: absolute;
-                left: 493px;
-                top: 192px;
+                left: 260px;
+                top: 243px;
                 color:#BDBDBD;transition:color 0.5s"
-          class="fa fa-copy fa-2x"
+          class="fa fa-copy fa-lg"
         ></i>
         <i
           id="copy2"
           @click="fallbackCopyTextToClipboard(`https://dota2gamebot.herokuapp.com/registration/ref=${user.promoCode}`)"
           style="position: absolute;
-                left: 493px;
-                top: 246px;
+                left: 610px;
+                top: 243px;
                 color:#BDBDBD;transition:color 0.5s"
-          class="fa fa-copy fa-2x"
+          class="fa fa-copy fa-lg"
         ></i>
       </div>
       <div class="t3 LenTitle slide-right">{{ $ml.get("len") }}</div>
       <div class="t3 lengChange">
-        <table class="lengChangeUl">
-          <tr class="t4">
-            <td class="langBtn" @click="ChangeLang(1)" style="width:120px">Русский</td>
-            <td
-              :class="{ show: show2 == 1 }"
-              style="width:105px;opacity:0;display:inline;color:#BDBDBD"
-            >{{ $ml.get("now") }}</td>
-          </tr>
-          <tr class="t4">
-            <td class="langBtn" @click="ChangeLang(2)" style="width:120px">English</td>
-            <td
+        <div class="lengChangeUl">
+          <div class="t4 langRow">
+            <div class="langBtn" @click="ChangeLang(1)" style="width:120px;">Русский</div>
+            <div :class="{ show: show2 == 1 }" style="opacity:0;color:#BDBDBD">{{ $ml.get("now") }}</div>
+          </div>
+
+          <div class="t4 langRow">
+            <div class="langBtn" @click="ChangeLang(2)" style="width:120px">English</div>
+            <div
               :class="{ show: show2 == 2 }"
-              style="width:105px;opacity:0;display:inline;color:#BDBDBD"
-            >{{ $ml.get("now") }}</td>
-          </tr>
-        </table>
+              style="opacity:0;display:inline;color:#BDBDBD"
+            >{{ $ml.get("now") }}</div>
+          </div>
+        </div>
       </div>
 
       <button
@@ -211,10 +208,8 @@ export default {
       this.$store.commit("SetLang", i);
       if (i == 1) {
         this.$ml.change("russian");
-        this.show2 = 1;
       } else {
         this.$ml.change("english");
-        this.show2 = 2;
       }
     },
   },
@@ -241,10 +236,8 @@ export default {
     this.$store.commit("SetLang", localStorage.getItem("leng"));
     if (localStorage.getItem("leng") == 1) {
       this.$ml.change("russian");
-      this.show2 = 1;
     } else {
       this.$ml.change("english");
-      this.show2 = 2;
     }
     let a = window.location.href;
 
@@ -260,6 +253,32 @@ export default {
 };
 </script>
 <style scoped>
+.langRow {
+  border: 1px solid rgb(224, 224, 224);
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+.langRow .show {
+  text-align: right;
+}
+.promoCode {
+  position: absolute;
+  top: 232px;
+  border: 1px solid rgb(224, 224, 224);
+  width: 280px;
+  padding-left: 10px;
+}
+.promoCode2 {
+  position: absolute;
+  top: 232px;
+  left: 300px;
+  border: 1px solid rgb(224, 224, 224);
+  width: 330px;
+  padding-left: 10px;
+}
 .slide-right {
   color: rgb(101, 100, 100);
   transition: color 0.5s;
@@ -271,8 +290,8 @@ export default {
 .LenTitle {
   position: absolute;
   height: 38px;
-  left: 721px;
-  top: 376px;
+  left: 651px;
+  top: 420px;
 }
 .shine {
   box-shadow: 0 0 5px 2px #bf0603;
@@ -291,13 +310,13 @@ export default {
 }
 .steamIdForm {
   position: absolute;
-  left: 830px;
-  top: 495px;
+  left: 950px;
+  top: 174px;
   z-index: 100;
 }
 .steamIdForm button {
-  width: 42px;
-  height: 48px;
+  width: 342px;
+  height: 40px;
   opacity: 0;
   border-radius: 2px;
 }
@@ -336,17 +355,18 @@ export default {
 .lengChange {
   position: absolute;
   height: 38px;
-  left: 721px;
-  top: 400px;
+  left: 651px;
+  top: 450px;
 }
 .lengChangeUl {
   width: 300px !important;
   margin: 0;
   padding: 0 0 16px 0;
 }
+
 .lengChangeUl tr {
   margin-bottom: 10px;
-  width: 225px !important;
+  width: 300px !important;
   cursor: pointer;
 }
 .lengChangeUl:first-child {
@@ -363,8 +383,8 @@ export default {
   position: absolute;
   width: 477px;
   height: 36px;
-  left: 0px;
-  top: 246px;
+  left: 300px;
+  top: 192px;
 }
 .promoTitle {
   position: absolute;
@@ -451,10 +471,11 @@ export default {
   top: 564px;
 }
 #steamID {
-  left: 721px;
-  top: 562px;
+  left: 950px;
+  top: 170px;
   padding: 0;
-  border: none;
+  width: 342px;
+  padding-left: 40px;
 }
 .steamIconShadow {
   position: absolute;
@@ -463,13 +484,13 @@ export default {
 }
 .fa-steam-square {
   position: absolute;
-  left: 830px;
-  top: 495px;
+  left: 957px;
+  top: 175px;
 }
 .steamIDTitile {
   position: absolute;
-  left: 721px;
-  top: 512px;
+  left: 950px;
+  top: 120px;
   width: 100px;
 }
 .titleBlock {
@@ -503,7 +524,7 @@ export default {
 }
 .passPromo {
   position: absolute;
-  left: 721px;
-  top: 64px;
+  left: 651px;
+  top: 120px;
 }
 </style>
