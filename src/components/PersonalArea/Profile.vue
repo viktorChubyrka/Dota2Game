@@ -139,6 +139,11 @@ export default {
       steamID: { name: "", id: "" },
     };
   },
+  watch: {
+    user() {
+      this.steamID = this.user.steamID;
+    },
+  },
   methods: {
     ChangePassword() {
       console.log(1);
@@ -232,8 +237,6 @@ export default {
     if (this.user.email && !this.email) this.email = this.user.email;
     if (this.user.number && !this.number) this.number = this.user.number;
     if (this.user.login && !this.login) this.login = this.user.login;
-    if (this.user.steamID && !this.steamID.name && !this.steamID.id)
-      this.steamID = this.user.steamID;
   },
   created() {
     setTimeout(() => (this.show = true), 10);
@@ -252,7 +255,10 @@ export default {
         console.log(a.split("2Fid%2F")[1].split("&")[0]);
         this.changeContactData();
         this.$store.dispatch("GetUserData", { context: this });
-      } catch {}
+        setTimeout(() => (this.steamID = this.user.steamID), 1000);
+      } catch {
+        this.steamID = this.user.steamID;
+      }
     }, 2000);
   },
 };
