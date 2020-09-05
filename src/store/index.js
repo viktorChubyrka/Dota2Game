@@ -68,7 +68,7 @@ export default new Vuex.Store({
       return state.playingMAtchesParty;
     },
     chat: (state) => {
-      return state.chat;
+      return state.chat.reverse();
     },
     anim1: (state) => {
       return state.anim1;
@@ -148,7 +148,7 @@ export default new Vuex.Store({
       state.playingMatchesParty = payload;
     },
     setChat: (state, payload) => {
-      state.chat = [...state.chat, ...payload.chat];
+      state.chat = [...state.chat.reverse(), ...payload.chat];
     },
     SetAnim1: (state) => {
       state.anim1 = true;
