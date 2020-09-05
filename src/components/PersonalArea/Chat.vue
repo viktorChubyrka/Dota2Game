@@ -42,11 +42,11 @@ export default {
           login: localStorage.getItem("login"),
         })
       );
-      var chat = document.getElementById("chatBody");
+      // var chat = document.getElementById("chatBody");
 
-      let height = chat.scrollHeight;
-      console.log(height);
-      chat.scrollTop = height;
+      // let height = chat.scrollHeight + 31;
+      // console.log(height);
+      // chat.scrollTop = height;
       this.message = "";
     },
   },
@@ -73,9 +73,11 @@ export default {
 }
 .chatBody {
   position: absolute;
+  display: flex;
+  flex-direction: column-reverse;
   top: 62px;
   left: 18px;
-  height: 320px;
+  height: 370px;
   width: 407px;
   overflow: auto;
   z-index: 1;
@@ -114,5 +116,6 @@ export default {
 }
 .message {
   width: 407px;
+  margin-bottom: 1px;
 }
 </style>

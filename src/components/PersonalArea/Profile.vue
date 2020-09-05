@@ -260,7 +260,7 @@ export default {
       } catch {
         this.steamID = this.user.steamID;
       }
-    }, 2000);
+    }, 1000);
   },
 };
 </script>
