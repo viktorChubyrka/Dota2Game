@@ -31,7 +31,7 @@
           {{i}}.
           <span class="slide-right">{{ $ml.get(`q${i}`)}}</span>
         </div>
-        <div :style="`${i==7?'margin-bottom:410px':''}`" class="t5 liText">{{ $ml.get(`a${i}`) }}</div>
+        <div :style="`${i==7?'margin-bottom:440px':''}`" class="t5 liText">{{ $ml.get(`a${i}`) }}</div>
       </li>
     </ul>
     <ul class="oldQLink">
