@@ -232,7 +232,7 @@ export default {
     if (this.user.email && !this.email) this.email = this.user.email;
     if (this.user.number && !this.number) this.number = this.user.number;
     if (this.user.login && !this.login) this.login = this.user.login;
-    if (this.user.steamID && !this.steamID.name)
+    if (this.user.steamID && !this.steamID.name && !this.steamID.id)
       this.steamID = this.user.steamID;
   },
   created() {
