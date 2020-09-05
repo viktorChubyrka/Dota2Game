@@ -272,7 +272,7 @@ export default new Vuex.Store({
           },
           { withCredentials: true }
         );
-        console.log(data.data.data);
+
         if (data.data.data.status == 200) {
           let userToSave = data.data.data.userModel;
           userToSave.matches = data.data.data.userModel.matches.reverse();
@@ -403,7 +403,6 @@ export default new Vuex.Store({
                 el.playersT1 = p1 ? p1 : [];
                 el.playersT2 = p2 ? p2 : [];
                 upcomingParty.push(el);
-                console.log(1);
               }
             }
           }
@@ -427,14 +426,14 @@ export default new Vuex.Store({
           }
         );
         let indexUser = null;
-        console.log(party, "ssssss");
+
         if (party.data) {
           party.data.players.forEach((el, index) => {
             if (el.login == localStorage.getItem("login")) indexUser = index;
           });
 
           party.data.players.splice(indexUser, 1);
-          console.log(party.data);
+
           state.commit("setPartyLeader", party.data.creatorLogin);
           state.commit("setParty", party.data.players);
           state.dispatch("GetAllReadyUsers");

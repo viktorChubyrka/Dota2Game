@@ -240,6 +240,12 @@ export default {
       notification: false,
     };
   },
+  watch: {
+    notifications() {
+      if (this.user.ready && this.notifications.length)
+        this.notification = true;
+    },
+  },
   computed: {
     windowLocation() {
       return this.$route.path.split("/")[2];
@@ -368,7 +374,7 @@ export default {
       }, 2000);
     }, 1);
     setTimeout(() => {
-      this.$store.dispatch("GetUserData", { context: this }), console.log(this);
+      this.$store.dispatch("GetUserData", { context: this });
     }, 20);
   },
   methods: {
@@ -380,8 +386,7 @@ export default {
     },
     scrollUp() {
       let router = document.getElementById("router");
-      console.log(router);
-      console.log(router.scrollTop);
+
       router.scrollTop = 0;
     },
     SetActive() {
@@ -426,7 +431,8 @@ export default {
 <style>
 .notificationContainer {
   position: fixed;
-  right: 200px;
+  padding: 0 100px;
+  right: 100px;
   z-index: 100;
   list-style-type: none;
   margin: 0;

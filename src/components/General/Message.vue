@@ -114,11 +114,9 @@ export default {
   padding: 30px 10px;
 }
 .buttonContainer {
-  position: absolute;
   width: 270px;
   height: 32px;
-  left: 12px;
-  top: 42px;
+  padding-left: 12px;
 }
 div.delete.containerMessage {
   margin-top: -150px;
@@ -127,9 +125,10 @@ div.delete.containerMessage {
 .containerMessage {
   width: 347px;
   height: 140px;
+  margin-left: 76px;
+  margin-right: 76px;
   background: #ffffff;
   z-index: 100;
-  position: relative;
   transition: box-shadow 0.5s, margin-top 0.5s;
 }
 .buttonMessage {

@@ -11,6 +11,19 @@ export default {
       interval: null,
     };
   },
+  watch: {
+    number() {
+      if (this.number <= 0) {
+        clearInterval(this.interval);
+        this.socket.send(
+          JSON.stringify({
+            login: this.partyLeader,
+            type: "DestroyLobby",
+          })
+        );
+      }
+    },
+  },
   created() {
     this.socket = this.$store.getters.socket;
     let nowDate = Date.now();
