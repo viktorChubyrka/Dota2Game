@@ -27,14 +27,54 @@
       <div class="titleBlock">
         <div class="t3 slide-right">{{ $ml.get("aboutYou") }}</div>
       </div>
-      <input id="name" class="t5 inputs" placeholder="Имя" type="text" v-model="name" />
-      <input id="surname" class="t5 inputs" placeholder="Фамилия" type="text" v-model="surname" />
+      <input
+        @focus="focus=true"
+        @focusout="focus=false"
+        id="name"
+        class="t5 inputs"
+        placeholder="Имя"
+        type="text"
+        v-model="name"
+      />
+      <input
+        @focus="focus=true"
+        @focusout="focus=false"
+        id="surname"
+        class="t5 inputs"
+        placeholder="Фамилия"
+        type="text"
+        v-model="surname"
+      />
       <div style="top:413px" class="titleBlock">
         <div class="t3 slide-right">{{ $ml.get("cont") }}</div>
       </div>
-      <input id="login" class="t5 inputs" type="text" placeholder="Логин" v-model="login" />
-      <input id="email" class="t5 inputs" type="text" placeholder="Емайл" v-model="email" />
-      <input id="phone" class="t5 inputs" type="text" placeholder="Телефон" v-model="number" />
+      <input
+        @focus="focus=true"
+        @focusout="focus=false"
+        id="login"
+        class="t5 inputs"
+        type="text"
+        placeholder="Логин"
+        v-model="login"
+      />
+      <input
+        @focus="focus=true"
+        @focusout="focus=false"
+        id="email"
+        class="t5 inputs"
+        type="text"
+        placeholder="Емайл"
+        v-model="email"
+      />
+      <input
+        @focus="focus=true"
+        @focusout="focus=false"
+        id="phone"
+        class="t5 inputs"
+        type="text"
+        placeholder="Телефон"
+        v-model="number"
+      />
       <div class="t3 steamIDTitile slide-right">Steam ID</div>
       <form class="steamIdForm" action="https://steamcommunity.com/openid/login" method="post">
         <input
@@ -137,6 +177,7 @@ export default {
       number: "",
       login: "",
       steamID: { name: "", id: "" },
+      focus: false,
     };
   },
   watch: {
@@ -232,11 +273,13 @@ export default {
     },
   },
   beforeUpdate() {
-    if (this.user && !this.name) this.name = this.user.name;
-    if (this.user.surname && !this.surname) this.surname = this.user.surname;
-    if (this.user.email && !this.email) this.email = this.user.email;
-    if (this.user.number && !this.number) this.number = this.user.number;
-    if (this.user.login && !this.login) this.login = this.user.login;
+    if (!this.focus) {
+      if (this.user && !this.name) this.name = this.user.name;
+      if (this.user.surname && !this.surname) this.surname = this.user.surname;
+      if (this.user.email && !this.email) this.email = this.user.email;
+      if (this.user.number && !this.number) this.number = this.user.number;
+      if (this.user.login && !this.login) this.login = this.user.login;
+    }
   },
   created() {
     setTimeout(() => (this.show = true), 10);
