@@ -34,6 +34,7 @@
       <div>
         <input
           :placeholder="ea()"
+          v-model="email"
           class="t5"
           style="position:absolute; padding:4px 18px; width: 750px; height: 40px; left: 970px;
         top: 275px; border: 1px solid #BDBDBD; box-sizing: border-box;
@@ -42,6 +43,7 @@
         />
         <textarea
           class="t5"
+          v-model="reportDiscription"
           :placeholder="yq()"
           style="position: absolute;
           padding:4px 18px;
@@ -55,6 +57,7 @@
           type="textarea"
         />
         <button
+          @click="SendReport()"
           class="t5"
           style="position: absolute;
                 width: 316px;
@@ -184,9 +187,20 @@ export default {
       yq: () => {
         return this.$ml.get("youQ");
       },
+      reportDiscription: "",
+      email: "",
     };
   },
   methods: {
+    SendReport() {
+      if (this.email && this.reportDiscription)
+        this.$store.dispatch("SendReport", {
+          email: this.email,
+          reportDescription: this.reportDiscription,
+        });
+      this.email = "";
+      this.reportDiscription = "";
+    },
     SetCurentPage(index) {
       this.$store.commit("SetCurrentPage", index);
       localStorage.setItem("currentPage", index);

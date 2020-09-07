@@ -456,6 +456,11 @@ export default new Vuex.Store({
       });
       state.commit("setReady", ready.data.ready);
     },
+    SendReport: async (state, payload) => {
+      await Axios.post(`${url}/api/user/actions/sendReport`, payload, {
+        withCredentials: true,
+      });
+    },
   },
   modules: {},
 });

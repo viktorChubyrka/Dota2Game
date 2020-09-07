@@ -22,8 +22,9 @@
       :placeholder="yq()"
       type="textarea"
       id="textArea"
+      v-model="reportDiscription"
     />
-    <button class="t4 buttonSend">{{ $ml.get("supBut") }}</button>
+    <button @click="SendReport()" class="t4 buttonSend">{{ $ml.get("supBut") }}</button>
     <div class="t2 oldQuestion slide-right">{{ $ml.get("pQ") }}</div>
     <ul class="answersList">
       <li :id="`q${i}`" v-for="i in 7" :key="i">
@@ -56,6 +57,7 @@ export default {
       scroll: 0,
       focus: false,
       topic: "",
+      reportDiscription: "",
     };
   },
   created() {
@@ -65,7 +67,20 @@ export default {
     }
   },
   computed: {},
-  methods: {},
+  methods: {
+    SendReport() {
+      let user = this.$store.getters.userData;
+      if (this.reportDiscription && this.topic)
+        this.$store.dispatch("SendReport", {
+          login: user.login,
+          email: user.email,
+          reportTopic: this.topic,
+          reportDescription: this.reportDiscription,
+        });
+      this.topic = "";
+      this.reportDiscription = "";
+    },
+  },
 };
 </script>
 <style scoped>
