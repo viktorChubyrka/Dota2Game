@@ -16,13 +16,13 @@
     </div>
     <div class="chatInputBody">
       <input
-        placeholder="Ваше собщение"
+        :placeholder="chatPh()"
         type="text "
         v-model="message"
         class="t5 chatInput"
         @keydown.enter="WriteToChat()"
       />
-      <button @click="WriteToChat()" class="t5 chatButton">Чат</button>
+      <button @click="WriteToChat()" class="t5 chatButton">{{$ml.get("chatBtn")}}</button>
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@ export default {
     return {
       message: "",
       socket: null,
+      chatPh: () => this.$ml.get("chatPlaceholder"),
     };
   },
   methods: {

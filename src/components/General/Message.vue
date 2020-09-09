@@ -19,8 +19,10 @@
       v-if="notification.type == 'AddTooFriends' || notification.type == 'AddTooParty'"
       class="t5 buttonContainer"
     >
-      {{ $ml.get(notification.type) }}
-      <strong>{{ notification.login }}</strong>
+      <div class="notificationText">
+        {{ $ml.get(notification.type) }}
+        <strong>{{ notification.login }}</strong>
+      </div>
       <button
         v-if="notification.type == 'AddTooFriends'"
         @click="acceptFriend()"
@@ -37,7 +39,7 @@
     </div>
     <div
       class="messageText"
-      v-else-if="notification.type == 'notAcceptFriend' || notification.type == 'AcceptLobby'|| notification.type=='notAcceptParty' ||notification.type=='AcceptFriend'"
+      v-else-if="notification.type == 'notAcceptFriend' || notification.type == 'AcceptLobby'|| notification.type=='notAcceptParty' ||notification.type=='AcceptFriend' ||notification.type=='LobbyDestroed'"
     >
       <strong>{{ notification.login }}</strong>
       {{ $ml.get(notification.type) }}
@@ -109,6 +111,9 @@ export default {
 };
 </script>
 <style>
+.notificationText {
+  width: 380px;
+}
 .messageText {
   width: 327px;
   padding: 30px 10px;
@@ -123,7 +128,7 @@ div.delete.containerMessage {
   z-index: 10;
 }
 .containerMessage {
-  width: 347px;
+  width: 380px;
   height: 140px;
   margin-left: 76px;
   margin-right: 76px;

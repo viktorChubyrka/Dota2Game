@@ -112,6 +112,11 @@
         :style="`color:${steamID.name?'#2a475e':'rgb(187, 185, 185)'}`"
         :class="{fa:true, 'fa-steam-square':true, 'fa-2x':true }"
       ></i>
+      <i class="fa fa-info-circle fa-2x">
+        <div
+          class="t5 steam-connect-info"
+        >Тут будет сообщение которое обяснит как правильно подключать стим</div>
+      </i>
       <div class="passPromo">
         <div class="t3 slide-right">{{ $ml.get("sec") }}</div>
         <div @click="ChangePassword()" class="t4 changePass">{{ $ml.get("changePass") }}</div>
@@ -125,7 +130,7 @@
           @click="fallbackCopyTextToClipboard(user.promoCode)"
           style="position: absolute;
                 left: 260px;
-                top: 243px;
+                top: 223px;
                 color:#BDBDBD;transition:color 0.5s"
           class="fa fa-copy fa-lg"
         ></i>
@@ -134,7 +139,7 @@
           @click="fallbackCopyTextToClipboard(`https://dota2gamebot.herokuapp.com/registration/ref=${user.promoCode}`)"
           style="position: absolute;
                 left: 610px;
-                top: 243px;
+                top: 223px;
                 color:#BDBDBD;transition:color 0.5s"
           class="fa fa-copy fa-lg"
         ></i>
@@ -273,7 +278,7 @@ export default {
     },
   },
   beforeUpdate() {
-    if (!this.focus) {
+    if (this.focus) {
       if (this.user && !this.name) this.name = this.user.name;
       if (this.user.surname && !this.surname) this.surname = this.user.surname;
       if (this.user.email && !this.email) this.email = this.user.email;
@@ -321,14 +326,14 @@ export default {
 }
 .promoCode {
   position: absolute;
-  top: 232px;
+  top: 212px;
   border: 1px solid rgb(224, 224, 224);
   width: 280px;
   padding-left: 10px;
 }
 .promoCode2 {
   position: absolute;
-  top: 232px;
+  top: 212px;
   left: 300px;
   border: 1px solid rgb(224, 224, 224);
   width: 330px;
@@ -346,7 +351,7 @@ export default {
   position: absolute;
   height: 38px;
   left: 651px;
-  top: 420px;
+  top: 410px;
 }
 .shine {
   box-shadow: 0 0 5px 2px #bf0603;
@@ -367,7 +372,7 @@ export default {
   position: absolute;
   left: 950px;
   top: 174px;
-  z-index: 100;
+  z-index: 99;
 }
 .steamIdForm button {
   width: 342px;
@@ -432,21 +437,21 @@ export default {
   width: 250px;
   height: 36px;
   left: 0px;
-  top: 192px;
+  top: 172px;
 }
 .promo2 {
   position: absolute;
   width: 477px;
   height: 36px;
   left: 300px;
-  top: 192px;
+  top: 172px;
 }
 .promoTitle {
   position: absolute;
   width: 320px;
   height: 38px;
-  left: 0 px;
-  top: 138px;
+  left: 0px;
+  top: 118px;
 }
 .profileImg {
   position: absolute;
@@ -541,6 +546,29 @@ export default {
   position: absolute;
   left: 957px;
   top: 175px;
+}
+.fa-info-circle {
+  position: relative;
+  left: 1257px;
+  top: 175px;
+  color: rgb(198, 197, 197);
+  z-index: 100;
+}
+.fa-info-circle:hover .steam-connect-info {
+  z-index: 100;
+  opacity: 1;
+}
+.steam-connect-info {
+  background: #1f2430;
+  color: white;
+  opacity: 0;
+  position: absolute;
+  top: -7px;
+  right: -9px;
+  width: 200px;
+  transition: opacity 0.5s;
+  padding: 10px;
+  border-radius: 10px;
 }
 .steamIDTitile {
   position: absolute;

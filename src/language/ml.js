@@ -197,6 +197,7 @@ export default new MLCreate({
       AcceptFriend: "accepted a friend invitation",
       AcceptLobby: "accepted the invitation to the group",
       notAcceptParty: "declined the invitation to the group",
+      LobbyDestroed: "Lobby dissolved",
       accept: "Accept",
       cancel: "Reject",
       len: "Languages",
@@ -205,6 +206,8 @@ export default new MLCreate({
       brothersF: "Brothers F.",
       notLider: "You are not a party leader",
       notReady: "Not ready",
+      chatBtn: "Chat",
+      chatPlaceholder: "Your message",
     }),
 
     new MLanguage("russian").create({
@@ -397,6 +400,7 @@ export default new MLCreate({
       AcceptFriend: "принял приглашение в друзья",
       AcceptLobby: "принял приглашение в группу",
       notAcceptParty: "отклонил приглашение в группу",
+      LobbyDestroed: "Лобби розпущено",
       accept: "Добавить",
       cancel: "Отклонить",
       len: "Языки",
@@ -405,6 +409,8 @@ export default new MLCreate({
       brothersF: "Братья Ф.",
       notLider: "Вы не лидер группы",
       notReady: "Не готов",
+      chatBtn: "Чат",
+      chatPlaceholder: "Ваше сообщение",
     }),
   ],
 });

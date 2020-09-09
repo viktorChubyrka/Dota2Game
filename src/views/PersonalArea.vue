@@ -221,6 +221,11 @@
     <div v-if="scrollTop" @click="scrollUp()" class="scrollTopBtn">
       <i class="fa fa-chevron-up"></i>
     </div>
+    <div @click="isPrivate=false" v-if="isPrivate" class="isPrivateAccountModal">
+      <div class="messageContainer">
+        <p>Для того чтобы начать игру нужно сделать свой стим профиль публичным</p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -238,6 +243,7 @@ export default {
       online: 0,
       scroll: 0,
       notification: false,
+      isPrivate: false,
     };
   },
   watch: {
@@ -303,7 +309,11 @@ export default {
       let date = new Date();
       let user = this.$store.getters.userData;
       let message = JSON.parse(event.data);
+      console.log(message.type);
       switch (message.type) {
+        case "PrivateAccount":
+          this.isPrivate = true;
+          break;
         case "Chat":
           let newDate = { min: date.getMinutes(), hour: date.getHours() };
           this.$store.commit("setChat", {
@@ -398,7 +408,7 @@ export default {
       );
     },
     SearchGame() {
-      if (this.user.steamID) {
+      if (this.user.steamID.id) {
         this.socket.send(
           JSON.stringify({
             login: localStorage.getItem("login"),
@@ -408,7 +418,7 @@ export default {
       } else this.$router.push("profile");
     },
     FindPartyGame() {
-      if (this.user.steamID)
+      if (this.user.steamID.id)
         // this.socket.send(
         //   JSON.stringify({
         //     login: localStorage.getItem("login"),
@@ -429,6 +439,26 @@ export default {
 };
 </script>
 <style>
+.isPrivateAccountModal {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1080px;
+  backdrop-filter: blur(5px);
+}
+.messageContainer {
+  width: 500px;
+  font-size: 30px;
+  background: #1f2430;
+  color: white;
+  border-radius: 30px;
+  box-shadow: 0 0px 20px black;
+  padding: 10px 20px;
+  text-align: center;
+  margin: 400px auto;
+}
 .notificationContainer {
   position: fixed;
   padding: 0 100px;

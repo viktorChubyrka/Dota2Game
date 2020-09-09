@@ -27,6 +27,7 @@
         :photo="user.photo"
         :status="'you'"
         :ready="user.ready"
+        ref="PartySlot"
       />
       <PartySlot :party="party || ''" :index="i - 1" v-for="i in 4" :key="i" />
     </div>
@@ -51,26 +52,40 @@ top: 240px;"
     >{{ $ml.get("search") }}</div>
     <table class="searchTable">
       <tbody>
-        <tr style v-for="(user, i) in allUsers" :key="user._id">
+        <div style="position:relative!important" v-for="(User, i) in allUsers" :key="User._id">
           <td style="padding-bottom:15px;padding-right:16px">
             <div class="circle"></div>
           </td>
           <td style="padding-bottom:15px;">
-            <div class="t5">{{ search == "" ? user : user.login }}</div>
+            <div class="t5">{{ search == "" ? User : User.login }}</div>
           </td>
           <td
             class="addFriend"
-            style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
+            style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;z-index:1"
           >
             <i
               v-if="search != ''"
               :id="`plus${i}2`"
-              @click="Click(2, i), addFriend(user.login)"
+              @click="Click(2, i,false), addFriend(User.login)"
               class="fa fa-plus-square fa-lg"
             ></i>
-            <i v-else :id="`plus${i}2`" @click="Click(2, i)" class="fa fa-ellipsis-h fa-2x"></i>
+            <i
+              v-else
+              :id="`plus${i}2`"
+              @mouseleave="friendsOptions=false"
+              @click="Click(2, i,true)"
+              class="fa fa-ellipsis-h fa-2x"
+            ></i>
           </td>
-        </tr>
+          <div @mouseleave="dissableOption(i)" :id="`options${i}`" class="partyOptions">
+            <div class="t6" @click="AddToParty(User,i)">Пригласить в пати</div>
+            <div
+              class="t6"
+              style="color:red"
+              @click="DeleteFromFriends(user.login,User,i)"
+            >Удалить из друзей</div>
+          </div>
+        </div>
       </tbody>
     </table>
   </div>
@@ -89,10 +104,39 @@ export default {
   },
   components: { Chat, PartySlot },
   methods: {
-    Click(tableIndex, i) {
-      let el = document.getElementById(`plus${i}${tableIndex}`);
-      el.style = "color:#908e8e!important";
-      setTimeout(() => (el.style = "display:none"), 300);
+    Click(tableIndex, i, isFriend) {
+      if (isFriend) {
+        let options = document.getElementById(`options${i}`);
+        options.style = "display:block!important";
+      } else {
+        let el = document.getElementById(`plus${i}${tableIndex}`);
+        el.style = "color:#908e8e!important";
+        if (this.search) setTimeout(() => (el.style = "display:none"), 300);
+      }
+    },
+    dissableOption(i) {
+      let options = document.getElementById(`options${i}`);
+      options.style = "display:none!important";
+    },
+    AddToParty(login, i) {
+      this.$refs.PartySlot.SendPartyInvite(login, this.user.partyID);
+      let options = document.getElementById(`options${i}`);
+
+      options.style = "display:block!important";
+    },
+    DeleteFromFriends(login, friendLogin, i) {
+      let options = document.getElementById(`options${i}`);
+
+      options.style = "display:block!important";
+
+      this.$store.dispatch("DeleteFriend");
+      this.socket.send(
+        JSON.stringify({
+          friendLogin,
+          login: localStorage.getItem("login"),
+          type: "DeleteFriend",
+        })
+      );
     },
     addFriend(login) {
       this.socket.send(
@@ -139,6 +183,22 @@ export default {
 };
 </script>
 <style>
+.partyOptions {
+  position: absolute;
+  top: -7px;
+  display: none;
+  right: 0;
+  width: 140px;
+  background: #f2f2f2;
+  color: black;
+  z-index: 2;
+}
+.partyOptions div {
+  padding: 10px 15px;
+}
+.partyOptions div:hover {
+  background: #e0e0e0;
+}
 .fa-plus-square:hover {
   color: #bdbdbd !important;
 }

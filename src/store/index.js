@@ -461,6 +461,11 @@ export default new Vuex.Store({
         withCredentials: true,
       });
     },
+    DeleteFriend: async (state, payload) => {
+      await Axios.post(`${url}/api/user/actions/deleteFriend`, payload, {
+        withCredentials: true,
+      });
+    },
   },
   modules: {},
 });
