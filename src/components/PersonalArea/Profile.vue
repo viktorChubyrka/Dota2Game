@@ -278,7 +278,7 @@ export default {
     },
   },
   beforeUpdate() {
-    if (this.focus) {
+    if (!this.focus) {
       if (this.user && !this.name) this.name = this.user.name;
       if (this.user.surname && !this.surname) this.surname = this.user.surname;
       if (this.user.email && !this.email) this.email = this.user.email;
@@ -554,9 +554,11 @@ export default {
   color: rgb(198, 197, 197);
   z-index: 100;
 }
-.fa-info-circle:hover .steam-connect-info {
-  z-index: 100;
+.fa-info-circle:hover .t5.steam-connect-info {
   opacity: 1;
+  width: 200px;
+  font-size: 15px;
+  height: auto;
 }
 .steam-connect-info {
   background: #1f2430;
@@ -565,8 +567,11 @@ export default {
   position: absolute;
   top: -7px;
   right: -9px;
-  width: 200px;
-  transition: opacity 0.5s;
+  width: 0;
+  height: 0;
+  font-size: 0px;
+  transition: all 0.5s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   padding: 10px;
   border-radius: 10px;
 }
