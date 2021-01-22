@@ -24,6 +24,9 @@ export default {
       }
     },
   },
+  destroyed() {
+    clearInterval(this.interval);
+  },
   created() {
     this.socket = this.$store.getters.socket;
     let nowDate = Date.now();

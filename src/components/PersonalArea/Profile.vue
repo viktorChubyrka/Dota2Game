@@ -5,14 +5,12 @@
         v-if="user.photo"
         class="profileImg"
         :style="{
-        background: `url(${user.photo != '' ? user.photo : svg}) center`,
-      }"
+          background: `url(${user.photo != '' ? user.photo : svg}) center`,
+        }"
       ></div>
       <div v-else class="photo"></div>
       <label class="t4 changePhoto2" for="filechooser">
-        {{
-        $ml.get("changePhoto")
-        }}
+        {{ $ml.get("changePhoto") }}
       </label>
       <input
         id="filechooser"
@@ -28,8 +26,8 @@
         <div class="t3 slide-right">{{ $ml.get("aboutYou") }}</div>
       </div>
       <input
-        @focus="focus=true"
-        @focusout="focus=false"
+        @focus="focus = true"
+        @focusout="focus = false"
         id="name"
         class="t5 inputs"
         placeholder="Имя"
@@ -37,8 +35,8 @@
         v-model="name"
       />
       <input
-        @focus="focus=true"
-        @focusout="focus=false"
+        @focus="focus = true"
+        @focusout="focus = false"
         id="surname"
         class="t5 inputs"
         placeholder="Фамилия"
@@ -49,8 +47,8 @@
         <div class="t3 slide-right">{{ $ml.get("cont") }}</div>
       </div>
       <input
-        @focus="focus=true"
-        @focusout="focus=false"
+        @focus="focus = true"
+        @focusout="focus = false"
         id="login"
         class="t5 inputs"
         type="text"
@@ -58,8 +56,8 @@
         v-model="login"
       />
       <input
-        @focus="focus=true"
-        @focusout="focus=false"
+        @focus="focus = true"
+        @focusout="focus = false"
         id="email"
         class="t5 inputs"
         type="text"
@@ -67,8 +65,8 @@
         v-model="email"
       />
       <input
-        @focus="focus=true"
-        @focusout="focus=false"
+        @focus="focus = true"
+        @focusout="focus = false"
         id="phone"
         class="t5 inputs"
         type="text"
@@ -76,7 +74,11 @@
         v-model="number"
       />
       <div class="t3 steamIDTitile slide-right">Steam ID</div>
-      <form class="steamIdForm" action="https://steamcommunity.com/openid/login" method="post">
+      <form
+        class="steamIdForm"
+        action="https://steamcommunity.com/openid/login"
+        method="post"
+      >
         <input
           type="hidden"
           name="openid.identity"
@@ -87,7 +89,11 @@
           name="openid.claimed_id"
           value="http://specs.openid.net/auth/2.0/identifier_select"
         />
-        <input type="hidden" name="openid.ns" value="http://specs.openid.net/auth/2.0" />
+        <input
+          type="hidden"
+          name="openid.ns"
+          value="http://specs.openid.net/auth/2.0"
+        />
         <input type="hidden" name="openid.mode" value="checkid_setup" />
         <input
           type="hidden"
@@ -103,28 +109,36 @@
       </form>
       <input
         id="steamID"
-        :class="{ t5: true, inputs: true, shine: !steamID.name}"
+        :class="{ t5: true, inputs: true, shine: !steamID.name }"
         type="text"
         v-model="steamID.name"
       />
-      <div :class="{steamIconShadow:true}"></div>
+      <div :class="{ steamIconShadow: true }"></div>
       <i
-        :style="`color:${steamID.name?'#2a475e':'rgb(187, 185, 185)'}`"
-        :class="{fa:true, 'fa-steam-square':true, 'fa-2x':true }"
+        :style="`color:${steamID.name ? '#2a475e' : 'rgb(187, 185, 185)'}`"
+        :class="{ fa: true, 'fa-steam-square': true, 'fa-2x': true }"
       ></i>
       <i class="fa fa-info-circle fa-2x">
-        <div
-          class="t5 steam-connect-info"
-        >Тут будет сообщение которое обяснит как правильно подключать стим</div>
+        <div class="t5 steam-connect-info">
+          Тут будет сообщение которое обяснит как правильно подключать стим
+        </div>
       </i>
       <div class="passPromo">
         <div class="t3 slide-right">{{ $ml.get("sec") }}</div>
-        <div @click="ChangePassword()" class="t4 changePass">{{ $ml.get("changePass") }}</div>
-        <div class="t3 slide-right promoTitle">Darewin’s family {{ $ml.get("promo").toLowerCase() }}</div>
+        <div @click="ChangePassword()" class="t4 changePass">
+          {{ $ml.get("changePass") }}
+        </div>
+        <div class="t3 slide-right promoTitle">
+          Darewin’s family {{ $ml.get("promo").toLowerCase() }}
+        </div>
         <div class="t4 promo">{{ $ml.get("promo") }}:</div>
-        <div class="t4 promoCode" style="color:#BDBDBD;">{{user.promoCode}}</div>
+        <div class="t4 promoCode" style="color:#BDBDBD;">
+          {{ user.promoCode }}
+        </div>
         <div class="t4 promo2">{{ $ml.get("refLink") }}:</div>
-        <div class="t4 promoCode2" style="color:#BDBDBD;">registration/ref={{user.promoCode}}</div>
+        <div class="t4 promoCode2" style="color:#BDBDBD;">
+          registration/ref={{ user.promoCode }}
+        </div>
         <i
           id="copy1"
           @click="fallbackCopyTextToClipboard(user.promoCode)"
@@ -136,7 +150,11 @@
         ></i>
         <i
           id="copy2"
-          @click="fallbackCopyTextToClipboard(`https://dota2gamebot.herokuapp.com/registration/ref=${user.promoCode}`)"
+          @click="
+            fallbackCopyTextToClipboard(
+              `https://dota2gamebot.herokuapp.com/registration/ref=${user.promoCode}`
+            )
+          "
           style="position: absolute;
                 left: 610px;
                 top: 223px;
@@ -148,25 +166,42 @@
       <div class="t3 lengChange">
         <div class="lengChangeUl">
           <div class="t4 langRow">
-            <div class="langBtn" @click="ChangeLang(1)" style="width:120px;">Русский</div>
-            <div :class="{ show: show2 == 1 }" style="opacity:0;color:#BDBDBD">{{ $ml.get("now") }}</div>
+            <div class="langBtn" @click="ChangeLang(1)" style="width:120px;">
+              Русский
+            </div>
+            <div :class="{ show: show2 == 1 }" style="opacity:0;color:#BDBDBD">
+              {{ $ml.get("now") }}
+            </div>
           </div>
 
           <div class="t4 langRow">
-            <div class="langBtn" @click="ChangeLang(2)" style="width:120px">English</div>
+            <div class="langBtn" @click="ChangeLang(2)" style="width:120px">
+              English
+            </div>
             <div
               :class="{ show: show2 == 2 }"
               style="opacity:0;display:inline;color:#BDBDBD"
-            >{{ $ml.get("now") }}</div>
+            >
+              {{ $ml.get("now") }}
+            </div>
           </div>
         </div>
       </div>
 
       <button
-        v-if="user.login != login || user.number != number || user.steamID.id != steamID.id || user.email != email || user.name != name || user.surname!= surname "
+        v-if="
+          user.login != login ||
+            user.number != number ||
+            user.steamID.id != steamID.id ||
+            user.email != email ||
+            user.name != name ||
+            user.surname != surname
+        "
         class="t4 change-btn"
-        @click="changeName(),changeContactData()"
-      >{{ $ml.get("apply") }}</button>
+        @click="changeName(), changeContactData()"
+      >
+        {{ $ml.get("apply") }}
+      </button>
     </div>
   </div>
 </template>
@@ -210,7 +245,6 @@ export default {
       var textArea = document.createElement("textarea");
       textArea.value = text;
 
-      // Avoid scrolling to bottom
       textArea.style.top = "0";
       textArea.style.left = "0";
       textArea.style.position = "fixed";
