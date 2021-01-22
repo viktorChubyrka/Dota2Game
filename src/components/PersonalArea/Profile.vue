@@ -92,12 +92,12 @@
         <input
           type="hidden"
           name="openid.realm"
-          value="https://dota2gamebot.herokuapp.com/personalArea/profile"
+          value="https://darewins.club/personalArea/Profile"
         />
         <input
           type="hidden"
           name="openid.return_to"
-          value="https://dota2gamebot.herokuapp.com/personalArea/profile"
+          value="https://darewins.club/personalArea/profile"
         />
         <Button type="submit">Log in through Steam</Button>
       </form>
