@@ -87,7 +87,6 @@ export default {
     },
   },
   created() {
-    console.log(this.$route.params.date - Date.now());
     if (Date.now() - this.$route.params.date > 300000) this.$router.push("/");
   },
   computed: {
