@@ -175,7 +175,7 @@
             </div>
           </li>
         </router-link>
-        <router-link class="RL" to>
+        <router-link class="RL" to="rules">
           <li
             @click="ChangePage(2)"
             :class="{ t5: true, iconFocused: windowLocation == 'rules' }"
