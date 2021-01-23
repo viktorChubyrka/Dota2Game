@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Promo from "../views/Promo.vue";
 import Registration from "../views/Registration.vue";
 import LogIn from "../views/LogIn.vue";
+import Rules from "../views/Rules.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
 import RecoweryPassword from "../views/RecoweryPassword.vue";
 import PasswordResetSucces from "../views/PasswordResetSucces.vue";
@@ -88,6 +89,11 @@ const routes = [
         name: "Friends",
         component: Friends,
       },
+      {
+        path: "rules",
+        name: "rules",
+        component: Rules,
+  },
     ],
   },
 ];
