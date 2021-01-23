@@ -363,7 +363,7 @@ export default {
     this.$store.commit(
       "SetSocket",
       //new WebSocket("wss://safe-inlet-79254.herokuapp.com")
-      new WebSocket("ws://localhost:3000")
+      new WebSocket("wss://darewins.club/api")
     );
     this.socket = this.$store.getters.socket;
 

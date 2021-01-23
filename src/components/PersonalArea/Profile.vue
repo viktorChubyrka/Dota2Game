@@ -98,7 +98,7 @@
         <input
           type="hidden"
           name="openid.realm"
-          value="https://darewins.club/personalArea/Profile"
+          value="https://darewins.club/"
         />
         <input
           type="hidden"
