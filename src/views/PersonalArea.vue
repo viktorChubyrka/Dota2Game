@@ -164,7 +164,7 @@
         <router-link class="RL" to="games">
           <li
             @click="ChangePage(1)"
-            :class="{ t5: true, iconFocused: windowLocation == 'games' }"
+            :class="{ t5: true, iconFocused: windowLocation == 'Games' }"
           >
             <div style="display:flex">
               <img
@@ -178,7 +178,7 @@
         <router-link class="RL" to="rules">
           <li
             @click="ChangePage(2)"
-            :class="{ t5: true, iconFocused: windowLocation == 'rules' }"
+            :class="{ t5: true, iconFocused: windowLocation == 'Rules' }"
           >
             <div style="display:flex">
               <img
@@ -192,7 +192,7 @@
         <router-link class="RL" to="profile">
           <li
             @click="ChangePage(3)"
-            :class="{ t5: true, iconFocused: windowLocation == 'profile' }"
+            :class="{ t5: true, iconFocused: windowLocation == 'Profile' }"
           >
             <div style="display:flex">
               <img
@@ -206,7 +206,7 @@
         <router-link class="RL" to="friends">
           <li
             @click="ChangePage(4)"
-            :class="{ t5: true, iconFocused: windowLocation == 'friends' }"
+            :class="{ t5: true, iconFocused: windowLocation == 'Friends' }"
           >
             <div style="display:flex">
               <img
@@ -220,7 +220,7 @@
         <router-link class="RL" to="money">
           <li
             @click="ChangePage(5)"
-            :class="{ t5: true, iconFocused: windowLocation == 'money' }"
+            :class="{ t5: true, iconFocused: windowLocation == 'Money' }"
           >
             <div style="display:flex">
               <img
@@ -236,7 +236,7 @@
             @click="ChangePage(6)"
             :class="{
               t5: true,
-              iconFocused: windowLocation == 'loyalityProgram',
+              iconFocused: windowLocation == 'LoyalityProgram',
             }"
           >
             <div style="display:flex">
@@ -251,7 +251,7 @@
         <router-link style="margin:0" :class="{ RL: true }" to="support0">
           <li
             @click="ChangePage(7)"
-            :class="{ t5: true, iconFocused: windowLocation == 'support' }"
+            :class="{ t5: true, iconFocused: windowLocation == 'Support' }"
           >
             <div style="display:flex">
               <img
@@ -309,13 +309,15 @@ export default {
   },
   watch: {
     notifications() {
-      if (this.user.ready && this.notifications.length)
+      if (this.user.ready && this.notifications.length) {
         this.notification = true;
+        this.PlayNotificationSound();
+      }
     },
   },
   computed: {
     windowLocation() {
-      return this.$route.path.split("/")[2];
+      return this.$route.name;
     },
     scrollTop() {
       if (this.scroll) {
@@ -351,7 +353,9 @@ export default {
     newNotifications() {
       if (this.user.notifications)
         for (let i = 0; i < this.user.notifications.length; i++) {
-          if (this.user.notifications[i].new) return true;
+          if (this.user.notifications[i].new) {
+            return true;
+          }
         }
       return false;
     },
@@ -362,8 +366,8 @@ export default {
     this.$store.dispatch("GetAllMatches");
     this.$store.commit(
       "SetSocket",
-      //new WebSocket("wss://safe-inlet-79254.herokuapp.com")
-      new WebSocket("wss://darewins.club/api")
+      new WebSocket("ws://localhost:3000")
+      //new WebSocket("wss://darewins.club/api")
     );
     this.socket = this.$store.getters.socket;
 
@@ -450,6 +454,10 @@ export default {
     }, 20);
   },
   methods: {
+    PlayNotificationSound() {
+      let audio = new Audio("/audio/message.mp3");
+      audio.play();
+    },
     ShowNotifications() {
       this.notification = !this.notification;
     },
@@ -664,14 +672,12 @@ path {
 }
 .onlineText {
   position: absolute;
-  width: 80px;
   height: 32px;
   left: 759px;
   top: 26px;
 }
 .readyText {
   position: absolute;
-  width: 57px;
   height: 32px;
   left: 888px;
   top: 26px;

@@ -91,7 +91,7 @@ const routes = [
       },
       {
         path: "rules",
-        name: "rules",
+        name: "Rules",
         component: Rules,
   },
     ],
