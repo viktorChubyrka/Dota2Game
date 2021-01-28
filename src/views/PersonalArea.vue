@@ -366,8 +366,8 @@ export default {
     this.$store.dispatch("GetAllMatches");
     this.$store.commit(
       "SetSocket",
-      new WebSocket("ws://localhost:3000")
-      //new WebSocket("wss://darewins.club/api")
+      //new WebSocket("ws://localhost:3000")
+      new WebSocket("wss://darewins.club/api")
     );
     this.socket = this.$store.getters.socket;
 
