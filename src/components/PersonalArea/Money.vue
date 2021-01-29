@@ -13,7 +13,9 @@
         first: true,
         activeBtn: button == 1,
       }"
-    >{{ $ml.get("trans") }}</div>
+    >
+      {{ $ml.get("trans") }}
+    </div>
     <div class="smVretLine"></div>
     <div
       @click="ActiveButton(2)"
@@ -24,21 +26,27 @@
         second: true,
         activeBtn: button == 2,
       }"
-    >{{ $ml.get("vuv") }}</div>
+    >
+      {{ $ml.get("vuv") }}
+    </div>
     <div class="statTable">
       <table>
-        <tr>
-          <th class="tc1 t5">{{ $ml.get("num") }}</th>
-          <th class="tc2 t5">{{ $ml.get("type") }}</th>
-          <th class="tc3 t5">{{ $ml.get("sum") }}</th>
-          <th class="tc4 t5">{{ $ml.get("dateTime") }}</th>
-        </tr>
-        <tr class="toHover1" v-for="i in 6" :key="i">
-          <td class="tc1 t4">{{ i }}</td>
-          <td class="tc2 t4">{{ $ml.get("win") }}</td>
-          <td class="tc3 t4">+1 $</td>
-          <td class="tc4 t4">12.04.2020 14:34</td>
-        </tr>
+        <thead>
+          <tr>
+            <th class="tc1 t5">{{ $ml.get("num") }}</th>
+            <th class="tc2 t5">{{ $ml.get("type") }}</th>
+            <th class="tc3 t5">{{ $ml.get("sum") }}</th>
+            <th class="tc4 t5">{{ $ml.get("dateTime") }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="toHover1" v-for="i in 10" :key="i">
+            <td class="tc1 t4">{{ i }}</td>
+            <td class="tc2 t4">{{ $ml.get("win") }}</td>
+            <td class="tc3 t4">+1 $</td>
+            <td class="tc4 t4">12.04.2020 14:34</td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <div class="t4 moneyTitle">{{ $ml.get("transMet") }}</div>
@@ -60,7 +68,9 @@
       </li>
     </ul>
     <input class="t5 money" type="text" :placeholder="trPh()" />
-    <button @click="Pay()" v-if="button == 1" class="t5 submitMoney">{{ $ml.get("transBut") }}</button>
+    <button @click="Pay()" v-if="button == 1" class="t5 submitMoney">
+      {{ $ml.get("transBut") }}
+    </button>
     <button v-else class="t5 submitMoney">{{ $ml.get("enterMoney") }}</button>
     <ul class="more">
       <li class="t5">{{ $ml.get("confPol") }}</li>
@@ -120,7 +130,7 @@ export default {
 .toHover1 {
   z-index: 1 !important;
   transition: box-shadow 0.3s;
-  margin-bottom: 5px !important;
+  border: 5px solid transparent !important;
 }
 .toHover1:hover {
   background-color: white !important;
@@ -214,13 +224,38 @@ export default {
   text-align: left;
 }
 .tc4 {
-  width: 156px;
+  width: 170px;
   text-align: left;
 }
 .statTable {
   position: absolute;
   left: 692px;
   top: 222px;
+}
+.statTable table {
+  border-collapse: separate;
+}
+.statTable table thead {
+  display: table;
+}
+.statTable table tbody {
+  display: block;
+  height: 330px;
+  overflow: auto;
+}
+
+.statTable table tbody::-webkit-scrollbar {
+  width: 2px;
+}
+
+.statTable table tbody::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 3px;
+}
+
+.statTable table tbody::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 3px;
 }
 .smVretLine {
   position: absolute;

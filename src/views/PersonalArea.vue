@@ -321,7 +321,7 @@ export default {
     },
     scrollTop() {
       if (this.scroll) {
-        if (this.scroll >= 750) return true;
+        if (this.scroll >= 750 && this.$route.name == "Support") return true;
         else return false;
       } else return false;
     },
@@ -359,89 +359,94 @@ export default {
         }
       return false;
     },
+    setupWebSocket() {
+      this.$store.commit(
+        "SetSocket",
+        //new WebSocket("ws://localhost:3000")
+        new WebSocket("wss://darewins.club/api")
+      );
+      this.socket = this.$store.getters.socket;
+      this.socket.onmessage = (event) => {
+        let date = new Date();
+        let user = this.$store.getters.userData;
+        let message = JSON.parse(event.data);
+        console.log(message.type);
+        switch (message.type) {
+          case "PrivateAccount":
+            this.isPrivate = true;
+            break;
+          case "LobbyUpdate":
+            this.$store.dispatch("GetUserData", { context: this });
+            this.$store.dispatch("GetAllMatches");
+            if (message.Tab) {
+              this.$store.commit("setSelectedTab", message.Tab);
+              this.$router.push("games");
+            }
+            this.$store.dispatch("GetAllReadyUsers");
+            break;
+          case "Chat":
+            let newDate = { min: date.getMinutes(), hour: date.getHours() };
+            this.$store.commit("setChat", {
+              chat: [
+                {
+                  newDate,
+                  message: message.message,
+                  login: message.login,
+                },
+              ],
+            });
+            break;
+          case "LobbyUpdateParty":
+            this.$store.dispatch("GetUserData", { context: this });
+            this.$store.dispatch("GetAllMatches");
+            this.$store.dispatch("GetAllReadyUsers");
+            if (this.user.partyID)
+              this.$store.dispatch("GetParty", this.user.partyID);
+            this.$router.push("friends");
+            break;
+          case "ReadyUpdate":
+            this.$store.dispatch("GetAllReadyUsers");
+            this.$store.dispatch("GetUserData", { context: this });
+            if (message.partyID)
+              this.$store.dispatch("GetParty", message.partyID);
+            break;
+          case "LobbyDestroyed":
+            this.$store.dispatch("GetAllMatches");
+            this.$store.dispatch("GetUserData", { context: this });
+            if (message.Tab) this.$store.commit("setSelectedTab", message.Tab);
+            this.$store.dispatch("GetAllReadyUsers");
+            break;
+          case "NotificationUpdate":
+            this.$store.dispatch("GetUserData", { context: this });
+            this.$store.dispatch("GetAllReadyUsers");
+            break;
+          case "online":
+            this.online = message.online;
+            this.$store.dispatch("GetAllReadyUsers");
+            break;
+          case "PartyUpdate":
+            this.$store.dispatch("GetAllMatches");
+            this.$store.dispatch("GetUserData", { context: this });
+            this.$store.dispatch("GetParty", message.party);
+            this.$store.dispatch("GetAllReadyUsers");
+            if (message.matchID) this.$store.dispatch("GetAllMatches");
+            break;
+          default:
+            this.$store.dispatch("GetUserData", { context: this });
+            this.$store.dispatch("GetAllReadyUsers");
+            break;
+        }
+      };
+      this.socket.onclose = function() {
+        setTimeout(setupWebSocket, 1000);
+      };
+    },
   },
   created() {
     if (localStorage.getItem("PersonalAreaPage"))
       this.focus = localStorage.getItem("PersonalAreaPage");
     this.$store.dispatch("GetAllMatches");
-    this.$store.commit(
-      "SetSocket",
-      //new WebSocket("ws://localhost:3000")
-      new WebSocket("wss://darewins.club/api")
-    );
-    this.socket = this.$store.getters.socket;
-
-    this.socket.onmessage = (event) => {
-      let date = new Date();
-      let user = this.$store.getters.userData;
-      let message = JSON.parse(event.data);
-      console.log(message.type);
-      switch (message.type) {
-        case "PrivateAccount":
-          this.isPrivate = true;
-          break;
-        case "LobbyUpdate":
-          this.$store.dispatch("GetUserData", { context: this });
-          this.$store.dispatch("GetAllMatches");
-          if (message.Tab) {
-            this.$store.commit("setSelectedTab", message.Tab);
-            this.$router.push("games");
-          }
-          this.$store.dispatch("GetAllReadyUsers");
-          break;
-        case "Chat":
-          let newDate = { min: date.getMinutes(), hour: date.getHours() };
-          this.$store.commit("setChat", {
-            chat: [
-              {
-                newDate,
-                message: message.message,
-                login: message.login,
-              },
-            ],
-          });
-          break;
-        case "LobbyUpdateParty":
-          this.$store.dispatch("GetUserData", { context: this });
-          this.$store.dispatch("GetAllMatches");
-          this.$store.dispatch("GetAllReadyUsers");
-          if (this.user.partyID)
-            this.$store.dispatch("GetParty", this.user.partyID);
-          this.$router.push("friends");
-          break;
-        case "ReadyUpdate":
-          this.$store.dispatch("GetAllReadyUsers");
-          this.$store.dispatch("GetUserData", { context: this });
-          if (message.partyID)
-            this.$store.dispatch("GetParty", message.partyID);
-          break;
-        case "LobbyDestroyed":
-          this.$store.dispatch("GetAllMatches");
-          this.$store.dispatch("GetUserData", { context: this });
-          if (message.Tab) this.$store.commit("setSelectedTab", message.Tab);
-          this.$store.dispatch("GetAllReadyUsers");
-          break;
-        case "NotificationUpdate":
-          this.$store.dispatch("GetUserData", { context: this });
-          this.$store.dispatch("GetAllReadyUsers");
-          break;
-        case "online":
-          this.online = message.online;
-          this.$store.dispatch("GetAllReadyUsers");
-          break;
-        case "PartyUpdate":
-          this.$store.dispatch("GetAllMatches");
-          this.$store.dispatch("GetUserData", { context: this });
-          this.$store.dispatch("GetParty", message.party);
-          this.$store.dispatch("GetAllReadyUsers");
-          if (message.matchID) this.$store.dispatch("GetAllMatches");
-          break;
-        default:
-          this.$store.dispatch("GetUserData", { context: this });
-          this.$store.dispatch("GetAllReadyUsers");
-          break;
-      }
-    };
+    this.setupWebSocket;
     setTimeout(() => {
       this.show2 = !this.show2;
       setTimeout(() => {

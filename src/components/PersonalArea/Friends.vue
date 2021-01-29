@@ -13,7 +13,11 @@
             class="addFriend"
             style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
           >
-            <i :id="`plus${i}1`" @click="Click(1, i)" class="fa fa-plus-square fa-lg"></i>
+            <i
+              :id="`plus${i}1`"
+              @click="Click(1, i)"
+              class="fa fa-plus-square fa-lg"
+            ></i>
           </td>
         </tr>
       </tbody>
@@ -31,7 +35,12 @@
       />
       <PartySlot :party="party || ''" :index="i - 1" v-for="i in 4" :key="i" />
     </div>
-    <input :placeholder="sh()" class="searchFriend" v-model="search" type="text" />
+    <input
+      :placeholder="sh()"
+      class="searchFriend"
+      v-model="search"
+      type="text"
+    />
     <div
       v-if="search == ''"
       class="t4"
@@ -40,7 +49,9 @@ width: 82px;
 height: 38px;
 left: 100px;
 top: 240px;"
-    >{{ $ml.get("frend") }}</div>
+    >
+      {{ $ml.get("frend") }}
+    </div>
     <div
       v-else
       class="t4"
@@ -49,10 +60,16 @@ width: 82px;
 height: 38px;
 left: 100px;
 top: 240px;"
-    >{{ $ml.get("search") }}</div>
+    >
+      {{ $ml.get("search") }}
+    </div>
     <table class="searchTable">
       <tbody>
-        <div style="position:relative!important" v-for="(User, i) in allUsers" :key="User._id">
+        <tr
+          style="position:relative!important"
+          v-for="(User, i) in allUsers"
+          :key="User._id"
+        >
           <td style="padding-bottom:15px;padding-right:16px">
             <div class="circle"></div>
           </td>
@@ -66,26 +83,32 @@ top: 240px;"
             <i
               v-if="search != ''"
               :id="`plus${i}2`"
-              @click="Click(2, i,false), addFriend(User.login)"
+              @click="Click(2, i, false), addFriend(User.login)"
               class="fa fa-plus-square fa-lg"
             ></i>
             <i
               v-else
               :id="`plus${i}2`"
-              @mouseleave="friendsOptions=false"
-              @click="Click(2, i,true)"
+              @mouseleave="friendsOptions = false"
+              @click="Click(2, i, true)"
               class="fa fa-ellipsis-h fa-2x"
             ></i>
           </td>
-          <div @mouseleave="dissableOption(i)" :id="`options${i}`" class="partyOptions">
-            <div class="t6" @click="AddToParty(User,i)">Пригласить в пати</div>
+          <div
+            @mouseleave="dissableOption(i)"
+            :id="`options${i}`"
+            class="partyOptions"
+          >
+            <div class="t6" @click="AddToParty(User, i)">Пригласить в пати</div>
             <div
               class="t6"
               style="color:red"
-              @click="DeleteFromFriends(user.login,User,i)"
-            >Удалить из друзей</div>
+              @click="DeleteFromFriends(user.login, User, i)"
+            >
+              Удалить из друзей
+            </div>
           </div>
-        </div>
+        </tr>
       </tbody>
     </table>
   </div>

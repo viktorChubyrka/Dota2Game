@@ -152,7 +152,7 @@
           id="copy2"
           @click="
             fallbackCopyTextToClipboard(
-              `https://dota2gamebot.herokuapp.com/registration/ref=${user.promoCode}`
+              `https://darewins.club/registration/ref=${user.promoCode}`
             )
           "
           style="position: absolute;
