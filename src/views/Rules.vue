@@ -2,20 +2,20 @@
   <div :class="{ show: show, content: true }">
     <div class="t2 oldQuestion slide-right">{{ $ml.get("pravil") }}</div>
     <ul class="answersList">
-      <div class="t2 oldQuestion2 slide-right">Общие положения</div>
+      <div class="t2 oldQuestion2 slide-right">{{ $ml.get(`gr`) }}</div>
       <li :id="`q${i}`" v-for="i in 9" :key="i">
         <div class="t5 liText">
           {{ $ml.get(`rule${i}1`) }}
         </div>
       </li>
-      <div class="t2 oldQuestion2 slide-right">Правила поведения</div>
+      <div class="t2 oldQuestion2 slide-right">{{ $ml.get(`br`) }}</div>
       <li :id="`q${i}`" v-for="i in 4" :key="i">
         <div class="t5 liText">
           {{ $ml.get(`rule${i}2`) }}
         </div>
       </li>
       <div class="t2 oldQuestion2 slide-right">
-        Правила проведения игр Solo формата
+        {{ $ml.get(`sgr`) }}
       </div>
       <li :id="`q${i}`" v-for="i in 13" :key="i">
         <div class="t5 liText">
@@ -23,7 +23,7 @@
         </div>
       </li>
       <div class="t2 oldQuestion2 slide-right">
-        Правила проведения игр Party формата
+        {{ $ml.get(`pgr`) }}
       </div>
       <li :id="`q${i}`" v-for="i in 12" :key="i">
         <div
