@@ -5,7 +5,7 @@ import Axios from "axios";
 Vue.use(Vuex);
 
 //const url = "https://safe-inlet-79254.herokuapp.com";
-const url = "http://localhost:3000";
+const url = "wss://darewins.club/api";
 
 export default new Vuex.Store({
   state: {
