@@ -40,11 +40,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="toHover1" v-for="i in 10" :key="i">
-            <td class="tc1 t4">{{ i }}</td>
-            <td class="tc2 t4">{{ $ml.get("win") }}</td>
-            <td class="tc3 t4">+1 $</td>
-            <td class="tc4 t4">12.04.2020 14:34</td>
+          <tr class="toHover1" v-for="(el, i) in matches" :key="el">
+            <td class="tc1 t4">{{ i + 1 }}</td>
+            <td class="tc2 t4">
+              {{ el.status }}
+            </td>
+            <td class="tc3 t4">{{ el.status == "win" ? "+" : "-" }}1 $</td>
+            <td class="tc4 t4">
+              {{
+                `${el.creationDate.split("T")[0]} ${
+                  el.creationDate.split("T")[1].split(".")[0]
+                }`
+              }}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -90,6 +98,12 @@ export default {
       },
       button: 1,
     };
+  },
+  computed: {
+    matches() {
+      let user = this.$store.getters.userData;
+      return user.matches;
+    },
   },
   methods: {
     Pay() {
@@ -224,7 +238,7 @@ export default {
   text-align: left;
 }
 .tc4 {
-  width: 170px;
+  width: 190px;
   text-align: left;
 }
 .statTable {

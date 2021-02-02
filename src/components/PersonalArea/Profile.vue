@@ -294,6 +294,7 @@ export default {
       }
     },
     ChangeLang(i) {
+      this.$store.commit("setChangeLang");
       localStorage.setItem("leng", i);
       this.$store.commit("SetLang", i);
       if (i == 1) {

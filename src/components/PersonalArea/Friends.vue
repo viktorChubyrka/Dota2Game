@@ -2,16 +2,17 @@
   <div :class="{ show: show, content: true }">
     <table class="lastesPlayersTable">
       <tbody>
-        <tr style v-for="i in 10" :key="i">
+        <tr style v-for="el in userGamesPlayers" :key="el">
           <td style="padding-bottom:15px;padding-right:16px">
             <div class="circle"></div>
           </td>
           <td style="padding-bottom:15px;">
-            <div class="t5">Ally</div>
+            <div class="t5">{{ el }}</div>
           </td>
           <td
             class="addFriend"
             style="text-align:right;width:269px;margin:0;padding-bottom:18px;color:#F2F2F2;"
+            v-if="!allUsers.includes(el)"
           >
             <i
               :id="`plus${i}1`"
@@ -123,6 +124,7 @@ export default {
       search: "",
       sh: () => this.$ml.get("search"),
       socket: null,
+      userGamesPlayers: [],
     };
   },
   components: { Chat, PartySlot },
@@ -200,7 +202,17 @@ export default {
       }
     },
     user() {
-      return this.$store.getters.userData;
+      let user = this.$store.getters.userData;
+
+      let players = [];
+      user.matches.forEach((el) => {
+        players = [...players, ...el.playersT1, ...el.playersT2];
+      });
+      players = Array.from(new Set(players));
+      let index = players.indexOf(user.login);
+      players.splice(index, 1);
+      this.userGamesPlayers = players;
+      return user;
     },
   },
 };

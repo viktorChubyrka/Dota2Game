@@ -5,10 +5,11 @@ import Axios from "axios";
 Vue.use(Vuex);
 
 //const url = "https://safe-inlet-79254.herokuapp.com";
-const url = "https://darewins.club";
+const url = "http://localhost:3000";
 
 export default new Vuex.Store({
   state: {
+    changeLang: false,
     currentPage: 1,
     countdown: 50000,
     lang: 1,
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     ready: 0,
   },
   getters: {
+    changeLang: (state) => {
+      return state.changeLang;
+    },
     ready: (state) => {
       return state.ready;
     },
@@ -117,6 +121,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setChangeLang: (state) => {
+      state.changeLang = !state.changeLang;
+    },
     setPartyLeader: (state, payload) => {
       state.partyLeader = payload;
     },

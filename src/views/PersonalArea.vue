@@ -314,8 +314,26 @@ export default {
         this.PlayNotificationSound();
       }
     },
+    changeLang() {
+      this.show = false;
+      this.show2 = false;
+      this.show3 = false;
+      setTimeout(() => {
+        setTimeout(() => {
+          this.show2 = true;
+          this.show = true;
+          setTimeout(() => (this.show3 = true), 1000);
+        }, 2000);
+      }, 1);
+    },
   },
   computed: {
+    changeLang() {
+      return this.$store.getters.changeLang;
+    },
+    lang() {
+      return this.$store.getters.lang;
+    },
     windowLocation() {
       return this.$route.name;
     },
@@ -448,7 +466,7 @@ export default {
     this.$store.dispatch("GetAllMatches");
     this.setupWebSocket;
     setTimeout(() => {
-      this.show2 = !this.show2;
+      this.show2 = true;
       setTimeout(() => {
         this.show = true;
         setTimeout(() => (this.show3 = true), 1000);
@@ -730,6 +748,7 @@ path {
   left: 0px;
   top: 86px;
   opacity: 0;
+  background-color: transparent;
   background-color: #1f2430;
   transition: opacity 3s;
 }
