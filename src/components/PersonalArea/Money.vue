@@ -135,7 +135,7 @@
       @close="withdraw = false"
       v-if="withdraw && amount"
       :login="user.login"
-      :amount="+amountCorrect"
+      :amount="parseFloat(amountCorrect)"
     />
   </div>
 </template>
