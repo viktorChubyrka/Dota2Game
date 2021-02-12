@@ -113,7 +113,7 @@ export default {
         let sign = sha256(str);
         obj.sign = sign;
         let res = await Axios.post(
-          "http://localhost:3000/api/user/actions/test_withdraw",
+          "https://darewins.club/api/user/actions/test_withdraw",
           obj
         );
         console.log(res.data.data);
@@ -143,7 +143,7 @@ export default {
         let sign = sha256(str);
         obj.sign = sign;
         let res = await Axios.post(
-          "http://localhost:3000/api/user/actions/test_withdraw",
+          "https://darewins.club/api/user/actions/test_withdraw",
           obj
         );
         if (res.status) {
@@ -163,7 +163,7 @@ export default {
           let sign = sha256(str);
           obj.sign = sign;
           let res = await Axios.post(
-            "http://localhost:3000/api/user/actions/send_withdraw",
+            "https://darewins.club/api/user/actions/send_withdraw",
             obj
           );
           this.message = res.message;
