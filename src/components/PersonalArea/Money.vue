@@ -1,8 +1,8 @@
 <template>
   <div :class="{ show: show, content: true }">
-    <div class="balance t4">
-      {{ $ml.get("balans") }}: 100
-      <img src="../../assets/moneyIcons/dd.svg" /> = $100
+    <div v-if="user" class="balance t4">
+      {{ $ml.get("balans") }}: {{ user.purse }}
+      <img src="../../assets/moneyIcons/dd.svg" /> = ${{ user.purse }}
     </div>
     <div
       @click="ActiveButton(1)"
