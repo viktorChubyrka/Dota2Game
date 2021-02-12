@@ -501,7 +501,7 @@ export default {
       );
     },
     SearchGame() {
-      if (this.user.steamID.id) {
+      if (this.user.steamID.id && this.user.purse >= 1) {
         this.socket.send(
           JSON.stringify({
             login: localStorage.getItem("login"),
@@ -511,7 +511,7 @@ export default {
       } else this.$router.push("profile");
     },
     FindPartyGame() {
-      if (this.user.steamID.id)
+      if (this.user.steamID.id && this.user.purse >= 1)
         // this.socket.send(
         //   JSON.stringify({
         //     login: localStorage.getItem("login"),

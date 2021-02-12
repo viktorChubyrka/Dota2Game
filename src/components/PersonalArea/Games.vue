@@ -599,7 +599,7 @@ export default {
       setTimeout(() => {
         btn.style = style;
       }, 200);
-      if (this.user.steamID)
+      if (this.user.steamID && this.user.purse >= 1)
         this.socket.send(
           JSON.stringify({
             matchNumber,
