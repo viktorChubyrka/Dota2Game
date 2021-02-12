@@ -107,7 +107,12 @@
       name="Pay"
       accept-charset="UTF-8"
     >
-      <input v-if="button == 1" type="hidden" name="amount" :value="amount" />
+      <input
+        v-if="button == 1"
+        type="hidden"
+        name="amount"
+        :value="amountCorrect"
+      />
       <input v-if="button == 1" type="hidden" name="currency" value="840" />
       <input v-if="button == 1" type="hidden" name="shop_id" value="5086" />
       <input
@@ -130,7 +135,7 @@
       @close="withdraw = false"
       v-if="withdraw && amount"
       :login="user.login"
-      :amount="amount"
+      :amount="+amountCorrect"
     />
   </div>
 </template>
@@ -164,19 +169,30 @@ export default {
       let user = this.$store.getters.userData;
       return user.matches;
     },
+    amountCorrect() {
+      if (this.amount) return parseFloat(this.amount).toFixed(2);
+      else return 0;
+    },
   },
   watch: {
     amount() {
       if (this.button == 1) {
         this.sign = sha256(
-          `${this.amount.toFixed(2)}:840:5086:${this.order_id}d2wNA0pMEVP2`
+          `${this.amountCorrect}:840:5086:${this.order_id}d2wNA0pMEVP2`
         );
-        this.description = `Пополнение счета на ${this.amount.toFixed(
-          2
-        )}$ для аккаунта - ${this.user.login}`;
+        this.description = `Пополнение счета на ${this.amountCorrect}$ для аккаунта - ${this.user.login}`;
+      }
+    },
+    button() {
+      if (this.button == 1) {
+        this.sign = sha256(
+          `${this.amountCorrect}:840:5086:${this.order_id}d2wNA0pMEVP2`
+        );
+        this.description = `Пополнение счета на ${this.amountCorrect}$ для аккаунта - ${this.user.login}`;
       }
     },
   },
+
   methods: {
     async Pay() {
       if (this.button == 1) {
