@@ -75,57 +75,118 @@
         <img src="../../assets/moneyIcons/webMoney.svg" />
       </li>
     </ul>
-    <input class="t5 money" type="text" :placeholder="trPh()" />
+    <input
+      class="t5 money"
+      type="text"
+      v-model="amount"
+      :placeholder="trPh()"
+    />
     <button @click="Pay()" v-if="button == 1" class="t5 submitMoney">
       {{ $ml.get("transBut") }}
     </button>
-    <button v-else class="t5 submitMoney">{{ $ml.get("enterMoney") }}</button>
+    <button @click="Pay()" :disabled="!amount" v-else class="t5 submitMoney">
+      {{ $ml.get("enterMoney") }}
+    </button>
     <ul class="more">
       <li class="t5">{{ $ml.get("confPol") }}</li>
       <li class="t5">{{ $ml.get("AMLPol") }}</li>
       <li class="t5">{{ $ml.get("pravSog") }}</li>
     </ul>
+    <form
+      id="form"
+      contentType="application/json"
+      class="payForm"
+      :action="
+        `${
+          button == 1
+            ? 'https://pay.piastrix.com/ru/pay'
+            : 'https://private-anon-8a5c51a566-piastrix.apiary-mock.com/withdraw/try'
+        }`
+      "
+      method="post"
+      name="Pay"
+      accept-charset="UTF-8"
+    >
+      <input v-if="button == 1" type="hidden" name="amount" :value="amount" />
+      <input v-if="button == 1" type="hidden" name="currency" value="840" />
+      <input v-if="button == 1" type="hidden" name="shop_id" value="5086" />
+      <input
+        v-if="button == 1"
+        type="hidden"
+        name="shop_order_id"
+        :value="order_id"
+      />
+      <input type="hidden" name="sign" :value="sign" />
+      <input
+        v-if="button == 1"
+        type="hidden"
+        name="description"
+        :value="description"
+      />
+
+      <Button id="payBtn" type="submit">Log in through Steam</Button>
+    </form>
+    <WithdrawsPopUp
+      @close="withdraw = false"
+      v-if="withdraw && amount"
+      :login="user.login"
+      :amount="amount"
+    />
   </div>
 </template>
 <script>
+import sha256 from "js-sha256";
+
+import WithdrawsPopUp from "@/components/General/WithdrawsPopUp.vue";
+
 export default {
+  components: { WithdrawsPopUp },
   data() {
     return {
+      withdraw: false,
       focus: 1,
       show: false,
       trPh: () => {
         return this.$ml.get("trPh");
       },
+      order_id: null,
       button: 1,
+      amount: null,
+      sign: null,
+      description: null,
     };
   },
   computed: {
+    user() {
+      return this.$store.getters.userData;
+    },
     matches() {
       let user = this.$store.getters.userData;
       return user.matches;
     },
   },
+  watch: {
+    amount() {
+      if (this.button == 1) {
+        this.sign = sha256(
+          `${this.amount.toFixed(2)}:840:5086:${this.order_id}d2wNA0pMEVP2`
+        );
+        this.description = `Пополнение счета на ${this.amount.toFixed(
+          2
+        )}$ для аккаунта - ${this.user.login}`;
+      }
+    },
+  },
   methods: {
-    Pay() {
-      QiwiCheckout.createInvoice({
-        publicKey: "5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3c******",
-        amount: 1.23,
-        phone: "79123456789",
-      })
-        .then((data) => {
-          data ===
-            {
-              publicKey: "5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3c******",
-              amount: 1.23,
-              phone: "79123456789",
-            };
-        })
-        .catch((error) => {
-          error ===
-            {
-              reason: "PAYMENT_FAILED",
-            };
-        });
+    async Pay() {
+      if (this.button == 1) {
+        let btn = document.getElementById("payBtn");
+        btn.click();
+      } else {
+        if (this.amount) {
+          this.withdraw = true;
+        }
+      }
     },
     focused(i) {
       this.focus = i;
@@ -136,6 +197,7 @@ export default {
   },
 
   created() {
+    this.order_id = Math.floor(Math.random() * 1000000000);
     setTimeout(() => (this.show = true), 10);
   },
 };
@@ -157,6 +219,18 @@ export default {
 }
 .show {
   opacity: 1;
+}
+.payForm {
+  position: absolute;
+  left: 950px;
+  top: 174px;
+  z-index: 99;
+}
+.payForm button {
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+  border-radius: 2px;
 }
 .more {
   position: absolute;
