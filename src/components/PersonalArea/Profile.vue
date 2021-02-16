@@ -587,7 +587,7 @@ export default {
   left: 1257px;
   top: 175px;
   color: rgb(198, 197, 197);
-  z-index: 100;
+  z-index: 19;
 }
 .fa-info-circle:hover .t5.steam-connect-info {
   opacity: 1;

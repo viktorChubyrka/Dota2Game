@@ -6,9 +6,11 @@ Vue.use(Vuex);
 
 //const url = "https://safe-inlet-79254.herokuapp.com";
 const url = "https://darewins.club";
+//const url = "http://localhost:3000";
 
 export default new Vuex.Store({
   state: {
+    tutorialStep: 1,
     changeLang: false,
     currentPage: 1,
     countdown: 50000,
@@ -38,6 +40,9 @@ export default new Vuex.Store({
     ready: 0,
   },
   getters: {
+    tutorialStep: (state) => {
+      return state.tutorialStep;
+    },
     changeLang: (state) => {
       return state.changeLang;
     },
@@ -121,6 +126,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setTutorialStep: (state, payload) => {
+      state.tutorialStep = payload;
+    },
     setChangeLang: (state) => {
       state.changeLang = !state.changeLang;
     },

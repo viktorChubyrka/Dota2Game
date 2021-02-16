@@ -286,6 +286,33 @@ export default new MLCreate({
       sgr: "Solo Games Rules",
       br: "Behavior rules",
       gr: "General rules",
+      t1:
+        "This is your status. When it is active, you can search for a game and receive notifications from our club",
+      t2:
+        "This button will take you to a section where you can add friends to the team to play",
+      t3:
+        "This button will create a lobby for you if there are no other active lobbies. If you are playing  5-men, then the lobby will be created for the team",
+      t4:
+        "Here you can find a game, view match history or join an active lobby",
+      t5: "Game mode for solo players only or incomplete squads",
+      t6: "Game mode for full team games only",
+      t7:
+        "Here you can view match history, see a link to Dotabuff, or file a player complaint",
+      t8:
+        "Here you can find information about available lobbies and ongoing matches",
+      t9:
+        "Here you can find information about a match in which you are already participating",
+      t10: "Here you can read and accept the rules of our club",
+      t11:
+        "Here you can find personal information, linking your Steam account and a link to the referral program",
+      t12:
+        "Here is a list of your friends and recent players, global chat and the ability to form a team",
+      t13:
+        "Here you can purchase in-club currency, as well as withdraw it into real money using available methods",
+      t14:
+        "This is a section of active loyalty programs for which club members will receive rewards",
+      t15:
+        "Here you can contact the administration and get answers to frequently asked questions",
     }),
 
     new MLanguage("russian").create({
@@ -567,6 +594,32 @@ export default new MLCreate({
       sgr: "Правила проведения игр Solo формата",
       br: "Правила поведения",
       gr: "Общие положения",
+      t1:
+        "Это Ваш статус. Когда он активен, Вы можете искать игру и получать уведомления от нашего клуба ",
+      t2:
+        "Эта кнопка отправит Вас в раздел, где Вы сможете добавить друзей в команду, чтобы сыграть в 5ом",
+      t3:
+        "Эта кнопка создаст Вам лобби, если других активных лобби нет. Если Вы играете в 5ом, тогда лобби будет создано для команды",
+      t4:
+        "Здесь Вы сможете найти игру, посмотреть историю матчей либо присоединиться к активному лобби",
+      t5: "Режим игры только для соло игроков либо неполных составов",
+      t6: "Режим игры только для игр в полном составе команды",
+      t7:
+        "Здесь можно посмотреть историю матчей, увидеть ссылку на Dotabuff либо подать жалобу на игрока",
+      t8:
+        "Здесь находится информация о доступных лобби и уже проходящих матчах",
+      t9: "Здесь находится информация о матче, в котором Вы уже участвуете",
+      t10: "Здесь Вы сможете прочитать и принять правила нашего клуба",
+      t11:
+        "Здесь находится личная информация, привязка Steam аккаунта и ссылка на реферальную программу",
+      t12:
+        "Здесь находится список Ваших друзей и недавних игроков, глобальный чат и возможность сформировать команду",
+      t13:
+        "Здесь Вы сможете приобрести внутриклубную валюту, а также вывести ее в реальные деньги доступными способами",
+      t14:
+        "Это раздел активных программ лояльности, за которые члены клуба будут получать вознаграждения",
+      t15:
+        "Здесь Вы сможете обратиться к администрации и получить ответы на частые вопросы",
     }),
   ],
 });

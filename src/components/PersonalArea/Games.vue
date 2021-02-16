@@ -8,6 +8,7 @@
         first: true,
         activeBtn: button == 1,
         toHover1: button != 1,
+        'tutorial-selected-element': tutorialStep == 5 && user.tutorial,
       }"
     >
       {{ $ml.get("solo") }}
@@ -20,6 +21,7 @@
         second: true,
         activeBtn: button == 2,
         toHover1: button != 2,
+        'tutorial-selected-element': tutorialStep == 6 && user.tutorial,
       }"
     >
       {{ $ml.get("party") }}
@@ -34,6 +36,7 @@
           tab1T: true,
           tabTSelected: selected == 1,
           tabTitleSelected: selected == 1,
+          'tutorial-selected-element': tutorialStep == 7 && user.tutorial,
         }"
       >
         {{ $ml.get("match1") }}
@@ -121,6 +124,7 @@
           tab2T: true,
           tabTSelected: selected == 2,
           tabTitleSelected: selected == 2,
+          'tutorial-selected-element': tutorialStep == 8 && user.tutorial,
         }"
       >
         {{ $ml.get("match2") }}
@@ -227,6 +231,7 @@
           tab3T: true,
           tabTSelected: selected == 3,
           tabTitleSelected: selected == 3,
+          'tutorial-selected-element': tutorialStep == 9 && user.tutorial,
         }"
       >
         {{ $ml.get("match3") }}
@@ -626,6 +631,9 @@ export default {
     },
   },
   computed: {
+    tutorialStep() {
+      return this.$store.getters.tutorialStep;
+    },
     selected() {
       return this.$store.getters.selectedTab;
     },

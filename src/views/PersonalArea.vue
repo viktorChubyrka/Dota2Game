@@ -63,7 +63,15 @@
     </div>
     <div :class="{ actions: true, show: show2 }">
       <div>
-        <div @click="SetActive()" :class="{ readyIcon1: true, show: show }">
+        <div
+          @click="SetActive()"
+          :class="{
+            readyIcon1: true,
+            show: show,
+            'tutorial-selected-element':
+              tutorialStep == 1 && show3 && user.tutorial,
+          }"
+        >
           <svg
             :class="{ icon: true }"
             width="28"
@@ -96,7 +104,15 @@
           {{ $ml.get("notReady") }}
         </div>
       </div>
-      <div @click="FindPartyGame()" :class="{ readyIcon2: true, show: show }">
+      <div
+        @click="FindPartyGame()"
+        :class="{
+          readyIcon2: true,
+          show: show,
+          'tutorial-selected-element':
+            tutorialStep == 2 && show3 && user.tutorial,
+        }"
+      >
         <svg
           class="icon hoverIcon"
           width="64"
@@ -138,7 +154,14 @@
         {{ $ml.get("getComand") }}
       </div>
       <div style="cursor:pointer" @click="SearchGame()">
-        <div :class="{ readyIcon3: true, show: show }">
+        <div
+          :class="{
+            readyIcon3: true,
+            show: show,
+            'tutorial-selected-element':
+              tutorialStep == 3 && show3 && user.tutorial,
+          }"
+        >
           <svg
             class="icon"
             width="48"
@@ -161,10 +184,15 @@
     </div>
     <div :class="{ sideNavigation: true, sideNavigationShow: show }">
       <ul class="sideNavUl">
-        <router-link class="RL" to="games">
+        <router-link class="RL " to="games">
           <li
             @click="ChangePage(1)"
-            :class="{ t5: true, iconFocused: windowLocation == 'Games' }"
+            :class="{
+              t5: true,
+              iconFocused: windowLocation == 'Games',
+              'tutorial-selected-element':
+                tutorialStep == 4 && show3 && user.tutorial,
+            }"
           >
             <div style="display:flex">
               <img
@@ -178,7 +206,12 @@
         <router-link class="RL" to="rules">
           <li
             @click="ChangePage(2)"
-            :class="{ t5: true, iconFocused: windowLocation == 'Rules' }"
+            :class="{
+              t5: true,
+              iconFocused: windowLocation == 'Rules',
+              'tutorial-selected-element':
+                tutorialStep == 10 && show3 && user.tutorial,
+            }"
           >
             <div style="display:flex">
               <img
@@ -192,7 +225,11 @@
         <router-link class="RL" to="profile">
           <li
             @click="ChangePage(3)"
-            :class="{ t5: true, iconFocused: windowLocation == 'Profile' }"
+            :class="{
+              t5: true,
+              iconFocused: windowLocation == 'Profile',
+              'tutorial-selected-element': tutorialStep == 11 && show3,
+            }"
           >
             <div style="display:flex">
               <img
@@ -206,7 +243,12 @@
         <router-link class="RL" to="friends">
           <li
             @click="ChangePage(4)"
-            :class="{ t5: true, iconFocused: windowLocation == 'Friends' }"
+            :class="{
+              t5: true,
+              iconFocused: windowLocation == 'Friends',
+              'tutorial-selected-element':
+                tutorialStep == 12 && show3 && user.tutorial,
+            }"
           >
             <div style="display:flex">
               <img
@@ -220,7 +262,12 @@
         <router-link class="RL" to="money">
           <li
             @click="ChangePage(5)"
-            :class="{ t5: true, iconFocused: windowLocation == 'Money' }"
+            :class="{
+              t5: true,
+              iconFocused: windowLocation == 'Money',
+              'tutorial-selected-element':
+                tutorialStep == 13 && show3 && user.tutorial,
+            }"
           >
             <div style="display:flex">
               <img
@@ -237,6 +284,8 @@
             :class="{
               t5: true,
               iconFocused: windowLocation == 'LoyalityProgram',
+              'tutorial-selected-element':
+                tutorialStep == 14 && show3 && user.tutorial,
             }"
           >
             <div style="display:flex">
@@ -251,7 +300,12 @@
         <router-link style="margin:0" :class="{ RL: true }" to="support0">
           <li
             @click="ChangePage(7)"
-            :class="{ t5: true, iconFocused: windowLocation == 'Support' }"
+            :class="{
+              t5: true,
+              iconFocused: windowLocation == 'Support',
+              'tutorial-selected-element':
+                tutorialStep == 15 && show3 && user.tutorial,
+            }"
           >
             <div style="display:flex">
               <img
@@ -287,12 +341,130 @@
         </p>
       </div>
     </div>
+    <Tutorial
+      v-if="tutorialStep == 1 && show3 && user.tutorial"
+      @submit="SetTutorialStep(2)"
+      :top="180"
+      :left="250"
+    >
+      {{ $ml.get("t1") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 2 && show3 && user.tutorial"
+      @submit="SetTutorialStep(3)"
+      :top="180"
+      :left="600"
+    >
+      {{ $ml.get("t2") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 3 && show3 && user.tutorial"
+      @submit="SetTutorialStep(4)"
+      :top="180"
+      :left="1000"
+    >
+      {{ $ml.get("t3") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 4 && show3 && user.tutorial"
+      @submit="SetTutorialStep(5)"
+      :top="340"
+      :left="40"
+    >
+      {{ $ml.get("t4") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 5 && show3 && user.tutorial"
+      @submit="SetTutorialStep(6)"
+      :top="370"
+      :left="550"
+    >
+      {{ $ml.get("t5") }}</Tutorial
+    ><Tutorial
+      v-if="tutorialStep == 6 && show3 && user.tutorial"
+      @submit="SetTutorialStep(7)"
+      :top="370"
+      :left="880"
+    >
+      {{ $ml.get("t6") }}</Tutorial
+    ><Tutorial
+      v-if="tutorialStep == 7 && show3 && user.tutorial"
+      @submit="SetTutorialStep(8)"
+      :top="480"
+      :left="400"
+    >
+      {{ $ml.get("t7") }}</Tutorial
+    ><Tutorial
+      v-if="tutorialStep == 8 && show3 && user.tutorial"
+      @submit="SetTutorialStep(9)"
+      :top="480"
+      :left="670"
+    >
+      {{ $ml.get("t8") }}</Tutorial
+    ><Tutorial
+      v-if="tutorialStep == 9 && show3 && user.tutorial"
+      @submit="SetTutorialStep(10)"
+      :top="480"
+      :left="960"
+    >
+      {{ $ml.get("t9") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 10 && show3 && user.tutorial"
+      @submit="SetTutorialStep(11)"
+      :top="405"
+      :left="40"
+    >
+      {{ $ml.get("t10") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 11 && show3 && user.tutorial"
+      @submit="SetTutorialStep(12)"
+      :top="470"
+      :left="40"
+    >
+      {{ $ml.get("t11") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 12 && show3 && user.tutorial"
+      @submit="SetTutorialStep(13)"
+      :top="535"
+      :left="40"
+    >
+      {{ $ml.get("t12") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 13 && show3 && user.tutorial"
+      @submit="SetTutorialStep(14)"
+      :top="600"
+      :left="40"
+    >
+      {{ $ml.get("t13") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 14 && show3 && user.tutorial"
+      @submit="SetTutorialStep(15)"
+      :top="665"
+      :left="40"
+    >
+      {{ $ml.get("t14") }}</Tutorial
+    >
+    <Tutorial
+      v-if="tutorialStep == 15 && show3 && user.tutorial"
+      @submit="SetTutorialStep(0)"
+      :top="730"
+      :left="40"
+    >
+      {{ $ml.get("t15") }}</Tutorial
+    >
   </div>
 </template>
 <script>
 import Message from "../components/General/Message";
+import Tutorial from "../components/General/Tutorial.vue";
+import Axios from "axios";
 export default {
-  components: { Message },
+  components: { Message, Tutorial },
 
   data() {
     return {
@@ -328,6 +500,9 @@ export default {
     },
   },
   computed: {
+    tutorialStep() {
+      return this.$store.getters.tutorialStep;
+    },
     changeLang() {
       return this.$store.getters.changeLang;
     },
@@ -477,6 +652,38 @@ export default {
     }, 20);
   },
   methods: {
+    async SetTutorialStep(val) {
+      if (this.tutorialStep == 3) {
+        this.$router.push("games");
+      }
+      if (this.tutorialStep == 9) {
+        this.$router.push("rules");
+      }
+      if (this.tutorialStep == 10) {
+        this.$router.push("profile");
+      }
+      if (this.tutorialStep == 11) {
+        this.$router.push("friends");
+      }
+      if (this.tutorialStep == 12) {
+        this.$router.push("money");
+      }
+      if (this.tutorialStep == 13) {
+        this.$router.push("loyalityProgram");
+      }
+      if (this.tutorialStep == 14) {
+        this.$router.push("support0");
+      }
+      if (this.tutorialStep == 15) {
+        this.$router.push("profile");
+        this.$store.commit("setTutorialStep", val);
+        await Axios.post(
+          "https://darewins.club/api/user/actions/tutorial_complited",
+          { login: user.login }
+        );
+      }
+      this.$store.commit("setTutorialStep", val);
+    },
     PlayNotificationSound() {
       let audio = new Audio("/audio/message.mp3");
       audio.play();
@@ -532,6 +739,11 @@ export default {
 };
 </script>
 <style>
+.tutorial-selected-element {
+  box-shadow: 0 0 10px 10px #ccc;
+  animation: selected 2s ease infinite;
+  z-index: 100 !important;
+}
 .isPrivateAccountModal {
   z-index: 100;
   position: absolute;
@@ -795,7 +1007,7 @@ div.readyIcon2:hover svg path.hoverIcon {
 .readyIcon3 {
   position: absolute;
   width: 80px;
-  height: 60px;
+  height: 50px;
   margin-left: -15px;
 
   left: 1303px;
