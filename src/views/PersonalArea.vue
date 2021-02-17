@@ -21,6 +21,9 @@
         <div class="cash t5">
           ${{ user.purse }} — {{ user.purse }} Darewin’s dollar
         </div>
+        <div @click="StartTutorial()" class="tutorial-start-icon-container">
+          <img src="/icons/question.svg" class="tutorial-start-icon" />
+        </div>
         <div class="notification">
           <i
             @click="ShowNotifications()"
@@ -652,6 +655,10 @@ export default {
     }, 20);
   },
   methods: {
+    StartTutorial() {
+      this.$store.commit("setTutorialStep", 1);
+      this.user.tutorial = true;
+    },
     async SetTutorialStep(val) {
       if (this.tutorialStep == 3) {
         this.$router.push("games");
@@ -739,6 +746,26 @@ export default {
 };
 </script>
 <style>
+.tutorial-start-icon {
+  width: 17px;
+}
+.tutorial-start-icon-container {
+  border: 3px solid black;
+  border-radius: 50%;
+  padding: 3px;
+  position: absolute;
+  left: 1626px;
+  top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity 0.5s ease 0s;
+  cursor: pointer;
+}
+.tutorial-start-icon-container:hover {
+  opacity: 1;
+}
 .tutorial-selected-element {
   box-shadow: 0 0 10px 10px #ccc;
   animation: selected 2s ease infinite;
