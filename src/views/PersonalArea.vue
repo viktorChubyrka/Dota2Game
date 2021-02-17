@@ -655,9 +655,13 @@ export default {
     }, 20);
   },
   methods: {
-    StartTutorial() {
+    async StartTutorial() {
       this.$store.commit("setTutorialStep", 1);
       this.user.tutorial = true;
+      let a = await Axios.post(
+        "https://darewins.club/api/user/actions/tutorial_complited",
+        { login: this.user.login, val: true }
+      );
     },
     async SetTutorialStep(val) {
       if (this.tutorialStep == 3) {
@@ -684,9 +688,9 @@ export default {
       if (this.tutorialStep == 15) {
         this.$router.push("profile");
         this.$store.commit("setTutorialStep", val);
-        await Axios.post(
+        let a = await Axios.post(
           "https://darewins.club/api/user/actions/tutorial_complited",
-          { login: user.login }
+          { login: this.user.login, val: false }
         );
       }
       this.$store.commit("setTutorialStep", val);
