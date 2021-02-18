@@ -1,14 +1,26 @@
 <template>
   <div style="position:relative">
     <div class="partySlot">
-      <div :class="{'arrow-up':true,'showModal':showModal}"></div>
-      <div :class="{t4:true, playerName:true,'showModal':showModal}">{{ $ml.get("notLider") }}</div>
+      <div :class="{ 'arrow-up': true, showModal: showModal }"></div>
+      <div :class="{ t4: true, playerName: true, showModal: showModal }">
+        {{ $ml.get("notLider") }}
+      </div>
       <i class="fa fa-crown"></i>
       <div
         @mouseover="show = true"
         :class="{
-          readyBorder: ready || (party && party[index] && party[index].ready && partyLeader != party[index].login),
-          leaderBorder:(ready&&login && partyLeader==login) || (party && party[index] && party[index].ready && partyLeader == party[index].login),
+          readyBorder:
+            ready ||
+            (party &&
+              party[index] &&
+              party[index].ready &&
+              partyLeader != party[index].login),
+          leaderBorder:
+            (ready && login && partyLeader == login) ||
+            (party &&
+              party[index] &&
+              party[index].ready &&
+              partyLeader == party[index].login),
           circle: true,
           noPhoto: login ? (photo ? false : true) : false,
         }"
@@ -44,11 +56,15 @@
             v-for="f in User.friends"
             @click="SendPartyInvite(f, User.partyID)"
             :key="f"
-          >{{ f }}</li>
+          >
+            {{ f }}
+          </li>
         </ul>
       </div>
       <div v-if="login" class="circleText">{{ login }}</div>
-      <div v-if="party" class="circleText">{{ party[index] ? party[index].login : index + 2 }}</div>
+      <div v-if="party" class="circleText">
+        {{ party[index] ? party[index].login : index + 2 }}
+      </div>
       <div v-if="!party && index + 1" class="circleText">{{ index + 2 }}</div>
     </div>
     <div
@@ -86,8 +102,8 @@
       </svg>
     </div>
     <div
-      @mouseover="show==true"
-      v-if="!show &&party && party[index] && party[index].status == 'waiting'"
+      @mouseover="show == true"
+      v-if="!show && party && party[index] && party[index].status == 'waiting'"
       class="circleW"
     >
       <svg
@@ -108,7 +124,12 @@
     <div
       @mouseleave="show = false"
       @click="CickPlayer(party[index].login, User.partyID)"
-      v-if="show && party && party[index] && (party[index].status == 'inLobby' || party[index].status == 'waiting')"
+      v-if="
+        show &&
+          party &&
+          party[index] &&
+          (party[index].status == 'inLobby' || party[index].status == 'waiting')
+      "
       class="circleK"
       style="z-index:20"
     >
@@ -130,13 +151,18 @@
     <img
       @mouseover="show = true"
       style="width:50px;height:50px;border-radius:25px;position:absolute;top:21px;left:107px;"
-      v-if="status"
+      v-if="status && photo"
       :src="photo"
     />
     <img
       @mouseover="show = true"
       style="width:50px;height:50px;border-radius:25px;position:absolute;top:21px;left:107px;"
-      v-if=" party && party[index] && party[index].status != 'waiting' && party[index].photo"
+      v-if="
+        party &&
+          party[index] &&
+          party[index].status != 'waiting' &&
+          party[index].photo
+      "
       :src="party[index].photo"
     />
   </div>

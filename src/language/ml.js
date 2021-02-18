@@ -313,6 +313,7 @@ export default new MLCreate({
         "This is a section of active loyalty programs for which club members will receive rewards",
       t15:
         "Here you can contact the administration and get answers to frequently asked questions",
+      tutorialSkip: "Skip",
     }),
 
     new MLanguage("russian").create({
@@ -620,6 +621,7 @@ export default new MLCreate({
         "Это раздел активных программ лояльности, за которые члены клуба будут получать вознаграждения",
       t15:
         "Здесь Вы сможете обратиться к администрации и получить ответы на частые вопросы",
+      tutorialSkip: "Пропустить",
     }),
   ],
 });

@@ -297,11 +297,13 @@ export default {
       this.$store.commit("setChangeLang");
       localStorage.setItem("leng", i);
       this.$store.commit("SetLang", i);
-      if (i == 1) {
-        this.$ml.change("russian");
-      } else {
-        this.$ml.change("english");
-      }
+      setTimeout(() => {
+        if (i == 1) {
+          this.$ml.change("russian");
+        } else {
+          this.$ml.change("english");
+        }
+      }, 2000);
     },
   },
   computed: {

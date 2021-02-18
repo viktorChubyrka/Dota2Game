@@ -75,28 +75,31 @@
               tutorialStep == 1 && show3 && user.tutorial,
           }"
         >
-          <svg
-            :class="{ icon: true }"
-            width="28"
-            height="44"
-            viewBox="0 0 28 44"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g clip-path="url(#clip0)">
-              <path
-                :class="{ activeML: user.ready, hoverIcon: !user.ready }"
-                d="M27.8779 16.9429C27.7961 16.8011 27.6773 16.6832 27.5339 16.6012C27.3904 16.5192 27.2273 16.476 27.0612 16.476H14.7633L16.8251 1.02283C16.8472 0.816019 16.7977 0.607917 16.6846 0.432035C16.5715 0.256154 16.4013 0.122728 16.2015 0.0532393C16.0017 -0.0162492 15.7839 -0.0177562 15.5831 0.048961C15.3823 0.115678 15.2103 0.246737 15.0947 0.421036L0.139058 26.1234C0.0516024 26.2629 0.00366986 26.4228 0.00020247 26.5866C-0.00326492 26.7504 0.0378583 26.9121 0.119333 27.055C0.200807 27.198 0.319684 27.3171 0.463705 27.4C0.607726 27.4829 0.771679 27.5266 0.938659 27.5266H13.0528L11.4189 43.003C11.4028 43.2091 11.4575 43.4146 11.5742 43.5867C11.6909 43.7588 11.8629 43.8876 12.0629 43.9528C12.2629 44.0179 12.4794 44.0156 12.6778 43.9462C12.8763 43.8767 13.0454 43.7442 13.1582 43.5696L20.5124 30.7198L27.8667 17.87C27.952 17.7302 27.998 17.5708 27.9999 17.4079C28.0019 17.245 27.9598 17.0846 27.8779 16.9429Z"
-                fill="#BDBDBD"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0">
-                <rect width="28" height="44" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
+          <div>
+            <svg
+              :class="{ icon: true }"
+              width="28"
+              height="44"
+              viewBox="0 0 28 44"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0)">
+                <path
+                  :class="{ activeML: user.ready, hoverIcon: !user.ready }"
+                  d="M27.8779 16.9429C27.7961 16.8011 27.6773 16.6832 27.5339 16.6012C27.3904 16.5192 27.2273 16.476 27.0612 16.476H14.7633L16.8251 1.02283C16.8472 0.816019 16.7977 0.607917 16.6846 0.432035C16.5715 0.256154 16.4013 0.122728 16.2015 0.0532393C16.0017 -0.0162492 15.7839 -0.0177562 15.5831 0.048961C15.3823 0.115678 15.2103 0.246737 15.0947 0.421036L0.139058 26.1234C0.0516024 26.2629 0.00366986 26.4228 0.00020247 26.5866C-0.00326492 26.7504 0.0378583 26.9121 0.119333 27.055C0.200807 27.198 0.319684 27.3171 0.463705 27.4C0.607726 27.4829 0.771679 27.5266 0.938659 27.5266H13.0528L11.4189 43.003C11.4028 43.2091 11.4575 43.4146 11.5742 43.5867C11.6909 43.7588 11.8629 43.8876 12.0629 43.9528C12.2629 44.0179 12.4794 44.0156 12.6778 43.9462C12.8763 43.8767 13.0454 43.7442 13.1582 43.5696L20.5124 30.7198L27.8667 17.87C27.952 17.7302 27.998 17.5708 27.9999 17.4079C28.0019 17.245 27.9598 17.0846 27.8779 16.9429Z"
+                  fill="#BDBDBD"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0">
+                  <rect width="28" height="44" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
         </div>
+
         <div
           v-if="user.ready"
           :class="{ readyIconText1: true, show: show, t4: true }"
@@ -116,36 +119,39 @@
             tutorialStep == 2 && show3 && user.tutorial,
         }"
       >
-        <svg
-          class="icon hoverIcon"
-          width="64"
-          height="44"
-          viewBox="0 0 64 44"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M42.0209 34.3613L41.4826 33.823C41.4576 33.798 41.445 33.7854 41.42 33.7604C38.4408 35.5254 35.0109 36.4768 31.4934 36.4768C27.0746 36.4768 22.8686 35.0122 19.4513 32.3083C18.525 32.9468 17.5736 33.6603 16.6473 34.4239C15.9088 35.0247 15.4832 35.9385 15.4832 36.8899V41.4088H31.5435H47.5913V39.9192L42.8721 35.2L42.0209 34.3613Z"
-            fill="#BDBDBD"
-          />
-          <path
-            d="M32.257 6.75964H31.5435H30.83C27.5503 6.75964 24.884 9.42593 24.884 12.7056V19.3025C24.884 20.3414 25.4098 21.2427 26.2109 21.781V27.414C27.8257 28.2402 29.6283 28.6908 31.5059 28.6908C33.4086 28.6908 35.2362 28.2402 36.8636 27.3889V21.7935C37.6647 21.2552 38.1904 20.354 38.1904 19.315V12.7181C38.203 9.41341 35.5367 6.75964 32.257 6.75964Z"
-            fill="#BDBDBD"
-          />
-          <path
-            d="M61.1228 29.9676C57.6929 27.1511 54.0002 25.286 53.2491 24.9104C53.1615 24.8729 53.1114 24.7852 53.1114 24.6851V19.3525C53.7874 18.9019 54.2255 18.1383 54.2255 17.2746V11.7417C54.2255 8.98781 51.9973 6.75964 49.2434 6.75964H48.6426H48.0918C49.8443 9.60118 50.8582 12.8558 50.9834 16.2481C51.1336 20.0285 50.1823 23.7337 48.2796 26.9383C48.3046 26.9633 48.3171 26.9759 48.3422 27.0009L48.5925 27.2512L48.8804 27.5392L49.7316 28.3904L57.1922 35.851H62.0992V32.0581C62.0992 31.2444 61.7362 30.4808 61.1228 29.9676Z"
-            fill="#BDBDBD"
-          />
-          <path
-            d="M57.8182 39.9818L47.9667 30.1303L47.1155 29.2791L46.8276 28.9912L46.5772 28.7408L45.9138 29.4043L44.4868 27.9772C50.1448 21.3053 49.8319 11.291 43.5229 4.98208C40.2057 1.66486 35.8495 0 31.5058 0C27.1622 0 22.806 1.66486 19.4888 4.98208C12.8543 11.6165 12.8543 22.3818 19.4888 29.0162C22.806 32.3334 27.1622 33.9983 31.5058 33.9983C35.4114 33.9983 39.3169 32.6589 42.4839 29.9801L43.9109 31.4071L43.2475 32.0706L43.7858 32.6088L44.637 33.46L54.4885 43.3115C54.9516 43.7747 55.5525 44 56.1533 44C56.7542 44 57.355 43.7747 57.8182 43.3115C58.732 42.3977 58.732 40.9081 57.8182 39.9818C57.8182 39.9943 57.8182 39.9818 57.8182 39.9818ZM41.5201 27.0259C38.7536 29.7923 35.1235 31.1693 31.5058 31.1693C27.8757 31.1693 24.258 29.7923 21.4916 27.0259C15.9587 21.493 15.9587 12.5303 21.4916 6.99744C24.258 4.23101 27.8882 2.85405 31.5058 2.85405C35.136 2.85405 38.7536 4.23101 41.5201 6.99744C47.0529 12.5178 47.0529 21.493 41.5201 27.0259Z"
-            fill="#BDBDBD"
-          />
-          <path
-            d="M14.9448 6.75964H14.4566H13.8558C11.1018 6.75964 8.87368 8.98781 8.87368 11.7417V17.2746C8.87368 18.1383 9.31181 18.9019 9.98777 19.3525V24.6851C9.98777 24.7852 9.93769 24.8604 9.85007 24.9104C9.099 25.2734 5.40626 27.1511 1.97639 29.9676C1.36302 30.4808 1 31.2444 1 32.0456V35.8384H13.1673C13.4176 34.5491 14.0936 33.385 15.1201 32.5463C15.9462 31.8703 16.7849 31.2319 17.6111 30.6436C11.2145 24.1343 10.3257 14.2202 14.9448 6.75964Z"
-            fill="#BDBDBD"
-          />
-        </svg>
+        <div>
+          <svg
+            class="icon hoverIcon"
+            width="64"
+            height="44"
+            viewBox="0 0 64 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M42.0209 34.3613L41.4826 33.823C41.4576 33.798 41.445 33.7854 41.42 33.7604C38.4408 35.5254 35.0109 36.4768 31.4934 36.4768C27.0746 36.4768 22.8686 35.0122 19.4513 32.3083C18.525 32.9468 17.5736 33.6603 16.6473 34.4239C15.9088 35.0247 15.4832 35.9385 15.4832 36.8899V41.4088H31.5435H47.5913V39.9192L42.8721 35.2L42.0209 34.3613Z"
+              fill="#BDBDBD"
+            />
+            <path
+              d="M32.257 6.75964H31.5435H30.83C27.5503 6.75964 24.884 9.42593 24.884 12.7056V19.3025C24.884 20.3414 25.4098 21.2427 26.2109 21.781V27.414C27.8257 28.2402 29.6283 28.6908 31.5059 28.6908C33.4086 28.6908 35.2362 28.2402 36.8636 27.3889V21.7935C37.6647 21.2552 38.1904 20.354 38.1904 19.315V12.7181C38.203 9.41341 35.5367 6.75964 32.257 6.75964Z"
+              fill="#BDBDBD"
+            />
+            <path
+              d="M61.1228 29.9676C57.6929 27.1511 54.0002 25.286 53.2491 24.9104C53.1615 24.8729 53.1114 24.7852 53.1114 24.6851V19.3525C53.7874 18.9019 54.2255 18.1383 54.2255 17.2746V11.7417C54.2255 8.98781 51.9973 6.75964 49.2434 6.75964H48.6426H48.0918C49.8443 9.60118 50.8582 12.8558 50.9834 16.2481C51.1336 20.0285 50.1823 23.7337 48.2796 26.9383C48.3046 26.9633 48.3171 26.9759 48.3422 27.0009L48.5925 27.2512L48.8804 27.5392L49.7316 28.3904L57.1922 35.851H62.0992V32.0581C62.0992 31.2444 61.7362 30.4808 61.1228 29.9676Z"
+              fill="#BDBDBD"
+            />
+            <path
+              d="M57.8182 39.9818L47.9667 30.1303L47.1155 29.2791L46.8276 28.9912L46.5772 28.7408L45.9138 29.4043L44.4868 27.9772C50.1448 21.3053 49.8319 11.291 43.5229 4.98208C40.2057 1.66486 35.8495 0 31.5058 0C27.1622 0 22.806 1.66486 19.4888 4.98208C12.8543 11.6165 12.8543 22.3818 19.4888 29.0162C22.806 32.3334 27.1622 33.9983 31.5058 33.9983C35.4114 33.9983 39.3169 32.6589 42.4839 29.9801L43.9109 31.4071L43.2475 32.0706L43.7858 32.6088L44.637 33.46L54.4885 43.3115C54.9516 43.7747 55.5525 44 56.1533 44C56.7542 44 57.355 43.7747 57.8182 43.3115C58.732 42.3977 58.732 40.9081 57.8182 39.9818C57.8182 39.9943 57.8182 39.9818 57.8182 39.9818ZM41.5201 27.0259C38.7536 29.7923 35.1235 31.1693 31.5058 31.1693C27.8757 31.1693 24.258 29.7923 21.4916 27.0259C15.9587 21.493 15.9587 12.5303 21.4916 6.99744C24.258 4.23101 27.8882 2.85405 31.5058 2.85405C35.136 2.85405 38.7536 4.23101 41.5201 6.99744C47.0529 12.5178 47.0529 21.493 41.5201 27.0259Z"
+              fill="#BDBDBD"
+            />
+            <path
+              d="M14.9448 6.75964H14.4566H13.8558C11.1018 6.75964 8.87368 8.98781 8.87368 11.7417V17.2746C8.87368 18.1383 9.31181 18.9019 9.98777 19.3525V24.6851C9.98777 24.7852 9.93769 24.8604 9.85007 24.9104C9.099 25.2734 5.40626 27.1511 1.97639 29.9676C1.36302 30.4808 1 31.2444 1 32.0456V35.8384H13.1673C13.4176 34.5491 14.0936 33.385 15.1201 32.5463C15.9462 31.8703 16.7849 31.2319 17.6111 30.6436C11.2145 24.1343 10.3257 14.2202 14.9448 6.75964Z"
+              fill="#BDBDBD"
+            />
+          </svg>
+        </div>
       </div>
+
       <div
         :class="{
           readyIconText2: true,
@@ -156,15 +162,17 @@
       >
         {{ $ml.get("getComand") }}
       </div>
-      <div style="cursor:pointer" @click="SearchGame()">
-        <div
-          :class="{
-            readyIcon3: true,
-            show: show,
-            'tutorial-selected-element':
-              tutorialStep == 3 && show3 && user.tutorial,
-          }"
-        >
+      <div
+        style="cursor:pointer"
+        :class="{
+          readyIcon3: true,
+          show: show,
+          'tutorial-selected-element':
+            tutorialStep == 3 && show3 && user.tutorial,
+        }"
+        @click="SearchGame()"
+      >
+        <div>
           <svg
             class="icon"
             width="48"
@@ -180,9 +188,9 @@
             />
           </svg>
         </div>
-        <div :class="{ readyIconText3: true, show: show, t4: true }">
-          {{ $ml.get("findG") }}
-        </div>
+      </div>
+      <div :class="{ readyIconText3: true, show: show, t4: true }">
+        {{ $ml.get("findG") }}
       </div>
     </div>
     <div :class="{ sideNavigation: true, sideNavigationShow: show }">
@@ -346,30 +354,34 @@
     </div>
     <Tutorial
       v-if="tutorialStep == 1 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(2)"
-      :top="180"
+      :top="190"
       :left="250"
     >
       {{ $ml.get("t1") }}</Tutorial
     >
     <Tutorial
       v-if="tutorialStep == 2 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(3)"
-      :top="180"
+      :top="190"
       :left="600"
     >
       {{ $ml.get("t2") }}</Tutorial
     >
     <Tutorial
       v-if="tutorialStep == 3 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(4)"
-      :top="180"
+      :top="190"
       :left="1000"
     >
       {{ $ml.get("t3") }}</Tutorial
     >
     <Tutorial
       v-if="tutorialStep == 4 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(5)"
       :top="340"
       :left="40"
@@ -378,6 +390,7 @@
     >
     <Tutorial
       v-if="tutorialStep == 5 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(6)"
       :top="370"
       :left="550"
@@ -385,6 +398,7 @@
       {{ $ml.get("t5") }}</Tutorial
     ><Tutorial
       v-if="tutorialStep == 6 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(7)"
       :top="370"
       :left="880"
@@ -392,6 +406,7 @@
       {{ $ml.get("t6") }}</Tutorial
     ><Tutorial
       v-if="tutorialStep == 7 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(8)"
       :top="480"
       :left="400"
@@ -399,6 +414,7 @@
       {{ $ml.get("t7") }}</Tutorial
     ><Tutorial
       v-if="tutorialStep == 8 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(9)"
       :top="480"
       :left="670"
@@ -406,6 +422,7 @@
       {{ $ml.get("t8") }}</Tutorial
     ><Tutorial
       v-if="tutorialStep == 9 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(10)"
       :top="480"
       :left="960"
@@ -414,6 +431,7 @@
     >
     <Tutorial
       v-if="tutorialStep == 10 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(11)"
       :top="405"
       :left="40"
@@ -422,6 +440,7 @@
     >
     <Tutorial
       v-if="tutorialStep == 11 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(12)"
       :top="470"
       :left="40"
@@ -430,6 +449,7 @@
     >
     <Tutorial
       v-if="tutorialStep == 12 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(13)"
       :top="535"
       :left="40"
@@ -438,6 +458,7 @@
     >
     <Tutorial
       v-if="tutorialStep == 13 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(14)"
       :top="600"
       :left="40"
@@ -446,6 +467,7 @@
     >
     <Tutorial
       v-if="tutorialStep == 14 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(15)"
       :top="665"
       :left="40"
@@ -454,6 +476,7 @@
     >
     <Tutorial
       v-if="tutorialStep == 15 && show3 && user.tutorial"
+      @skip="SkipTutorial()"
       @submit="SetTutorialStep(0)"
       :top="730"
       :left="40"
@@ -655,11 +678,20 @@ export default {
     }, 20);
   },
   methods: {
+    async SkipTutorial() {
+      this.$router.push("profile");
+      this.$store.commit("setTutorialStep", 0);
+      let a = await Axios.post(
+        "https://darewins.club/api/user/actions/tutorial",
+        { login: this.user.login, val: false }
+      );
+    },
     async StartTutorial() {
       this.$store.commit("setTutorialStep", 1);
       this.user.tutorial = true;
+      console.log({ login: this.user.login, val: true });
       let a = await Axios.post(
-        "https://darewins.club/api/user/actions/tutorial_complited",
+        "https://darewins.club/api/user/actions/tutorial",
         { login: this.user.login, val: true }
       );
     },
@@ -689,7 +721,7 @@ export default {
         this.$router.push("profile");
         this.$store.commit("setTutorialStep", val);
         let a = await Axios.post(
-          "https://darewins.club/api/user/actions/tutorial_complited",
+          "https://darewins.club/api/user/actions/tutorial",
           { login: this.user.login, val: false }
         );
       }
@@ -861,9 +893,7 @@ html {
 .RL {
   text-decoration: none;
 }
-.icon {
-  padding-right: 8px;
-}
+
 .iconFocused {
   opacity: 1 !important;
   color: black;
@@ -1003,16 +1033,18 @@ path {
   width: 60px;
   height: 50px;
   margin-left: -15px;
-  left: 556px;
-  top: 36px;
+  left: 550px;
+  top: 32px;
   color: #bdbdbd;
   opacity: 0;
   cursor: pointer;
   transition: opacity 1.5s;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.readyIcon1 svg {
-  margin-left: 15px;
-}
+
 div.readyIcon1:hover svg g path.hoverIcon {
   fill: #ffffff !important;
 }
@@ -1020,18 +1052,19 @@ div.readyIcon1:hover svg g path.hoverIcon {
   position: absolute;
   width: 90px;
   height: 50px;
-  left: 906px;
-  top: 36px;
+  left: 898px;
+  top: 32px;
   margin-left: -15px;
-
   color: #bdbdbd;
   opacity: 0;
   cursor: pointer;
+  padding: 8px;
   transition: opacity 1.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.readyIcon2 svg {
-  margin-left: 15px;
-}
+
 div.readyIcon2:hover svg path.hoverIcon {
   fill: #ffffff !important;
 }
@@ -1040,16 +1073,17 @@ div.readyIcon2:hover svg path.hoverIcon {
   width: 80px;
   height: 50px;
   margin-left: -15px;
-
-  left: 1303px;
-  top: 36px;
+  left: 1302px;
+  top: 32px;
+  padding: 8px;
   color: #bdbdbd;
   opacity: 0;
   transition: opacity 1.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.readyIcon3 svg {
-  margin-left: 15px;
-}
+
 div.readyIcon3:hover svg path.hoverIcon {
   fill: #ffffff !important;
 }
