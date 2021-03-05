@@ -1,14 +1,19 @@
 <template>
   <div class="chat">
-    <div class="t3 chatTitle">{{$ml.get("chat")}}</div>
+    <div class="t3 chatTitle">{{ $ml.get("chat") }}</div>
     <div id="chatBody" class="chatBody">
-      <div class="message t5" :id="message.message" v-for="message in chat" :key="message.date">
+      <div
+        class="message t5"
+        :id="message.message"
+        v-for="message in chat"
+        :key="message.date"
+      >
         {{
-        message.newDate.hour +
-        ":" +
-        (message.newDate.min < 10
-        ? "0" + message.newDate.min
-        : message.newDate.min)
+          message.newDate.hour +
+            ":" +
+            (message.newDate.min < 10
+              ? "0" + message.newDate.min
+              : message.newDate.min)
         }}
         <strong>{{ message.login }}:</strong>
         <span>{{ message.message }}</span>
@@ -22,7 +27,9 @@
         class="t5 chatInput"
         @keydown.enter="WriteToChat()"
       />
-      <button @click="WriteToChat()" class="t5 chatButton">{{$ml.get("chatBtn")}}</button>
+      <button @click="WriteToChat()" class="t5 chatButton">
+        {{ $ml.get("chatBtn") }}
+      </button>
     </div>
   </div>
 </template>
@@ -63,23 +70,23 @@ export default {
 </script>
 <style>
 .chat {
-  width: 454px;
-  height: 452px;
+  width: 42.03703703703703vh;
+  height: 41.85185185185185vh;
   border: 1px solid #e0e0e0;
   box-sizing: border-box;
 }
 .chatTitle {
   text-align: center;
-  margin-top: 16px;
+  margin-top: 1.4814814814814814vh;
 }
 .chatBody {
   position: absolute;
   display: flex;
   flex-direction: column-reverse;
-  top: 62px;
-  left: 18px;
-  height: 370px;
-  width: 407px;
+  top: 5.7407407407407405vh;
+  left: 1.6666666666666665vh;
+  height: 34.25925925925926vh;
+  width: 37.68518518518518vh;
   overflow: auto;
   z-index: 1;
 }
@@ -88,35 +95,35 @@ export default {
 }
 .chatInputBody {
   position: relative;
-  top: 382px;
-  left: -2px;
-  width: 455px;
-  height: 70px;
+  top: 35.37037037037037vh;
+  left: -0.18518518518518517vh;
+  width: 42.129629629629626vh;
+  height: 6.481481481481481vh;
   background-color: #f2f2f2;
 
   z-index: 2;
 }
 .chatInput {
   position: absolute;
-  top: 16px;
-  left: 15px;
-  width: 336px;
-  height: 30px;
-  padding: 2px 0 2px 12px;
+  top: 1.4814814814814814vh;
+  left: 1.3888888888888888vh;
+  width: 31.11111111111111vh;
+  height: 2.7777777777777777vh;
+  padding: 0.18518518518518517vh 0 0.18518518518518517vh 1.111111111111111vh;
 }
 .chatButton {
   position: absolute;
-  top: 16px;
-  right: 15px;
-  width: 62px;
-  height: 38px;
+  top: 1.4814814814814814vh;
+  right: 1.3888888888888888vh;
+  width: 5.7407407407407405vh;
+  height: 3.518518518518518vh;
   background: #1f2430;
-  border-radius: 4px;
+  border-radius: 0.37037037037037035vh;
   border: 0px;
   color: #f2f2f2;
 }
 .message {
-  width: 407px;
+  width: 37.68518518518518vh;
   margin-bottom: 1px;
 }
 </style>

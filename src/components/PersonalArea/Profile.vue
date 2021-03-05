@@ -1,207 +1,245 @@
 <template>
   <div>
     <div :class="{ show: show, content: true }">
-      <div
-        v-if="user.photo"
-        class="profileImg"
-        :style="{
-          background: `url(${user.photo != '' ? user.photo : svg}) center`,
-        }"
-      ></div>
-      <div v-else class="photo"></div>
-      <label class="t4 changePhoto2" for="filechooser">
-        {{ $ml.get("changePhoto") }}
-      </label>
-      <input
-        id="filechooser"
-        class="changePhoto"
-        style="opacity:0;position:absolute;z-index:-1"
-        type="file"
-        name="file"
-        @change="SendFile()"
-      />
-      <div></div>
-
-      <div class="titleBlock">
-        <div class="t3 slide-right">{{ $ml.get("aboutYou") }}</div>
+      <div class="profile-column">
+        <div class="user-photo-block">
+          <div
+            v-if="user.photo"
+            class="profileImg"
+            :style="{
+              background: `url(${user.photo != '' ? user.photo : svg}) center`,
+            }"
+          ></div>
+          <div v-else class="photo"></div>
+          <label class="t4 changePhoto2" for="filechooser">
+            {{ $ml.get("changePhoto")
+            }}<input
+              id="filechooser"
+              class="changePhoto"
+              style="opacity:0;position:absolute;z-index:-1"
+              type="file"
+              name="file"
+              @change="SendFile()"
+            />
+          </label>
+        </div>
+        <div class="profile-info-inputs-container">
+          <div class="titleBlock">
+            <div class="t3 slide-right">{{ $ml.get("aboutYou") }}</div>
+          </div>
+          <input
+            @focus="focus = true"
+            @focusout="focus = false"
+            id="name"
+            class="t5 inputs"
+            placeholder="Имя"
+            type="text"
+            v-model="name"
+          />
+          <input
+            @focus="focus = true"
+            @focusout="focus = false"
+            id="surname"
+            class="t5 inputs"
+            placeholder="Фамилия"
+            type="text"
+            v-model="surname"
+          />
+          <div style="top:413px" class="titleBlock">
+            <div class="t3 slide-right">{{ $ml.get("cont") }}</div>
+          </div>
+          <input
+            @focus="focus = true"
+            @focusout="focus = false"
+            id="login"
+            class="t5 inputs"
+            type="text"
+            placeholder="Логин"
+            v-model="login"
+          />
+          <input
+            @focus="focus = true"
+            @focusout="focus = false"
+            id="email"
+            class="t5 inputs"
+            type="text"
+            placeholder="Емайл"
+            v-model="email"
+          />
+          <input
+            @focus="focus = true"
+            @focusout="focus = false"
+            id="phone"
+            class="t5 inputs"
+            type="text"
+            placeholder="Телефон"
+            v-model="number"
+          /><button
+            v-if="
+              user.login != login ||
+                user.number != number ||
+                user.steamID.id != steamID.id ||
+                user.email != email ||
+                user.name != name ||
+                user.surname != surname
+            "
+            class="t4 change-btn"
+            @click="changeName(), changeContactData()"
+          >
+            {{ $ml.get("apply") }}
+          </button>
+        </div>
       </div>
-      <input
-        @focus="focus = true"
-        @focusout="focus = false"
-        id="name"
-        class="t5 inputs"
-        placeholder="Имя"
-        type="text"
-        v-model="name"
-      />
-      <input
-        @focus="focus = true"
-        @focusout="focus = false"
-        id="surname"
-        class="t5 inputs"
-        placeholder="Фамилия"
-        type="text"
-        v-model="surname"
-      />
-      <div style="top:413px" class="titleBlock">
-        <div class="t3 slide-right">{{ $ml.get("cont") }}</div>
-      </div>
-      <input
-        @focus="focus = true"
-        @focusout="focus = false"
-        id="login"
-        class="t5 inputs"
-        type="text"
-        placeholder="Логин"
-        v-model="login"
-      />
-      <input
-        @focus="focus = true"
-        @focusout="focus = false"
-        id="email"
-        class="t5 inputs"
-        type="text"
-        placeholder="Емайл"
-        v-model="email"
-      />
-      <input
-        @focus="focus = true"
-        @focusout="focus = false"
-        id="phone"
-        class="t5 inputs"
-        type="text"
-        placeholder="Телефон"
-        v-model="number"
-      />
-      <div class="t3 steamIDTitile slide-right">Steam ID</div>
-      <form
-        class="steamIdForm"
-        action="https://steamcommunity.com/openid/login"
-        method="post"
-      >
-        <input
-          type="hidden"
-          name="openid.identity"
-          value="http://specs.openid.net/auth/2.0/identifier_select"
-        />
-        <input
-          type="hidden"
-          name="openid.claimed_id"
-          value="http://specs.openid.net/auth/2.0/identifier_select"
-        />
-        <input
-          type="hidden"
-          name="openid.ns"
-          value="http://specs.openid.net/auth/2.0"
-        />
-        <input type="hidden" name="openid.mode" value="checkid_setup" />
-        <input
-          type="hidden"
-          name="openid.realm"
-          value="https://darewins.club/"
-        />
-        <input
-          type="hidden"
-          name="openid.return_to"
-          value="https://darewins.club/personalArea/profile"
-        />
-        <Button type="submit">Log in through Steam</Button>
-      </form>
-      <input
-        id="steamID"
-        :class="{ t5: true, inputs: true, shine: !steamID.name }"
-        type="text"
-        v-model="steamID.name"
-      />
-      <div :class="{ steamIconShadow: true }"></div>
-      <i
-        :style="`color:${steamID.name ? '#2a475e' : 'rgb(187, 185, 185)'}`"
-        :class="{ fa: true, 'fa-steam-square': true, 'fa-2x': true }"
-      ></i>
-      <i class="fa fa-info-circle fa-2x">
-        <div class="t5 steam-connect-info">
-          Тут будет сообщение которое обяснит как правильно подключать стим
-        </div>
-      </i>
-      <div class="passPromo">
-        <div class="t3 slide-right">{{ $ml.get("sec") }}</div>
-        <div @click="ChangePassword()" class="t4 changePass">
-          {{ $ml.get("changePass") }}
-        </div>
-        <div class="t3 slide-right promoTitle">
-          Darewin’s family {{ $ml.get("promo").toLowerCase() }}
-        </div>
-        <div class="t4 promo">{{ $ml.get("promo") }}:</div>
-        <div class="t4 promoCode" style="color:#BDBDBD;">
-          {{ user.promoCode }}
-        </div>
-        <div class="t4 promo2">{{ $ml.get("refLink") }}:</div>
-        <div class="t4 promoCode2" style="color:#BDBDBD;">
-          registration/ref={{ user.promoCode }}
-        </div>
-        <i
-          id="copy1"
-          @click="fallbackCopyTextToClipboard(user.promoCode)"
-          style="position: absolute;
-                left: 260px;
-                top: 223px;
-                color:#BDBDBD;transition:color 0.5s"
-          class="fa fa-copy fa-lg"
-        ></i>
-        <i
-          id="copy2"
-          @click="
-            fallbackCopyTextToClipboard(
-              `https://darewins.club/registration/ref=${user.promoCode}`
-            )
-          "
-          style="position: absolute;
-                left: 610px;
-                top: 223px;
-                color:#BDBDBD;transition:color 0.5s"
-          class="fa fa-copy fa-lg"
-        ></i>
-      </div>
-      <div class="t3 LenTitle slide-right">{{ $ml.get("len") }}</div>
-      <div class="t3 lengChange">
-        <div class="lengChangeUl">
-          <div class="t4 langRow">
-            <div class="langBtn" @click="ChangeLang(1)" style="width:120px;">
-              Русский
+      <div class="profile-column">
+        <div class="passPromo">
+          <div class="promo-block">
+            <div class="promo-col">
+              <div style="width:25.925925925925924vh" class="t3 slide-right">
+                {{ $ml.get("sec") }}
+              </div>
+              <div @click="ChangePassword()" class="t4 changePass">
+                {{ $ml.get("changePass") }}
+              </div>
             </div>
-            <div :class="{ show: show2 == 1 }" style="opacity:0;color:#BDBDBD">
-              {{ $ml.get("now") }}
+            <div class="promo-col">
+              <div class="t3 steamIDTitile slide-right">Steam ID</div>
+
+              <div
+                style="width: 30.555555555555554vh"
+                class="steam-id-container"
+              >
+                <form
+                  class="steamIdForm"
+                  action="https://steamcommunity.com/openid/login"
+                  method="post"
+                >
+                  <input
+                    type="hidden"
+                    name="openid.identity"
+                    value="http://specs.openid.net/auth/2.0/identifier_select"
+                  />
+                  <input
+                    type="hidden"
+                    name="openid.claimed_id"
+                    value="http://specs.openid.net/auth/2.0/identifier_select"
+                  />
+                  <input
+                    type="hidden"
+                    name="openid.ns"
+                    value="http://specs.openid.net/auth/2.0"
+                  />
+                  <input
+                    type="hidden"
+                    name="openid.mode"
+                    value="checkid_setup"
+                  />
+                  <input
+                    type="hidden"
+                    name="openid.realm"
+                    value="https://darewins.club/"
+                  />
+                  <input
+                    type="hidden"
+                    name="openid.return_to"
+                    value="https://darewins.club/personalArea/profile"
+                  />
+                  <Button type="submit">Log in through Steam</Button>
+                </form>
+                <input
+                  id="steamID"
+                  :class="{ t5: true, inputs: true, shine: !steamID.name }"
+                  type="text"
+                  v-model="steamID.name"
+                />
+                <div :class="{ steamIconShadow: true }">
+                  <i
+                    :style="
+                      `color:${steamID.name ? '#2a475e' : 'rgb(187, 185, 185)'}`
+                    "
+                    :class="{
+                      fa: true,
+                      'fa-steam-square': true,
+                      'fa-2x': true,
+                    }"
+                  ></i>
+                </div>
+
+                <i class="fa fa-info-circle fa-2x">
+                  <div class="t5 steam-connect-info">
+                    Тут будет сообщение которое обяснит как правильно подключать
+                    стим
+                  </div>
+                </i>
+              </div>
             </div>
           </div>
-
-          <div class="t4 langRow">
-            <div class="langBtn" @click="ChangeLang(2)" style="width:120px">
-              English
+          <div class="t3 slide-right promoTitle">
+            Darewin’s family {{ $ml.get("promo").toLowerCase() }}
+          </div>
+          <div class="promo-block">
+            <div class="promo-col">
+              <div class="t4 promo">{{ $ml.get("promo") }}:</div>
+              <div class="t4 promoCode" style="color:#BDBDBD;">
+                {{ user.promoCode
+                }}<i
+                  id="copy1"
+                  @click="fallbackCopyTextToClipboard(user.promoCode)"
+                  style="position: absolute;
+                
+                color:#BDBDBD;transition:color 0.5s"
+                  class="fa fa-copy fa-lg"
+                ></i>
+              </div>
             </div>
-            <div
-              :class="{ show: show2 == 2 }"
-              style="opacity:0;display:inline;color:#BDBDBD"
-            >
-              {{ $ml.get("now") }}
+            <div class="promo-col">
+              <div class="t4 promo2">{{ $ml.get("refLink") }}:</div>
+              <div class="t4 promoCode2" style="color:#BDBDBD;">
+                registration/ref={{ user.promoCode
+                }}<i
+                  id="copy2"
+                  @click="
+                    fallbackCopyTextToClipboard(
+                      `https://darewins.club/registration/ref=${user.promoCode}`
+                    )
+                  "
+                  style="position: absolute;
+                
+                color:#BDBDBD;transition:color 0.5s"
+                  class="fa fa-copy fa-lg"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="t3 LenTitle slide-right">{{ $ml.get("len") }}</div>
+        <div class="t3 lengChange">
+          <div class="lengChangeUl">
+            <div class="t4 langRow">
+              <div class="langBtn" @click="ChangeLang(1)" style="width:120px;">
+                Русский
+              </div>
+              <div
+                :class="{ show: show2 == 1 }"
+                style="opacity:0;color:#BDBDBD"
+              >
+                {{ $ml.get("now") }}
+              </div>
+            </div>
+
+            <div class="t4 langRow">
+              <div class="langBtn" @click="ChangeLang(2)" style="width:120px">
+                English
+              </div>
+              <div
+                :class="{ show: show2 == 2 }"
+                style="opacity:0;display:inline;color:#BDBDBD"
+              >
+                {{ $ml.get("now") }}
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <button
-        v-if="
-          user.login != login ||
-            user.number != number ||
-            user.steamID.id != steamID.id ||
-            user.email != email ||
-            user.name != name ||
-            user.surname != surname
-        "
-        class="t4 change-btn"
-        @click="changeName(), changeContactData()"
-      >
-        {{ $ml.get("apply") }}
-      </button>
     </div>
   </div>
 </template>
@@ -350,31 +388,66 @@ export default {
 };
 </script>
 <style scoped>
+.promo-block {
+  display: flex;
+  margin-bottom: 1.8518518518518516vh;
+}
+.promo-col:first-child {
+  margin-right: 1vh;
+}
+.promo-col .slide-right {
+  margin-bottom: 1.8518518518518516vh;
+}
+.profile-info-inputs-container {
+  width: 100%;
+}
+.profile-column {
+  width: 30%;
+}
+.profile-column:nth-of-type(2) {
+  width: 60%;
+}
+.user-photo-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30.833333333333332vh;
+}
 .langRow {
   border: 1px solid rgb(224, 224, 224);
   display: flex;
   justify-content: space-between;
-  width: 350px;
-  padding: 0 10px;
-  margin-bottom: 10px;
+  width: 32.407407407407405vh;
+  padding: 0 0.9259259259259258vh;
+  margin-bottom: 0.9259259259259258vh;
 }
 .langRow .show {
   text-align: right;
 }
 .promoCode {
-  position: absolute;
-  top: 212px;
   border: 1px solid rgb(224, 224, 224);
-  width: 280px;
-  padding-left: 10px;
+  width: 25.925925925925924vh;
+  padding-left: 0.9259259259259258vh;
+  height: 3.518518518518518vh;
+  position: relative;
+}
+.promoCode i.fa-lg {
+  font-size: 2.5vh;
+  right: 1vh;
+  top: calc(50% - 1vh);
+  cursor: pointer;
+}
+.promoCode2 i.fa-lg {
+  font-size: 2.5vh;
+  right: 1vh;
+  cursor: pointer;
+  top: calc(50% - 1vh);
 }
 .promoCode2 {
-  position: absolute;
-  top: 212px;
-  left: 300px;
   border: 1px solid rgb(224, 224, 224);
-  width: 330px;
-  padding-left: 10px;
+  width: 30.555555555555554vh;
+  position: relative;
+  padding-left: 0.9259259259259258vh;
 }
 .slide-right {
   color: rgb(101, 100, 100);
@@ -385,19 +458,16 @@ export default {
   cursor: pointer;
 }
 .LenTitle {
-  position: absolute;
-  height: 38px;
-  left: 651px;
-  top: 410px;
+  height: 3.518518518518518vh;
 }
 .shine {
   box-shadow: 0 0 5px 2px #bf0603;
   border-radius: 7.5px;
-  width: 41px;
-  height: 40.7px;
+  width: 4.555555555555555vh;
+  height: 4.555555555555555vh;
 }
 .langBtn:hover {
-  text-shadow: 1px 1px 10px #737e98;
+  text-shadow: 1px 1px 0.9259259259259258vh #737e98;
 }
 #copy1:hover {
   color: #35a7ffaf !important;
@@ -407,13 +477,12 @@ export default {
 }
 .steamIdForm {
   position: absolute;
-  left: 950px;
-  top: 174px;
+
   z-index: 99;
 }
 .steamIdForm button {
-  width: 342px;
-  height: 40px;
+  width: 31.666666666666664vh;
+  height: 3.7037037037037033vh;
   opacity: 0;
   border-radius: 2px;
 }
@@ -425,22 +494,20 @@ export default {
 .content {
   opacity: 0;
   transition: opacity 1.5s;
+  padding-top: 3.7037037037037033vh;
+  display: flex;
+  justify-content: space-between;
 }
 .show {
   opacity: 1;
 }
 .photo {
   background-image: url(../../assets/userEmpty.svg);
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  left: 0;
-  top: 64px;
+  width: 12.962962962962962vh;
+  height: 12.962962962962962vh;
   background-repeat: no-repeat !important;
   background-size: cover !important;
-  border-radius: 70px;
+  border-radius: 50%;
 }
 .changePass:hover {
   color: #bf0603;
@@ -450,151 +517,134 @@ export default {
   color: #bf0603 !important;
 }
 .lengChange {
-  position: absolute;
-  height: 38px;
-  left: 651px;
-  top: 450px;
+  height: 3.518518518518518vh;
 }
 .lengChangeUl {
-  width: 300px !important;
+  width: 27.777777777777775vh !important;
   margin: 0;
   padding: 0 0 16px 0;
 }
 
 .lengChangeUl tr {
-  margin-bottom: 10px;
-  width: 300px !important;
+  margin-bottom: 0.9259259259259258vh;
+  width: 27.777777777777775vh !important;
   cursor: pointer;
 }
 .lengChangeUl:first-child {
-  margin-top: 16px;
+  margin-top: 1.4814814814814814vh;
 }
 .promo {
-  position: absolute;
-  width: 250px;
-  height: 36px;
-  left: 0px;
-  top: 172px;
+  width: 23.148148148148145vh;
+  height: 3.333333333333333vh;
 }
 .promo2 {
-  position: absolute;
-  width: 477px;
-  height: 36px;
-  left: 300px;
-  top: 172px;
+  width: 44.166666666666664vh;
+  height: 3.333333333333333vh;
 }
 .promoTitle {
-  position: absolute;
-  width: 320px;
-  height: 38px;
-  left: 0px;
-  top: 118px;
+  width: 29.629629629629626vh;
+  height: 3.518518518518518vh;
+  margin-bottom: 1.8518518518518516vh;
 }
 .profileImg {
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  left: 0;
-  top: 64px;
+  width: 12.962962962962962vh;
+  height: 12.962962962962962vh;
   background: #e0e0e0;
   background-repeat: no-repeat !important;
   background-size: cover !important;
-  border-radius: 70px;
+  border-radius: 50%;
 }
 .changePhoto {
-  position: absolute;
-  width: 145px;
-  height: 36px;
-  left: 188px;
-  top: 116px;
+  width: 13.425925925925926vh;
+  height: 3.333333333333333vh;
+
   text-decoration: underline;
   color: #35a7ff;
 }
 .changePhoto2 {
-  position: absolute;
-  width: 145px;
-  height: 36px;
-  left: 188px;
-  top: 116px;
+  width: 13.425925925925926vh;
+  height: 3.333333333333333vh;
+
   text-decoration: underline;
   color: #35a7ff;
   transition: color 0.25s;
 }
 
 .changePass {
-  position: absolute;
-  width: 166px;
-  height: 36px;
-  left: 0px;
-  top: 54px;
+  width: 15.37037037037037vh;
+  height: 3.333333333333333vh;
   text-decoration: underline;
   color: #35a7ff;
   transition: color 0.25s;
 }
 .AboutUser {
   position: absolute;
-  width: 444px;
-  height: 144px;
+  width: 41.11111111111111vh;
+  height: 13.333333333333332vh;
   left: 0;
-  top: 236px;
+  top: 23.333333333333333vh;
 }
 .inputs {
-  position: absolute;
-  width: 444px;
-  height: 40px;
+  width: 100%;
+  height: 3.7037037037037033vh;
   border: 1px solid #e0e0e0;
   box-sizing: border-box;
   padding-left: 16px;
   color: #1f2430;
+  margin: 0 0 0.7407407407407407vh;
 }
 #name {
   left: 0;
-  top: 292px;
+  top: 27.037037037037035vh;
 }
 #surname {
   left: 0;
-  top: 340px;
+  top: 22.22222222222222vh;
 }
 #login {
   left: 0;
-  top: 468px;
+  top: 43.33333333333333vh;
 }
 #email {
   left: 0;
-  top: 516px;
+  top: 47.77777777777777vh;
 }
 #phone {
   left: 0;
-  top: 564px;
+  top: 52.22222222222222vh;
 }
 #steamID {
-  left: 950px;
-  top: 170px;
-  padding: 10px;
-  width: 342px;
-  padding-left: 40px;
+  padding: 0.9259259259259258vh;
+  width: 100%;
+  padding-left: 3.7037037037037033vh;
+  margin: 0 !important;
+}
+.steam-id-container {
+  position: relative;
+}
+.steam-id-container i.fa {
+  font-size: 3.5vh;
+  top: 50%;
 }
 .steamIconShadow {
   position: absolute;
-  left: 830px;
-  top: 498.5px;
+  left: 0.5vh;
+  top: calc(50% - 1.7vh);
 }
 .fa-steam-square {
-  position: absolute;
-  left: 957px;
-  top: 175px;
+  font-size: 3.5vh;
 }
-.fa-info-circle {
-  position: relative;
-  left: 1257px;
-  top: 175px;
+i.fa.fa-info-circle {
+  position: absolute;
+  right: 0.5vh;
+  top: calc(50% - 1.7vh);
   color: rgb(198, 197, 197);
   z-index: 19;
 }
 .fa-info-circle:hover .t5.steam-connect-info {
   opacity: 1;
-  width: 200px;
-  font-size: 15px;
+  width: 18.51851851851852vh;
+  font-size: 1.3888888888888888vh;
   height: auto;
 }
 .steam-connect-info {
@@ -609,33 +659,27 @@ export default {
   font-size: 0px;
   transition: all 0.5s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-  padding: 10px;
-  border-radius: 10px;
+  padding: 0.9259259259259258vh;
+  border-radius: 0.9259259259259258vh;
 }
 .steamIDTitile {
-  position: absolute;
-  left: 950px;
-  top: 120px;
   width: 100px;
 }
 .titleBlock {
-  position: absolute;
-  width: 444px;
-  height: 40px;
-  left: 0;
-  top: 236px;
+  width: 41.11111111111111vh;
+  height: 3.7037037037037033vh;
+  padding-top: 3.0555555555555554vh;
+  padding-bottom: 1.574074074074074vh;
 }
 .titleBlock div {
   float: left;
 }
 .change-btn {
-  position: absolute;
-  left: 0px;
-  top: 615px;
-  width: 170px;
-  height: 40px;
+  width: 15.74074074074074vh;
+  height: 3.7037037037037033vh;
   background-color: #f2f2f2;
   border: none;
+
   border-radius: 6px;
   color: #1f2430;
   transition: color 0.5s, background-color 0.5s;
@@ -648,8 +692,5 @@ export default {
   background-color: #394154;
 }
 .passPromo {
-  position: absolute;
-  left: 651px;
-  top: 120px;
 }
 </style>

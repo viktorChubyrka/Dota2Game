@@ -74,7 +74,7 @@
       style="z-index:10"
       @click="LeveLobby(User.partyID)"
     >
-      <svg width="20" height="19" viewBox="0 0 20 19" fill="white">
+      <svg width="10" height="10" viewBox="0 0 25 23" fill="white">
         <path
           d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
         />
@@ -87,8 +87,8 @@
       class="circleL"
     >
       <svg
-        width="24"
-        height="24"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -150,13 +150,13 @@
     </div>
     <img
       @mouseover="show = true"
-      style="width:50px;height:50px;border-radius:25px;position:absolute;top:21px;left:107px;"
+      style="width:4.62962962962963vh;height:4.62962962962963vh;border-radius:2.314814814814815vh;position:absolute;top:1.9444444444444444vh;left:9.907407407407407vh;"
       v-if="status && photo"
       :src="photo"
     />
     <img
       @mouseover="show = true"
-      style="width:50px;height:50px;border-radius:25px;position:absolute;top:21px;left:107px;"
+      style="width:4.62962962962963vh;height:4.62962962962963vh;border-radius:2.314814814814815vh;position:absolute;top:1.9444444444444444vh;left:9.907407407407407vh;"
       v-if="
         party &&
           party[index] &&
@@ -252,53 +252,53 @@ export default {
 .arrow-up {
   opacity: 0;
   position: absolute;
-  top: 4px;
-  left: 125px;
+  top: 0.37037037037037035vh;
+  left: 11.574074074074073vh;
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 16px solid #f2f2f2;
+  border-left: 0.7407407407407407vh solid transparent;
+  border-right: 0.7407407407407407vh solid transparent;
+  border-top: 1.4814814814814814vh solid #f2f2f2;
   transition: opacity 0.5s;
 }
 .playerName {
   opacity: 0;
   position: fixed;
-  top: -42px;
-  left: 10px;
+  top: -3.888888888888889vh;
+  left: 0.9259259259259258vh;
   text-align: center;
   background-color: #f2f2f2;
   position: absolute;
-  width: 250px;
-  height: 46px;
+  width: 23.148148148148145vh;
+  height: 4.259259259259259vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
+  border-top-left-radius: 1.8518518518518516vh;
+  border-top-right-radius: 1.8518518518518516vh;
+  border-bottom-left-radius: 3.7037037037037033vh;
+  border-bottom-right-radius: 3.7037037037037033vh;
   transition: opacity 0.5s;
 }
 .showModal {
   opacity: 1;
 }
 .readyBorder {
-  border: 4px solid blueviolet;
+  border: 0.37037037037037035vh solid blueviolet;
   border-radius: 50% !important;
-  margin: 17px 0 0 103px !important;
+  margin: 1.574074074074074vh 0 0 9.537037037037036vh !important;
 }
 .leaderBorder {
-  border: 4px solid gold;
+  border: 0.37037037037037035vh solid gold;
   border-radius: 50% !important;
-  margin: 17px 0 0 103px !important;
+  margin: 1.574074074074074vh 0 0 9.537037037037036vh !important;
 }
 .selectFriend {
   position: absolute;
   padding: 0;
-  width: 264px;
+  width: 24.444444444444443vh;
   background: #ffffff;
-  margin: 10px 0 0 -107px;
+  margin: 0.9259259259259258vh 0 0 -9.907407407407407vh;
   list-style-type: none;
   color: #1f2430;
   text-align: center;
@@ -312,15 +312,15 @@ export default {
   background: url("../../assets/userEmpty.svg") center !important;
 }
 .partySlot {
-  width: 264px;
-  height: 121px;
+  width: 24.444444444444443vh;
+  height: 11.203703703703702vh;
 }
 .circle {
-  margin: 21px 0 0 107px;
-  width: 50px;
-  height: 50px;
+  margin: 1.9444444444444444vh 0 0 9.907407407407407vh;
+  width: 4.62962962962963vh;
+  height: 4.62962962962963vh;
   background: #828282;
-  border-radius: 25px;
+  border-radius: 2.314814814814815vh;
   color: #e0e0e0;
   background-repeat: no-repeat !important;
   background-size: cover !important;
@@ -331,11 +331,11 @@ export default {
 .circleT {
   position: absolute;
   top: 0;
-  margin: 21px 0 0 107px;
-  width: 50px;
-  height: 50px;
+  margin: 1.9444444444444444vh 0 0 9.907407407407407vh;
+  width: 4.62962962962963vh;
+  height: 4.62962962962963vh;
   background: #f02d3a;
-  border-radius: 25px;
+  border-radius: 2.314814814814815vh;
   color: #e0e0e0;
   background-repeat: no-repeat !important;
   background-size: cover !important;
@@ -344,11 +344,11 @@ export default {
 .circleK {
   position: absolute;
   top: 0;
-  margin: 21px 0 0 107px;
-  width: 50px;
-  height: 50px;
+  margin: 1.9444444444444444vh 0 0 9.907407407407407vh;
+  width: 4.62962962962963vh;
+  height: 4.62962962962963vh;
   background: #f02d3a;
-  border-radius: 25px;
+  border-radius: 2.314814814814815vh;
   color: #e0e0e0;
   background-repeat: no-repeat !important;
   background-size: cover !important;
@@ -357,49 +357,62 @@ export default {
 .circleL {
   position: absolute;
   top: 0;
-  margin: 21px 0 0 107px;
-  width: 50px;
-  height: 50px;
+  margin: 1.9444444444444444vh 0 0 9.907407407407407vh;
+  width: 4.62962962962963vh;
+  height: 4.62962962962963vh;
   background: #a4d8b6;
-  border-radius: 25px;
+  border-radius: 2.314814814814815vh;
   color: #e0e0e0;
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background-position: center;
+}
+.circleL svg {
+  width: 2vh;
 }
 .circleW {
   position: absolute;
   top: 0;
   z-index: 10;
-  margin: 21px 0 0 107px;
-  width: 50px;
-  height: 50px;
+  margin: 1.9444444444444444vh 0 0 9.907407407407407vh;
+  width: 4.62962962962963vh;
+  height: 4.62962962962963vh;
   background: #828282;
-  border-radius: 25px;
+  border-radius: 2.314814814814815vh;
   color: #e0e0e0;
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background-position: center;
 }
-.circle svg {
-  margin: 0px 0px;
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.circleT svg {
-  margin: 13px 13px;
+.circleT {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.circleL svg {
-  margin: 12px 14px;
+.circleL {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.circleW svg {
-  margin: 15px 15px;
+.circleW {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.circleK svg {
-  margin: 15px 16px;
+.circleK {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .circleText {
   color: white;
-  width: 264px;
+  width: 24.444444444444443vh;
   text-align: center;
-  margin-top: 8px;
+  margin-top: 0.7407407407407407vh;
 }
 </style>

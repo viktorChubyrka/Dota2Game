@@ -57,7 +57,7 @@
         </tbody>
       </table>
     </div>
-    <div class="t4 moneyTitle">{{ $ml.get("transMet") }}</div>
+    <!-- <div class="t4 moneyTitle">{{ $ml.get("transMet") }}</div>
     <ul class="tTypes">
       <li @click="focused(1)" :class="{ focused: focus == 1 }">
         <img src="../../assets/moneyIcons/visa.svg" />
@@ -74,7 +74,7 @@
       <li @click="focused(5)" :class="{ focused: focus == 5 }">
         <img src="../../assets/moneyIcons/webMoney.svg" />
       </li>
-    </ul>
+    </ul> -->
     <input
       class="t5 money"
       type="text"
@@ -238,8 +238,8 @@ export default {
 }
 .payForm {
   position: absolute;
-  left: 950px;
-  top: 174px;
+  left: 87.96296296296296vh;
+  top: 16.11111111111111vh;
   z-index: 99;
 }
 .payForm button {
@@ -251,26 +251,26 @@ export default {
 .more {
   position: absolute;
   left: 0;
-  top: 634px;
+  top: 58.7037037037037vh;
   margin: 0;
   padding: 0;
 }
 .more li {
   display: inline;
-  margin-right: 92px;
+  margin-right: 8.518518518518517vh;
 }
 .tTypes {
   position: absolute;
-  width: 424px;
-  height: 25px;
+  width: 39.25925925925926vh;
+  height: 2.314814814814815vh;
   left: 0;
-  top: 286px;
+  top: 26.48148148148148vh;
   margin: 0;
   padding: 0;
 }
 .tTypes li {
   display: inline;
-  margin-left: 20px;
+  margin-left: 1.8518518518518516vh;
   opacity: 0.5;
 }
 .focused {
@@ -279,24 +279,24 @@ export default {
 .moneyTitle {
   position: absolute;
 
-  height: 36px;
+  height: 3.333333333333333vh;
   left: 0;
-  top: 218px;
+  top: 20.185185185185183vh;
 }
 .money {
   position: absolute;
-  width: 218px;
-  height: 36px;
+  width: 20.185185185185183vh;
+  height: 3.333333333333333vh;
   left: 0px;
-  top: 378px;
-  padding: 0px 10px;
+  top: 23vh;
+  padding: 0px 0.9259259259259258vh;
 }
 .submitMoney {
   position: absolute;
-  width: 138px;
-  height: 40px;
-  left: 268px;
-  top: 378px;
+  width: 12.777777777777777vh;
+  height: 3.7037037037037033vh;
+  left: 24.814814814814813vh;
+  top: 23vh;
   padding: 2px 0px;
   border-width: 0px;
   background-color: #1f2430;
@@ -315,26 +315,26 @@ export default {
   background: white;
 }
 .tc1 {
-  width: 114px;
+  width: 10.555555555555555vh;
   text-align: left;
   padding: 10px;
 }
 .tc2 {
-  width: 259px;
+  width: 23.98148148148148vh;
   text-align: left;
 }
 .tc3 {
-  width: 103px;
+  width: 9.537037037037036vh;
   text-align: left;
 }
 .tc4 {
-  width: 190px;
+  width: 17.59259259259259vh;
   text-align: left;
 }
 .statTable {
   position: absolute;
-  left: 692px;
-  top: 222px;
+  left: 64.07407407407408vh;
+  top: 20.555555555555554vh;
 }
 .statTable table {
   border-collapse: separate;
@@ -344,44 +344,44 @@ export default {
 }
 .statTable table tbody {
   display: block;
-  height: 330px;
+  height: 30.555555555555554vh;
   overflow: auto;
 }
 
 .statTable table tbody::-webkit-scrollbar {
-  width: 2px;
+  width: 0.18518518518518517vh;
 }
 
 .statTable table tbody::-webkit-scrollbar-track {
   background: white;
-  border-radius: 3px;
+  border-radius: 0.27777777777777773vh;
 }
 
 .statTable table tbody::-webkit-scrollbar-thumb {
   background: #e0e0e0;
-  border-radius: 3px;
+  border-radius: 0.27777777777777773vh;
 }
 .smVretLine {
   position: absolute;
-  width: 1px;
-  height: 70px;
-  left: 668px;
-  top: 100px;
+  width: 0.09259259259259259vh;
+  height: 6.481481481481481vh;
+  left: 61.85185185185185vh;
+  top: 9.25925925925926vh;
   background: #1f2430;
 }
 .balance {
   position: absolute;
-  width: 250px;
-  height: 36px;
-  left: 563px;
-  top: 32px;
+  width: 23.148148148148145vh;
+  height: 3.333333333333333vh;
+  left: 52.22222222222222vh;
+  top: 2.962962962962963vh;
 }
 .buttonSolo {
-  width: 150px;
-  padding: 16px;
+  width: 13.888888888888888vh;
+  padding: 1.4814814814814814vh;
   position: absolute;
   color: black;
-  top: 100px;
+  top: 9.25925925925926vh;
   border: 1px solid #bdbdbd;
   text-align: center;
   transition: color 0.5s, background-color 0.5s;
@@ -390,10 +390,10 @@ export default {
   cursor: pointer;
 }
 .first {
-  left: 448px;
+  left: 41.48148148148148vh;
 }
 .second {
-  left: 705px;
+  left: 65.27777777777777vh;
 }
 .activeBtn {
   background: #1f2430;

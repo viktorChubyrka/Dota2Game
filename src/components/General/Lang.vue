@@ -46,14 +46,14 @@ export default {
 <style>
 .lengUl {
   position: absolute;
-  left: 1624px;
-  top: 904px;
+  right: 15.555555555555555vh;
+  bottom: 12.962962962962962vh;
   margin: 0;
   padding: 0;
 }
 .lengUl li {
   display: inline !important;
-  padding: 0 16px;
+  padding: 0 1.4814814814814814vh;
   cursor: pointer;
 }
 

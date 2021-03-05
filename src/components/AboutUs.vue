@@ -3,41 +3,52 @@
     <Header headerColor="#f2f2f2" class="header" />
     <div class="logo"></div>
     <img
-      :class="{shine:true,hidetImg:true,showImg:$store.getters.currentAnimation == 3 || $store.getters.anim2}"
+      :class="{
+        shine: true,
+        hidetImg: true,
+        showImg: $store.getters.currentAnimation == 3 || $store.getters.anim2,
+      }"
       style="position: absolute;
-width: 464px;
-height: 612px;
-left: 200px;
-top: 208px;"
+width: 42.96296296296296vh;
+height: 56.666666666666664vh;
+left: 18.51851851851852vh;
+top: 19.25925925925926vh;"
       src="../assets/AboutUs/dedy.jpg"
       alt
     />
     <div
-      :class="{hidetText:true,showText:$store.getters.anim3}"
+      :class="{ hidetText: true, showText: $store.getters.anim3 }"
       style="color:white;position: absolute;
-            width: 952px;
-            height: 252px;
-            left: 768px;
-            top: 252px;font-style: italic;"
+            width: 90.14814814814814vh;
+            
+            left: 71.1111111111111vh;
+            top:23.333333333333332vh;font-style: italic;"
       class="t4"
-    >{{ $ml.get("p3Text1") }}</div>
+    >
+      {{ $ml.get("p3Text1") }}
+    </div>
     <div
-      :class="{hidetText:true,showText:$store.getters.anim3}"
+      :class="{ hidetText: true, showText: $store.getters.anim3 }"
       style="color:white;position: absolute;
-            width: 951px;
-            height: 144px;
-            left: 768px;
-            top: 544px;font-style: italic;"
+            width: 90.05555555555554vh;
+            
+            left: 71.1111111111111vh;
+            top: 50.37037037037037vh;font-style: italic;"
       class="t4"
-    >{{ $ml.get("p3Text2") }}</div>
+    >
+      {{ $ml.get("p3Text2") }}
+    </div>
     <div
-      :class="{t4:true,hidetText:true,showText:$store.getters.anim3}"
+      :class="{ t4: true, hidetText: true, showText: $store.getters.anim3 }"
       style="color:white;position: absolute;
-            width: 951px;
-            height: 144px;
-            left: 1600px;
-            top: 700px;font-style: italic;"
-    >{{$ml.get("brothersF")}}</div>
+            width: 90.05555555555554vh;
+            height: 13.333333333333332vh;
+            left: 71.1111111111111vh;
+            text-align:right;
+            top: 64.81481481481481vh;font-style: italic;"
+    >
+      {{ $ml.get("brothersF") }}
+    </div>
     <div class="t4 alfa">{{ $ml.get("alfa") }}</div>
     <Lang />
   </div>
@@ -61,24 +72,24 @@ export default {
 }
 .header {
   float: right;
-  margin-top: 60px;
-  margin-right: 164px;
+  margin-top: 5.555555555555555vh;
+  margin-right: 15.185185185185183vh;
   color: #f2f2f2;
 }
 .logo {
   background: url(../assets/DarewinLargeWhite.svg);
-  position: relative;
-  left: 200px;
-  top: 60px;
-  width: 174px;
-  height: 36px;
+  position: absolute;
+  left: 13.51851851851852vh;
+  top: 5.555555555555555vh;
+  width: 16.11111111111111vh;
+  height: 3.333333333333333vh;
 }
 .alfa {
   position: absolute;
   width: 133px;
   height: 36px;
-  right: 1587px;
-  top: 904px;
+  left: 18.51851851851852vh;
+  top: 83.7037037037037vh;
   color: #f2f2f2;
 }
 .hidetImg {

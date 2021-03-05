@@ -63,30 +63,30 @@ export default {
 </script>
 <style>
 .inputs input {
-  margin-bottom: 16px;
-  width: 339px;
-  height: 32px;
+  margin-bottom: 1.4814814814814814vh;
+  width: 31.759259259259256vh;
+  height: 4.0740740740740735vh;
   border: 1px solid #626878;
   box-sizing: border-box;
   border-radius: 4px;
   color: #626878;
   background: #1f2430;
-  font-size: 16px;
+  font-size: 1.4814814814814814vh;
   line-height: 200%;
-  padding-left: 13px;
+  padding-left: 1.2037037037037037vh;
 }
 .header {
   float: right;
-  margin-top: 60px;
-  margin-right: 164px;
+  margin-top: 5.555555555555555vh;
+  margin-right: 15.185185185185183vh;
 }
 .logoR {
   background: url(../assets/DarewinLargeWhite.svg);
   position: absolute;
-  left: 200px;
-  top: 60px;
-  width: 174px;
-  height: 36px;
+  left: 18.51851851851852vh;
+  top: 5.555555555555555vh;
+  width: 16.11111111111111vh;
+  height: 3.333333333333333vh;
 }
 .reg-container {
   background: #1f2430;

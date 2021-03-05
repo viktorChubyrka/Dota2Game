@@ -1,25 +1,39 @@
 <template>
-  <div :class="{ show: show, content: true }">
+  <div
+    :class="{ show: show, content: true, 'darewins-family-container': true }"
+  >
     <div
       :class="{
         t1: true,
         title: true,
         titleEng: this.$store.getters.lang == 2,
-        slideRight2:true
+        slideRight2: true,
       }"
-    >{{ $ml.get("LoyalProg") }}</div>
-    <div class="slide-right">
-      <div class="t3 subTitle1 first">{{ $ml.get("firstCitTitle") }}</div>
-      <div class="t5 autor1 second">{{ $ml.get("firstCitAutor") }}</div>
+    >
+      {{ $ml.get("LoyalProg") }}
     </div>
-    <div class="slide-right">
-      <div class="t3 subTitle2 first">{{ $ml.get("secondCitTitle") }}</div>
-      <div class="t5 autor2 second">{{ $ml.get("secondCitAutor") }}</div>
+    <div class="columns-container">
+      <div class="content-column">
+        <div class="slide-right slide-right-container">
+          <div class="t3 subTitle first">{{ $ml.get("firstCitTitle") }}</div>
+          <div class="t5 autor second">{{ $ml.get("firstCitAutor") }}</div>
+        </div>
+      </div>
+      <div class="content-column">
+        <div class="slide-right slide-right-container">
+          <div class="t3 subTitle first">{{ $ml.get("secondCitTitle") }}</div>
+          <div class="t5 autor second">{{ $ml.get("secondCitAutor") }}</div>
+        </div>
+      </div>
     </div>
-    <div class="t5 bigText1">{{ $ml.get("firstCitText") }}</div>
-    <div class="vertLine"></div>
-    <div class="t5 bigText2">{{ $ml.get("secondCitText") }}</div>
-    <div style="position:absolute;height:93px;width:100%;top:969px"></div>
+    <div class="columns-container">
+      <div class="content-column">
+        <div class="t5 bigText">{{ $ml.get("firstCitText") }}</div>
+      </div>
+      <div class="content-column">
+        <div class="t5 bigText">{{ $ml.get("secondCitText") }}</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -36,6 +50,13 @@ export default {
 };
 </script>
 <style>
+.slide-right-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 11.851851851851851vh;
+  margin-bottom: 2.5925925925925926vh;
+}
 .slide-right div {
   color: rgb(101, 100, 100);
   transition: color 0.5s;
@@ -63,79 +84,58 @@ export default {
   opacity: 1;
 }
 .title {
-  position: absolute;
-  width: 500px;
-  height: 58px;
-  left: 465px;
-  top: 43px;
-}
-.titleEng {
-  left: 530px;
-}
-.subTitle1 {
-  padding-left: 30px;
-  position: absolute;
-  width: 632px;
-  height: 48px;
-  left: 10px;
-  top: 166px;
-  font-style: italic;
-}
-.subTitle2 {
-  position: absolute;
-  width: 631px;
-  height: 76px;
-  left: 710px;
-  top: 166px;
+  width: 100%;
 
+  text-align: center;
+  margin-bottom: 6.018518518518518vh;
+}
+.content-column {
+  width: 50%;
+  padding: 0 2.685185185185185vh;
+  box-sizing: border-box;
+  padding: 0 2.685185185185185vh;
+}
+
+.columns-container {
+  display: flex;
+  width: 100%;
+}
+.content-column:first-child {
+  width: calc(50% - 3px);
+  border-right: 3px solid transparent;
+}
+
+.columns-container:last-child .content-column:first-child {
+  width: calc(50% - 3px);
+  border-right: 3px solid #828282;
+}
+.subTitle {
+  padding-left: 2.7777777777777777vh;
+  box-sizing: border-box;
+  width: 100%;
   font-style: italic;
 }
-.vertLine {
-  position: absolute;
-  width: 3px;
-  height: 662px;
-  left: 672px;
-  top: 307px;
-  background: #828282;
+
+.autor {
+  width: 100%;
+  text-align: end;
 }
-.autor1 {
-  position: absolute;
-  height: 32px;
-  right: 979px;
-  top: 262px;
-}
-.autor2 {
-  position: absolute;
-  height: 32px;
-  right: 288px;
-  top: 262px;
-}
-.bigText1 {
-  position: absolute;
-  width: 552px;
-  left: 10px;
-  top: 322px;
-  padding: 40px;
+.bigText {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 3.7037037037037033vh;
   background: #f2f2f2;
   transition: box-shadow 0.5s;
+  margin: 2.1296296296296293vh 0;
 }
-.bigText2 {
-  position: absolute;
-  width: 552px;
-  left: 701px;
-  top: 322px;
-  padding: 40px;
-  background: #f2f2f2;
-  transition: box-shadow 0.5s;
-}
-.bigText1:hover {
+
+.bigText:hover {
   -webkit-box-shadow: 0 0 10px 6px #cbcaca;
   -moz-box-shadow: 0 0 10px 6px #cbcaca;
   box-shadow: 0 0 10px 6px #cbcaca;
 }
-.bigText2:hover {
-  -webkit-box-shadow: 0 0 10px 6px #cbcaca;
-  -moz-box-shadow: 0 0 10px 6px #cbcaca;
-  box-shadow: 0 0 10px 6px #cbcaca;
+.darewins-family-container {
+  padding-bottom: 5vh;
+  padding-top: 3.9814814814814814vh;
 }
 </style>

@@ -4,22 +4,45 @@
       <div :class="{ preloaderLogo: true, black: start2 }"></div>
       <div :class="{ loading: true, load: start }"></div>
     </div>
-    <div :class="{ show: show, comp: true }" id="page1" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page1"
+      style="position:relative"
+    >
       <Main />
     </div>
-    <div :class="{ show: show, comp: true }" id="page2" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page2"
+      style="position:relative"
+    >
       <Principes />
     </div>
-    <div :class="{ show: show, comp: true }" id="page3" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page3"
+      style="position:relative"
+    >
       <AboutUs />
     </div>
-    <div :class="{ show: show, comp: true }" id="page4" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page4"
+      style="position:relative"
+    >
       <FAQ />
     </div>
-    <div :class="{ show: show, comp: true }" id="page5" style="position:relative">
+    <div
+      :class="{ show: show, comp: true }"
+      id="page5"
+      style="position:relative"
+    >
       <ContactUs />
     </div>
-    <RightDots style="opacity:0;transition:opacity .5s" :class="{ showDots: start3 }" />
+    <RightDots
+      style="opacity:0;transition:opacity .5s"
+      :class="{ showDots: start3 }"
+    />
   </div>
 </template>
 <script>
@@ -41,7 +64,7 @@ export default {
     };
   },
   methods: {},
-  mounted: function () {
+  mounted: function() {
     setTimeout(() => {
       this.start2 = true;
       setTimeout(() => {
@@ -246,15 +269,15 @@ export default {
 .loading {
   position: absolute;
   width: 0px;
-  height: 4px;
-  left: 754px;
-  top: 607px;
+  height: 0.37037037037037035vh;
+  left: calc(50% - 19.0252525252vh);
+  top: 56.2037037037037vh;
   background-color: black;
   transition: background-color 2.75s, width 2.75s;
   z-index: 101;
 }
 .load {
-  width: 411px;
+  width: 38.05555555555555vh;
   background-color: white;
 }
 .showDots {
@@ -278,10 +301,11 @@ export default {
 .preloaderLogo {
   background-image: url(../assets/DarewinBlack.svg);
   position: absolute;
-  width: 411px;
-  height: 345px;
-  left: 754px;
-  top: 262px;
+  width: 38.05555555555555vh;
+  height: 31.944444444444443vh;
+  position: absolute;
+  top: 24.259259259259256vh;
+  left: calc(50% - 19.0252525252vh);
   opacity: 0;
   transition: background-image 3.75s;
   transition: opacity 1s;

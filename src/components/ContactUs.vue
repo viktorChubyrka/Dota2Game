@@ -6,16 +6,20 @@
       <div
         style="position: absolute;
                 
-                left: 200px;
-                top: 202px;"
+                left: 18.51851851851852vh;
+                top: 18.703703703703702vh;"
         class="t3 slide-right"
-      >{{ $ml.get("header5") }}</div>
+      >
+        {{ $ml.get("header5") }}
+      </div>
       <div
         style="position: absolute;
-                left: 970px;
-                top: 202px;"
+                left: 89.81481481481481vh;
+                top: 18.703703703703702vh;"
         class="t3 slide-right"
-      >{{ $ml.get("ask") }}</div>
+      >
+        {{ $ml.get("ask") }}
+      </div>
       <table class="t4" id="contactTable">
         <tr>
           <td>{{ $ml.get("phone") }}</td>
@@ -36,9 +40,9 @@
           :placeholder="ea()"
           v-model="email"
           class="t5"
-          style="position:absolute; padding:4px 18px; width: 750px; height: 40px; left: 970px;
-        top: 275px; border: 1px solid #BDBDBD; box-sizing: border-box;
-        border-radius: 4px;"
+          style="position:absolute; padding:0.37037037037037035vh 1.6666666666666665vh; width: 69.44444444444444vh; height: 3.7037037037037033vh; left: 89.81481481481481vh;
+        top: 25.462962962962962vh; border: 1px solid #BDBDBD; box-sizing: border-box;
+        border-radius: 0.37037037037037035vh;"
           type="text"
         />
         <textarea
@@ -46,74 +50,73 @@
           v-model="reportDiscription"
           :placeholder="yq()"
           style="position: absolute;
-          padding:4px 18px;
-                width: 750px;
-                height: 169px;
-                left: 970px;
-                top: 331px;
+          padding:0.37037037037037035vh 1.6666666666666665vh;
+                width: 69.44444444444444vh;
+                height: 15.648148148148147vh;
+                left: 89.81481481481481vh;
+                top: 30.648148148148145vh;
                 border: 1px solid #BDBDBD;
                 box-sizing: border-box;
-                border-radius: 4px;"
+                border-radius: 0.37037037037037035vh;
+                resize:none"
           type="textarea"
         />
         <button
           @click="SendReport()"
           class="t5"
           style="position: absolute;
-                width: 316px;
-                height: 40px;
-                left: 1404px;
-                top: 516px;
+                width: 29.259259259259256vh;
+                height: 3.7037037037037033vh;
+                left: 89.81481481481481vh;
+                top: 47.77777777777777vh;
                 color:white;
-                border-size:0px;
+                border:none;
                 background: #1F2430;
-                border-radius: 4px;"
-        >{{ $ml.get("ask") }}</button>
+                border-radius: 0.37037037037037035vh;"
+        >
+          {{ $ml.get("ask") }}
+        </button>
       </div>
     </div>
     <div class="second-div">
       <div class="futerLogo"></div>
       <div
         style="position: absolute;
-                left: 200px;
-                bottom:58px;
+                left: 18.51851851851852vh;
+                bottom:5.37037037037037vh;
                 color:#e0e0e0"
         class="t6"
-      >Darewin’s club, 2020. All rights reserved.</div>
+      >
+        Darewin’s club, 2020. All rights reserved.
+      </div>
       <div
         style="position: absolute;
-                left: 612px;
-                bottom:288px;
+                left: 56.666666666666664vh;
+                bottom:26.666666666666664vh;
                 color:#f2f2f2"
         class="t3 slide-right"
-      >{{ $ml.get("map") }}</div>
+      >
+        {{ $ml.get("map") }}
+      </div>
       <ul class="t6" id="pageMap">
         <li>
           <a @click="SetCurentPage(1)" href="#page1">
-            {{
-            $ml.get("header1")
-            }}
+            {{ $ml.get("header1") }}
           </a>
         </li>
         <li>
           <a @click="SetCurentPage(2)" href="#page2">
-            {{
-            $ml.get("header2")
-            }}
+            {{ $ml.get("header2") }}
           </a>
         </li>
         <li>
           <a @click="SetCurentPage(3)" href="#page3">
-            {{
-            $ml.get("header3")
-            }}
+            {{ $ml.get("header3") }}
           </a>
         </li>
         <li>
           <a @click="SetCurentPage(4)" href="#page4">
-            {{
-            $ml.get("header4")
-            }}
+            {{ $ml.get("header4") }}
           </a>
         </li>
         <li>
@@ -121,20 +124,24 @@
         </li>
         <li>
           <a @click="SetCurentPage(5)" href="#page5">
-            {{
-            $ml.get("header5")
-            }}
+            {{ $ml.get("header5") }}
           </a>
         </li>
       </ul>
       <div
         style="position: absolute;
-                left: 920px;
-                bottom:288px;
+                left: 85.18518518518518vh;
+                bottom:26.666666666666664vh;
                 color:#f2f2f2"
         class="t3 slide-right"
-      >{{ $ml.get("pp") }}</div>
-      <ul style="left:920px;bottom:166px" class="t6" id="pageMap">
+      >
+        {{ $ml.get("pp") }}
+      </div>
+      <ul
+        style="left:85.18518518518518vh;bottom:15.37037037037037vh"
+        class="t6"
+        id="pageMap"
+      >
         <li>{{ $ml.get("usePol") }}</li>
         <li>{{ $ml.get("confPol") }}</li>
         <li>{{ $ml.get("AMLPol") }}</li>
@@ -142,16 +149,12 @@
       <ul class="t4" id="fotterLogInUl">
         <li>
           <router-link class="link" to="/login">
-            {{
-            $ml.get("logIn")
-            }}
+            {{ $ml.get("logIn") }}
           </router-link>
         </li>
         <li>
           <router-link class="link" to="/registration">
-            {{
-            $ml.get("register")
-            }}
+            {{ $ml.get("register") }}
           </router-link>
         </li>
       </ul>
@@ -237,42 +240,42 @@ export default {
 .logo4 {
   background: url(../assets/DarewinLarge.svg);
   position: relative;
-  left: 200px;
-  top: 60px;
-  width: 174px;
-  height: 36px;
+  left: 13.51851851851852vh;
+  top: 5.555555555555555vh;
+  width: 16.11111111111111vh;
+  height: 3.333333333333333vh;
 }
 .header4 {
   float: right;
-  margin-top: 60px;
-  margin-right: 164px;
+  margin-top: 5.555555555555555vh;
+  margin-right: 15.185185185185183vh;
 }
 #contactTable tr td {
-  padding: 8px 28px 8px 0px;
+  padding: 0.7407407407407407vh 2.5925925925925926vh 0.7407407407407407vh 0px;
 }
 #contactTable {
   position: absolute;
-  left: 200px;
-  top: 268px;
+  left: 18.51851851851852vh;
+  top: 24.814814814814813vh;
 }
 .futerLogo {
   background: url(../assets/Darewin.svg);
   position: absolute;
-  bottom: 120px;
-  left: 200px;
-  width: 241.24px;
-  height: 196px;
+  bottom: 11.11111111111111vh;
+  left: 18.51851851851852vh;
+  width: 22.37037037037037035vh;
+  height: 18.148148148148145vh;
 }
 #pageMap {
   position: absolute;
-  left: 612px;
-  bottom: 58px;
+  left: 56.666666666666664vh;
+  bottom: 5.37037037037037vh;
   list-style-type: none;
   color: #e0e0e0;
   padding: 0;
 }
 #pageMap li {
-  padding-top: 12px;
+  padding-top: 1.111111111111111vh;
 }
 #pageMap li a {
   text-decoration: none;
@@ -281,12 +284,12 @@ export default {
 #fotterLogInUl {
   padding: 0;
   position: absolute;
-  bottom: 268px;
-  right: 200px;
+  bottom: 24.814814814814813vh;
+  right: 18.51851851851852vh;
 }
 #fotterLogInUl li {
   display: inline;
-  padding-left: 32px;
+  padding-left: 2.962962962962963vh;
   color: #f2f2f2;
 }
 .link {
@@ -298,14 +301,14 @@ export default {
 }
 #socialSites li {
   display: inline;
-  padding-left: 25px;
+  padding-left: 2.314814814814815vh;
 }
 #socialSites {
   list-style-type: none;
   position: absolute;
   padding: 0;
-  right: 200px;
-  bottom: 180px;
+  right: 18.51851851851852vh;
+  bottom: 16.666666666666664vh;
   color: #f2f2f2;
 }
 </style>

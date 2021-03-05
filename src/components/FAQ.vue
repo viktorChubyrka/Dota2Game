@@ -4,33 +4,41 @@
     <div class="logo"></div>
     <div
       style="color:white;position: absolute;
-left: 200px;
-top: 166px;"
-      :class="{t1:true,hidetText:true,showText:$store.getters.anim4}"
-    >FAQ</div>
+left: 18.51851851851852vh;
+top: 15.37037037037037vh;"
+      :class="{ t1: true, hidetText: true, showText: $store.getters.anim4 }"
+    >
+      FAQ
+    </div>
     <div>
-      <div :class="{hidetText:true,showText:$store.getters.anim4}">
+      <div :class="{ hidetText: true, showText: $store.getters.anim4 }">
         <ul id="FAQUl">
           <li
             v-for="i in 10"
             :key="i"
             :class="{ focusedLi: i - 1 == focused, t5: true }"
             @click="ChangeQuestion(i - 1)"
-          >{{ $ml.get(`p4q${i}`) }}</li>
+          >
+            {{ $ml.get(`p4q${i}`) }}
+          </li>
         </ul>
       </div>
       <div
-        :class="{hidetText:true,showText:$store.getters.anim5}"
+        :class="{ hidetText: true, showText: $store.getters.anim5 }"
         style="color:white;position: absolute;
-                    max-width:840px;
-                    left: 879px;
-                    top: 224px;"
+                    max-width:77.77777777777777vh;
+                    right: 15.38888888888889vh;
+                    top: 20.74074074074074vh;"
       >
-        <div :class="{ hiden: true, t2: true, show: show }">{{ $ml.get(`p4q${focused + 1}`) }}</div>
+        <div :class="{ hiden: true, t2: true, show: show }">
+          {{ $ml.get(`p4q${focused + 1}`) }}
+        </div>
         <div
-          style="margin-top:24px;"
+          style="margin-top:2.222222222222222vh;"
           :class="{ hiden: true, t4: true, show: show }"
-        >{{ $ml.get(`p4t${focused + 1}`) }}</div>
+        >
+          {{ $ml.get(`p4t${focused + 1}`) }}
+        </div>
       </div>
     </div>
     <Lang />
@@ -73,16 +81,16 @@ export default {
 .logo {
   background: url(../assets/DarewinLargeWhite.svg);
   position: relative;
-  left: 200px;
-  top: 60px;
-  width: 174px;
-  height: 36px;
+  left: 13.51851851851852vh;
+  top: 5.555555555555555vh;
+  width: 16.11111111111111vh;
+  height: 3.333333333333333vh;
 }
 
 .header {
   float: right;
-  margin-top: 60px;
-  margin-right: 164px;
+  margin-top: 5.555555555555555vh;
+  margin-right: 15.185185185185183vh;
   color: white;
 }
 .main-div4 {
@@ -92,20 +100,20 @@ export default {
 }
 .alfa {
   position: absolute;
-  left: 200px;
-  top: 904px;
+  left: 18.51851851851852vh;
+  top: 83.7037037037037vh;
   color: white;
 }
 
 #FAQUl {
   padding: 0;
   position: absolute;
-  left: 200px;
-  top: 214px;
+  left: 18.51851851851852vh;
+  top: 19.814814814814813vh;
   list-style-type: none;
 }
 #FAQUl li {
-  padding: 10px 0;
+  padding: 0.9259259259259258vh 0;
   color: #bdbdbd;
   max-width: 523px;
   cursor: pointer;
@@ -113,7 +121,7 @@ export default {
 }
 #FAQUl li:hover {
   color: #adb4ca;
-  margin-left: 20px;
+  margin-left: 1.8518518518518516vh;
 }
 .focusedLi {
   color: #f2f2f2 !important;

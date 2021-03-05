@@ -1,73 +1,107 @@
 <template>
   <div class="reg-container">
-    <h1 style="color:red;position:absolute;left:790px;top:355px" class="t5">{{ error }}</h1>
+    <h1
+      style="color:red;position:absolute;left:73.14814814814814vh;top:355px"
+      class="t5"
+    >
+      {{ error }}
+    </h1>
     <div style="position:absolute;z-index:20;"></div>
-    <Header headerColor="#f5f5f5" :class="{header:true,'show':show}" />
-    <Lang :class="{Lang:true,'show':show}" />
-    <div :class="{logoR:true,'show':show}"></div>
-    <div :class="{loginForm:true,'show':show2}">
+    <Header headerColor="#f5f5f5" :class="{ header: true, show: show }" />
+    <Lang :class="{ Lang: true, show: show }" />
+    <div :class="{ logoR: true, show: show }"></div>
+    <div :class="{ loginForm: true, show: show2 }">
       <div
         class="t2"
         style="color:#f2f2f2;position: absolute;
-width: 181px;
-height: 48px;
-left: 790px;
-top: 252px;"
-      >{{ this.$ml.get("register") }}</div>
+width: 16.75925925925926vh;
+height: 4.444444444444444vh;
+left: 73.14814814814814vh;
+top: 23.333333333333332vh;"
+      >
+        {{ this.$ml.get("register") }}
+      </div>
       <div
         class="t4"
         style=" color:#f2f2f2;position: absolute;
-width: 314px;
-height: 36px;
-left: 790px;
-top: 332px;"
+width: 29.074074074074073vh;
+height: 3.333333333333333vh;
+left: 73.14814814814814vh;
+top: 30.74074074074074vh;"
       >
         {{ this.$ml.get("readyAcc") }}
-        <a
-          style="color:white"
-          href="/logIn"
-        >{{ this.$ml.get("logggin") }}</a>
+        <a style="color:white" href="/logIn">{{ this.$ml.get("logggin") }}</a>
       </div>
 
       <div
         class="inputs"
         style="position: absolute;
-width: 339px;
-height: 32px;
-left: 790px;
-top: 400px;"
+width: 31.388888888888886vh;
+height: 2.962962962962963vh;
+left: 73.14814814814814vh;
+top: 37.03703703703704vh;"
       >
-        <input @keydown.enter="Regist()" type="email" v-model="email" :placeholder="ea()" />
-        <input @keydown.enter="Regist()" type="text" v-model="login" :placeholder="l()" />
-        <input @keydown.enter="Regist()" type="password" v-model="password" :placeholder="p()" />
-        <input @keydown.enter="Regist()" type="password" v-model="cpassword" :placeholder="cp()" />
-        <input @keydown.enter="Regist()" type="text" v-model="promoCode" :placeholder="pr()" />
+        <input
+          @keydown.enter="Regist()"
+          type="email"
+          v-model="email"
+          :placeholder="ea()"
+        />
+        <input
+          @keydown.enter="Regist()"
+          type="text"
+          v-model="login"
+          :placeholder="l()"
+        />
+        <input
+          @keydown.enter="Regist()"
+          type="password"
+          v-model="password"
+          :placeholder="p()"
+        />
+        <input
+          @keydown.enter="Regist()"
+          type="password"
+          v-model="cpassword"
+          :placeholder="cp()"
+        />
+        <input
+          @keydown.enter="Regist()"
+          type="text"
+          v-model="promoCode"
+          :placeholder="pr()"
+        />
       </div>
       <button
         :disabled="!accept"
         @click="Regist()"
         style="position: absolute;
       color:white;
-width: 339px;
-height: 44px;
-left: 790px;
-top: 664px;
+width: 31.388888888888886vh;
+height: 4.0740740740740735vh;
+left: 73.14814814814814vh;
+top: 61.48148148148148vh;
 border:0px solid black;
 background: #626878;
-border-radius: 4px;"
-      >{{ $ml.get("toRegist") }}</button>
-      <div class="t6" style="color:#f2f2f2;position: absolute;
-left: 820px;
-top: 730px;">
+border-radius: 0.37037037037037035vh;"
+      >
+        {{ $ml.get("toRegist") }}
+      </button>
+      <div
+        class="t6"
+        style="color:#f2f2f2;position: absolute;
+left: 75.92592592592592vh;
+top: 67.5925925925926vh;"
+      >
         <input
           v-model="accept"
           style="display:inline;
         background-color: #ffffff !important;
-width: 18px;
-height: 18px;
+width: 1.6666666666666665vh;
+height: 1.6666666666666665vh;
 border: 2px solid #626878;
 box-sizing: border-box;
-border-radius: 4px;"
+border-radius: 0.37037037037037035vh;"
           type="checkbox"
           name="confident"
           id="confident"
@@ -78,10 +112,10 @@ border-radius: 4px;"
         style="
       color:white;
             position: absolute;
-            width: 265px;
-            height: 22px;
-            left: 850px;
-            top: 732px;"
+            width: 24.537037037037035vh;
+            height: 2.0370370370370368vh;
+            left: 78.7037037037037vh;
+            top: 68vh;"
       >
         {{ $ml.get("iAgree") }}
         <a>{{ $ml.get("polCofid") }}</a>
@@ -159,32 +193,32 @@ export default {
   transition: opacity 0.5s;
 }
 .inputs input {
-  margin-bottom: 16px;
-  width: 339px;
-  height: 32px;
+  margin-bottom: 1.4814814814814814vh;
+  width: 31.388888888888886vh;
+  height: 2.962962962962963vh;
   border: 1px solid #626878;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 0.37037037037037035vh;
   color: #626878;
   background: #1f2430;
-  font-size: 16px;
+  font-size: 1.4814814814814814vh;
   line-height: 200%;
-  padding-left: 13px;
+  padding-left: 1.2037037037037037vh;
 }
 .header {
   float: right;
-  margin-top: 60px;
-  margin-right: 164px;
+  margin-top: 5.555555555555555vh;
+  margin-right: 15.185185185185183vh;
   opacity: 0;
   transition: opacity 0.5s;
 }
 .logoR {
   background: url(../assets/DarewinLargeWhite.svg);
   position: absolute;
-  left: 200px;
-  top: 60px;
-  width: 174px;
-  height: 36px;
+  left: 18.51851851851852vh;
+  top: 5.555555555555555vh;
+  width: 16.11111111111111vh;
+  height: 3.333333333333333vh;
   opacity: 0;
   transition: opacity 0.5s;
 }

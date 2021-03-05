@@ -665,24 +665,24 @@ export default {
 </script>
 <style scoped>
 .gamesTable tbody {
-  max-height: 400px;
+  max-height: 3.7037037037037033vh;
 }
 .gamesTable thead {
   position: sticky;
   top: 0;
 }
 .gamesTable tbody::-webkit-scrollbar {
-  width: 2px;
+  width: 0.18518518518518517vh;
 }
 
 .gamesTable tbody::-webkit-scrollbar-track {
   background: white;
-  border-radius: 3px;
+  border-radius: 0.27777777777777773vh;
 }
 
 .gamesTable tbody::-webkit-scrollbar-thumb {
   background: #e0e0e0;
-  border-radius: 3px;
+  border-radius: 0.27777777777777773vh;
 }
 .linkTable:hover {
   color: #bf0603 !important;
@@ -690,7 +690,7 @@ export default {
 }
 .content {
   position: absolute;
-  left: 10px;
+  left: 0.9259259259259258vh;
   opacity: 0;
   transition: opacity 1.5s;
 }
@@ -707,12 +707,12 @@ export default {
 .toHover {
   z-index: 1;
   transition: box-shadow 0.3s;
-  margin-bottom: 5px !important;
+  margin-bottom: 0.4629629629629629vh !important;
 }
 .toHover:hover {
   background-color: white !important;
   z-index: 10;
-  box-shadow: 0 0 10px 4px #cbcaca;
+  box-shadow: 0 0 0.9259259259259258vh 0.37037037037037035vh #cbcaca;
 }
 .buttonSolo:hover {
   cursor: pointer;
@@ -723,26 +723,26 @@ export default {
 .enterMath {
   display: flex;
   flex-direction: row;
-  padding: 4px 37px;
+  padding: 0.37037037037037035vh 3.4259259259259256vh;
   background: #ffffff;
   border: 1px solid #35a7ff;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: 0.7407407407407407vh;
   float: right;
-  margin-right: 61px;
+  margin-right: 5.648148148148148vh;
   transition: background 0.5s;
 }
 .enterMath:hover {
   background: #f3f4f7;
 }
 .players {
-  padding-left: 12px;
+  padding-left: 1.111111111111111vh;
 }
 .buttonSolo {
-  padding: 16px 48px;
+  padding: 1.4814814814814814vh 4.444444444444444vh;
   position: absolute;
   color: black;
-  top: 42px;
+  top: 3.888888888888889vh;
   border: 1px solid #bdbdbd;
   transition: color 0.5s, background-color 0.5s;
 }
@@ -756,12 +756,12 @@ export default {
 .dot {
   position: relative;
   padding: 0;
-  margin: 0 16px 0 0;
+  margin: 0 1.4814814814814814vh 0 0;
   float: left;
-  width: 16px;
-  height: 16px;
+  width: 1.4814814814814814vh;
+  height: 1.4814814814814814vh;
   background: #1f2430;
-  border-radius: 8px;
+  border-radius: 0.7407407407407407vh;
 }
 .dot:hover .arrow-up {
   opacity: 1;
@@ -772,37 +772,37 @@ export default {
 .arrow-up {
   opacity: 0;
   position: absolute;
-  top: 16px;
+  top: 1.4814814814814814vh;
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 16px solid #f2f2f2;
+  border-left: 0.7407407407407407vh solid transparent;
+  border-right: 0.7407407407407407vh solid transparent;
+  border-bottom: 1.4814814814814814vh solid #f2f2f2;
 }
 .playerName {
   opacity: 0;
   position: fixed;
-  top: 32px;
-  left: -91px;
+  top: 2.962962962962963vh;
+  left: -8.425925925925926vh;
   text-align: center;
   background-color: #f2f2f2;
   padding: 0px 6px;
   position: absolute;
-  width: 182px;
-  height: 46px;
+  width: 16.85185185185185vh;
+  height: 4.259259259259259vh;
 }
 .first {
-  left: 478px;
+  left: 44.25925925925926vh;
 }
 .second {
-  left: 695px;
+  left: 64.35185185185185vh;
 }
 .smVretLine {
   position: absolute;
-  width: 2px;
-  height: 70px;
-  left: 663px;
-  top: 42px;
+  width: 0.18518518518518517vh;
+  height: 6.481481481481481vh;
+  left: 61.388888888888886vh;
+  top: 3.888888888888889vh;
   background: #1f2430;
 }
 .activeBtn {
@@ -811,40 +811,40 @@ export default {
 }
 .tabTitle {
   text-align: center;
-  padding: 8px 32px;
+  padding: 0.7407407407407407vh 2.962962962962963vh;
   position: absolute;
-  width: 192px;
-  height: 36px;
+  width: 17.777777777777775vh;
+  height: 3.333333333333333vh;
   border-left: 1px solid #bdbdbd;
   border-top: 1px solid #bdbdbd;
   border-right: 1px solid #bdbdbd;
   border-bottom: 1px solid #bdbdbd;
-  top: 166px;
+  top: 15.37037037037037vh;
   transition: top 0.5s, height 0.5s, border-bottom 0.25s;
 }
 .tabTitleSelected {
-  top: 156px !important;
-  height: 46px;
+  top: 14.444444444444443vh !important;
+  height: 4.259259259259259vh;
   border-bottom: 3px solid white;
 }
 .tab1T {
-  left: 255px;
+  left: 23.61111111111111vh;
   z-index: 2;
 }
 .tab2T {
-  left: 544px;
+  left: 50.37037037037037vh;
   z-index: 2;
 }
 .tab3T {
-  left: 848px;
+  left: 78.51851851851852vh;
   z-index: 2;
 }
 .tabContent {
   position: absolute;
-  width: 1329.5px;
+  width: 69.21875vw;
   height: 0px;
   left: 0;
-  top: 219px;
+  top: 20.277777777777775vh;
   border: 1px solid #bdbdbd;
 }
 .tab1C {

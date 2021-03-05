@@ -1,20 +1,20 @@
 <template>
   <div :class="{ show: show, content: true }">
-    <div class="t2 oldQuestion slide-right">{{ $ml.get("pravil") }}</div>
+    <div class="t1 rules-title slide-right">{{ $ml.get("pravil") }}</div>
     <ul class="answersList">
-      <div class="t2 oldQuestion2 slide-right">{{ $ml.get(`gr`) }}</div>
+      <div class="t2 rules-section-title slide-right">{{ $ml.get(`gr`) }}</div>
       <li :id="`q${i}`" v-for="i in 9" :key="i">
         <div class="t5 liText">
           {{ $ml.get(`rule${i}1`) }}
         </div>
       </li>
-      <div class="t2 oldQuestion2 slide-right">{{ $ml.get(`br`) }}</div>
+      <div class="t2 rules-section-title slide-right">{{ $ml.get(`br`) }}</div>
       <li :id="`q${i}`" v-for="i in 4" :key="i">
         <div class="t5 liText">
           {{ $ml.get(`rule${i}2`) }}
         </div>
       </li>
-      <div class="t2 oldQuestion2 slide-right">
+      <div class="t2 rules-section-title slide-right">
         {{ $ml.get(`sgr`) }}
       </div>
       <li :id="`q${i}`" v-for="i in 13" :key="i">
@@ -22,14 +22,11 @@
           {{ $ml.get(`rule${i}3`) }}
         </div>
       </li>
-      <div class="t2 oldQuestion2 slide-right">
+      <div class="t2 rules-section-title slide-right">
         {{ $ml.get(`pgr`) }}
       </div>
       <li :id="`q${i}`" v-for="i in 12" :key="i">
-        <div
-          :style="`${i == 12 ? 'margin-bottom:440px' : ''}`"
-          class="t5 liText"
-        >
+        <div class="t5 liText">
           {{ $ml.get(`rule${i}4`) }}
         </div>
       </li>
@@ -77,6 +74,14 @@ export default {
 .rules {
   width: 100%;
 }
+.rules-title {
+  width: 100%;
+  padding-top: 3.518518518518518vh;
+  text-align: center;
+}
+.rules-section-title {
+  margin-bottom: 4vh;
+}
 .oldQLink li a {
   display: block;
   width: 100%;
@@ -94,9 +99,8 @@ export default {
   font-weight: 600;
 }
 .oldQLink li {
-  padding-left: 8px;
-  padding-right: 8px;
-  width: 410px;
+  padding: 0.9259259259259258vh;
+  width: 100%;
   transition: box-shadow 0.3s, margin-left 0.3s;
 }
 .oldQLink li:hover {
@@ -147,11 +151,12 @@ html {
 }
 .liText {
   background-color: #ececec;
-  width: 80%;
-  margin-bottom: 32px;
-  padding-left: 10px;
+  width: 100%;
+  margin-bottom: 2.962962962962963vh;
+  padding: 1vh;
   transition: background-color 0.5s, box-shadow 0.5s;
   cursor: default;
+  box-sizing: border-box !important;
 }
 .liText:hover {
   -webkit-box-shadow: 0 0 10px 6px #cbcaca;
@@ -220,21 +225,15 @@ html {
   background-color: rgb(236, 240, 239);
 }
 .oldQuestion {
-  position: absolute;
-  width: 311px;
-  height: 48px;
-  left: 0;
-  top: 20px;
+  width: 100%;
 }
 .answersList {
   margin: 0;
-  padding: 0;
-  position: absolute;
+  padding: 1vh;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
-  left: 0;
-  top: 100px;
+
   list-style-type: none;
-  margin-left: 10px;
 }
 </style>

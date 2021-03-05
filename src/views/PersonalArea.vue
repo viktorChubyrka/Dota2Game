@@ -10,7 +10,7 @@
       </li>
     </ul>
     <div :class="{ headerPA: true, headerPAShow: show }">
-      <router-link to="/">
+      <router-link style="width: 30%;" to="/">
         <div class="logoPA"></div>
       </router-link>
       <div id="inform">
@@ -21,6 +21,8 @@
         <div class="cash t5">
           ${{ user.purse }} — {{ user.purse }} Darewin’s dollar
         </div>
+      </div>
+      <div class="header-actions">
         <div @click="StartTutorial()" class="tutorial-start-icon-container">
           <img src="/icons/question.svg" class="tutorial-start-icon" />
         </div>
@@ -32,7 +34,7 @@
                 notification
                   ? 'transition:color 0.5s'
                   : 'transition:color 0.5s;color:grey'
-              }`
+              } ;`
             "
             class="fa fa-bell fa-lg notif"
           >
@@ -42,26 +44,17 @@
         <div v-if="!user.photo" class="profileSmallImage"></div>
         <img
           v-if="user.photo"
-          style="position: absolute;
-            width: 30px;
-            height: 30px;
-            border-radius: 15px;
-            left: 1699px;
-            top: 25px;"
+          class="user-profile-photo-small"
           :src="user.photo"
           alt
         />
 
-        <router-link to="profile">
-          <div style="color:black" class="nickname t5">
-            {{
-              login.length > 9
-                ? login.substr(0, login.length - login.length / 2) + "..."
-                : login
-            }}
+        <router-link style="text-decoration:none" to="profile">
+          <div style="color:black;" class="nickname t5">
+            {{ login }}
           </div>
         </router-link>
-        <div @click="LogOut()" class="logOut">{{ $ml.get("LogOut") }}</div>
+        <div @click="LogOut()" class="logOut t4">{{ $ml.get("LogOut") }}</div>
       </div>
     </div>
     <div :class="{ actions: true, show: show2 }">
@@ -98,16 +91,15 @@
               </defs>
             </svg>
           </div>
-        </div>
-
-        <div
-          v-if="user.ready"
-          :class="{ readyIconText1: true, show: show, t4: true }"
-        >
-          {{ $ml.get("redy") }}!
-        </div>
-        <div v-else :class="{ readyIconText12: true, show: show, t4: true }">
-          {{ $ml.get("notReady") }}
+          <div
+            v-if="user.ready"
+            :class="{ readyIconText1: true, show: show, t4: true }"
+          >
+            {{ $ml.get("redy") }}!
+          </div>
+          <div v-else :class="{ readyIconText12: true, show: show, t4: true }">
+            {{ $ml.get("notReady") }}
+          </div>
         </div>
       </div>
       <div
@@ -150,18 +142,18 @@
             />
           </svg>
         </div>
+        <div
+          :class="{
+            readyIconText2: true,
+            t4: true,
+            readyIconText2Eng: this.$store.getters.lang == 2,
+            show: show,
+          }"
+        >
+          {{ $ml.get("getComand") }}
+        </div>
       </div>
 
-      <div
-        :class="{
-          readyIconText2: true,
-          t4: true,
-          readyIconText2Eng: this.$store.getters.lang == 2,
-          show: show,
-        }"
-      >
-        {{ $ml.get("getComand") }}
-      </div>
       <div
         style="cursor:pointer"
         :class="{
@@ -188,159 +180,159 @@
             />
           </svg>
         </div>
-      </div>
-      <div :class="{ readyIconText3: true, show: show, t4: true }">
-        {{ $ml.get("findG") }}
+        <div :class="{ readyIconText3: true, show: show, t4: true }">
+          {{ $ml.get("findG") }}
+        </div>
       </div>
     </div>
-    <div :class="{ sideNavigation: true, sideNavigationShow: show }">
-      <ul class="sideNavUl">
-        <router-link class="RL " to="games">
-          <li
-            @click="ChangePage(1)"
-            :class="{
-              t5: true,
-              iconFocused: windowLocation == 'Games',
-              'tutorial-selected-element':
-                tutorialStep == 4 && show3 && user.tutorial,
-            }"
-          >
-            <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/gamesIcon.svg"
-              />
-              <div>{{ $ml.get("game") }}</div>
-            </div>
-          </li>
-        </router-link>
-        <router-link class="RL" to="rules">
-          <li
-            @click="ChangePage(2)"
-            :class="{
-              t5: true,
-              iconFocused: windowLocation == 'Rules',
-              'tutorial-selected-element':
-                tutorialStep == 10 && show3 && user.tutorial,
-            }"
-          >
-            <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/rulesIcon.svg"
-              />
-              <div>{{ $ml.get("pravil") }}</div>
-            </div>
-          </li>
-        </router-link>
-        <router-link class="RL" to="profile">
-          <li
-            @click="ChangePage(3)"
-            :class="{
-              t5: true,
-              iconFocused: windowLocation == 'Profile',
-              'tutorial-selected-element': tutorialStep == 11 && show3,
-            }"
-          >
-            <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/profileIcon.svg"
-              />
-              <div>{{ $ml.get("prof") }}</div>
-            </div>
-          </li>
-        </router-link>
-        <router-link class="RL" to="friends">
-          <li
-            @click="ChangePage(4)"
-            :class="{
-              t5: true,
-              iconFocused: windowLocation == 'Friends',
-              'tutorial-selected-element':
-                tutorialStep == 12 && show3 && user.tutorial,
-            }"
-          >
-            <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/friendsIcon.svg"
-              />
-              <div>{{ $ml.get("frend") }}</div>
-            </div>
-          </li>
-        </router-link>
-        <router-link class="RL" to="money">
-          <li
-            @click="ChangePage(5)"
-            :class="{
-              t5: true,
-              iconFocused: windowLocation == 'Money',
-              'tutorial-selected-element':
-                tutorialStep == 13 && show3 && user.tutorial,
-            }"
-          >
-            <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/moneyIcon.svg"
-              />
-              <div>{{ $ml.get("money") }}</div>
-            </div>
-          </li>
-        </router-link>
-        <router-link class="RL" to="loyalityProgram">
-          <li
-            @click="ChangePage(6)"
-            :class="{
-              t5: true,
-              iconFocused: windowLocation == 'LoyalityProgram',
-              'tutorial-selected-element':
-                tutorialStep == 14 && show3 && user.tutorial,
-            }"
-          >
-            <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/familyIcon.svg"
-              />
-              <div>Darewin’s family</div>
-            </div>
-          </li>
-        </router-link>
-        <router-link style="margin:0" :class="{ RL: true }" to="support0">
-          <li
-            @click="ChangePage(7)"
-            :class="{
-              t5: true,
-              iconFocused: windowLocation == 'Support',
-              'tutorial-selected-element':
-                tutorialStep == 15 && show3 && user.tutorial,
-            }"
-          >
-            <div style="display:flex">
-              <img
-                :class="{ icon: true }"
-                src="../assets/iconsPA/infoIcon.svg"
-              />
-              <div>{{ $ml.get("sup") }}</div>
-            </div>
-          </li>
-        </router-link>
-      </ul>
+    <div class="main-content-container">
+      <div :class="{ sideNavigation: true, sideNavigationShow: show }">
+        <ul class="sideNavUl">
+          <router-link class="RL " to="games">
+            <li
+              @click="ChangePage(1)"
+              :class="{
+                t5: true,
+                iconFocused: windowLocation == 'Games',
+                'tutorial-selected-element':
+                  tutorialStep == 4 && show3 && user.tutorial,
+              }"
+            >
+              <div style="display:flex">
+                <img
+                  :class="{ icon: true }"
+                  src="../assets/iconsPA/gamesIcon.svg"
+                />
+                <div>{{ $ml.get("game") }}</div>
+              </div>
+            </li>
+          </router-link>
+          <router-link class="RL" to="rules">
+            <li
+              @click="ChangePage(2)"
+              :class="{
+                t5: true,
+                iconFocused: windowLocation == 'Rules',
+                'tutorial-selected-element':
+                  tutorialStep == 10 && show3 && user.tutorial,
+              }"
+            >
+              <div style="display:flex">
+                <img
+                  :class="{ icon: true }"
+                  src="../assets/iconsPA/rulesIcon.svg"
+                />
+                <div>{{ $ml.get("pravil") }}</div>
+              </div>
+            </li>
+          </router-link>
+          <router-link class="RL" to="profile">
+            <li
+              @click="ChangePage(3)"
+              :class="{
+                t5: true,
+                iconFocused: windowLocation == 'Profile',
+                'tutorial-selected-element': tutorialStep == 11 && show3,
+              }"
+            >
+              <div style="display:flex">
+                <img
+                  :class="{ icon: true }"
+                  src="../assets/iconsPA/profileIcon.svg"
+                />
+                <div>{{ $ml.get("prof") }}</div>
+              </div>
+            </li>
+          </router-link>
+          <router-link class="RL" to="friends">
+            <li
+              @click="ChangePage(4)"
+              :class="{
+                t5: true,
+                iconFocused: windowLocation == 'Friends',
+                'tutorial-selected-element':
+                  tutorialStep == 12 && show3 && user.tutorial,
+              }"
+            >
+              <div style="display:flex">
+                <img
+                  :class="{ icon: true }"
+                  src="../assets/iconsPA/friendsIcon.svg"
+                />
+                <div>{{ $ml.get("frend") }}</div>
+              </div>
+            </li>
+          </router-link>
+          <router-link class="RL" to="money">
+            <li
+              @click="ChangePage(5)"
+              :class="{
+                t5: true,
+                iconFocused: windowLocation == 'Money',
+                'tutorial-selected-element':
+                  tutorialStep == 13 && show3 && user.tutorial,
+              }"
+            >
+              <div style="display:flex">
+                <img
+                  :class="{ icon: true }"
+                  src="../assets/iconsPA/moneyIcon.svg"
+                />
+                <div>{{ $ml.get("money") }}</div>
+              </div>
+            </li>
+          </router-link>
+          <router-link class="RL" to="loyalityProgram">
+            <li
+              @click="ChangePage(6)"
+              :class="{
+                t5: true,
+                iconFocused: windowLocation == 'LoyalityProgram',
+                'tutorial-selected-element':
+                  tutorialStep == 14 && show3 && user.tutorial,
+              }"
+            >
+              <div style="display:flex">
+                <img
+                  :class="{ icon: true }"
+                  src="../assets/iconsPA/familyIcon.svg"
+                />
+                <div>Darewin’s family</div>
+              </div>
+            </li>
+          </router-link>
+          <router-link style="margin:0" :class="{ RL: true }" to="support0">
+            <li
+              @click="ChangePage(7)"
+              :class="{
+                t5: true,
+                iconFocused: windowLocation == 'Support',
+                'tutorial-selected-element':
+                  tutorialStep == 15 && show3 && user.tutorial,
+              }"
+            >
+              <div style="display:flex">
+                <img
+                  :class="{ icon: true }"
+                  src="../assets/iconsPA/infoIcon.svg"
+                />
+                <div>{{ $ml.get("sup") }}</div>
+              </div>
+            </li>
+          </router-link>
+        </ul>
+      </div>
+
+      <div
+        @scroll="setScroll()"
+        id="router"
+        style="overflow-y:scroll;scroll-behavior:smooth"
+        :class="{ pages: true, show: show3 }"
+      >
+        <router-view></router-view>
+      </div>
     </div>
 
-    <div
-      @scroll="setScroll()"
-      id="router"
-      style="overflow-y:scroll;scroll-behavior:smooth"
-      :class="{ pages: true, show: show3 }"
-    >
-      <router-view></router-view>
-    </div>
-    <div v-if="scrollTop" @click="scrollUp()" class="scrollTopBtn">
-      <i class="fa fa-chevron-up"></i>
-    </div>
     <div
       @click="isPrivate = false"
       v-if="isPrivate"
@@ -783,21 +775,21 @@ export default {
 </script>
 <style>
 .tutorial-start-icon {
-  width: 17px;
+  width: 1.574074074074074vh;
 }
 .tutorial-start-icon-container {
-  border: 3px solid black;
+  border: 0.27777777777777773vh solid black;
   border-radius: 50%;
-  padding: 3px;
-  position: absolute;
-  left: 1626px;
-  top: 26px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.5;
   transition: opacity 0.5s ease 0s;
   cursor: pointer;
+  width: 2.77777777777777777777vh;
+  height: 2.77777777777777777777vh;
+  box-sizing: border-box;
 }
 .tutorial-start-icon-container:hover {
   opacity: 1;
@@ -841,29 +833,35 @@ export default {
 }
 .scrollTopBtn {
   position: fixed;
-  right: 700px;
-  bottom: 50px;
-  width: 40px;
-  height: 40px;
+  right: 31%;
+  bottom: 10%;
+  width: 4vh;
+  height: 4vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 40px;
+  border-radius: 50%;
   background: #f2f2f2;
   color: #1f2430;
   transition: background 0.5s, color 0.5s;
+  cursor: pointer
+  ;
 }
+
 .scrollTopBtn:hover {
   color: #f2f2f2;
   background: #1f2430;
+}
+.scrollTopBtn .fa {
+  font-size: 2vh;
 }
 .notification .indicator {
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
+  width: 0.9259259259259258vh;
+  height: 0.9259259259259258vh;
+  border-radius: 50%;
   background-color: red;
 }
 .profileSmallImage {
@@ -893,7 +891,9 @@ html {
 .RL {
   text-decoration: none;
 }
-
+li div .icon {
+  margin-right: 1vh;
+}
 .iconFocused {
   opacity: 1 !important;
   color: black;
@@ -903,10 +903,8 @@ html {
 }
 .pages {
   position: relative;
-  width: 1622px;
-  height: 714px;
-  left: 298px;
-  top: 246px;
+  width: 85%;
+  height: 100%;
   opacity: 0;
   transition: opacity 1.5s;
 }
@@ -914,38 +912,40 @@ html {
   width: 0px;
 }
 .headerPA {
-  width: 1920px;
-  height: 86px;
-  position: absolute;
+  width: 100vw;
+  height: 7.962962962962963vh;
   background: white;
-  top: -86px;
-  left: 0px;
-  transition: top 1s;
+  transition: transform 1s;
+  transform: translateY(-100%);
   z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3.7037037037037033vh;
+  box-sizing: border-box;
 }
 .headerPAShow {
-  top: 0px;
+  transform: translateY(0);
 }
 .logoPA {
   background: url("../assets/DarewinLarge.svg");
-  position: absolute;
-  width: 174px;
-  height: 36px;
-  left: 40px;
-  top: 24px;
+
+  width: 16.3vh;
+  height: 3.4vh;
 }
 .onlineDot {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  left: 729px;
-  top: 35px;
+  width: 1.2962962962962963vh;
+  height: 1.2962962962962963vh;
   background: #baff29;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 9px;
+  border-radius: 50%;
 }
 path {
   transition: fill 0.3s;
+}
+#inform {
+  display: flex;
+  align-items: center;
 }
 .hoverIcon:hover {
   fill: #ffffff !important;
@@ -957,131 +957,124 @@ path {
   fill: gold !important;
 }
 .readyDot {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  left: 858px;
-  top: 35px;
+  width: 1.2962962962962963vh;
+  height: 1.2962962962962963vh;
+  margin-left: 2.962962962962963vh;
   background: #35a7ff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 9px;
+  border-radius: 50%;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 30%;
 }
 .onlineText {
-  position: absolute;
-  height: 32px;
-  left: 759px;
-  top: 26px;
+  margin-left: 1.4814814814814814vh;
 }
 .readyText {
-  position: absolute;
-  height: 32px;
-  left: 888px;
-  top: 26px;
+  margin-left: 1.4814814814814814vh;
 }
 .cash {
-  position: absolute;
-  width: 300px;
-  height: 32px;
-  left: 1009px;
-  top: 26px;
+  margin-left: 5.925925925925926vh;
 }
 .notificationUl {
   display: inline !important;
 }
-
+.user-profile-photo-small {
+  width: 2.7777777777777777vh;
+  height: 2.7777777777777777vh;
+  border-radius: 50%;
+  margin-left: 1.5vh;
+}
 .notification {
-  position: absolute;
-  left: 1666px;
-  top: 30px;
   z-index: 10;
+  margin-left: 1.5vh;
 }
 .notification:hover i.fa.fa-bell.fa-lg.notif {
   color: #1f2430 !important;
 }
 .nickname {
-  position: absolute;
-  left: 1742px;
-  top: 26px;
+  margin-left: 1.5vh;
+  width: 10vh;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .nickname {
   cursor: pointer;
 }
 .logOut {
-  position: absolute;
-  left: 1831px;
-  top: 32px;
   color: #dc493a;
   cursor: pointer;
+  margin-left: 1.5vh;
 }
 .actions {
-  width: 1920px;
-  height: 160px;
-  position: absolute;
-  height: 160px;
-  left: 0px;
-  top: 86px;
+  width: 100vw;
+  height: 14.814814814814813vh;
   opacity: 0;
   background-color: transparent;
   background-color: #1f2430;
   transition: opacity 3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28.177083333333336vw;
+  box-sizing: border-box;
 }
 .show {
   opacity: 1;
 }
 .readyIcon1 {
-  position: absolute;
-  width: 60px;
-  height: 50px;
-  margin-left: -15px;
-  left: 550px;
-  top: 32px;
   color: #bdbdbd;
   opacity: 0;
   cursor: pointer;
   transition: opacity 1.5s;
-  padding: 8px;
+  padding: 0.7407407407407407vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
+.readyIcon1 svg {
+  width: 5.555555555555555vh;
+  height: 4.62962962962963vh;
+}
 div.readyIcon1:hover svg g path.hoverIcon {
   fill: #ffffff !important;
 }
 .readyIcon2 {
-  position: absolute;
-  width: 90px;
-  height: 50px;
-  left: 898px;
-  top: 32px;
-  margin-left: -15px;
   color: #bdbdbd;
   opacity: 0;
   cursor: pointer;
-  padding: 8px;
+  padding: 0.7407407407407407vh;
   transition: opacity 1.5s;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
+.readyIcon2 svg {
+  width: 8.333333333333332vh;
+  height: 4.62962962962963vh;
+}
 div.readyIcon2:hover svg path.hoverIcon {
   fill: #ffffff !important;
 }
 .readyIcon3 {
-  position: absolute;
-  width: 80px;
-  height: 50px;
-  margin-left: -15px;
-  left: 1302px;
-  top: 32px;
-  padding: 8px;
+  padding: 0.7407407407407407vh;
   color: #bdbdbd;
   opacity: 0;
   transition: opacity 1.5s;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.readyIcon3 svg {
+  width: 7.4074074074074066vh;
+  height: 4.62962962962963vh;
 }
 
 div.readyIcon3:hover svg path.hoverIcon {
@@ -1100,49 +1093,43 @@ div.readyIcon3:hover svg path.hoverIcon {
   transition: opacity 1.5s;
 }
 .readyIconText1 {
-  position: absolute;
-  left: 541px;
-  top: 88px;
   color: #f2f2f2;
   opacity: 0;
   transition: opacity 1.5s;
 }
 .readyIconText2 {
-  position: absolute;
-  left: 855px;
-  top: 88px;
   color: #f2f2f2;
   opacity: 0;
   transition: opacity 1.5s;
 }
 .readyIconText3 {
-  position: absolute;
-  left: 1280px;
-  top: 88px;
   color: #f2f2f2;
   opacity: 0;
   transition: opacity 1.5s;
 }
 .readyIconText12 {
-  position: absolute;
-  left: 528px;
-  top: 88px;
   color: #f2f2f2;
   opacity: 0;
   transition: opacity 1.5s;
 }
-
+.main-content-container {
+  width: 100vw;
+  height: 77.2vh;
+  display: flex;
+  padding: 0 5.185185185185185vh 0;
+  box-sizing: border-box;
+}
 .readyIconText2Eng {
   left: 865px;
 }
 .sideNavigation {
-  position: absolute;
-  left: -150px;
-  top: 266px;
-  transition: left 1s;
+  padding-top: 3.888888888888889vh;
+  transition: transform 1s;
+  transform: translateX(-100%);
+  width: 15%;
 }
 .sideNavigationShow {
-  left: 46px;
+  transform: translateX(0);
 }
 .sideNavUl {
   margin: 0;
