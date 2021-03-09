@@ -348,8 +348,8 @@
       v-if="tutorialStep == 1 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(2)"
-      :top="190"
-      :left="250"
+      :top="21.59259259259259"
+      :left="23.148148148148145"
     >
       {{ $ml.get("t1") }}</Tutorial
     >
@@ -357,8 +357,8 @@
       v-if="tutorialStep == 2 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(3)"
-      :top="190"
-      :left="600"
+      :top="21.59259259259259"
+      :left="55.55555555555555"
     >
       {{ $ml.get("t2") }}</Tutorial
     >
@@ -366,8 +366,8 @@
       v-if="tutorialStep == 3 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(4)"
-      :top="190"
-      :left="1000"
+      :top="21.59259259259259"
+      :left="92.59259259259258"
     >
       {{ $ml.get("t3") }}</Tutorial
     >
@@ -375,8 +375,8 @@
       v-if="tutorialStep == 4 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(5)"
-      :top="340"
-      :left="40"
+      :top="35.48148148148148"
+      :left="3.7037037037037033"
     >
       {{ $ml.get("t4") }}</Tutorial
     >
@@ -384,40 +384,40 @@
       v-if="tutorialStep == 5 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(6)"
-      :top="370"
-      :left="550"
+      :top="35.25925925925926"
+      :left="50.925925925925924"
     >
       {{ $ml.get("t5") }}</Tutorial
     ><Tutorial
       v-if="tutorialStep == 6 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(7)"
-      :top="370"
-      :left="880"
+      :top="35.25925925925926"
+      :left="81.48148148148148"
     >
       {{ $ml.get("t6") }}</Tutorial
     ><Tutorial
       v-if="tutorialStep == 7 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(8)"
-      :top="480"
-      :left="400"
+      :top="44.44444444444444"
+      :left="37.03703703703704"
     >
       {{ $ml.get("t7") }}</Tutorial
     ><Tutorial
       v-if="tutorialStep == 8 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(9)"
-      :top="480"
-      :left="670"
+      :top="44.44444444444444"
+      :left="62.03703703703703"
     >
       {{ $ml.get("t8") }}</Tutorial
     ><Tutorial
       v-if="tutorialStep == 9 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(10)"
-      :top="480"
-      :left="960"
+      :top="44.44444444444444"
+      :left="88.88888888888889"
     >
       {{ $ml.get("t9") }}</Tutorial
     >
@@ -425,8 +425,8 @@
       v-if="tutorialStep == 10 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(11)"
-      :top="405"
-      :left="40"
+      :top="43.5"
+      :left="3.7037037037037033"
     >
       {{ $ml.get("t10") }}</Tutorial
     >
@@ -434,8 +434,8 @@
       v-if="tutorialStep == 11 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(12)"
-      :top="470"
-      :left="40"
+      :top="50.51851851851852"
+      :left="3.7037037037037033"
     >
       {{ $ml.get("t11") }}</Tutorial
     >
@@ -443,8 +443,8 @@
       v-if="tutorialStep == 12 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(13)"
-      :top="535"
-      :left="40"
+      :top="58.53703703703703"
+      :left="3.7037037037037033"
     >
       {{ $ml.get("t12") }}</Tutorial
     >
@@ -452,8 +452,8 @@
       v-if="tutorialStep == 13 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(14)"
-      :top="600"
-      :left="40"
+      :top="65.55555555555555"
+      :left="3.7037037037037033"
     >
       {{ $ml.get("t13") }}</Tutorial
     >
@@ -461,8 +461,8 @@
       v-if="tutorialStep == 14 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(15)"
-      :top="665"
-      :left="40"
+      :top="72.57407407407407"
+      :left="3.7037037037037033"
     >
       {{ $ml.get("t14") }}</Tutorial
     >
@@ -470,11 +470,12 @@
       v-if="tutorialStep == 15 && show3 && user.tutorial"
       @skip="SkipTutorial()"
       @submit="SetTutorialStep(0)"
-      :top="730"
-      :left="40"
+      :top="80.5925925925926"
+      :left="3.7037037037037033"
     >
       {{ $ml.get("t15") }}</Tutorial
     >
+    <div class="no-money-pop-up"></div>
   </div>
 </template>
 <script>
@@ -573,8 +574,8 @@ export default {
     setupWebSocket() {
       this.$store.commit(
         "SetSocket",
-        new WebSocket("ws://localhost:3000")
-        //new WebSocket("wss://darewins.club/api")
+        //new WebSocket("ws://localhost:3000")
+        new WebSocket("wss://darewins.club/api")
       );
       this.socket = this.$store.getters.socket;
       this.socket.onmessage = (event) => {
@@ -750,7 +751,11 @@ export default {
             type: "SearchGame",
           })
         );
-      } else this.$router.push("profile");
+      } else if (!this.user.steamID.id) {
+        this.$router.push("profile");
+      } else if (this.user.purse <= 1) {
+        this.$router.push("money");
+      }
     },
     FindPartyGame() {
       if (this.user.steamID.id && this.user.purse >= 1)
@@ -798,6 +803,7 @@ export default {
   box-shadow: 0 0 10px 10px #ccc;
   animation: selected 2s ease infinite;
   z-index: 100 !important;
+  position: relative;
 }
 .isPrivateAccountModal {
   z-index: 100;
@@ -844,8 +850,7 @@ export default {
   background: #f2f2f2;
   color: #1f2430;
   transition: background 0.5s, color 0.5s;
-  cursor: pointer
-  ;
+  cursor: pointer;
 }
 
 .scrollTopBtn:hover {
@@ -903,7 +908,7 @@ li div .icon {
 }
 .pages {
   position: relative;
-  width: 85%;
+  width: 80vw;
   height: 100%;
   opacity: 0;
   transition: opacity 1.5s;
@@ -1116,7 +1121,7 @@ div.readyIcon3:hover svg path.hoverIcon {
   width: 100vw;
   height: 77.2vh;
   display: flex;
-  padding: 0 5.185185185185185vh 0;
+  padding: 0 3vw 0;
   box-sizing: border-box;
 }
 .readyIconText2Eng {
@@ -1126,7 +1131,7 @@ div.readyIcon3:hover svg path.hoverIcon {
   padding-top: 3.888888888888889vh;
   transition: transform 1s;
   transform: translateX(-100%);
-  width: 15%;
+  width: 14vw;
 }
 .sideNavigationShow {
   transform: translateX(0);
@@ -1138,8 +1143,10 @@ div.readyIcon3:hover svg path.hoverIcon {
 }
 .sideNavUl li {
   padding: 16px 0 16px 10px;
-  width: 200px;
+  width: calc(100% - 15px);
   color: black;
+  background: #ffffff;
+  box-sizing: border-box;
 }
 .sideNavUl li:hover {
   cursor: pointer;

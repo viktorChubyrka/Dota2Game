@@ -363,7 +363,7 @@ export default {
 }
 .smVretLine {
   position: absolute;
-  width: 0.09259259259259259vh;
+  width: 1px;
   height: 6.481481481481481vh;
   left: 61.85185185185185vh;
   top: 9.25925925925926vh;

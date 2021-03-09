@@ -4,7 +4,7 @@
     <Header headerColor="#f5f5f5" class="header" />
     <Lang />
     <h1
-      style="color:red;position:absolute;left:73.14814814814814vh;top:32.87037037037037vh"
+      style="color:red;position:absolute;left:calc(50% - 15vh);top:32.87037037037037vh"
       class="t5"
     >
       {{ error }}
@@ -13,9 +13,8 @@
     <div
       class="t2"
       style="color:#f2f2f2;position: absolute;
-width: 31.759259259259256vh;
 height: 4.444444444444444vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15vh);
 top: 28.333333333333332vh;"
     >
       {{ this.$ml.get("forgotPassw") }}
@@ -23,20 +22,19 @@ top: 28.333333333333332vh;"
     <div
       class="t5"
       style="position: absolute;color:#f2f2f2
-width: 31.759259259259256vh;
-height: 32px;
-left: 73.14814814814814vh;
-top: 386px;"
+height: 2.962962962962963vh;
+left: calc(50% - 15vh);
+top: 35.74074074074074vh;"
     >
       {{ $ml.get("wPass") }}
     </div>
     <div
       class="inputs"
       style="position: absolute;
-width: 31.759259259259256vh;
-height: 32px;
-left: 73.14814814814814vh;
-top: 434px;"
+      width:31.759259259259256vh;
+height: 2.962962962962963vh;
+left: calc(50% - 15vh);
+top: 40.18518518518518vh;"
     >
       <input v-model="password" type="password" :placeholder="p()" />
       <input v-model="cpassword" type="password" :placeholder="cp()" />
@@ -46,10 +44,9 @@ top: 434px;"
       class="t4"
       style="position: absolute;
       color:white;
-width: 31.759259259259256vh;
-height: 44px;
-left: 73.14814814814814vh;
-top: 526px;
+height: 4.0740740740740735vh;
+left: calc(50% - 15vh);
+top: 51.7037037037037vh;
 border:0px solid black;
 background: #626878;
 border-radius: 4px;"
@@ -103,7 +100,7 @@ export default {
 .inputs input {
   margin-bottom: 16px;
   width: 339px;
-  height: 32px;
+  height: 2.962962962962963vh;
   border: 1px solid #626878;
   box-sizing: border-box;
   border-radius: 4px;

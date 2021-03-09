@@ -90,7 +90,7 @@
           </button>
         </div>
       </div>
-      <div class="profile-column">
+      <div style="margin-top:5.3vh" class="profile-column">
         <div class="passPromo">
           <div class="promo-block">
             <div class="promo-col">
@@ -459,6 +459,7 @@ export default {
 }
 .LenTitle {
   height: 3.518518518518518vh;
+  margin-top: 5vh;
 }
 .shine {
   box-shadow: 0 0 5px 2px #bf0603;
@@ -542,7 +543,6 @@ export default {
   height: 3.333333333333333vh;
 }
 .promoTitle {
-  width: 29.629629629629626vh;
   height: 3.518518518518518vh;
   margin-bottom: 1.8518518518518516vh;
 }
@@ -571,7 +571,7 @@ export default {
 }
 
 .changePass {
-  width: 15.37037037037037vh;
+  width: 27.037037037037035vh;
   height: 3.333333333333333vh;
   text-decoration: underline;
   color: #35a7ff;

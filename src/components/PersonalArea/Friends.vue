@@ -40,7 +40,7 @@
     </div>
     <input
       :placeholder="sh()"
-      class="searchFriend"
+      class="searchFriend t2"
       v-model="search"
       type="text"
     />
@@ -61,7 +61,7 @@ top: 22.22222222222222vh;"
       style="position: absolute;
 width: 7.592592592592592vh;
 height: 3.518518518518518vh;
-left: 0.9259259259259258vh;
+left: 9.25925925925926vh;
 top: 22.22222222222222vh;"
     >
       {{ $ml.get("search") }}
@@ -287,11 +287,11 @@ export default {
 }
 .searchFriend {
   position: absolute;
-  width: 25.648148148148145vh;
-  height: 3.148148148148148vh;
+  width: 33vh;
+  height: 4vh;
   left: 9.25925925925926vh;
   top: 16.666666666666664vh;
-  font-size: 1.111111111111111vh;
+  font-size: 2vh;
   padding-left: 1.111111111111111vh;
   border-radius: 0.7407407407407407vh;
   border: 1px solid #f2f2f2;

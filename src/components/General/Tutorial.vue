@@ -1,6 +1,6 @@
 <template>
   <div
-    :style="`position:absolute;top:${top}px;left:${left}px;`"
+    :style="`position:fixed;top:${top}vh;left:${left}vh;`"
     class="tutorial-container"
   >
     <div class="tutorial-body">

@@ -80,8 +80,8 @@
               </th>
             </tr>
           </thead>
-          <tbody v-if="user && user.matches">
-            <tr class="toHover" v-for="(match, i) in user.matches" :key="i">
+          <tbody v-if="user && soloGames">
+            <tr class="toHover" v-for="(match, i) in soloGames" :key="i">
               <td class="t4 players">№ {{ i + 1 }}</td>
               <td class="t4" style="text-align:center">
                 {{
@@ -369,7 +369,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="toHover" v-for="i in 4" :key="i">
+            <tr class="toHover" v-for="(el, i) in partyGames" :key="i">
               <td class="t4 players">№ {{ i }}</td>
               <td class="t4">{{ $ml.get("win") }}</td>
               <td class="t4">
@@ -384,8 +384,14 @@
                   >{{ $ml.get("sendRep") }}</router-link
                 >
               </td>
-              <td class="t4">21/05/2020 11:31:32</td>
-              <td class="t4" style="padding-left:20px">3522211212</td>
+              <td class="t4">
+                {{
+                  `${el.creationDate.split("T")[0]} ${
+                    el.creationDate.split("T")[1].split(".")[0]
+                  }`
+                }}
+              </td>
+              <td class="t4" style="padding-left:20px">{{ el.matchNumber }}</td>
             </tr>
           </tbody>
         </table>
@@ -474,17 +480,27 @@
         </div>
         <table class="gamesTable">
           <tbody>
-            <tr class="toHover" v-for="i in 2" :key="i">
-              <td style="width:87px" class="players">10/10</td>
+            <tr class="toHover" v-for="i in PlayingMatches" :key="i">
+              <td style="width:87px" class="players">
+                {{ [...i.playersT1, ...i.playersT2].length }}/10
+              </td>
               <td style="width:336px;text-align: left;">
-                <span class="dot" v-for="i in 10" :key="i"></span>
+                <span
+                  class="dot"
+                  v-for="j in [...i.playersT1, ...i.playersT2]"
+                  :key="j"
+                ></span>
               </td>
               <td style="width:562px;"></td>
               <td style="width:190px;text-align:left;" class="t4">
-                21/05/2020 11:31:32
+                {{
+                  `${i.creationDate.split("T")[0]} ${
+                    i.creationDate.split("T")[1].split(".")[0]
+                  }`
+                }}
               </td>
               <td class="t4" style="width:113px;padding-left:20px">
-                3522211212
+                {{ i.matchNumber }}
               </td>
             </tr>
           </tbody>
@@ -631,6 +647,12 @@ export default {
     },
   },
   computed: {
+    partyGames() {
+      return this.user.matches.filter((el) => el.gameType == "Party");
+    },
+    soloGames() {
+      return this.user.matches.filter((el) => el.gameType == "Solo");
+    },
     tutorialStep() {
       return this.$store.getters.tutorialStep;
     },
@@ -651,6 +673,9 @@ export default {
     },
     UpcomingMatchesParty() {
       return this.$store.getters.upcomingMatchesParty;
+    },
+    PlayingMatches() {
+      return this.$store.getters.playingMatchesParty;
     },
     user() {
       return this.$store.getters.userData;

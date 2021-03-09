@@ -10,7 +10,7 @@
         style="color:#f2f2f2;position: absolute;
 width: 7.592592592592592vh;
 height: 5.37037037037037vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15.65vh);
 top: 30.555555555555554vh;"
       >
         {{ this.$ml.get("enter") }}
@@ -19,7 +19,7 @@ top: 30.555555555555554vh;"
         class="t4"
         style=" color:#f2f2f2;position:absolute;
 height: 3.333333333333333vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15.65vh);
 top: 48.51851851851851vh;"
       >
         <a style="color:white" href="/forgotPassword">{{
@@ -31,7 +31,7 @@ top: 48.51851851851851vh;"
         style=" color:#f2f2f2;position: absolute;
 width: 30.277777777777775vh;
 height: 3.333333333333333vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15.65vh);
 top: 54.07407407407407vh;"
       >
         {{ this.$ml.get("noAcc") }}
@@ -40,7 +40,7 @@ top: 54.07407407407407vh;"
         }}</a>
       </div>
       <h1
-        style="color:red;position:absolute;left:73.14814814814814vh;top:355px"
+        style="color:red;position:absolute;left:calc(50% - 15.65vh);top:355px"
         class="t5"
       >
         {{ error }}
@@ -50,7 +50,7 @@ top: 54.07407407407407vh;"
         style="position: absolute;
 width: 31.388888888888886vh;
 height: 2.962962962962963vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15.65vh);
 top:37.03703703703704vh;"
       >
         <input
@@ -73,7 +73,7 @@ top:37.03703703703704vh;"
       color:white;
 width: 31.388888888888886vh;
 height: 4.0740740740740735vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15.65vh);
 top: 59.629629629629626vh;
 border:0px solid black;
 background: #626878;

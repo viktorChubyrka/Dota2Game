@@ -44,37 +44,37 @@ body {
 .t1 {
   font-style: normal;
   font-weight: 500;
-  font-size: 3.333333333333333vh;
+  font-size: 3.5vh;
   line-height: 160%;
 }
 .t2 {
   font-style: normal;
   font-weight: 500;
-  font-size: 2.7777777777777777vh;
+  font-size: 2.9vh;
   line-height: 160%;
 }
 .t3 {
   font-style: normal;
   font-weight: 500;
-  font-size: 2.222222222222222vh;
+  font-size: 2.4vh;
   line-height: 160%;
 }
 .t4 {
   font-style: normal;
   font-weight: normal;
-  font-size: 1.8518518518518516vh;
+  font-size: 2vh;
   line-height: 180%;
 }
 .t5 {
   font-style: normal;
   font-weight: normal;
-  font-size: 1.4814814814814814vh;
+  font-size: 1.68vh;
   line-height: 200%;
 }
 .t6 {
   font-style: normal;
   font-weight: normal;
-  font-size: 1.111111111111111vh;
+  font-size: 1.3vh;
   line-height: 180%;
 }
 </style>

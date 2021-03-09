@@ -1,7 +1,7 @@
 <template>
   <div class="reg-container">
     <h1
-      style="color:red;position:absolute;left:73.14814814814814vh;top:355px"
+      style="color:red;position:absolute;left:calc(50% - 15.65vh);top:355px"
       class="t5"
     >
       {{ error }}
@@ -16,7 +16,7 @@
         style="color:#f2f2f2;position: absolute;
 width: 16.75925925925926vh;
 height: 4.444444444444444vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15.65vh);
 top: 23.333333333333332vh;"
       >
         {{ this.$ml.get("register") }}
@@ -26,7 +26,7 @@ top: 23.333333333333332vh;"
         style=" color:#f2f2f2;position: absolute;
 width: 29.074074074074073vh;
 height: 3.333333333333333vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15.65vh);
 top: 30.74074074074074vh;"
       >
         {{ this.$ml.get("readyAcc") }}
@@ -38,7 +38,7 @@ top: 30.74074074074074vh;"
         style="position: absolute;
 width: 31.388888888888886vh;
 height: 2.962962962962963vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15.65vh);
 top: 37.03703703703704vh;"
       >
         <input
@@ -79,7 +79,7 @@ top: 37.03703703703704vh;"
       color:white;
 width: 31.388888888888886vh;
 height: 4.0740740740740735vh;
-left: 73.14814814814814vh;
+left: calc(50% - 15.65vh);
 top: 61.48148148148148vh;
 border:0px solid black;
 background: #626878;
@@ -90,7 +90,7 @@ border-radius: 0.37037037037037035vh;"
       <div
         class="t6"
         style="color:#f2f2f2;position: absolute;
-left: 75.92592592592592vh;
+left: calc(50% - 15.65vh);;
 top: 67.5925925925926vh;"
       >
         <input
@@ -114,7 +114,7 @@ border-radius: 0.37037037037037035vh;"
             position: absolute;
             width: 24.537037037037035vh;
             height: 2.0370370370370368vh;
-            left: 78.7037037037037vh;
+            left: calc(50% - 12.65vh);;
             top: 68vh;"
       >
         {{ $ml.get("iAgree") }}
