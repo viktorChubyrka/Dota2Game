@@ -226,6 +226,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    DeletePhoto: async (state, payload) => {
+      let data = await Axios.post(
+        `${url}/api/user/actions/deletePhoto`,
+        payload
+      );
+    },
     Registration: async (state, payload) => {
       let data = await Axios.post(
         `${url}/api/user/autorization/registration`,

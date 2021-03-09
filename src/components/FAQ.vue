@@ -101,7 +101,7 @@ export default {
 .alfa {
   position: absolute;
   left: 18.51851851851852vh;
-  top: 83.7037037037037vh;
+  bottom: 6.962962962962962vh;
   color: white;
 }
 

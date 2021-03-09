@@ -24,7 +24,7 @@ top: 23.333333333333332vh;"
       <div
         class="t4"
         style=" color:#f2f2f2;position: absolute;
-width: 29.074074074074073vh;
+
 height: 3.333333333333333vh;
 left: calc(50% - 15.65vh);
 top: 30.74074074074074vh;"
@@ -112,7 +112,7 @@ border-radius: 0.37037037037037035vh;"
         style="
       color:white;
             position: absolute;
-            width: 24.537037037037035vh;
+
             height: 2.0370370370370368vh;
             left: calc(50% - 12.65vh);;
             top: 68vh;"

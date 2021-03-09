@@ -157,7 +157,7 @@ export default {
             shop_currency: 840,
             shop_id: 5086,
             login: this.login,
-            shop_payment_id: Math.floor(Math.random() * 1000000000),
+            shop_payment_id: `deposit:${this.login}:${Date.now()}`,
           };
           let str = `${obj.account}:${obj.amount}:${obj.amount_type}:${obj.payway}:${obj.shop_currency}:${obj.shop_id}:${obj.shop_payment_id}d2wNA0pMEVP2`;
           let sign = sha256(str);

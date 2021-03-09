@@ -50,7 +50,7 @@ export default {
 .alfa2 {
   position: absolute;
   left: 15.555555555555555vh;
-  bottom: 12.962962962962962vh;
+  bottom: 6.962962962962962vh;
   color: black;
 }
 </style>

@@ -47,7 +47,7 @@ export default {
 .lengUl {
   position: absolute;
   right: 15.555555555555555vh;
-  bottom: 12.962962962962962vh;
+  bottom: 6.962962962962962vh;
   margin: 0;
   padding: 0;
 }

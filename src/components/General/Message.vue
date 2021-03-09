@@ -8,15 +8,18 @@
   >
     <div class="t6 messageDate">
       {{
-      `${notification.date.split("T")[1].split(":")[0]}:${
-      notification.date.split("T")[1].split(":")[1]
-      } ${notification.date.split("-")[2].split("T")[0]}-${
-      notification.date.split("-")[1]
-      }`
+        `${notification.date.split("T")[1].split(":")[0]}:${
+          notification.date.split("T")[1].split(":")[1]
+        } ${notification.date.split("-")[2].split("T")[0]}-${
+          notification.date.split("-")[1]
+        }`
       }}
     </div>
     <div
-      v-if="notification.type == 'AddTooFriends' || notification.type == 'AddTooParty'"
+      v-if="
+        notification.type == 'AddTooFriends' ||
+          notification.type == 'AddTooParty'
+      "
       class="t5 buttonContainer"
     >
       <div class="notificationText">
@@ -27,21 +30,41 @@
         v-if="notification.type == 'AddTooFriends'"
         @click="acceptFriend()"
         class="buttonMessage b1 t5"
-      >{{ $ml.get("accept") }}</button>
-      <button v-else @click="acceptLobby()" class="buttonMessage b1 t5">{{ $ml.get("accept") }}</button>
+      >
+        {{ $ml.get("accept") }}
+      </button>
+      <button v-else @click="acceptLobby()" class="buttonMessage b1 t5">
+        {{ $ml.get("accept") }}
+      </button>
       <button
         v-if="notification.type == 'AddTooFriends'"
         @click="notAcceptFriend()"
         class="buttonMessage b2 t5"
-      >{{ $ml.get("cancel") }}</button>
+      >
+        {{ $ml.get("cancel") }}
+      </button>
 
-      <button v-else @click="notAcceptLobby()" class="buttonMessage b2 t5">{{ $ml.get("cancel") }}</button>
+      <button v-else @click="notAcceptLobby()" class="buttonMessage b2 t5">
+        {{ $ml.get("cancel") }}
+      </button>
     </div>
     <div
       class="messageText"
-      v-else-if="notification.type == 'notAcceptFriend' || notification.type == 'AcceptLobby'|| notification.type=='notAcceptParty' ||notification.type=='AcceptFriend' ||notification.type=='LobbyDestroed'"
+      v-else-if="
+        notification.type == 'notAcceptFriend' ||
+          notification.type == 'AcceptLobby' ||
+          notification.type == 'notAcceptParty' ||
+          notification.type == 'AcceptFriend' ||
+          notification.type == 'LobbyDestroed'
+      "
     >
       <strong>{{ notification.login }}</strong>
+      {{ $ml.get(notification.type) }}
+    </div>
+    <div
+      class="messageText"
+      v-else-if="notification.type == 'partyInviteSendet'"
+    >
       {{ $ml.get(notification.type) }}
     </div>
   </div>
@@ -112,36 +135,36 @@ export default {
 </script>
 <style>
 .notificationText {
-  width: 380px;
+  width: 35.18518518518518vh;
 }
 .messageText {
-  width: 327px;
-  padding: 30px 10px;
+  width: 30.277777777777775vh;
+  padding: 2.7777777777777777vh 0.9259259259259258vh;
 }
 .buttonContainer {
-  width: 270px;
-  height: 32px;
-  padding-left: 12px;
+  width: 25vh;
+  height: 2.962962962962963vh;
+  padding-left: 1.111111111111111vh;
 }
 div.delete.containerMessage {
-  margin-top: -150px;
+  margin-top: -13.888888888888888vh;
   z-index: 10;
 }
 .containerMessage {
-  width: 380px;
-  height: 140px;
-  margin-left: 76px;
-  margin-right: 76px;
+  width: 35.18518518518518vh;
+  height: 12.962962962962962vh;
+  margin-left: 7.037037037037036vh;
+  margin-right: 7.037037037037036vh;
   background: #ffffff;
   z-index: 100;
   transition: box-shadow 0.5s, margin-top 0.5s;
 }
 .buttonMessage {
-  width: 100px;
-  height: 40px;
-  margin-top: 10px;
-  border-radius: 8px;
-  margin-right: 16px;
+  width: 9.25925925925926vh;
+  height: 3.7037037037037033vh;
+  margin-top: 0.9259259259259258vh;
+  border-radius: 0.7407407407407407vh;
+  margin-right: 1.4814814814814814vh;
   border: 0px;
 }
 .b1 {
@@ -158,7 +181,7 @@ div.delete.containerMessage {
   box-shadow: 0 0 10px 6px #cbcaca;
 }
 .messageDate {
-  padding: 16px 0 4px 12px;
+  padding: 1.4814814814814814vh 0 0.37037037037037035vh 1.111111111111111vh;
   color: #bdbdbd;
 }
 </style>

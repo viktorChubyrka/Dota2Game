@@ -86,10 +86,10 @@ export default {
 }
 .alfa {
   position: absolute;
-  width: 133px;
+
   height: 36px;
   left: 18.51851851851852vh;
-  top: 83.7037037037037vh;
+  bottom: 6.962962962962962vh;
   color: #f2f2f2;
 }
 .hidetImg {

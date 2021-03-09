@@ -3,7 +3,9 @@
     <ul
       @mouseleave="notification = false"
       :class="{ notificationUl: notification, notificationContainer: true }"
-      :style="{ top: !notification ? `-${notificationHeight}px` : '96px' }"
+      :style="{
+        top: !notification ? `-${notificationHeight}px` : '8.888888888888888vh',
+      }"
     >
       <li v-for="(not, i) in notifications" :key="i" style="margin-bottom:10px">
         <Message :notification="not" />
@@ -827,15 +829,15 @@ export default {
 }
 .notificationContainer {
   position: fixed;
-  padding: 0 100px;
-  right: 100px;
+  padding: 0 9.25925925925926vh;
+  right: 9.25925925925926vh;
   z-index: 100;
   list-style-type: none;
   margin: 0;
   padding: 0;
   z-index: 1;
   transition: top 1s;
-  width: 500px;
+  width: 46.29629629629629vh;
 }
 .scrollTopBtn {
   position: fixed;
@@ -870,12 +872,10 @@ export default {
   background-color: red;
 }
 .profileSmallImage {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  left: 1699px;
-  top: 25px;
+  width: 2.7777777777777777vh;
+  height: 2.7777777777777777vh;
+  border-radius: 50%;
+  margin-left: 1.5vh;
   background: url(../assets/userEmpty.svg);
   background-repeat: no-repeat !important;
   background-size: cover !important;
@@ -995,6 +995,7 @@ path {
 }
 .notification {
   z-index: 10;
+  position: relative;
   margin-left: 1.5vh;
 }
 .notification:hover i.fa.fa-bell.fa-lg.notif {

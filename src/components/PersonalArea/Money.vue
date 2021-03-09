@@ -2,7 +2,7 @@
   <div :class="{ show: show, content: true }">
     <div v-if="user" class="balance t4">
       {{ $ml.get("balans") }}: {{ user.purse }}
-      <img src="../../assets/moneyIcons/dd.svg" /> = ${{ user.purse }}
+      <img src="../../assets/moneyIcons/dd.svg" /> = {{ user.purse }}$
     </div>
     <div
       @click="ActiveButton(1)"
@@ -371,7 +371,7 @@ export default {
 }
 .balance {
   position: absolute;
-  width: 23.148148148148145vh;
+  width: 40.148148148148145vh;
   height: 3.333333333333333vh;
   left: 52.22222222222222vh;
   top: 2.962962962962963vh;

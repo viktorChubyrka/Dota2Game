@@ -77,7 +77,6 @@ export default {
 }
 .moreButton {
   position: absolute;
-  width: 20.74074074074074vh;
   height: 4.62962962962963vh;
   left: calc(50% - 10.37037037037037vh);
   top: 68.05555555555556vh;
@@ -103,7 +102,7 @@ export default {
 .alfa1 {
   position: absolute;
   left: 15.555555555555555vh;
-  bottom: 12.962962962962962vh;
+  bottom: 6.962962962962962vh;
   color: #f2f2f2;
   opacity: 0;
   transition: opacity 0.5s;
@@ -111,6 +110,7 @@ export default {
 .lang {
   opacity: 0;
   transition: opacity 0.5s;
+  bottom: 6.962962962962962vh;
 }
 .loadText {
   opacity: 1;

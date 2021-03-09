@@ -29,7 +29,7 @@ top: 48.51851851851851vh;"
       <div
         class="t4"
         style=" color:#f2f2f2;position: absolute;
-width: 30.277777777777775vh;
+
 height: 3.333333333333333vh;
 left: calc(50% - 15.65vh);
 top: 54.07407407407407vh;"

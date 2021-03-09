@@ -208,14 +208,16 @@ export default {
     user() {
       let user = this.$store.getters.userData;
       let players = [];
-      user.matches.forEach((el) => {
-        players = [...players, ...el.playersT1, ...el.playersT2];
-      });
-      players = Array.from(new Set(players));
-      let index = players.indexOf(user.login);
-      players.splice(index, 1);
-      this.userGamesPlayers = players;
-      return user;
+      try {
+        user.matches.forEach((el) => {
+          players = [...players, ...el.playersT1, ...el.playersT2];
+        });
+        players = Array.from(new Set(players));
+        let index = players.indexOf(user.login);
+        players.splice(index, 1);
+        this.userGamesPlayers = players;
+        return user;
+      } catch {}
     },
   },
 };

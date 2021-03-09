@@ -314,6 +314,8 @@ export default new MLCreate({
       t15:
         "Here you can contact the administration and get answers to frequently asked questions",
       tutorialSkip: "Skip",
+      deletePhoto: "Delete photo",
+      partyInviteSendet: "Sendet invite to lobby",
     }),
 
     new MLanguage("russian").create({
@@ -622,6 +624,8 @@ export default new MLCreate({
       t15:
         "Здесь Вы сможете обратиться к администрации и получить ответы на частые вопросы",
       tutorialSkip: "Пропустить",
+      deletePhoto: "Удалить фото",
+      partyInviteSendet: "Приглашение в лобби отправлено",
     }),
   ],
 });

@@ -192,7 +192,7 @@
           </tbody>
         </table>
 
-        <div class="t3 slide-right" style="margin:36px 0 16px 0;width:170px">
+        <div class="t3 slide-right" style="margin:36px 0 16px 0;">
           {{ $ml.get("playing") }}
         </div>
         <table class="gamesTable">
@@ -480,7 +480,7 @@
         </div>
         <table class="gamesTable">
           <tbody>
-            <tr class="toHover" v-for="i in PlayingMatches" :key="i">
+            <tr class="toHover" v-for="i in PlayingMatchesParty" :key="i">
               <td style="width:87px" class="players">
                 {{ [...i.playersT1, ...i.playersT2].length }}/10
               </td>
@@ -648,10 +648,14 @@ export default {
   },
   computed: {
     partyGames() {
-      return this.user.matches.filter((el) => el.gameType == "Party");
+      if (this.user.matches)
+        return this.user.matches.filter((el) => el.gameType == "Party");
+      else return [];
     },
     soloGames() {
-      return this.user.matches.filter((el) => el.gameType == "Solo");
+      if (this.user.matches)
+        return this.user.matches.filter((el) => el.gameType == "Solo");
+      else return [];
     },
     tutorialStep() {
       return this.$store.getters.tutorialStep;
@@ -674,7 +678,7 @@ export default {
     UpcomingMatchesParty() {
       return this.$store.getters.upcomingMatchesParty;
     },
-    PlayingMatches() {
+    PlayingMatchesParty() {
       return this.$store.getters.playingMatchesParty;
     },
     user() {
@@ -838,7 +842,7 @@ export default {
   text-align: center;
   padding: 0.7407407407407407vh 2.962962962962963vh;
   position: absolute;
-  width: 17.777777777777775vh;
+  width: 20vh;
   height: 3.333333333333333vh;
   border-left: 1px solid #bdbdbd;
   border-top: 1px solid #bdbdbd;

@@ -11,17 +11,25 @@
             }"
           ></div>
           <div v-else class="photo"></div>
-          <label class="t4 changePhoto2" for="filechooser">
-            {{ $ml.get("changePhoto")
-            }}<input
-              id="filechooser"
-              class="changePhoto"
-              style="opacity:0;position:absolute;z-index:-1"
-              type="file"
-              name="file"
-              @change="SendFile()"
-            />
-          </label>
+          <div>
+            <label class="t4 changePhoto2" for="filechooser">
+              {{ $ml.get("changePhoto")
+              }}<input
+                id="filechooser"
+                class="changePhoto"
+                style="opacity:0;position:absolute;z-index:-1"
+                type="file"
+                name="file"
+                @change="SendFile()"
+              /> </label
+            ><label
+              v-if="user.photo"
+              class="t4 changePhoto2 red"
+              @click="DeletePhoto"
+            >
+              {{ $ml.get("deletePhoto") }}
+            </label>
+          </div>
         </div>
         <div class="profile-info-inputs-container">
           <div class="titleBlock">
@@ -264,6 +272,10 @@ export default {
     },
   },
   methods: {
+    DeletePhoto() {
+      this.$store.dispatch("DeletePhoto", { login: this.user.login });
+      this.user.photo = "";
+    },
     ChangePassword() {
       console.log(1);
       this.$router.push(`/recoweryPassword/${this.user.email}/${Date.now()}`);
@@ -410,8 +422,7 @@ export default {
 .user-photo-block {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 30.833333333333332vh;
+  width: 100%;
 }
 .langRow {
   border: 1px solid rgb(224, 224, 224);
@@ -448,6 +459,7 @@ export default {
   width: 30.555555555555554vh;
   position: relative;
   padding-left: 0.9259259259259258vh;
+  box-sizing: border-box;
 }
 .slide-right {
   color: rgb(101, 100, 100);
@@ -562,14 +574,16 @@ export default {
   color: #35a7ff;
 }
 .changePhoto2 {
-  width: 13.425925925925926vh;
   height: 3.333333333333333vh;
-
   text-decoration: underline;
   color: #35a7ff;
   transition: color 0.25s;
+  display: block;
+  margin-left: 3vh;
 }
-
+.changePhoto2.red.t4 {
+  color: #bf0603;
+}
 .changePass {
   width: 27.037037037037035vh;
   height: 3.333333333333333vh;
@@ -663,7 +677,6 @@ i.fa.fa-info-circle {
   border-radius: 0.9259259259259258vh;
 }
 .steamIDTitile {
-  width: 100px;
 }
 .titleBlock {
   width: 41.11111111111111vh;
