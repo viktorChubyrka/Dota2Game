@@ -315,7 +315,9 @@ export default new MLCreate({
         "Here you can contact the administration and get answers to frequently asked questions",
       tutorialSkip: "Skip",
       deletePhoto: "Delete photo",
-      partyInviteSendet: "Sendet invite to lobby",
+      partyInviteSendet: "Шnvitation has been sent",
+      noMoney: "Insufficient funds to start the game.Please top up your wallet",
+      acceptLobbyInvite: "Join",
     }),
 
     new MLanguage("russian").create({
@@ -625,7 +627,10 @@ export default new MLCreate({
         "Здесь Вы сможете обратиться к администрации и получить ответы на частые вопросы",
       tutorialSkip: "Пропустить",
       deletePhoto: "Удалить фото",
-      partyInviteSendet: "Приглашение в лобби отправлено",
+      partyInviteSendet: "Приглашение отправлено",
+      noMoney:
+        "Недостаточно средств чтобы начать игру. Пожалуйста пополните свой счет",
+      acceptLobbyInvite: "Вступить",
     }),
   ],
 });

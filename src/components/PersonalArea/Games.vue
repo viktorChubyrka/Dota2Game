@@ -82,7 +82,7 @@
           </thead>
           <tbody v-if="user && soloGames">
             <tr class="toHover" v-for="(match, i) in soloGames" :key="i">
-              <td class="t4 players">№ {{ i + 1 }}</td>
+              <td class="t4 players">№ {{ soloGames.length - i }}</td>
               <td class="t4" style="text-align:center">
                 {{
                   match.status == "Техническое поражение"
@@ -370,7 +370,7 @@
           </thead>
           <tbody>
             <tr class="toHover" v-for="(el, i) in partyGames" :key="i">
-              <td class="t4 players">№ {{ i }}</td>
+              <td class="t4 players">№ {{ partyGames.length - i }}</td>
               <td class="t4">{{ $ml.get("win") }}</td>
               <td class="t4">
                 {{ button == 1 ? $ml.get("solo") : $ml.get("party") }}
@@ -861,7 +861,7 @@ export default {
   z-index: 2;
 }
 .tab2T {
-  left: 50.37037037037037vh;
+  left: 51vh;
   z-index: 2;
 }
 .tab3T {

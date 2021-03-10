@@ -477,15 +477,17 @@
     >
       {{ $ml.get("t15") }}</Tutorial
     >
-    <div class="no-money-pop-up"></div>
+    <NoMoneyPopUp @close="not_enouth_money = false" v-if="not_enouth_money" />
   </div>
 </template>
 <script>
 import Message from "../components/General/Message";
 import Tutorial from "../components/General/Tutorial.vue";
+import NoMoneyPopUp from "../components/General/NoMoneyPopUp.vue";
+
 import Axios from "axios";
 export default {
-  components: { Message, Tutorial },
+  components: { Message, Tutorial, NoMoneyPopUp },
 
   data() {
     return {
@@ -498,9 +500,15 @@ export default {
       scroll: 0,
       notification: false,
       isPrivate: false,
+      not_enouth_money: false,
     };
   },
   watch: {
+    not_enouth_money() {
+      if (!this.not_enouth_money) {
+        this.$router.push("money");
+      }
+    },
     notifications() {
       if (this.user.ready && this.notifications.length) {
         this.notification = true;
@@ -756,7 +764,7 @@ export default {
       } else if (!this.user.steamID.id) {
         this.$router.push("profile");
       } else if (this.user.purse <= 1) {
-        this.$router.push("money");
+        this.not_enouth_money = true;
       }
     },
     FindPartyGame() {
@@ -768,7 +776,9 @@ export default {
         //   })
         // );
         this.$router.push("friends");
-      else this.$router.push("profile");
+      else if (this.user.purse <= 1) {
+        this.not_enouth_money = true;
+      } else if (!this.user.steamID.id) this.$router.push("profile");
     },
     ChangePage(i) {
       this.focus = i;
