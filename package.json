@@ -17,7 +17,7 @@
     "vue-multilanguage": "^4.0.10",
     "vue-paypal-checkout": "^3.2.0",
     "vue-router": "^3.2.0",
-    "vuetify": "^2.3.2",
+    "vuetify": "^2.6.10",
     "vuex": "^3.4.0",
     "ws": "^7.3.1"
   },
